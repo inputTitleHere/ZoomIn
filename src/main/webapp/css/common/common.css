@@ -1,0 +1,162 @@
+@charset "UTF-8";
+/* 공통 css */
+html, body, section{
+	height:100%;	
+}
+/*구직자 구인자 비회 원 모두 공통으로 로고 검색창으로 바꿈*/
+/* zoomHeader.jsp 헤더 css */
+#account{
+	position : relative;
+	text-align : right;
+	width : 100%;
+}
+#account > a{
+	margin : 10px;
+	font-size : 15pt;
+	text-decoration: none;
+}
+#logodiv{
+	position : relative;
+	text-align : left;
+	margin-top : 50px;
+	margin-left : 200px;
+}
+#logo{
+	width : 400px;
+}
+#superlogodiv{
+	position : relative;
+	text-align : center;
+	margin-top : 50px;
+}
+#superlogo{
+	width : 400px;
+}
+#searchBoxdiv{
+	position : relative;
+	text-align : center;
+	
+}
+#searchBox{
+	height : 30px;
+	width : 700px;
+	margin-bottom : 50px;
+}
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+.btn-3 {
+  background: rgb(242, 214, 98);
+background: linear-gradient(0deg, rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  
+}
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+   background: rgba(242, 187, 98,1);
+  transition: all 0.3s ease;
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3:hover{
+   background: transparent;
+  box-shadow: none;
+}
+.btn-3:hover:before {
+  height: 100%;
+}
+.btn-3:hover:after {
+  width: 100%;
+}
+.btn-3 span:hover{
+   color: rgba(242, 187, 98,1);
+}
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+   background: rgba(242, 187, 98,1);
+  transition: all 0.3s ease;
+}
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3 span:hover:before {
+  height: 100%;
+}
+.btn-3 span:hover:after {
+  width: 100%;
+}
+
+/* body 공통 css */
+section{
+	margin-left : 160px;
+	margin-right : 160px;
+}
+.title {
+	height : 60px;
+	background-color : rgb(242, 187, 98);
+}
+.title > h1 {
+	position : relative;
+	text-align : center;
+	padding-top : 15px;
+}
+.context{
+	border-left: solid 1px #F2BB62;
+	border-right: solid 1px #F2BB62;
+    border-bottom: solid 1px #F2BB62;
+	padding-left : 100px;
+	padding-right : 100px;
+	height: 90%;
+}
+
+/*footer css*/
+#copyright{
+	position : relative;
+	text-align : center;
+	margin-top: 20px;
+	padding-bottom : 20px;
+} 

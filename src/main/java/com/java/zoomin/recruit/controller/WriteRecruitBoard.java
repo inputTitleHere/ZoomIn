@@ -1,4 +1,4 @@
-package com.zoomin.mvc.recruit.controller;
+package com.java.zoomin.recruit.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
