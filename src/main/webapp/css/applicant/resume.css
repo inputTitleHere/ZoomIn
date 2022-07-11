@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#resumeFrm{
+	
+	padding-top:50px;
+	border-bottom : solid 1px black;
+}
+
+.resumeDev{
+	border-left : solid 1px black;
+	border-right : solid 1px black;
+	
+}
+
+.resumeTitle{	
+	border-top : solid 1px black;
+	border-bottom : solid 1px black;
+}
+
+.resumeContext{
+	
+}
