@@ -1,4 +1,4 @@
-package resume.model.dto;
+package com.java.zoomin.resume.model.dto;
 
 public class Resume {
 	String id;

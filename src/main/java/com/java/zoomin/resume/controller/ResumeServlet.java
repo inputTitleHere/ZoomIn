@@ -1,4 +1,4 @@
-package resume.controller;
+package com.java.zoomin.resume.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import resume.model.dto.Gender;
-import resume.model.dto.Resume;
-import resume.model.dto.SchoolType;
-import resume.model.dto.Status;
-import resume.model.service.ResumeService;
+import com.java.zoomin.resume.model.dto.Gender;
+import com.java.zoomin.resume.model.dto.Resume;
+import com.java.zoomin.resume.model.dto.SchoolType;
+import com.java.zoomin.resume.model.dto.Status;
+import com.java.zoomin.resume.model.service.ResumeService;
 
 
 /**

@@ -1,4 +1,4 @@
-package resume.model.dao;
+package com.java.zoomin.resume.model.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,9 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-import static common.JdbcTemplate.*;
-import resume.model.dto.Resume;
-import resume.model.exception.ResumeException;
+
+import com.java.zoomin.resume.model.dto.Resume;
+import com.java.zoomin.resume.model.exception.ResumeException;
+
+import static com.java.zoomin.common.JdbcTemplate.*;
 
 
 public class ResumeDao {

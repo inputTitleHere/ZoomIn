@@ -1,4 +1,4 @@
-package common;
+package com.java.zoomin.common;
 
 import java.io.FileReader;
 import java.io.IOException;

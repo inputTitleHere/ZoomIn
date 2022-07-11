@@ -1,9 +1,10 @@
-package resume.model.service;
+package com.java.zoomin.resume.model.service;
 
 import java.sql.Connection;
-import static common.JdbcTemplate.*;
-import resume.model.dao.ResumeDao;
-import resume.model.dto.Resume;
+
+import com.java.zoomin.resume.model.dao.ResumeDao;
+import com.java.zoomin.resume.model.dto.Resume;
+import static com.java.zoomin.common.JdbcTemplate.*;
 
 public class ResumeService {
 	private ResumeDao ResumeDao = new ResumeDao();

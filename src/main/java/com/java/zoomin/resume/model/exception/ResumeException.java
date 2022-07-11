@@ -1,4 +1,4 @@
-package resume.model.exception;
+package com.java.zoomin.resume.model.exception;
 
 public class ResumeException extends RuntimeException {
 
