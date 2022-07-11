@@ -1,5 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows,macos,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows,macos,eclipse
+/classes/
+
 .classpath
 .project
 
