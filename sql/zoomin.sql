@@ -20,6 +20,10 @@ create table COMPANY_TABLE(
     CONSTRAINT pk_company_table_company_no primary key(company_no)
 );
 
+insert into COMPANY_TABLE values(0123456789, '줌인주식회사', null,'줌인 웹사이트를 운영하는 주식회사입니다.');
+commit;
+select * from company_Table;
+
 create table CATEGORY(
     category_number number not null,
     domain varchar2(50) not null,
@@ -153,7 +157,7 @@ constraint uq_applicant_member_id unique(id)
 --시퀀스 구직자 멤버 uid 생성 
 create sequence seq_applicant_member_uid;
 
---SELECT*FROM RECRUIT_BOARD;
+SELECT*FROM RECRUIT_BOARD;
 --drop table RECRUIT_TABLE;
 
 --채용글-지원자 연결 테이블
