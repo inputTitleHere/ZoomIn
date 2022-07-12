@@ -22,7 +22,6 @@ import com.java.zoomin.resume.model.service.ResumeService;
 public class ResumeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ResumeService ResumeService = new ResumeService();
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
