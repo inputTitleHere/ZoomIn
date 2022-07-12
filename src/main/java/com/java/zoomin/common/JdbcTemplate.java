@@ -20,7 +20,8 @@ public class JdbcTemplate {
 	static String url;
 	static String user;
 	static String password;
-	
+  
+
 	static {
 		// datasource.propreties의 내용을 Properties객체로 불러오기
 		Properties prop = new Properties();
