@@ -1,8 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows,macos,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows,macos,eclipse
 /classes/
-/oracle_db_wallet/
-datasource.properties
+oracle_db_wallet/
 
 
 .classpath
