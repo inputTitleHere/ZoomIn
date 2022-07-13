@@ -77,11 +77,87 @@ insert into applicant_member values (seq_applicant_member_uid.nextval, '박우�
 insert into applicant_member values (seq_applicant_member_uid.nextval, '홍길동', 'hong', 4689, 01045788956, 'hong@abcd.com', default);
 insert into applicant_member values (seq_applicant_member_uid.nextval, '김두한', 'kimdoo', 9876, 01065329487, 'kimdoo@abcd.com', default);
 
+--update applicant_member set password = 1234 where id = 'kimdoo';
+-- 회사정보 테이블
+select * from COMPANY_TABLE;
+insert into COMPANY_TABLE values ('1948653785', '현대', null, '전자쪽에 발을 뻗치는 현대입니다.');
+insert into COMPANY_TABLE values ('8153268498', '벤츠코리아', null, '최고의 전기차를 만들기 위해 노력하는 벤츠입니다.');
+insert into COMPANY_TABLE values ('4988653629', 'KH전자', null, '최상위 레벨의 인재들이 모인 기업 KH전자입니다.');
+
+-- 업무 카테고리 테이블
+select * from CATEGORY order by category_number asc;
+insert into CATEGORY values (3, '의료/제약/복지/');
+insert into CATEGORY values (4, '건설업');
+
+-- 취업담당자 한명씩 만들기
+select * from recruit_member;
+insert into RECRUIT_MEMBER values (seq_recruit_member.nextval, '1948653785', '현대 인사 1팀', 'hyundai', 1234, 'hyundai@mail.com', default, default);
+insert into RECRUIT_MEMBER values (seq_recruit_member.nextval, '8153268498', '벤츠코리아 인사팀', 'benzko', 1234, 'benzko@mail.com', default, default);
+insert into RECRUIT_MEMBER values (seq_recruit_member.nextval, '4988653629', 'KH전자 인사과장', 'khjava', 1234, 'khjava@mail.com', default, default);
+
+-- 이력서 만들기
+select * from resume;
+insert into RESUME values (seq_resume_no.nextval, 5, 1, '박우석', '1998/11/09', 'M', '경기도 광명시', 'C4', '서울대학교', 'C', '컴퓨터', 4.0, 4.5);
+insert into RESUME values (seq_resume_no.nextval, 13, 7, '홍길동', '1967/08/24', 'M', '강원도 춘천시', 'C3', '춘천고등학교', 'C', '기계공학', 3.4 , 4.5);
+insert into RESUME values (seq_resume_no.nextval, 14, 3, '김두한', '1983/02/17', 'M', '제주도 서귀포시', 'C2', '조선대학교', 'C', '지리학', 2.5, 4.5);
+
+-- 연봉테이블
+select * from salary_review;
+insert into salary_review values (SEQ_SALARY_REVIEW_NO.nextval, 5, '1948653785', 9, 8000, 4, 3, default);
+insert into salary_review values (SEQ_SALARY_REVIEW_NO.nextval, 13, '8153268498', 5, 4000, 2, 2, default);
+insert into salary_review values (SEQ_SALARY_REVIEW_NO.nextval, 14, '4988653629', 3, 2000, 1, 1, default);
+
+-- 회사리뷰테이블
+select * from company_review;
+insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 5, '1948653785', 9, '자유로운 회사에요.', 4, 4, 5, 4, 5, 5, default);
+insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 13, '8153268498', 5, '이것도 회사인가..?', 3, 2, 2, 1, 3, 2, default);
+insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 14, '4988653629', 3, '다닐만 해요.', 3, 4, 5, 4, 3, 5, default);
+
 commit;
 -- 박우석 END -- 
 -- 김승환 START -- 
+--구직자 멤버
+insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김승환', 'kshw', 1234, 01089284867, 'kshwan1379@naver.com',default);
+insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김남길', 'kngs', 1234, 01098523346, 'kngs@naver.com',default);
+insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김창렬', 'kcl', 1234, 01066248753, 'kcl@naver.com',default);
+select * from applicant_member;
 
+--회사 정보
+insert into company_table values('6875341675','농협',null,'제 1 금융권 모든 국민과 함께 하는 그날까지!');
+insert into company_table values('3578951486','국민은행',null,'자산관리의 베스트 국민은행');
+insert into company_table values('6877345778','신한은행',null,'돈불려 드립니다 신한은행');
+select * from company_table;
 
+--업무 카테고리 테이블 
+insert into category values(5,'서비스업');
+insert into category values(6,'은행/금융업');
+commit;
+select * from category order by category_number; 
+
+-- 구인자 테이블 데이터
+insert into recruit_member values(seq_recruit_member.nextval,'6875341675','농협 민원 접수팀','nonghyeob',1234,'nong@naver.com',default,default);
+insert into recruit_member values(seq_recruit_member.nextval,'3578951486','국민은행 경비 1팀','kukmin',1234,'kuk@naver.com',default,default);
+insert into recruit_member values(seq_recruit_member.nextval,'6877345778','신한은행 창구2팀','sinhan',1234,'sin@naver.com',default,default);
+select * from  recruit_member;
+commit;
+
+--이력서
+select * from resume;
+
+insert into  resume values(seq_resume_no.nextval, 7, 3, '김승환', '1996/11/11', 'M','경기도 하남시 미사강변대로', 'C2', '춘천대학교','C', '의료기기정보과', '4.0', '4.1');
+insert into  resume values(seq_resume_no.nextval, 15, 5, '김남길', '1966/05/05', 'F','서울시 강남구 봉은사로', 'C4', '서울대학교','C', '토목과', '2.8', '3.0');
+insert into  resume values(seq_resume_no.nextval, 16, 7, '김창렬', '1973/2/18', 'M','강원도 춘천시 기계공고', 'C3', '가천대학교','C', '기계설비학과', '3.5', '4.2');
+--구직자  연봉테이블
+insert into salary_review values(seq_SALARY_REVIEW_no.nextval,7,'6875341675',3,2600,3,3,default);
+insert into salary_review values(seq_SALARY_REVIEW_no.nextval,15,'3578951486',6,3500,4,2,default);
+insert into salary_review values(seq_SALARY_REVIEW_no.nextval,16,'6877345778',6,4200,5,3,default);
+select * from salary_review;
+
+select * from company_review;
+insert into company_review values (seq_company_review_no.nextval, 7,'6875341675',3,'끔찍합니다 정말',1,2,2,3,2,2,default);
+insert into company_review values (seq_company_review_no.nextval, 15,'6875341675',6,'그냥 그래요',3,3,3,3,3,3,default);
+insert into company_review values (seq_company_review_no.nextval, 16,'6875341675',6,'죽지못해 다닙니다',2,3,4,3,2,1,default);
+commit;
 -- 김승환 END --
 -- 김지윤 START-- 
 -- 구직자 멤버 데이터--
