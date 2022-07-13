@@ -152,11 +152,25 @@ insert into salary_review values(seq_SALARY_REVIEW_no.nextval,7,'6875341675',3,2
 insert into salary_review values(seq_SALARY_REVIEW_no.nextval,15,'3578951486',6,3500,4,2,default);
 insert into salary_review values(seq_SALARY_REVIEW_no.nextval,16,'6877345778',6,4200,5,3,default);
 select * from salary_review;
-
+--회사 리뷰 테이블
 select * from company_review;
 insert into company_review values (seq_company_review_no.nextval, 7,'6875341675',3,'끔찍합니다 정말',1,2,2,3,2,2,default);
 insert into company_review values (seq_company_review_no.nextval, 15,'6875341675',6,'그냥 그래요',3,3,3,3,3,3,default);
+update company_review set company_no = '3578951486' where NO = 14;
 insert into company_review values (seq_company_review_no.nextval, 16,'6875341675',6,'죽지못해 다닙니다',2,3,4,3,2,1,default);
+update company_review set company_no = '6877345778' where NO = 15;
+--채용게시글
+insert into recruit_board values(seq_recruit_board.nextval, 11, 5, '6875341675', '농협 민원 접수 1팀 채용','신입','고졸이상','정규직','서울특별시 강남구',
+default, '농협 민원 접수 1팀 상시채용합니다','2022/12/31',default);
+insert into recruit_job_bridge values(7,5);
+insert into recruit_board values(seq_recruit_board.nextval, 12, 5, '3578951486', '국민은행 경비 1팀 채용',default,default,'정규직','서울특별시 강동구',
+default, '국민은행경빝님과 함께할 튼튼한 인재구합니다~','2022/12/31',default);
+insert into recruit_job_bridge values(8,5);
+insert into recruit_board values(seq_recruit_board.nextval, 13, 6, '6877345778', '신한은행 창구 2팀',default,'고졸이상','정규직','서울특별시 상일동',
+default, '고객과 함께 하는 즐거운 창구 생활 많이 지원하세요','2022/12/31',default);
+insert into recruit_job_bridge values(9,6);
+select * from  recruit_board;
+select * from recruit_job_bridge;
 commit;
 -- 김승환 END --
 -- 김지윤 START-- 
