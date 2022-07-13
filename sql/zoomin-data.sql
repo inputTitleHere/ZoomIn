@@ -9,7 +9,7 @@ insert into applicant_member values (seq_applicant_member_uid.nextval, '박우�
 
 -- 박우석 END -- 
 -- 김승환 START -- 
-
+insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김승환', 'kshw', 1234, 01089284867, 'kshwan1379@naver.com',default);
 
 -- 김승환 END --
 -- 김지윤 START -- 
