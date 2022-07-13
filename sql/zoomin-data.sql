@@ -1,8 +1,73 @@
 -- 백승윤 START --
-select * from applicant_member;
+select * from applicant_member order by "uid" asc;
+-- 구직자 멤버 데이터
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '백승윤', 'zxcv', 1234, 01035351212, 'emailsemail@mail.com', default);
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '백길동', 'baikgd',1234,01099321182, 'baikgildong@mail.com',default);
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '윤승백', 'ysb',1234,01013492490, 'ysbaik@mail.com',default);
+
+-- 회사정보 테이블
+select * from company_table;
+update company_table set company_no='1234567890' where company_name='줌인주식회사';
+insert into COMPANY_TABLE values ('4923047853', '네이버',null, '모두가 가고싶어하는 네카라쿠배라의 네이버입니다.');
+insert into COMPANY_TABLE values ('3385019283', '카카오',null, '모두가 가고싶어하는 네카라쿠배라의 카카오입니다.');
+insert into COMPANY_TABLE values ('7583294860', '삼성전자',null, '우리나라에서 제일 유명한 회사입니다.');
+
+-- 카테고리 테이블
+select * from category order by category_number asc;
+--update category set domain ='의료/제약/복지' where category_number=3;
+insert into CATEGORY values (1,'IT/웹/통신');
+insert into CATEGORY values (2,'미디어/디자인');
+
+-- 구인자 테이블 데이터 : RECRUIT_MEMBER
+select * from RECRUIT_MEMBER order by "uid";
+insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '4923047853', '네이버 인사 1팀', 'naver', 1234, 'naver@naver.com',default, default);
+insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '3385019283', '카카오 피플팀', 'kakao', 1234, 'kakao@daum.com',default, default);
+insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '7583294860', '삼성전자 인사담당자', 'samsung_electronics', 1234, 'samsung_electronics@samsung.com',default, default);
+
+-- 직무테이블  JOB_CATEGORY
+insert into job_category values(1,'인사');
+insert into job_category values(2,'회계/총무');
+insert into job_category values(3,'마케팅');
+insert into job_category values(4,'영업');
+insert into job_category values(5,'생산 / 관리');
+insert into job_category values(6,'연구개발');
+insert into job_category values(7,'기술');
+insert into job_category values(8,'서비스');
+insert into job_category values(9,'IT/인터넷');
+select * from job_category;
+
+-- 직급 테이블
+insert into position_category values(1, '사원');
+insert into position_category values(2, '주임');
+insert into position_category values(3, '대리');
+insert into position_category values(4, '과장');
+insert into position_category values(5, '차장');
+insert into position_category values(6, '부장');
+
+
+-- 이력서
+select * from resume order by resume_no;
+-- update resume set "uid"=6 where name='백길동';
+-- update resume set "uid"=17 where name='윤승백';
+insert into RESUME values(seq_resume_no.nextval, 1, 1, '백승윤', '1997/10/10', 'M','서울특별시 송파구 어딘가', 'C4','한국대학교','C','생화학',4.2,4.5);
+insert into RESUME values(seq_resume_no.nextval, 6, 8, '백길동', '1995/2/11', 'M','서울특별시 강남구 저긴가', 'C4','서울대학교','C','기계공학과',4.12,4.5);
+insert into RESUME values(seq_resume_no.nextval, 17, 2, '윤승백', '1998/11/22', 'M','서울특별시 동작구 요긴가', 'C2','한국산업학교','C','드론디자인 공학과',3.8,4.5);
+
+-- 연봉 테이블
+-- 연봉은 만단위에서 자르겠습니다. 3600만원 -> 3600 을 적읍시다. 
+insert into SALARY_REVIEW values(seq_SALARY_REVIEW_no.nextval, 1, '4923047853', 1,3600,2,1,default);
+insert into SALARY_REVIEW values(seq_SALARY_REVIEW_no.nextval, 6, '3385019283', 9,7500,6,3,default);
+insert into SALARY_REVIEW values(seq_SALARY_REVIEW_no.nextval, 17, '7583294860', 9,6600,4,2,default);
+
+-- 리뷰테이블
+insert into COMPANY_REVIEW values (seq_company_review_no.nextval, 1, '4923047853',1, '네이버 짱짱 좋아요~',4,4,3,5,5,5,default);
+insert into COMPANY_REVIEW values (seq_company_review_no.nextval, 6, '3385019283',9, '여기 카카오 회사 맞나요?',3,3,3,4,4,4,default);
+insert into COMPANY_REVIEW values (seq_company_review_no.nextval, 17, '7583294860',9, '삼성전자 별세개',3,2,2,4,4,3,default);
+
+select * from company_review;
+
+
+
 
 commit;
 -- 백승윤 END
