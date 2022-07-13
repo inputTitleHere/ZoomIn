@@ -9,6 +9,7 @@ insert into applicant_member values (seq_applicant_member_uid.nextval, '박우�
 insert into applicant_member values (seq_applicant_member_uid.nextval, '홍길동', 'hong', 4689, 01045788956, 'hong@abcd.com', default);
 insert into applicant_member values (seq_applicant_member_uid.nextval, '김두한', 'kimdoo', 9876, 01065329487, 'kimdoo@abcd.com', default);
 
+--update applicant_member set password = 1234 where id = 'kimdoo';
 commit;
 -- 박우석 END -- 
 -- 김승환 START -- 
