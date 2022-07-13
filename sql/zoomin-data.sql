@@ -24,6 +24,14 @@ insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '4923047853', '네
 insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '3385019283', '카카오 피플팀', 'kakao', 1234, 'kakao@daum.com',default, default);
 insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '7583294860', '삼성전자 인사담당자', 'samsung_electronics', 1234, 'samsung_electronics@samsung.com',default, default);
 
+-- 채용게시글
+select * from recruit_board;
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 1, 1,'4923047853','[네이버] 수시 개발직군 채용','1~5년차','대졸 이상','정규직','경기도 판교시 네이버사옥',default, '네이버에서 개발자 채용을 시행합니다. 와아~','2022/08/10',default);
+insert into RECRUIT_JOB_BRIDGE values();
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 2, 1,'4923047853','[카카오] 수시 개발직군 채용','3년차 이상',default,'정규직','제주도 카카오 사옥',default, '카카오에서 개발자 채용을 시행합니다. 와아~','2022/08/15',default);
+
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 3, 8,'4923047853','[삼성전자] 삼성 정기 공채', default,'대졸 이상','정규직','서울시 삼성전자 사옥',default, '삼성전자에서 2022년 정기 공채를 시행합니다.','2022/07/20',default);
+
 -- 직무테이블  JOB_CATEGORY
 insert into job_category values(1,'인사');
 insert into job_category values(2,'회계/총무');
@@ -65,9 +73,6 @@ insert into COMPANY_REVIEW values (seq_company_review_no.nextval, 6, '3385019283
 insert into COMPANY_REVIEW values (seq_company_review_no.nextval, 17, '7583294860',9, '삼성전자 별세개',3,2,2,4,4,3,default);
 
 select * from company_review;
-
-
-
 
 commit;
 -- 백승윤 END
