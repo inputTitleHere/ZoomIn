@@ -14,9 +14,54 @@ commit;
 -- 김승환 START -- 
 
 
+
+--업무 카테고리 테이블 
+insert into category values(5,'서비스업');
+insert into category values(6,'은행/금융업');
+commit;
+select * from category order by category_number; 
+
+-- 구인자 테이블 데이터
+insert into recruit_member values(seq_recruit_member.nextval,'6875341675','농협 민원 접수팀','nonghyeob',1234,'nong@naver.com',default,default);
+insert into recruit_member values(seq_recruit_member.nextval,'3578951486','국민은행 경비 1팀','kukmin',1234,'kuk@naver.com',default,default);
+insert into recruit_member values(seq_recruit_member.nextval,'6877345778','신한은행 창구2팀','sinhan',1234,'sin@naver.com',default,default);
+select * from  recruit_member;
+commit;
+
+--이력서
+select * from resume;
+
+insert into  resume values(seq_resume_no.nextval, 7, 3, '김승환', '1996/11/11', 'M','경기도 하남시 미사강변대로', 'C2', '춘천대학교','C', '의료기기정보과', '4.0', '4.1');
+insert into  resume values(seq_resume_no.nextval, 15, 5, '김남길', '1966/05/05', 'F','서울시 강남구 봉은사로', 'C4', '서울대학교','C', '토목과', '2.8', '3.0');
+insert into  resume values(seq_resume_no.nextval, 16, 7, '김창렬', '1973/2/18', 'M','강원도 춘천시 기계공고', 'C3', '가천대학교','C', '기계설비학과', '3.5', '4.2');
+--구직자  연봉테이블
+insert into salary_review values(seq_SALARY_REVIEW_no.nextval,7,'6875341675',3,2600,3,3,default);
+insert into salary_review values(seq_SALARY_REVIEW_no.nextval,15,'3578951486',6,3500,4,2,default);
+insert into salary_review values(seq_SALARY_REVIEW_no.nextval,16,'6877345778',6,4200,5,3,default);
+select * from salary_review;
+--회사 리뷰 테이블
+select * from company_review;
+insert into company_review values (seq_company_review_no.nextval, 7,'6875341675',3,'끔찍합니다 정말',1,2,2,3,2,2,default);
+insert into company_review values (seq_company_review_no.nextval, 15,'6875341675',6,'그냥 그래요',3,3,3,3,3,3,default);
+update company_review set company_no = '3578951486' where NO = 14;
+insert into company_review values (seq_company_review_no.nextval, 16,'6875341675',6,'죽지못해 다닙니다',2,3,4,3,2,1,default);
+update company_review set company_no = '6877345778' where NO = 15;
+--채용게시글
+insert into recruit_board values(seq_recruit_board.nextval, 11, 5, '6875341675', '농협 민원 접수 1팀 채용','신입','고졸이상','정규직','서울특별시 강남구',
+default, '농협 민원 접수 1팀 상시채용합니다','2022/12/31',default);
+insert into recruit_job_bridge values(7,5);
+insert into recruit_board values(seq_recruit_board.nextval, 12, 5, '3578951486', '국민은행 경비 1팀 채용',default,default,'정규직','서울특별시 강동구',
+default, '국민은행경빝님과 함께할 튼튼한 인재구합니다~','2022/12/31',default);
+insert into recruit_job_bridge values(8,5);
+insert into recruit_board values(seq_recruit_board.nextval, 13, 6, '6877345778', '신한은행 창구 2팀',default,'고졸이상','정규직','서울특별시 상일동',
+default, '고객과 함께 하는 즐거운 창구 생활 많이 지원하세요','2022/12/31',default);
+insert into recruit_job_bridge values(9,6);
+select * from  recruit_board;
+select * from recruit_job_bridge;
+commit;
+
 -- 김승환 END --
 -- 김지윤 START-- 
--- 구직자 멤버 데이터--
 select * from applicant_member;
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김지윤', 'yuiop', '1234', '01028013333', 'google@gmail.com', default);
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김수연', 'suyyen', '1234', '01054548989', 'suyyen@naver.com', default);
@@ -37,6 +82,7 @@ insert into CATEGORY values(10, '교육업');
 commit;
 
 --구인자 테이블 데이터 : recruit_member--
+select*from RECRUIT_MEMBER;
 insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '1238175934', '이즈소프트 개발 2팀', 'izsoft', 1234, 'izeasy@izsoft.com', default, default);
 insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '1138195777', '제니퍼소프트 솔루션융합 1팀', 'zenifer', 1234, 'zenifer@zzenifer.com', default, default);
 insert into RECRUIT_MEMBER values(seq_recruit_member.nextval, '2208145181', '티맥스소프트 공공개발 3팀', 'tmax', 1234, 'ttmz@tmaxsoft.com', default, default);
@@ -49,7 +95,7 @@ insert into RESUME values(seq_resume_no.nextval, 8, 5, '하민정', '1992/4/1', 
 commit;
 select*from RESUME ;
 
---구직자 salary_review 김수연 9, 하미정10 테이블
+--구직자 salary_review--
 --연봉은 만원단위에서 자르기. 3600만원 -> 3600
 select*from SALARY_REVIEW;
 insert into SALARY_REVIEW values(seq_SALARY_REVIEW_no.nextval, 2, '1238175934', 2, 3700, 3, 1, default);
@@ -61,6 +107,24 @@ commit;
 insert into COMPANY_REVIEW values(seq_COMPANY_REVIEW_no.nextval, 2, '1238175934', 2, '짧게 다니기엔 나쁘지 않고 좋아요~', 4, 5, 4, 4, 4, 3, default);
 insert into COMPANY_REVIEW values(seq_COMPANY_REVIEW_no.nextval, 9, '1138195777', 9, '괜찮았어요. 발전가능성은 모르겠네용', 4, 4, 2, 3, 3, 4, default);
 insert into COMPANY_REVIEW values(seq_COMPANY_REVIEW_no.nextval,10, '2208145181', 8, '워라벨에 대해 다시 생각해보게 되네요', 2, 3, 5, 4, 4, 5, default);
+commit;
+
+--채용게시판 RECRUIT_BOARD--
+select*from RECRUIT_BOARD;
+--select*from CATEGORY;
+
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 8, 1, '1238175934', '2022년 하반기 모집공고', default, default, default, '서울 중구', 3000, '지원하신 분 모두가 만족해 하는 기업', '2022/07/31', default);
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 9, 8, '1138195777', '신규 플랫폼 신입/경력자 채용', default, '대졸이상', '정규직', '서울 송파구 ', 3300, '지원하신 분 모두가 만족해 하는 기업', '2022/08/16', default);
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 10, 4, '2208145181', '2~3년차 경력자 채용', '2~3년차', '대졸이상', '정규직', '부산 강서구 ', 3500, '지원하신 분 모두가 만족해 하는 기업', '2022/08/11', default);
+commit;
+
+--채용 직무 브릿지 연결--
+--select*from RECRUIT_BOARD;
+--select*from JOB_CATEGORY;
+select*from RECRUIT_JOB_BRIDGE;
+insert into RECRUIT_JOB_BRIDGE values(13, 8);
+insert into RECRUIT_JOB_BRIDGE values(14, 7);
+insert into RECRUIT_JOB_BRIDGE values(15, 2);
 commit;
 
 -- 김지윤 END -- 
