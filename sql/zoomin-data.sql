@@ -113,6 +113,19 @@ insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 5, '1948653785
 insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 13, '8153268498', 5, '이것도 회사인가..?', 3, 2, 2, 1, 3, 2, default);
 insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 14, '4988653629', 3, '다닐만 해요.', 3, 4, 5, 4, 3, 5, default);
 
+-- 채용게시글
+select * from recruit_board;
+select * from category;
+insert into recruit_board values (seq_recruit_board.nextval, 4, 1, '1948653785', '[현대] 웹 개발자 채용', '신입', default, '정규직', '서울시 강남구', 3000, '웹개발자 신입 2명 모십니다.', '2022/07/20', default);
+insert into recruit_board values (seq_recruit_board.nextval, 5, 5, '8153268498', '[벤츠코리아] 영업직 채용', default, default, '계약직', '서울시 영등포구', 2000, '영업직 신입 한명 모십니다.', '2022/08/15', default);
+insert into recruit_board values (seq_recruit_board.nextval, 6, 10, '8153268498', '[KH전자] 교육 팀장 채용', '5년 이상', '대졸이상', '정규직', '경기도 수원시', 15000, '신입 교육 하실 수 있는 과장급 임원군 모십니다.', '2022/07/31', default);
+
+-- 채용글-직무 연결 브릿지
+select * from recruit_job_bridge;
+insert into recruit_job_bridge values(10, 1);
+insert into recruit_job_bridge values(11, 8);
+insert into recruit_job_bridge values(12, 5);
+
 commit;
 -- 박우석 END -- 
 -- 김승환 START -- 
