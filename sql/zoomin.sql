@@ -96,6 +96,15 @@ alter table recruit_board add constraint fk_recruit_board_company_no foreign key
 
 
 select * from user_constraints where table_name = 'RECRUIT_BOARD';
+
+create table recruit_job_bridge(
+    recruit_board_no number not null,
+    job_category_number number not null,
+    constraint fk_recruit_job_bridge_recruit_board_no foreign key(recruit_board_no) references recruit_board(no) on delete cascade,
+    constraint fk_recruit_job_bridge_job_category_number foreign key(job_category_number) references job_category(category_number) on delete set null
+);
+
+
 -- 백승윤 END --
 -- 박우석 START --
 
