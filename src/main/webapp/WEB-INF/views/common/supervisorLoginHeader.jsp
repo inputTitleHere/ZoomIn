@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+   #btn-manage{
+       width: 200px;
+       height: 100px;
+   }
+</style>
+
 </head>
 <body>
 <header>
