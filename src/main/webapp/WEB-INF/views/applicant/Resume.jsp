@@ -4,6 +4,8 @@
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <!-- section 태그 / div id="title" / h1 -> 변경 금지(공통 css 사용) -->
+
+
 <section>
 <div class="title">
 	<h1>이력서 작성</h1>
@@ -34,7 +36,7 @@
 					</tr>
 					<th>희망직종* : </th>
 						<td>
-							<select name="interestJob">
+							<select name="categoryNumber">
 								<option value="1">IT/웹/통신</option>
 								<option value="2">미디어/디자인</option>
 								<option value="3">의료/제약/복지</option>

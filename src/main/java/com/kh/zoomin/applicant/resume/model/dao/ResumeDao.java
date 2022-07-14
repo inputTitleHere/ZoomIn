@@ -5,6 +5,7 @@ import static com.kh.zoomin.common.JdbcTemplate.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -32,15 +33,15 @@ public class ResumeDao {
 		int result = 0;
 		String sql = prop.getProperty("insertResume"); 
 		//미완성 커리값 대입
-		// insert into tb_resume values(?*13)
+		// insert into resume values(?*13)
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, resume.getName());
-			pstmt.setInt(2,resume.getUid());
-			pstmt.setString(3, resume.getBirthday());
-			pstmt.setString(4, resume.getGender().name());
-			pstmt.setString(5, resume.getAddress());
-			pstmt.setInt(6, resume.getInterestJob());
+			pstmt.setInt(1,resume.getUid());
+			pstmt.setInt(2, resume.getCategoryNumber());
+			pstmt.setString(3, resume.getName());
+			pstmt.setDate(4, new java.sql.Date(resume.getBirthday().getTime()));
+			pstmt.setString(5, resume.getGender().name());
+			pstmt.setString(6, resume.getAddress());
 			pstmt.setString(7, resume.getSchoolType().name());
 			pstmt.setString(8, resume.getSchoolName());
 			pstmt.setString(9, resume.getSchoolStatus().name());

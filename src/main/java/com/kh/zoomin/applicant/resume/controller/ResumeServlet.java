@@ -1,6 +1,9 @@
 package com.kh.zoomin.applicant.resume.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,11 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.applicant.resume.model.dto.Gender;
 import com.kh.zoomin.applicant.resume.model.dto.Resume;
 import com.kh.zoomin.applicant.resume.model.dto.SchoolType;
 import com.kh.zoomin.applicant.resume.model.dto.Status;
 import com.kh.zoomin.applicant.resume.model.service.ResumeService;
+import com.kh.zoomin.member.dto.Member;
 
 
 /**
@@ -35,20 +40,20 @@ public class ResumeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Member member = (Member)session.getAttribute("loginMember");
-		int uid = Integer.parseInt();
-				
+		HttpSession loginSession = request.getSession();
+		ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
+		// 김지윤님 applicantMember 수정후에 Integer.parseInt 제거 할것!
+//		int uid = Integer.parseInt(member.getUid()) ; 로그인 기능 구현후 uid 수정
+		int uid = 7;	
 		try {
 			//인코딩처리
 			request.setCharacterEncoding("utf-8");
 			//1. 사용자 입력값 처리
+			int categoryNumber = Integer.parseInt(request.getParameter("categoryNumber"));
 			String name = request.getParameter("name");
-			int uid = Integer.parseInt(request.getSession("uid"));
-			String birthday = request.getParameter("birthday");
+			String _birthday = request.getParameter("birthday");
 			Gender gender = Gender.valueOf(request.getParameter("gender"));
 			String address = request.getParameter("address");
-			int interestJob = Integer.parseInt(request.getParameter("interestJob"));
 			SchoolType schoolType = SchoolType.valueOf(request.getParameter("schoolType"));
 			String schoolName = request.getParameter("schoolName");
 			Status schoolStatus = Status.valueOf(request.getParameter("schoolStatus"));
@@ -56,7 +61,10 @@ public class ResumeServlet extends HttpServlet {
 			double grade = Double.valueOf(request.getParameter("grade"));
 			double totalPoint = Double.valueOf(request.getParameter("totalPoint"));
 		
-			Resume resume = new Resume(interestJob, uid, name, birthday, gender, address, interestJob, 
+			SimpleDateFormat dateFomat = new SimpleDateFormat("yyyyMMdd");
+			Date birthday = dateFomat.parse(_birthday);
+			
+			Resume resume = new Resume(uid, categoryNumber ,name, birthday, gender, address, 
 					schoolType, schoolName, schoolStatus, majorName, grade, totalPoint);
 			
 			//2.업무로직 처리

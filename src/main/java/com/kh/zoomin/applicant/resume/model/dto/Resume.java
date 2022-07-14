@@ -1,34 +1,39 @@
 package com.kh.zoomin.applicant.resume.model.dto;
 
+import java.util.Date;
+
 public class Resume {
-	int no;
-	int uid;
-	String name;
-	String birthday;
-	Gender gender;
-	String address;
-	int interestJob;
-	SchoolType schoolType;
-	String schoolName;
-	Status schoolStatus;
-	String majorName;
-	double grade;
-	double totalPoint;
+	private int no;
+	private int uid;
+	private int categoryNumber;
+	private String name;
+	private Date birthday;
+	private Gender gender;
+	private String address;
+	private SchoolType schoolType;
+	private String schoolName;
+	private Status schoolStatus;
+	private String majorName;
+	private double grade;
+	private double totalPoint;
+	
+	
 	public Resume() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Resume(int no, int uid, String name, String birthday, Gender gender, String address, int interestJob,
+	
+	public Resume(int uid, int categoryNumber, String name, Date birthday, Gender gender, String address, 
 			SchoolType schoolType, String schoolName, Status schoolStatus, String majorName, double grade,
 			double totalPoint) {
 		super();
-		this.no = no;
+		
 		this.uid = uid;
+		this.categoryNumber = categoryNumber;
 		this.name = name;
 		this.birthday = birthday;
 		this.gender = gender;
 		this.address = address;
-		this.interestJob = interestJob;
 		this.schoolType = schoolType;
 		this.schoolName = schoolName;
 		this.schoolStatus = schoolStatus;
@@ -54,10 +59,10 @@ public class Resume {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 	public Gender getGender() {
@@ -72,11 +77,11 @@ public class Resume {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getInterestJob() {
-		return interestJob;
+	public int getCategoryNumber() {
+		return categoryNumber;
 	}
-	public void setInterestJob(int interestJob) {
-		this.interestJob = interestJob;
+	public void setCategoryNumber(int categoryNumber) {
+		this.categoryNumber = categoryNumber;
 	}
 	public SchoolType getSchoolType() {
 		return schoolType;
