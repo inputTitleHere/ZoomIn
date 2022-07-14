@@ -54,13 +54,14 @@ public class ApplicantDao {
 	}
 
 	private ApplicantMember handleApplicantResultSet(ResultSet rset) throws SQLException {
+		int uid = rset.getInt("uid");
 		String memberName = rset.getString("member_name");
 		String memberId = rset.getString("member_id");
 		String password = rset.getString("password");
 		String phone = rset.getString("phone");
 		String email = rset.getString("email");
 		Date regDate = rset.getDate("reg_date");
-		return new ApplicantMember(memberName, memberId, password, phone, email, regDate);
+		return new ApplicantMember(uid, memberName, memberId, password, phone, email, regDate);
 		
 	}
 
