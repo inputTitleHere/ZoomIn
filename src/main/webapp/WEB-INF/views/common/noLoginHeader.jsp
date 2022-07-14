@@ -25,6 +25,12 @@
 
   <div class="recruit-board-wrapper">
     <table class="recruit-board-table">
+      <thead>
+        <tr>
+          <td>마감임박 채용!</td>
+          <td><a href="<%=request.getContextPath()%>/recruit/recruitBoardView">→ 더 많은 채용글 보러가기 ←</a></td>
+        </tr>
+      </thead>
       <tbody></tbody>
     </table>
   </div>
@@ -61,7 +67,7 @@ const indexRecruiterBoard=()=>{
 
         const closureDateTd=document.createElement('td');
         closureDateTd.classList.add('recruit-board-closure-date');
-        closureDateTd.append(closureDate);
+        closureDateTd.append("마감일자 : "+closureDate);
 
         tr.append(companyLogoTd, titleTd, closureDateTd);
         tbody.append(tr);

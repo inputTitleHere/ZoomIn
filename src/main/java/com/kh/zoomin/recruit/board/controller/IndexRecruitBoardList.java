@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 import com.kh.zoomin.recruit.board.dto.RecruitBoardReadMode;
 import com.kh.zoomin.recruit.board.service.RecruitBoardService;
@@ -40,7 +41,8 @@ public class IndexRecruitBoardList extends HttpServlet {
 		
 		// json형식으로 list객체를 반환하기(request반환처리까지 해줌)
 		response.setContentType("application/json; charset=utf-8");		
-		new Gson().toJson(recruitBoard, response.getWriter());
+		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create();
+		gson.toJson(recruitBoard, response.getWriter());
 	}
 
 }
