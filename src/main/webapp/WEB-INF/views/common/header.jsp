@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>Zoom인</title>
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 
 <%
