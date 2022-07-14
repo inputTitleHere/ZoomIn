@@ -6,14 +6,15 @@ import java.sql.PreparedStatement;
 import java.util.Properties;
 import static com.kh.zoomin.common.JdbcTemplate.*;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
-import com.kh.zoomin.applicant.salaryReviewBoard.model.exception.CompanyReviewException;
+import com.kh.zoomin.applicant.companyReviewBoard.model.exception.CompanyReviewException;
+
 
 public class CompanyReviewDao {
 
 	private Properties prop = new Properties();
 
 	public CompanyReviewDao() {
-		String filename = CompanyReviewDao.class.getResource("/sql/zoomin/applicant/applicant-query.properties").getPath();
+		String filename = CompanyReviewDao.class.getResource("/sql/zoomin/applicant/companyreview-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (Exception e) {
@@ -43,7 +44,7 @@ public class CompanyReviewDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			throw new CompanyReviewException("리뷰 등록 오류", e);
+			throw new CompanyReviewException("회사 리뷰 등록 오류", e);
 		} finally {
 			close(pstmt);
 		}

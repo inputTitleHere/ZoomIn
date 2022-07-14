@@ -30,6 +30,18 @@ public class SalaryReview {
 		this.jobPosition = jobPosition;
 		this.regDate = regDate;
 	}
+	
+	public SalaryReview(int uid, String companyNo, int categoryNumber, int salary, int workYear,
+			String jobPosition, Date regDate) {
+		super();
+		this.uid = uid;
+		this.companyNo = companyNo;
+		this.categoryNumber = categoryNumber;
+		this.salary = salary;
+		this.workYear = workYear;
+		this.jobPosition = jobPosition;
+		this.regDate = regDate;
+	}
 
 	public int getNo() {
 		return no;

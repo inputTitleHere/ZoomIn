@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.zoomin.applicant.companyReviewBoard.Service.CompanyReviewService;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
+import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
 
 /**
  * Servlet implementation class CompanyEnrollServlet
@@ -34,7 +34,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("utf-8");
-			
+
 			// 사용자 입력값 처리
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));

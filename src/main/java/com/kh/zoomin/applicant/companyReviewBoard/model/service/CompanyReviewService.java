@@ -1,4 +1,4 @@
-package com.kh.zoomin.applicant.companyReviewBoard.Service;
+package com.kh.zoomin.applicant.companyReviewBoard.model.service;
 
 import java.sql.Connection;
 import static com.kh.zoomin.common.JdbcTemplate.*;
@@ -22,8 +22,7 @@ public class CompanyReviewService {
 		} finally {
 			close(conn);
 		}
+		
 		return result;
 	}
-
-	
 }
