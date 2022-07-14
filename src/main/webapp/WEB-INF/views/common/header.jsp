@@ -1,3 +1,4 @@
+<%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,8 +11,9 @@
 	
 	String saveId = null;
 	Cookie[] cookies = request.getCookies();
-	if(Cookie c : cookies){
-		String name = c.getNamge();
+	
+	for(Cookie c : cookies){
+		String name = c.getName();
 		String value = c.getValue();
 		System.out.println("[cookie] " + name + "=" + value);
 		if("saveId".equals(name)){
@@ -36,7 +38,6 @@
 
 
 // 
-Member loginMember = (Member)session.getAttribute("loginMember");
 
 if(loginMember==null){
 %>
