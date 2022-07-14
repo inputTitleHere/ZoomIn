@@ -22,13 +22,7 @@ import com.kh.zoomin.applicant.resume.model.service.ResumeService;
 public class ResumeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ResumeService ResumeService = new ResumeService();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ResumeServlet() {
-        super();
-    }
-
+ 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,34 +35,35 @@ public class ResumeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginMember");
+		int uid = Integer.parseInt();
+				
 		try {
 			//인코딩처리
 			request.setCharacterEncoding("utf-8");
 			//1. 사용자 입력값 처리
-			String id = request.getParameter("id");
 			String name = request.getParameter("name");
+			int uid = Integer.parseInt(request.getSession("uid"));
 			String birthday = request.getParameter("birthday");
 			Gender gender = Gender.valueOf(request.getParameter("gender"));
-			String email = request.getParameter("email");
-			String phoneNum = request.getParameter("phoneNum");
 			String address = request.getParameter("address");
+			int interestJob = Integer.parseInt(request.getParameter("interestJob"));
 			SchoolType schoolType = SchoolType.valueOf(request.getParameter("schoolType"));
 			String schoolName = request.getParameter("schoolName");
 			Status schoolStatus = Status.valueOf(request.getParameter("schoolStatus"));
 			String majorName = request.getParameter("majorName");
 			double grade = Double.valueOf(request.getParameter("grade"));
 			double totalPoint = Double.valueOf(request.getParameter("totalPoint"));
-			String companyName = request.getParameter("companyName");
-			int career = Integer.parseInt(request.getParameter("career"));
-			Status careerStatus = Status.valueOf(request.getParameter("careerStatus"));
-			
-			Resume resume = new Resume(id, name, birthday, gender, email, phoneNum, 
-					address, schoolType, schoolName, schoolStatus, majorName, grade, totalPoint, companyName, career, careerStatus);
+		
+			Resume resume = new Resume(interestJob, uid, name, birthday, gender, address, interestJob, 
+					schoolType, schoolName, schoolStatus, majorName, grade, totalPoint);
 			
 			//2.업무로직 처리
 			int result = ResumeService.insertResume(resume);
 			
 			//3.응답 리다이렉트
+			
 			HttpSession session = request.getSession();
 			String msg = "";
 			

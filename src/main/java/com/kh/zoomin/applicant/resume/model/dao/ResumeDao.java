@@ -18,7 +18,7 @@ public class ResumeDao {
 	private Properties prop = new Properties();
 	
 	public ResumeDao() {
-		String filename = ResumeDao.class.getResource("/sql/resume/resume.properties").getPath();
+		String filename = ResumeDao.class.getResource("/sql/zoomin/applicant/applicant-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (IOException e) {
@@ -32,25 +32,21 @@ public class ResumeDao {
 		int result = 0;
 		String sql = prop.getProperty("insertResume"); 
 		//미완성 커리값 대입
-		// insert into tb_resume values(?*16)
+		// insert into tb_resume values(?*13)
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, resume.getId());
-			pstmt.setString(2, resume.getName());
+			pstmt.setString(1, resume.getName());
+			pstmt.setInt(2,resume.getUid());
 			pstmt.setString(3, resume.getBirthday());
 			pstmt.setString(4, resume.getGender().name());
-			pstmt.setString(5, resume.getEmail());
-			pstmt.setString(6, resume.getPhoneNum());
-			pstmt.setString(7, resume.getAddress());
-			pstmt.setString(8, resume.getSchoolType().name());
-			pstmt.setString(9, resume.getSchoolName());
-			pstmt.setString(10, resume.getSchoolStatus().name());
-			pstmt.setString(11, resume.getMajorName());
-			pstmt.setDouble(12, resume.getGrade());
-			pstmt.setDouble(13, resume.getTotalPoint());
-			pstmt.setString(14, resume.getCompanyName());
-			pstmt.setInt(15, resume.getCareer());
-			pstmt.setString(16, resume.getCareerStatus() != null ? resume.getCareerStatus().name() : null);
+			pstmt.setString(5, resume.getAddress());
+			pstmt.setInt(6, resume.getInterestJob());
+			pstmt.setString(7, resume.getSchoolType().name());
+			pstmt.setString(8, resume.getSchoolName());
+			pstmt.setString(9, resume.getSchoolStatus().name());
+			pstmt.setString(10, resume.getMajorName());
+			pstmt.setDouble(11, resume.getGrade());
+			pstmt.setDouble(12, resume.getTotalPoint());
 			
 			result = pstmt.executeUpdate();
 		}
