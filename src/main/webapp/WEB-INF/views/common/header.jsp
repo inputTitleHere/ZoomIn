@@ -36,32 +36,6 @@ window.onload = () => {
 	alert("<%= msg %>");
 <% } %>
 
-//null일 경우 기능 사용못하게 팝업창 떠야함 
-<% if(loginMember.getMemberType() == null) { %>
-
-	 };	
-
-	 //해당 부분 추후 구직자란으로 옮길것임. 해당란에 잘못적음 
-<% } else if(loginMember.getMemberType() == 2) { %>
-	document.RecruitLoginFrm.onsubmit = (e) => {
-		const memberId = document.querySelector("#memberId");
-		const password = document.querySelecotr("#password");
-		
-		//db에 입력된 아이디 최소글자가 3글자라 3글자 이상으로 설정
-		if(!/^.{3,}$/.test(memberId.value)) {
-			alert("유효한 아이디를 입력해주세요");
-			memberId.select();
-			return false;
-		}
-		
-		//비번 1234통일했으므로 4글자 이상으로 설정
-		if(!/^.{4,}$/.test(password.value)) {
-			alert("유효한 비밀번호를 입력해주세요.");
-			password.select();
-			return false;
-		}
-	 };	
-<% } %>
 };
 </script>
 <%

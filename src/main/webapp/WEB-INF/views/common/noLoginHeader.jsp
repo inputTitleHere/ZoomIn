@@ -1,5 +1,4 @@
 <%@page import="com.kh.zoomin.member.dto.Member"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,11 +6,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script>
-window.onload = () => {
-	
-<% if(msg != null) { %>
-	alert("<%= msg %>");
-<% } %>
 
 //구인자 로그인 유효성 
 <% if((int) session.getAttribute("memberType") == 1) { %>
