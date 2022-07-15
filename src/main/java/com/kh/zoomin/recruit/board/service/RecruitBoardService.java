@@ -1,5 +1,6 @@
 package com.kh.zoomin.recruit.board.service;
 
+import com.kh.zoomin.common.ZoominUtils;
 import com.kh.zoomin.recruit.board.dao.RecruitBoardDao;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 
@@ -17,7 +18,31 @@ public class RecruitBoardService {
 		Connection conn = getConnection();
 		List<RecruitBoard> result=null;
 		result=rbd.loadRecruitBoardHeaders(param, conn);
+		close(conn);
+		return result;
+	}
+
+	/**
+	 * DB의 RECRUIT_BOARD에서 모든 채용글의 개수를 세어옵니다. 
+	 * @return
+	 */
+	public int totalRecruitBoardCount() {
+		int result=0;
+		Connection conn = getConnection();
+		result=rbd.totalRecruitBoardCount(conn);
+		close(conn);
+		return result;
+	}
+
+	public RecruitBoard viewRecruitBoard(int boardNo) {
+		RecruitBoard result=null;
+		Connection conn = getConnection();
+		result=rbd.viewRecruitBoard(boardNo, conn);
 		
+		result.setTitle(ZoominUtils.escapeXml(result.getTitle()));
+//		result.setContent(ZoominUtils.convertLineFeedToBr(ZoominUtils.escapeXml(result.getContent()))); // XML기호 해체 및 개행문자 HTML형식으로 처리.(컨텍스트 스타릴링 활용을 위해 보류)
+		
+		close(conn);
 		return result;
 	}
 	

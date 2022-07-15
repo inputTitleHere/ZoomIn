@@ -4,19 +4,19 @@ import java.sql.Date;
 
 public class RecruitBoard {
 
-	private int no;
-	private int uid;
-	private int categoryNumber;
-	private String company_no; // 사업자 등록번호는 문자열로 저장하였다.
-	private String title;
-	private String careerYears;
-	private String schoolStatus;
-	private String workType;
-	private String officeLocation;
-	private String salary;
-	private String content;
-	private Date closureDate;
-	private Date regDate;
+	private int no; 				// 해당 게시글의 고유번호이다.
+	private int uid; 				// 게시글 작성자(구인자)의 고유번호이다.
+	private int categoryNumber; 	// 소속 카테고리 정보이다. 
+	private String company_no; 		// 사업자 등록번호는 문자열로 저장하였다.
+	private String title;			//
+	private String careerYears;		//
+	private String schoolStatus;	//
+	private String workType;		//
+	private String officeLocation;	//
+	private String salary;			//
+	private String content;			//
+	private Date closureDate;		//	
+	private Date regDate;			//
 	
 	public RecruitBoard() {
 		super();
