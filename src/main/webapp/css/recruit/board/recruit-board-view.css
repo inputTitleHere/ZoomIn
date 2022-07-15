@@ -1,0 +1,38 @@
+section#recruit-board-view{
+  margin: 30px auto;
+  max-width: 1024px;
+}
+h1{
+  text-align: center;
+  font-size: 60px;
+}
+
+.small-info{
+  display: flex;
+  justify-content: space-between;
+}
+
+.small-info .button-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.small-info table{
+  width: 400px;
+}
+
+.small-info-title{
+  width: 120px;
+  height: 40px;
+  font-size: 24px;
+  margin-top: 4px;
+}
+.small-info-data{
+  font-size: 20px;
+}
+
+#recruit-board-view .content-wrapper{
+  margin: 30px auto;
+}
+
