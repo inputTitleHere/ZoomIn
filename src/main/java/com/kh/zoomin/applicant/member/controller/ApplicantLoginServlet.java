@@ -20,7 +20,7 @@ import com.kh.zoomin.applicant.member.model.service.ApplicantService;
 public class ApplicantLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ApplicantService as= new ApplicantService();
-	int uid = Integer.parseInt();
+	
        
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
