@@ -20,9 +20,7 @@ import com.kh.zoomin.applicant.member.model.service.ApplicantService;
 public class ApplicantLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ApplicantService as= new ApplicantService();
-	int uid = Integer.parseInt("uid");
 
-       
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -32,7 +30,7 @@ public class ApplicantLoginServlet extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			
 			//1. 사용자입력값 처리
-			uid = Integer.parseInt(request.getParameter("uid"));
+			int uid = Integer.parseInt(request.getParameter("uid"));
 			String memberId = request.getParameter("memberId");
 			String password = request.getParameter("password");
 			String saveId = request.getParameter("saveId");

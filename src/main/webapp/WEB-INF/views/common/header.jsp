@@ -1,3 +1,4 @@
+<%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="javax.websocket.Session"%>
@@ -11,6 +12,7 @@
 	
 	String saveId = null;
 	Cookie[] cookies = request.getCookies();
+
 	for(Cookie c : cookies){
 		String name = c.getName();
 		String value = c.getValue();
@@ -25,7 +27,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Zoomin</title>
+<title>Zoom인</title>
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
