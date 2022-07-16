@@ -1,4 +1,4 @@
-package com.kh.zoomin.applicant.member.model.dao;
+package com.kh.zoomin.recruit.member.model.dao;
 
 import static com.kh.zoomin.common.JdbcTemplate.close;
 
@@ -11,17 +11,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
+import com.kh.zoomin.recruit.member.model.exception.RecruitException;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
+import com.kh.zoomin.applicant.member.model.exception.ApplicantException;
 import com.kh.zoomin.member.exception.MemberException;
+import com.kh.zoomin.recruit.member.RecruitMember;
 
-
-public class ApplicantDao {
-
+public class RecruitDao {
+	
 	private Properties prop = new Properties();
-
+	
 	// member-query.properties에서 불러오기
-	public ApplicantDao() {
-		String filename = ApplicantDao.class.getResource("/sql/zoomin/member/member-query.properties").getPath();
+	public RecruitDao() {
+		String filename = RecruitDao.class.getResource("/sql/zoomin/member/member-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (IOException e) {
@@ -29,10 +32,8 @@ public class ApplicantDao {
 		}
 	}
 
-
-	// 로그인기능-로그인 아이디 인식
-	public ApplicantMember findById(Connection conn, String memberId) {
-		ApplicantMember amember = null;
+	public RecruitMember findById(Connection conn, String memberId) {
+		RecruitMember rmember = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("findById");
@@ -45,7 +46,7 @@ public class ApplicantDao {
 
 			while (rset.next()) { 
 				//다음행이 있을때 rset.next()에 의해 다음행 이동
-				amember = handleMemberResultSet(rset);
+				rmember = handleMemberResultSet(rset);
 			}
 
 		} catch (SQLException e) {
@@ -54,17 +55,21 @@ public class ApplicantDao {
 			close(rset);
 			close(pstmt);
 		}
-		return amember;
+		return rmember;
 	}
 
-	private ApplicantMember handleMemberResultSet(ResultSet rset) throws SQLException {
+	private RecruitMember handleMemberResultSet(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
-		String memberName = rset.getString("member_name");
+		String companyNo = rset.getString("company_no");
 		String memberId = rset.getString("member_id");
 		String password = rset.getString("password");
-		String phone = rset.getString("phone");
 		String email = rset.getString("email");
+		Boolean supervisor = rset.getBoolean(0);
 		Date regDate = rset.getDate("reg_date");
-		return new ApplicantMember(uid, memberName, memberId, password, phone, email, regDate);
+		return new RecruitMember(uid, email, email, email, email, supervisor, regDate);
+
 	}
+
+
+
 }

@@ -1,25 +1,25 @@
-package com.kh.zoomin.applicant.member.controller;
+package com.kh.zoomin.recruit.member.controller;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
-import com.kh.zoomin.applicant.member.model.service.ApplicantService;
+import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.recruit.member.model.service.RecruitService;
 
 /**
- * Servlet implementation class ApplicantLoginServlet
+ * Servlet implementation class RecruitLoginServlet
  */
-@WebServlet("/applicant/login")
-public class ApplicantLoginServlet extends HttpServlet {
+@WebServlet("/recruit/login")
+public class RecruitLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ApplicantService as= new ApplicantService();
+	private RecruitService res = new RecruitService();
+       
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,13 +34,13 @@ public class ApplicantLoginServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			
 			//2. 업무로직
-			ApplicantMember amember = as.findById(memberId);
+			RecruitMember rmember = res.findById(memberId);
 			HttpSession session = request.getSession(true); 
 			System.out.println(session.getId());
 			
 			//로그인 여부 판단. 로그인 성공
-			if(amember != null && password.equals(amember.getPassword())) {
-				session.setAttribute("loginMember", amember);
+			if(rmember != null && password.equals(rmember.getPassword())) {
+				session.setAttribute("loginMember", rmember);
 			}
 			else {
 				//로그인 실패
