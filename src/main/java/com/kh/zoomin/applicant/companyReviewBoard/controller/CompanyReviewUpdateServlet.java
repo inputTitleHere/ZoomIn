@@ -1,6 +1,7 @@
 package com.kh.zoomin.applicant.companyReviewBoard.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
+import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
 
 /**
- * Servlet implementation class CompanyEnrollServlet
+ * Servlet implementation class CompanyReviewUpdateServlet
  */
-@WebServlet("/CompanyReviewEnrollServlet")
-public class CompanyReviewEnrollServlet extends HttpServlet {
+@WebServlet("/CompanyReviewUpdateServlet")
+public class CompanyReviewUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();
 
@@ -23,25 +25,27 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewEnroll.jsp")
-			.forward(request, response);
-		
+		try {
+			int no = Integer.parseInt(request.getParameter("no"));
+			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
+			
+			request.setAttribute("companyReview", companyReview);
+			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewUpdate.jsp")
+				.forward(request, response);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
-			request.setCharacterEncoding("utf-8");
-
-			// 사용자 입력값 처리
-			
-			int uid = Integer.parseInt(request.getParameter("uid"));
-			String companyNo = request.getParameter("companyNo");
-			int categoryNumber = Integer.parseInt(request.getParameter("categoryNumber"));
-			
+			int no = Integer.parseInt(request.getParameter("no"));
 			String content = request.getParameter("content");
 			int stars = Integer.parseInt(request.getParameter("stars"));
 			int workLifeBalance = Integer.parseInt(request.getParameter("workLifeBalance"));
@@ -49,21 +53,18 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			int workIntensity = Integer.parseInt(request.getParameter("workIntensity"));
 			int potential = Integer.parseInt(request.getParameter("potential"));
 			int salarySatisfaction = Integer.parseInt(request.getParameter("salarySatisfaction"));
+			CompanyReviewExt companyReview = new CompanyReviewExt(no, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			
+			System.out.println("companyReview = " + companyReview);
 			
-			CompanyReview companyReview = new CompanyReview(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
+			int result = companyReviewService.updateCompanyReview(companyReview);
 			
-			// 업무로직
-			int result = companyReviewService.insertCompanyReview(companyReview);
-			
-			// redirect
-			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
-			
+			request.getSession().setAttribute("msg", "리뷰를 성공적으로 수정했습니다.");
+			response.sendRedirect(request.getContextPath() + "/applicant/companyReview?no=" + no);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-	}
+	} 
 
 }

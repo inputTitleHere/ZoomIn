@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+
+<%--@ include file="/WEB-INF/views/common/header.jsp" --%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<header>
 	<div id="account">
 		<a href ="" id="writeResume">이력서 작성</a>
 		<a href ="" id="info">회원정보</a>
@@ -21,4 +15,9 @@
 		<input id="searchBox" type="text">
 		 <button class="custom-btn btn-3"><span>검색</span></button>
 	</div>
-</header>
+	<div id="mainCategory">
+		<nav>
+			<a href="<%= request.getContextPath() %>/CompanyReviewUpdateServlet">리뷰</a>
+		</nav>
+	</div>
+
