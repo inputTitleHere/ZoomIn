@@ -7,7 +7,7 @@
 
 <%
 RecruitMember recruitMember = (RecruitMember)session.getAttribute("loginMember"); // 여기까지 왔으면 일단 loginMember는 있을 것.
-System.out.println("@recruiterLoginHeader.jsp : UID = "+recruitMember.getUid());
+//System.out.println("@recruiterLoginHeader.jsp : UID = "+recruitMember.getUid());
 %>
 
 <body>
