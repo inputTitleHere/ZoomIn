@@ -259,5 +259,12 @@ alter table resume add constraint ck_gender check (gender in ('M', 'F'));
 alter table resume add constraint ck_school_type check (school_type in ('H1', 'C2', 'C3', 'C4'));
 alter table resume add constraint ck_school_status check (school_status in ('A', 'B', 'C'));
 
+--방문자용 통계 테이블
+create table visit (
+	v_date date not null
+);
+select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
+insert into visit values (to_date(sysdate, 'yyyy-mm-dd'));
+commit;
 -- 이윤정 END --
 

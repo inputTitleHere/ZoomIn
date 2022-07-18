@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.RecruitMember;
 import com.kh.zoomin.supervisor.model.service.SupervisorService;
 

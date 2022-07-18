@@ -8,18 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SupervisorBoardListServlet
+ * Servlet implementation class SupervisorViewServlet
  */
-@WebServlet("/supervisor/BoardList")
-public class SupervisorBoardListServlet extends HttpServlet {
+@WebServlet("/supervisor/supervisorView")
+public class SupervisorViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//응답처리
-		request.getRequestDispatcher("/WEB-INF/views/supervisor/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/supervisor/supervisorIndex.jsp").forward(request, response);
 	}
 
 }

@@ -1,5 +1,4 @@
 package com.kh.zoomin.supervisor.model.dao;
-import static com.kh.mvc.common.JdbcTemplate.close;
 import static com.kh.zoomin.common.JdbcTemplate.close;
 
 import java.io.FileReader;
@@ -14,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.kh.mvc.member.model.exception.MemberException;
-import com.kh.zoomin.supervisor.model.service.ApplicantMember;
-import com.kh.zoomin.supervisor.model.service.RecruitMember;
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
+import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.supervisor.model.exception.SupervisorException;
 
 
 public class SupervisorDao {
@@ -24,9 +23,8 @@ public class SupervisorDao {
 	private Properties prop = new Properties();
 	
 	public SupervisorDao() {
-		String filename = SupervisorDao.class.getResource("/sql/zoomin/member/member-query.properties").getPath();
-		//로그
-		System.out.println("filename@SupervisorDao = " + filename);
+		String filename = SupervisorDao.class.getResource("/sql/zoomin/supervisor/supervisor-query.properties").getPath();
+		//System.out.println("filename@SupervisorDao = " + filename);
 		try {
 			prop.load(new FileReader(filename));
 		} catch (IOException e) {
@@ -63,7 +61,7 @@ public class SupervisorDao {
 		ResultSet rset = null;
 		List<ApplicantMember> applicantMemberList = new ArrayList<>();
 		String sql = prop.getProperty("findApplicantMemberAll");
-		
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
@@ -72,7 +70,7 @@ public class SupervisorDao {
 				applicantMemberList.add(applicantMember);
 			}
 		} catch (Exception e) {
-			throw new Exception("구인자 전체 조회 오류!", e);
+			throw new SupervisorException("구인자 전체 조회 오류!", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -95,7 +93,7 @@ public class SupervisorDao {
 				recruitMemberList.add(recruitMember);
 			}
 		} catch (Exception e) {
-			throw new Exception("구직자 전체 조회 오류!", e);
+			throw new SupervisorException("구직자 전체 조회 오류!", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -123,7 +121,7 @@ public class SupervisorDao {
 			while(rset.next())
 				applicantMemberList.add(handleApplicantMemberRset(rset));			
 		} catch (SQLException e) {
-			throw new Exception("관리자 회원검색 오류!", e);
+			throw new SupervisorException("관리자 회원검색 오류!", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -150,12 +148,33 @@ public class SupervisorDao {
 			while(rset.next())
 				recruitMemberList.add(handleRecruitMemberRset(rset));			
 		} catch (SQLException e) {
-			throw new Exception("관리자 회사검색 오류!", e);
+			throw new SupervisorException("관리자 회사검색 오류!", e);
 		} finally {
 			close(rset);
 			close(pstmt);
 		}				
 		return recruitMemberList;
+	}
+
+	//오늘의 방문자 수 
+	public int getTodayCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int todayCnt = 0;
+		String sql = prop.getProperty("getTodayVisitCnt");
+		System.out.println("sql = " + sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				todayCnt = rset.getInt(1);
+		} catch (Exception e) {
+			throw new SupervisorException("오늘 방문자 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return todayCnt;
 	}
 
 	

@@ -1,14 +1,18 @@
+<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
 
-<%
+<%--
 	List<ApplicantMember> applicantMemberList = (List<ApplicantMember>) request.getAttribute("applicantMemebrList");
 	List<RecruitMember> recruitMemberList = (List<RecruitMember>) request.getAttribute("recruitMemebrList");
+	System.out.println(applicantMemberList);
 	String type = request.getParameter("searchType");
 	String kw = request.getParameter("searchKeyword");	
-%>
+--%>
+<%--  
 <style>
 div.search-applicant{
 	display: <%= type == null || "applicant".contains(type) ? "inline-block" : "none" %>;
@@ -17,11 +21,12 @@ div.search-recruit{
 	display: <%= type == null || "recruit".contains(type) ? "inline-block" : "none" %>;
 }
 </style>
+ --%>
 	<section id="memberList-container">
 		<%-- 회원검색 --%>
 		<div id="search-container">
-			<label for="searchMemberType">회원타입 : </label>
 	        <select id="searchMemberType">
+	        	<option value="none">회원타입</option>
 	            <option value="aplicantMember">구직자</option>
 	            <option value="recruitMember">구인자</option>
 	        </select>
@@ -75,30 +80,24 @@ div.search-recruit{
 					</tr>
 				</thead>
 				<tbody>
-					<%
+					<%--
 						if(recruitMemberList == null || recruitMemberList.isEmpty()) {
-					%>
+					--%>
 						<tr>
 							<td colspan="7" align="center">조회 결과가 없습니다.</td>
 						</tr>
-					<%
+					<%--
 						}
 						else {
 							for(RecruitMember rm : recruitMemberList){
-					%>
+					--%>
 						<tr>
-							<td><%= rm.getRecruitMemberUid()%></td>
-							<td><%= rm.getRecruitMemberCompanyNo()%></td>
-							<td><%= rm.getRecruitMemberName()%></td>
-							<td><%= rm.getRecruitMemberId()%></td>
-							<td><%= rm.getRecruitMemberPassword()%></td>
-							<td><%= rm.getRecruitMemberEmail()%></td>
-							<td><%= rm.getRecruitMemberRegDate()%></td>
+		
 						</tr>					
-					<%
+					<%--
 							}
 						}
-					%>
+					--%>
 				</tbody>
 			</table>
 		</section>
@@ -118,33 +117,37 @@ div.search-recruit{
 					</tr>
 				</thead>
 				<tbody>
-				<%
+				<%--
 					if(applicantMemberList == null || applicantMemberList.isEmpty()) {
-				%>
+				--%>
 					<tr>
 						<td colspan="7" align="center">조회 결과가 없습니다.</td>
 					</tr>
-				<%
+				<%--
 					}
 					else {
 						for(ApplicantMember am : applicantMemberList){
-				%>
+				--%>
 					<tr>
-						<td><%= am.getApplicantMemberUid() %></td>
-						<td><%= am.getApplicantMemberName() %></td>
-						<td><%= am.getApplicantMemberId() %></td>
-						<td><%= am.getApplicantMemberPassword() %></td>
-						<td><%= am.getApplicantMemberPhone() %></td>
-						<td><%= am.getApplicantMemberEmail() %></td>
-						<td><%= am.getApplicantMemberRegDate() %></td>
+
 					</tr>
-				<%
+				<%--
 						}
 					}
-				%>
+				--%>
 				</tbody>
 			</table>
-		
+		<style>
+        #tbl-applicantMember, #tbl-recruitMember{
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 5px 5px;
+        }
+        tr, td, th{
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
 		
 		
 		</section>

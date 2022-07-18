@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자모드</title>
 
 <style>
    #btn-manage{

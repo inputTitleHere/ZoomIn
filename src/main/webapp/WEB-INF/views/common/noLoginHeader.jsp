@@ -9,6 +9,8 @@
 		<a href ="" id="logIn">로그인</a>
 		<a href ="" id="recruiterAsign">구인자 회원가입</a>
 		<a href ="" id="applicantAsign">구직자 회원가입</a>
+		<%-- 임시로 관리자 탭 만들었습니다. --%>
+		<a href="<%= request.getContextPath() %>/supervisor/supervisorView">관리자</a>
 	</div>
 	<div id="logodiv">
 		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
