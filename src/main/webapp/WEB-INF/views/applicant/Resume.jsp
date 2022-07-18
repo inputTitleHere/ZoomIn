@@ -1,10 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.zoomin.applicant.resume.model.dto.Resume"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/resume.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <!-- section 태그 / div id="title" / h1 -> 변경 금지(공통 css 사용) -->
 
+<%
+	String result = (String)request.getAttribute("result");
+	int categoryNumber = 0;
+	String name = "";
+	String birthday= "";
+	String gender = "";
+	String address = "";
+	String schoolType= "";
+	String schoolName = "";
+	String schoolStatus = "";
+	String majorName = "";
+	double grade= 0.0;
+	double totalPoint = 0.0;
+	
+	if(result == "ok"){
+	categoryNumber = (int)request.getAttribute("categoryNumber");
+	name= (String)request.getAttribute("name");
+	birthday= (String)request.getAttribute("birthday");
+	gender= (String)request.getAttribute("gender");
+	address= (String)request.getAttribute("address");
+	schoolType= (String)request.getAttribute("schoolType");
+	schoolName= (String)request.getAttribute("schoolName");
+	schoolStatus= (String)request.getAttribute("schoolStatus");
+	majorName= (String)request.getAttribute("majorName");
+	grade = (double)request.getAttribute("grade");
+	totalPoint= (double)request.getAttribute("totalPoint");		
+	}
+	
+%>
 
 <section>
 <div class="title">
@@ -12,16 +42,19 @@
 </div>
 <div class="context">
 	<form id="resumeFrm" name = "resumeFrm" action="<%=request.getContextPath()%>/ResumeServlet" method="POST">
-
+	<input type="hidden" name="result" value="<%=result%>"/>
 		<div class="resumeDev">
 			<div class="resumeTitle">인적사항</div>
 			<div class="resumeContext">
-				<table>
+				<table id="infoTable">
 					<tr>
 						<th>이름* : </th>
-						<td><input type="text" name="name"/></td>
+						<td><input type="text" name="name" value="<%=name%>"/></td>
 						<th>생년월일* : </th>
-						<td><input type="text" name="birthday"/></td>
+						<td><input type="text" name="birthday" value="<%=birthday%>"/></td>
+					</tr>
+					
+					<tr>
 						<th>성별* : </th>
 						<td>
 							<select name="gender">
@@ -29,12 +62,7 @@
 								<option value="F">여자</option>
 							</select>
 						</td>
-					</tr>
-					<tr>
-						<th>주소 : </th>
-						<td colspan="4"><input type="text" name="address"/></td>
-					</tr>
-					<th>희망직종* : </th>
+						<th>희망직종* : </th>
 						<td>
 							<select name="categoryNumber">
 								<option value="1">IT/웹/통신</option>
@@ -49,6 +77,11 @@
 								<option value="10">교육업</option>
 							</select>
 						</td>
+					</tr>
+					<tr>
+						<th>주소 : </th>
+						<td colspan="3"><input type="text" name="address" id="address" value="<%=address%>"/></td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -56,6 +89,12 @@
 			<div class="resumeTitle">학력사항</div>
 			<div class="resumeContext">
 				<table>
+					<tr>
+						<th>학교명* : </th>
+						<td><input type="text" name="schoolName" value="<%=schoolName%>"/></td>
+						<th>전공명 : </th>
+						<td><input type="text" name="majorName" value="<%=majorName%>"/></td>
+					</tr>
 					<tr>
 						<th>학력구분* : </th>
 						<td>
@@ -66,8 +105,6 @@
 								<option value="HI">고등학교</option>
 							</select>
 						</td>
-						<th>학교명* : </th>
-						<td><input type="text" name="schoolName"/></td>
 						<th>최종학력* : </th>
 						<td>
 							<select name="schoolStatus">
@@ -78,37 +115,61 @@
 						</td>
 					</tr>
 					<tr>
-						<th>전공명 : </th>
-						<td><input type="text" name="majorName"/></td>
 						<th>학점 : </th>
-						<td><input type="text" name="grade"/></td>
+						<td><input type="text" name="grade" value="<%=grade%>"/></td>
 						<th>총점 : </th>
-						<td><input type="text" name="totalPoint"/></td>
+						<td><input type="text" name="totalPoint" value="<%=totalPoint%>"/></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		<div class="resumeDev">
-			<div class="resumeTitle">경력사항</div>
-			<div class="resumeContext"></div>
-		</div>
+		
 		
 	</form>
-		<div>
-			<button>cancle</button>
-			<button>delete</button>
-			<button id="btnSubmit">submit</button>
-		</div>
+		<div id = "btndesign">
+			<button id="btnResumeUpdate" class="custom-btn btn-3"><span>이력서 수정</span></button>
+			<button id="btnResumeDelete" class="custom-btn btn-3"><span>이력서 삭제</span></button>
+			<button id="btnResumeSubmit" class="custom-btn btn-3"><span>이력서 저장</span></button>
+		</div>		
 </div>
 </section>
+<form name="resumeDelFrm" action="<%= request.getContextPath() %>/ResumeDeleteServlet" method="POST"></form>
 
 <script type="text/javascript">
-	document.getElementById("btnSubmit").onclick = (e) =>{
+	document.getElementById("btnResumeSubmit").onclick = (e) =>{
 		document.resumeFrm.submit();
+		alert("저장되었습니다!");
 	};
 	
-	$("select[name = interestJob]").change(function(){
-		  console.log($("select[name = interestJob] option:selected").val()); //text값 가져오기
+	document.getElementById("btnResumeDelete").onclick = (e) =>{
+			document.resumeDelFrm.submit();
+			alert("삭제 되었습니다!");
+	};
+	
+	document.getElementById("btnResumeUpdate").onclick = (e) =>{
+		document.resumeFrm.submit();
+		alert("수정되었습니다!");
+	};
+	
+	$("select[name = categoryNumber]").change(function(){
+		  console.log($("select[name = categoryNumber] option:selected").val()); //text값 가져오기
 		});
+	
+	
+	$(document).ready(function(){
+		if("<%=result%>"== "ok"){
+			$("select[name = categoryNumber]").val(<%=categoryNumber%>).prop("selected",true);
+			$("select[name = gender]").val("<%=gender%>").prop("selected",true);
+			$("select[name = schoolType]").val("<%=schoolType%>").prop("selected",true);
+			$("select[name = schoolStatus]").val("<%=schoolStatus%>").prop("selected",true);			
+			$("#btnResumeSubmit").hide();
+		}else{
+			$("#btnResumeUpdate").hide();
+			$("#btnResumeDelete").hide();
+		}
+	});
+
+	
+	
 </script>
 <%@ include file="/WEB-INF/views/common/commonFooter.jsp" %>

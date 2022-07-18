@@ -8,6 +8,7 @@ import com.kh.zoomin.applicant.resume.model.dao.ResumeDao;
 import com.kh.zoomin.applicant.resume.model.dto.Resume;
 
 public class ResumeService {
+	
 	private ResumeDao ResumeDao = new ResumeDao();
 	/**
 	 * DML요청 - service
@@ -19,6 +20,7 @@ public class ResumeService {
 	 * @param member
 	 * @return
 	 */
+	
 	public int insertResume(Resume resume) {
 		
 		int result = 0;
@@ -36,5 +38,47 @@ public class ResumeService {
 		}
 		return result;
 	}
+	
+	public Resume findByResume(int uid) {
+		Connection conn = getConnection();
+		Resume resume = ResumeDao.findByResume(conn,uid);
+		close(conn);
+		return resume;
+	}
+	
+	public int deleteResume(int uid) {
 
+		int result= 0;
+		Connection conn = getConnection();
+		try {
+			result = ResumeDao.deleteResume(conn,uid);
+			commit(conn);
+		}
+		catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int updateResume(Resume resume) {
+		int result= 0;
+		Connection conn = getConnection();
+		try {
+			result = ResumeDao.updateResume(conn,resume);
+			commit(conn);
+		}
+		catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		finally {
+			close(conn);
+		}
+		return result;
+	}
+	
 }
