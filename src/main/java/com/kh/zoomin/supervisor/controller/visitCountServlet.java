@@ -1,6 +1,7 @@
 package com.kh.zoomin.supervisor.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,10 @@ public class visitCountServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//사용자 입력값
+		String start = request.getParameter("dateStart");
+		System.out.println("start = " + start);
+		
 		//업무로직		
 		HttpSession session = request.getSession();
 		

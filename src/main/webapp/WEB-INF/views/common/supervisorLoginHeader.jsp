@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>관리자모드</title>
