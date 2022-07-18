@@ -36,6 +36,15 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common/common.css" />
+<script>
+window.addEventListener('load',()=>{
+	<% if(msg!=null){%>
+	alert('<%=msg%>');
+	<%}%>
+});
+
+</script>	
+
 </head>
 <%
 // 여기서 로그인 관련 처리를 수행한다.
@@ -43,7 +52,7 @@
 // else show respective menus of either recruiter or applicant.
 
 // 
-System.out.println("loginMember = "+loginMember); // 없으면 null뜸
+//System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 if (loginMember == null) {
 	%>
 	<%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
