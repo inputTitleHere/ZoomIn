@@ -10,11 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.common.ZoominUtils;
+import com.kh.zoomin.member.dto.Member;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 import com.kh.zoomin.recruit.board.dto.RecruitBoardReadMode;
 import com.kh.zoomin.recruit.board.service.RecruitBoardService;
+import com.kh.zoomin.recruit.member.RecruitMember;
 
 /**
  * Servlet implementation class MainRecruitBoardList
@@ -30,6 +33,29 @@ public class RecruitBoardList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginMember");
+		if (member instanceof RecruitMember) { // RecruitMember(구인자)인경우
+			RecruitMember recruitMember = (RecruitMember) member;
+			int uid = recruitMember.getUid();
+			String companyNo=recruitMember.getCompanyNo();
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("uid", uid);
+			param.put("companyNo", companyNo);
+			// 순서는 일단 무조건 마감임박순으로 정렬
+			try {
+				List<RecruitBoard> result = rbs.loadRecruiterBoard(param);
+				request.setAttribute("recruiterBoard", result);
+				// view처리는 아래에서 수행함.
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		}
+		
+		
+		// 기본적인 채용게시판 처리
 		try {
 			int currentPage = 1;
 			int itemsPerPage = 7;

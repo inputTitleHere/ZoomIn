@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="javax.websocket.Session"%>
@@ -8,6 +9,12 @@ String msg = (String) session.getAttribute("msg");
 if (msg != null)
 	session.removeAttribute("msg");
 Member loginMember = (Member) session.getAttribute("loginMember");
+
+// -- 백승윤 START -- //
+// 구인자 테스트옹 loginMember객체
+loginMember = new RecruitMember(); // 임시로 Naver 계정 객체 중 company_no하고 uid만 가져온다.
+session.setAttribute("loginMember", loginMember);
+// -- 백승윤 END -- //
 
 String saveId = null;
 Cookie[] cookies = request.getCookies();
@@ -31,14 +38,14 @@ if (cookies != null) {
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common/common.css" />
-
+</head>
 <%
 // 여기서 로그인 관련 처리를 수행한다.
 // if not login(by any means) then show login option
 // else show respective menus of either recruiter or applicant.
 
 // 
-
+System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 if (loginMember == null) {
 %>
 <%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
@@ -54,6 +61,3 @@ if (loginMember == null) {
 }
 %>
 
-
-</head>
-<body>

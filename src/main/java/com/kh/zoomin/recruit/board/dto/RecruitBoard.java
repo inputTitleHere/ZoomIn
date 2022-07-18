@@ -18,6 +18,8 @@ public class RecruitBoard {
 	private Date closureDate;		//	
 	private Date regDate;			//
 	
+	
+
 	public RecruitBoard() {
 		super();
 	}
@@ -40,6 +42,7 @@ public class RecruitBoard {
 		this.closureDate = closureDate;
 		this.regDate = regDate;
 	}
+	
 
 	public int getNo() {
 		return no;
@@ -145,6 +148,7 @@ public class RecruitBoard {
 		this.regDate = regDate;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "RecruitBoard [no=" + no + ", uid=" + uid + ", categoryNumber=" + categoryNumber + ", company_no="

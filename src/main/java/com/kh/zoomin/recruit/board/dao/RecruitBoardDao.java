@@ -72,9 +72,9 @@ public class RecruitBoardDao {
 		if(mode==RecruitBoardReadMode.NEAR_CLOSURE) {
 			sql=sql.replace("#", "closure_date asc");
 		}else if(mode==RecruitBoardReadMode.MOST_RECENT){
-			sql=sql.replace("#", "\"uid\" desc");
+			sql=sql.replace("#", "no desc");
 		}else {
-			throw new RecruitBoardException("채용게시판 조회 오류 : 이상한 enum값"); // 아마 문제 없을것
+			sql=sql.replace("#", "closure_date asc"); // null이거나 이상한 값이면 그냥 기본 설정으로 진행
 		}
 		
 		List<RecruitBoard> result=new ArrayList<RecruitBoard>();
@@ -137,6 +137,40 @@ public class RecruitBoardDao {
 			
 		}catch(SQLException e) {
 			throw new RecruitBoardException("단별 채용게시글 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<RecruitBoard> loadRecruiterBoard(Map<String, Object> param, Connection conn) {
+		PreparedStatement pstmt =null;
+		ResultSet rset=null;
+		List<RecruitBoard> result=new ArrayList<RecruitBoard>();
+		String sql=prop.getProperty("loadRecruiterBoard");
+//		loadRecruiterBoard=select * from recruit_board where "uid"=? order by #
+		
+		// SQL 구문에 대한 상세 처리(#를 대체함)
+		RecruitBoardReadMode mode=(RecruitBoardReadMode)param.get("recruiterMode"); // 20220717기준 무조건 null임. null타입도 casting가능함 그냥 null일뿐
+		if(mode==RecruitBoardReadMode.NEAR_CLOSURE) {
+			sql=sql.replace("#", "closure_date asc");
+		}else if(mode==RecruitBoardReadMode.MOST_RECENT){
+			sql=sql.replace("#", "no desc");
+		}else {
+			sql=sql.replace("#", "closure_date asc"); // null이거나 이상한 값이면 그냥 기본 설정으로 진행
+		}
+		
+		try {			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (Integer)param.get("uid"));
+			rset=pstmt.executeQuery();
+			// 쿼리 결과 처리
+			while(rset.next()) {
+				result.add(handleRecruitBoard(rset));
+			}
+		}catch(SQLException e) {
+			throw new RecruitBoardException("채용게시판 조회 오류",e);
 		}finally {
 			close(rset);
 			close(pstmt);

@@ -45,6 +45,14 @@ public class RecruitBoardService {
 		close(conn);
 		return result;
 	}
+
+	public List<RecruitBoard> loadRecruiterBoard(Map<String, Object> param) {
+		List<RecruitBoard> result=null;
+		Connection conn = getConnection();		
+		result = rbd.loadRecruiterBoard(param,conn);
+		close(conn);
+		return result;
+	}
 	
 	// ====================== 메소드 영역 ============================//
 	
