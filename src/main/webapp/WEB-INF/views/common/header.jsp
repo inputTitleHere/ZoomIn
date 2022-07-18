@@ -29,24 +29,23 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script>
-window.onload = () => {
-	
-<% if(msg != null) { %>
-	alert("<%= msg %>");
-<% } %>
-};
+window.addEventListener('load',()=>{
+	<% if(msg!=null){%>
+	alert('<%=msg%>');
+	<%}%>
+});
 
+</script>	
 
-</script>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/common/common.css" />
+</head>
+
 <%
 // 여기서 로그인 관련 처리를 수행한다.
 // if not login(by any means) then show login option
 // else show respective menus of either recruiter or applicant.
 
-if(loginMember == null){
-System.out.println("loginMember = "+loginMember); // 없으면 null뜸
+//System.out.println("loginMember = "+loginMember); // 없으면 null뜸
+if (loginMember == null) {
 %>
 <%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
 <%

@@ -4,6 +4,8 @@ import com.kh.zoomin.common.ZoominUtils;
 import com.kh.zoomin.recruit.board.dao.RecruitBoardDao;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 
+import oracle.security.crypto.core.PasswordBasedMAC;
+
 import static com.kh.zoomin.common.JdbcTemplate.*;
 
 import java.sql.Connection;
@@ -66,6 +68,46 @@ public class RecruitBoardService {
 		}finally {
 			close(conn);
 		}
+		return result;
+	}
+
+	public int deleteRecruitBoard(int no) {
+		int result=0;
+		Connection conn=getConnection();
+		try{
+			result=rbd.deleteRecruitBoard(no, conn);
+			commit(conn);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public RecruitBoard findBoardByNo(int no) {
+		RecruitBoard result=null;
+		Connection conn = getConnection();
+		result=rbd.findBoardByNo(no,conn);
+		close(conn);
+		return result;
+	}
+
+	public int updateRecruitBoard(RecruitBoard rb) {
+		int result=0;
+		Connection conn = getConnection();
+		try {
+			result = rbd.updateRecruitBoard(rb,conn);			
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
+		}
+		
+		
 		return result;
 	}
 	

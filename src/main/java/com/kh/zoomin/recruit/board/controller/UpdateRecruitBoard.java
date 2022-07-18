@@ -17,29 +17,25 @@ import com.kh.zoomin.recruit.board.exception.RecruitBoardException;
 import com.kh.zoomin.recruit.board.service.RecruitBoardService;
 
 /**
- * 채용게시글 작성 페이지에 사용되는 writeRecruitBoard
+ * Servlet implementation class UpdateRecruitBoard
  */
-@WebServlet("/recruit/board/writeRecruitBoard")
-public class WriteRecruitBoard extends HttpServlet {
+@WebServlet("/recruit/board/updateRecruitBoard")
+public class UpdateRecruitBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecruitBoardService rbs = new RecruitBoardService();
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/recruit/board/recruitBoardWrite.jsp").forward(request, response);
+		int no = Integer.parseInt(request.getParameter("No"));
+		RecruitBoard rb = rbs.findBoardByNo(no);
+		request.setAttribute("recruitBoard", rb);
+		request.getRequestDispatcher("/WEB-INF/views/recruit/board/recruitBoardUpdate.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RecruitBoard rb = new RecruitBoard();
 		request.setCharacterEncoding("utf-8");
+		RecruitBoard rb = new RecruitBoard();
 		try {
 		// 입력값을 전달받는다.
 		int uid = Integer.parseInt(request.getParameter("uid"));
@@ -53,6 +49,7 @@ public class WriteRecruitBoard extends HttpServlet {
 		}catch(ParseException e) {
 			throw new RecruitBoardException("@WriteRecruitBoard.java : 날짜 처리 오류",e);
 		}
+		int no=Integer.parseInt(request.getParameter("no"));
 		String career = request.getParameter("career");
 		String schoolStatus = request.getParameter("schoolStatus");
 		String workType = request.getParameter("workType");
@@ -60,6 +57,7 @@ public class WriteRecruitBoard extends HttpServlet {
 		String salary = request.getParameter("salary");
 		String content = request.getParameter("content");
 		// 객체에 내용을 담는다.
+		rb.setNo(no);
 		rb.setUid(uid);
 		rb.setCompanyNo(companyNo);
 		rb.setCategoryNumber(category);
@@ -72,13 +70,13 @@ public class WriteRecruitBoard extends HttpServlet {
 		rb.setContent(content);
 		rb.setClosureDate(closureDate);
 		
-		int result = rbs.insertRecruitBoard(rb.setDefaults());
-
-		HttpSession session = request.getSession();
-		session.setAttribute("msg", "채용글 등록에 성공했습니다.");
-		response.sendRedirect(request.getContextPath()+"/recruit/board/recruitBoardList");
+		int result = rbs.updateRecruitBoard(rb.setDefaults());
+		
+		// 리다이렉트처리
+		HttpSession session =request.getSession();
+		session.setAttribute("msg","채용게시판 수정이 완료되었습니다.");
+		response.sendRedirect(request.getContextPath()+"/recruit/board/viewRecruitBoard?boardNo="+no);
 		}catch(Exception e) {
-			e.printStackTrace();
 			throw e;
 		}
 	}
