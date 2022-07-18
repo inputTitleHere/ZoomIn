@@ -49,7 +49,7 @@ public class CompanyReviewList extends HttpServlet {
 			
 			// view
 			request.setAttribute("list", list);
-			request.setAttribute("pagebar", pagebar);
+//			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewList.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
