@@ -22,7 +22,7 @@ import com.kh.zoomin.recruit.member.RecruitMember;
 /**
  * Servlet implementation class MainRecruitBoardList
  */
-@WebServlet("/recruit/board/RecruitBoardList")
+@WebServlet("/recruit/board/recruitBoardList")
 public class RecruitBoardList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RecruitBoardService rbs = new RecruitBoardService();

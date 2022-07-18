@@ -178,6 +178,25 @@ public class RecruitBoardDao {
 		return result;
 	}
 
+	public int insertRecruitBoard(RecruitBoard rb, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql = prop.getProperty("insertRecruitBoard");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			
+		}catch(SQLException e) {
+			throw new RecruitBoardException("채용글 삽입 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 
 	
 

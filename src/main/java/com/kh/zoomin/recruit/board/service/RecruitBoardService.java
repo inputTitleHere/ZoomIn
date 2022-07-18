@@ -53,6 +53,21 @@ public class RecruitBoardService {
 		close(conn);
 		return result;
 	}
+
+	public int insertRecruitBoard(RecruitBoard rb) {
+		Connection conn = getConnection();
+		int result=0;
+		try {
+			result=rbd.insertRecruitBoard(rb, conn);
+			commit(conn);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
 	
 	// ====================== 메소드 영역 ============================//
 	
@@ -60,3 +75,12 @@ public class RecruitBoardService {
 	
 	
 }
+
+
+
+
+
+
+
+
+

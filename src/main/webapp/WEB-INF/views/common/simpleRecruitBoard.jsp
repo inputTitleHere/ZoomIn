@@ -10,7 +10,7 @@
       <thead>
         <tr>
           <td>마감임박 채용!</td>
-          <td><a href="<%=request.getContextPath()%>/recruit/board/RecruitBoardList">→ 더 많은 채용글 보러가기 ←</a></td>
+          <td><a href="<%=request.getContextPath()%>/recruit/board/recruitBoardList">→ 더 많은 채용글 보러가기 ←</a></td>
         </tr>
       </thead>
       <tbody></tbody>
