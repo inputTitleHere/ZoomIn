@@ -55,6 +55,56 @@ public class SupervisorService {
 		close(conn);
 		return todayCnt;
 	}
+
+	//총 방문자 수 조회
+	public int getTotalCount() {
+		Connection conn = getConnection();
+		int totalCnt = supervisorDao.getTotalCount(conn);
+		close(conn);
+		return totalCnt;
+	}
+
+	//총 방문자 수 증가 : 테이블에 현재 날짜 값 추가
+	//insert into visit values (sysdate)
+	public int setCount() {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			result = supervisorDao.setCount(conn);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);			
+		}
+		return result;
+	}
+
+	//회사리뷰게시판 조회
+	public int getTodayComCnt() {
+		Connection conn = getConnection();
+		int todayComCnt = supervisorDao.getTodayComCnt(conn);
+		close(conn);
+		return todayComCnt;
+	}
+
+	//연봉게시판 조회
+	public int getTodaySalCnt() {
+		Connection conn = getConnection();
+		int todaySalCnt = supervisorDao.getTodaySalCnt(conn);
+		close(conn);
+		return todaySalCnt;
+	}
+
+	//전체 게시판 글 수 조회
+	public int getTotalBoardCnt() {
+		Connection conn = getConnection();
+		int totalBoardCnt = supervisorDao.getTotalBoardCnt(conn);
+		close(conn);
+		return totalBoardCnt;
+	}
 	
 	
 }

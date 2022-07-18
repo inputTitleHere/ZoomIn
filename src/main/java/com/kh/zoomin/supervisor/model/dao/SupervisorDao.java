@@ -39,7 +39,7 @@ public class SupervisorDao {
 		String password = rset.getString("password");
 		String phone = rset.getString("phone");
 		String email = rset.getString("email");
-		Date regDate = rset.getDate("regDate");
+		Date regDate = rset.getDate("reg_date");
 		return new ApplicantMember(uid, name, id, password, phone, email, regDate);
 	}
 	
@@ -51,7 +51,7 @@ public class SupervisorDao {
 		String id = rset.getString("id");
 		String password = rset.getString("password");
 		String email = rset.getString("email");
-		Date regDate = rset.getDate("regDate");
+		Date regDate = rset.getDate("reg_date");
 		return new RecruitMember(uid, companyNo, name, id, password, email, regDate);
 	}
 	
@@ -162,7 +162,7 @@ public class SupervisorDao {
 		ResultSet rset = null;
 		int todayCnt = 0;
 		String sql = prop.getProperty("getTodayVisitCnt");
-		System.out.println("sql = " + sql);
+		//System.out.println("sql = " + sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
@@ -177,6 +177,113 @@ public class SupervisorDao {
 		return todayCnt;
 	}
 
+	//전체 방문자 수 조회
+	public int getTotalCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalCnt = 0;
+		String sql = prop.getProperty("getTotalVisitCnt");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalCnt = rset.getInt(1);
+		} catch (Exception e) {
+			throw new SupervisorException("전체 방문자 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalCnt;
+	}
+
+	//방문자 수 증가
+	public int setCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("setTotalCount");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new SupervisorException("방문자 수 증가 오류!", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//회사리뷰게시판 조회
+	public int getTodayComCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int todayComCnt = 0;
+		String sql = prop.getProperty("getTodayComCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				todayComCnt = rset.getInt(1);
+		} 
+		catch (Exception e) {
+			throw new SupervisorException("회사리뷰게시판 오늘의 게시글 수 조회 오류!", e);
+		} 
+		finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+			return todayComCnt;
+		}
+
+	//연봉게시판 조회
+	public int getTodaySalCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int todaySalCnt = 0;
+		String sql = prop.getProperty("getTodaySalCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				todaySalCnt = rset.getInt(1);
+		} 
+		catch (Exception e) {
+			throw new SupervisorException("회사리뷰게시판 오늘의 게시글 수 조회 오류!", e);
+		} 
+		finally {
+			close(rset);
+			close(pstmt);
+		}		
+			return todaySalCnt;
+	}
+
+	public int getTotalBoardCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalBoardCnt = 0;
+		String sql = prop.getProperty("getTotalBoardCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalBoardCnt = rset.getInt(1);
+		} 
+		catch (Exception e) {
+			throw new SupervisorException("게시판 전체글 수 조회 오류!", e);
+		} 
+		finally {
+			close(rset);
+			close(pstmt);
+		}		
+			return totalBoardCnt;
+	}
 	
 
 	
