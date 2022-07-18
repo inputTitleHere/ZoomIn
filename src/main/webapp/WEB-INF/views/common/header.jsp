@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
@@ -12,8 +13,9 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 
 // -- 백승윤 START -- //
 // 구인자 테스트옹 loginMember객체
-loginMember = new RecruitMember(); // 임시로 Naver 계정 객체 중 company_no하고 uid만 가져온다.
-session.setAttribute("loginMember", loginMember);
+ApplicantMember am = new ApplicantMember();
+am.setUid("11");
+
 // -- 백승윤 END -- //
 
 String saveId = null;

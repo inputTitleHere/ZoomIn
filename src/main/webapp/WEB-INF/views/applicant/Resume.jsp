@@ -3,10 +3,12 @@
 <%@ page import="com.kh.zoomin.applicant.resume.model.dto.Resume"%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/resume.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- section 태그 / div id="title" / h1 -> 변경 금지(공통 css 사용) -->
 
 <%
+	int uid  = Integer.parseInt(am.getUid());
+	
 	String result = (String)request.getAttribute("result");
 	int categoryNumber = 0;
 	String name = "";
@@ -34,6 +36,7 @@
 	totalPoint= (double)request.getAttribute("totalPoint");		
 	}
 	
+	
 %>
 
 <section>
@@ -49,22 +52,22 @@
 				<table id="infoTable">
 					<tr>
 						<th>이름* : </th>
-						<td><input type="text" name="name" value="<%=name%>"/></td>
+						<td><input type="text" name="name" id="name" value="<%=name%>" /></td>
 						<th>생년월일* : </th>
-						<td><input type="text" name="birthday" value="<%=birthday%>"/></td>
+						<td><input type="text" name="birthday" id="birthday" value="<%=birthday%>"/></td>
 					</tr>
 					
 					<tr>
 						<th>성별* : </th>
 						<td>
-							<select name="gender">
+							<select name="gender" id ="gender">
 								<option value="M">남자</option>
 								<option value="F">여자</option>
 							</select>
 						</td>
 						<th>희망직종* : </th>
 						<td>
-							<select name="categoryNumber">
+							<select name="categoryNumber" id="categoryNumber">
 								<option value="1">IT/웹/통신</option>
 								<option value="2">미디어/디자인</option>
 								<option value="3">의료/제약/복지</option>
@@ -91,14 +94,14 @@
 				<table>
 					<tr>
 						<th>학교명* : </th>
-						<td><input type="text" name="schoolName" value="<%=schoolName%>"/></td>
+						<td><input type="text" name="schoolName" id="schoolName" value="<%=schoolName%>"/></td>
 						<th>전공명 : </th>
-						<td><input type="text" name="majorName" value="<%=majorName%>"/></td>
+						<td><input type="text" name="majorName" id="majorName" value="<%=majorName%>"/></td>
 					</tr>
 					<tr>
 						<th>학력구분* : </th>
 						<td>
-							<select name="schoolType">
+							<select name="schoolType" id="schoolType">
 								<option value="C2">2년제</option>
 								<option value="C3">3년제</option>
 								<option value="C4">4년제</option>
@@ -107,7 +110,7 @@
 						</td>
 						<th>최종학력* : </th>
 						<td>
-							<select name="schoolStatus">
+							<select name="schoolStatus" id="schoolStatus">
 								<option value="A">재학</option>
 								<option value="B">휴학</option>
 								<option value="C">졸업</option>
@@ -116,9 +119,9 @@
 					</tr>
 					<tr>
 						<th>학점 : </th>
-						<td><input type="text" name="grade" value="<%=grade%>"/></td>
+						<td><input type="text" name="grade" id="grade" value="<%=grade%>"/></td>
 						<th>총점 : </th>
-						<td><input type="text" name="totalPoint" value="<%=totalPoint%>"/></td>
+						<td><input type="text" name="totalPoint" id="totalPoint" value="<%=totalPoint%>"/></td>
 					</tr>
 				</table>
 			</div>
@@ -137,8 +140,14 @@
 
 <script type="text/javascript">
 	document.getElementById("btnResumeSubmit").onclick = (e) =>{
+		if(isEmpty($("#categoryNumber").val()) || isEmpty($("#name").val()) || isEmpty($("#birthday").val()) || isEmpty($("#gender").val()) || isEmpty($("#address").val()) || isEmpty($("#schoolType").val())
+				|| isEmpty($("#schoolName").val()) || isEmpty($("#schoolStatus").val()) || isEmpty($("#majorName").val()) || isEmpty($("#grade").val()) || isEmpty($("#totalPoint").val())){
+		alert("빈간없이 입력해주세요!");
+		console.log($("#categoryNumber").val());
+		}else{			
 		document.resumeFrm.submit();
-		alert("저장되었습니다!");
+		alert("저장되었습니다!");			
+		}
 	};
 	
 	document.getElementById("btnResumeDelete").onclick = (e) =>{
@@ -147,6 +156,7 @@
 	};
 	
 	document.getElementById("btnResumeUpdate").onclick = (e) =>{
+		//현재는 btnResumeUpdate 눌렀을때 update 실행이 아닌 alert 창 확인 눌렀을때 실행됨.
 		document.resumeFrm.submit();
 		alert("수정되었습니다!");
 	};
@@ -168,8 +178,17 @@
 			$("#btnResumeDelete").hide();
 		}
 	});
-
 	
+	function isEmpty(value){
+		console.log(value);
+		if(value == "" || value == null || value == undefined || value == "undefined"){
+			console.log("true");
+			return true;
+		}else{
+			console.log("false");
+			return false;
+		}
+	}
 	
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

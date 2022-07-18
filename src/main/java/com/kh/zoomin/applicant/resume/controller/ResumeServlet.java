@@ -39,7 +39,7 @@ public class ResumeServlet extends HttpServlet {
 		// 2. 사용자입력값 처리
 		HttpSession loginSession = request.getSession();
 		ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
-//		int uid = Integer.parseInt(member.getUid()) ;
+//		int uid = Integer.parseInt(member.getUid());
 		int uid = 21;
 		// 3. 업무로직
 		Resume result = ResumeService.findByResume(uid);
@@ -116,6 +116,8 @@ public class ResumeServlet extends HttpServlet {
 			if(result > 0) {
 				msg = "이력서 성공적으로 등록!";
 				session.setAttribute("msg", msg);
+			}else {
+				msg = "이력서 등록 실패!";
 			}
 			//현재 페이지 리다이렉트
 			String referer = request.getHeader("Referer");
