@@ -29,29 +29,26 @@ public class ApplicantDao {
 		}
 	}
 
-
 	// 로그인기능-로그인 아이디 인식
-	public ApplicantMember findAppliId(String id, String password) {
+	public ApplicantMember findAppliId(Connection conn, String id, String password) {
 		ApplicantMember amember = null;
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		//로그인 여부
-		String messeage = new String();
-		String page = new String();
 		String sql = prop.getProperty("findAppliId");
 		// (sql) = select * from applicant_member where id = ?
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(3, id);
+			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
-			
+			System.out.println("rset = " + rset);
 			while (rset.next()) { 
 				//다음행이 있을때 rset.next()에 의해 다음행 이동
 				amember = handleMemberResultSet(rset);
 			}
+			System.out.println("amember@dao = " + amember);
 
 		} catch (SQLException e) {
 			throw new MemberException("아이디가 존재하지 않습니다.", e);

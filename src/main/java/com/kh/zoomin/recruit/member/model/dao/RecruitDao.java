@@ -29,16 +29,16 @@ public class RecruitDao {
 		}
 	}
 
-	public RecruitMember findById(Connection conn, String id) {
+	public RecruitMember findrecruId(Connection conn, String id) {
 		RecruitMember rmember = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("findById");
-		// findById(sql) = select * from member where member_id = ?
+		String sql = prop.getProperty("findrecruId");
+		// findById(sql) = select * from recruit_member where member_id = ?
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(4, id);
+			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) { 

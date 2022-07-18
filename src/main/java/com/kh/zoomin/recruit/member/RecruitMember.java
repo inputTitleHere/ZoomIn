@@ -8,24 +8,23 @@ public class RecruitMember extends Member{
 
 	private int uid;
 	private String companyNo;
-	private String memberId;
+	private String id;
 	private String password;
 	private String email;
 	private boolean supervisor;
 	private Date regDate;
 	
 
-	public RecruitMember(int memberType) {
-		super(1);
-		// TODO Auto-generated constructor stub
+	public RecruitMember(int uid, String companyNo, String id, String password, String phone, String email, Boolean supervisor, Date regDate) {
+		this(1, uid, companyNo, id, password, email, supervisor, regDate);
 	}
 
-	public RecruitMember(int uid, String companyNo, String memberId, String password, String email,
+	public RecruitMember(int memberType, int uid, String companyNo, String id, String password, String email,
 			boolean supervisor, Date regDate) {
 		super(1);
 		this.uid = uid;
 		this.companyNo = companyNo;
-		this.memberId = memberId;
+		this.id = id;
 		this.password = password;
 		this.email = email;
 		this.supervisor = supervisor;
@@ -48,12 +47,12 @@ public class RecruitMember extends Member{
 		this.companyNo = companyNo;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getid() {
+		return id;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberId(String id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -85,14 +84,13 @@ public class RecruitMember extends Member{
 		this.password = password;
 	}
 
-	public Object getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getPassword() {
+		return password;
 	}
 
 	@Override
 	public String toString() {
-		return "RecruitMember [uid=" + uid + ", companyNo=" + companyNo + ", memberId=" + memberId + ", password="
+		return "RecruitMember [uid=" + uid + ", companyNo=" + companyNo + ", memberId=" + id + ", password="
 				+ password + ", email=" + email + ", supervisor=" + supervisor + ", regDate=" + regDate + "]";
 	}
 

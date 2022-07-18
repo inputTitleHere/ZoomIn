@@ -19,30 +19,28 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
-<!-- /applicant/login 서블릿 이동 -->
 <body>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
-<div class="jumbotron">
-	<div class="container">
-		<h1 class="display-3">로그인</h1>
-	</div>
-</div>
-<div class="container" align="center">
-	<div class="col-md-4 col-me-offset-4">
-		<h3 class="form-signin-heading">Please sign in</h3>
+<script>
 
-		<form class="form-signin" action="<%= request.getContextPath() %>/applicant/login" method="post">
-			<div class"form-group">
-				<label class="sr-only">User Name</label>
-				<input name="id" class="form-control" placeholder="ID" required autofocus>
+
+</script>
+<div class="container" align="center">
+	<div class="collg-4"></div>
+	<div class="collg-4"></div>
+		<div class="jumbotron" style="padding-top: 20px;">
+		<form method="POST" action= "<%= request.getContextPath() %>/applicant/login" />
+		<h3 style="text-allign: center;"> 로그인 화면 </h3>
+			<div class="form-group">
+				<input type="text" class="form-control" name="id" placeholder="Username" maxlength="20">
 			</div>
 			<div class="form-group">
-				<label class="sr-only">Password</label>
-				<input type="password" name="password" class="form-control" placeholder="Password" required>
+				<input type="password" class="form-control" name="password" placeholder="Password" maxlength="20">
 			</div>
-			<button class="btn btn-lg btn-success btn-block" type="submit">로그인</button>
-			<button class="btn btn-lg btn-secondary btn-block" type="button" onclick="location.href='addMember.jsp'">회원가입</button>
+			<button type="submit" class="btn-btn-primary form-control">로그인</button>
+			<button class="btn btn-lg btn-secondary btn-block" type="button" onclick="location.href='joinMember.jsp'">회원가입</button>
 		</form>
+
 	</div>
 </div>
 

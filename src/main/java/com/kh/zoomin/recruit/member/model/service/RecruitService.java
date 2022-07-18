@@ -10,10 +10,10 @@ import com.kh.zoomin.recruit.member.RecruitMember;
 
 public class RecruitService {
 
-	public RecruitMember findById(String id) {
+	public RecruitMember findrecruId(String id) {
 		Connection conn = getConnection();
 		RecruitDao rd = new RecruitDao();
-		RecruitMember rmember = rd.findById(conn, id);
+		RecruitMember rmember = rd.findrecruId(conn, id);
 		close(conn);
 		return rmember;
 

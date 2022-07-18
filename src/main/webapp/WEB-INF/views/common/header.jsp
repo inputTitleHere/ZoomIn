@@ -9,18 +9,15 @@
 	if(msg != null) session.removeAttribute("msg"); 
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	
-	String saveId = null;
 	Cookie[] cookies = request.getCookies();
 	if(cookies != null)
 		for(Cookie c : cookies){
 			String name = c.getName();
 			String value = c.getValue();
 			System.out.println("[cookie] " + name + " = " + value);
-			if("saveId".equals(name)){
-				saveId = value;
+			
 			}
-
-		}
+		
  %>
 
 <!DOCTYPE html>

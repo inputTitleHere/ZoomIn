@@ -34,7 +34,7 @@ public class RecruitLoginServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			
 			//2. 업무로직
-			RecruitMember rmember = res.findById(id);
+			RecruitMember rmember = res.findrecruId(id);
 			HttpSession session = request.getSession(true); 
 			System.out.println(session.getId());
 			
@@ -48,12 +48,16 @@ public class RecruitLoginServlet extends HttpServlet {
 			}
 			
 			//3. 리다이렉트
-			String location = request.getHeader("Referer"); //현재 페이지 오기전 url정보
-			//수정필요한 부분 
-			response.sendRedirect(location); 
+			response.sendRedirect("index.jsp"); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/views/common/recruitLogin.jsp").forward(request, response);
+    }
+	
 
 }
