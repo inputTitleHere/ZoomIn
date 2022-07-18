@@ -5,7 +5,9 @@
 <!-- 여기부터 main 컨텐트 영역 -->
 
 
-
+<div class="simple-recruit-board">
+<%@ include file="/WEB-INF/views/common/simpleRecruitBoard.jsp" %>
+</div>
 
 
 

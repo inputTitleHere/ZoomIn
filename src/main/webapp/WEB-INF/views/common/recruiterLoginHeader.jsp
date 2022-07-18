@@ -1,19 +1,25 @@
+<%@page import="com.kh.zoomin.member.dto.Member"%>
+<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+   
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+
+<%
+RecruitMember recruitMember = (RecruitMember)session.getAttribute("loginMember"); // 여기까지 왔으면 일단 loginMember는 있을 것.
+System.out.println("@recruiterLoginHeader.jsp : UID = "+recruitMember.getUid());
+%>
+
 <body>
 <header>
 	<div id="account">
+		<a href="" id="userInfo">회원정보수정</a>
 		<a href ="" id="logOut">로그아웃</a>
 	</div>
 	<div id="logodiv">
-		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
+		<a href="<%=request.getContextPath()%>/">
+			<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
+		</a>
 	</div>
 	<div id="searchBoxdiv">
 		<input id="searchBox" type="text">
