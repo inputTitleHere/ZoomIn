@@ -13,4 +13,4 @@
 	<h1>회사 리뷰 수정</h1>
 </section>
 
-<%@ include file="/WEB-INF/views/common/commonFooter.jsp" %>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>

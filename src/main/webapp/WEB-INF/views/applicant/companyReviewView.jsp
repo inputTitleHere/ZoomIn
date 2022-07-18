@@ -13,4 +13,4 @@
 	
 </section>
 
-<%@ include file="/WEB-INF/views/common/commonFooter.jsp" %>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>

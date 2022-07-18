@@ -1,6 +1,9 @@
 package com.kh.zoomin.applicant.companyReviewBoard.model.service;
 
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
+
 import static com.kh.zoomin.common.JdbcTemplate.*;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dao.CompanyReviewDao;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
@@ -34,7 +37,6 @@ public class CompanyReviewService {
 	public CompanyReview findByCompanyReviewNo(int no, boolean hasRead) {
 		Connection conn = getConnection();
 		CompanyReview companyReview = null;
-		int result = 0;
 		try {
 			// 회사 리뷰테이블에서 조회
 			companyReview = companyReviewDao.findByCompanyReviewNo(conn, no);
@@ -78,6 +80,28 @@ public class CompanyReviewService {
 			close(conn);
 		}
 		return result;
+	}
+
+	public List<CompanyReview> findAll(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<CompanyReview> list = companyReviewDao.findAll(conn, param);
+		close(conn);
+		return list;
+	}
+
+	public int getTotalContent() {
+		Connection conn = getConnection();
+		int totalContent = companyReviewDao.getTotalContent(conn); 
+		close(conn);
+		return totalContent;
+	}
+
+	public List<CompanyReview> loadCompanyReview(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<CompanyReview> companyReview = null;
+		companyReview = companyReviewDao.loadCompanyReview(param, conn);
+		close(conn);
+		return companyReview;
 	}
 
 	

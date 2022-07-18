@@ -8,6 +8,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
@@ -80,7 +83,8 @@ public class CompanyReviewDao {
 	}
 
 	private CompanyReviewExt handleCompanyReviewResultSet(ResultSet rset) throws SQLException {
-		int no = rset.getInt("no");
+//		int no = rset.getInt("no");
+		int no = 11;
 		String content = rset.getString("content");
 		int stars = rset.getInt("stars");
 		int workLifeBalance = rset.getInt("work_life_balance");
@@ -137,6 +141,78 @@ public class CompanyReviewDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<CompanyReview> findAll(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<CompanyReview> list = new ArrayList<>();
+		String sql = prop.getProperty("findAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			
+			rset = pstmt.executeQuery();
+			
+			System.out.println("ok");
+			while(rset.next()) {
+				CompanyReviewExt companyReview = handleCompanyReviewResultSet(rset);
+				list.add(companyReview);
+			}
+		} catch (SQLException e) {
+			throw new CompanyReviewException("리뷰 목록 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getTotalContent(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContent = 0;
+		String sql = prop.getProperty("getTotalContent");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContent = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new CompanyReviewException("총 리뷰 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+
+	public List<CompanyReview> loadCompanyReview(Map<String, Object> param, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("loadCompanyReview");
+		// loadCompanyReview = select * from (select row_number() over(order by reg_date desc) rnum, c.* from company_review c) a where rnum between ? and ?
+		List<CompanyReview> companyReview = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				companyReview.add(handleCompanyReviewResultSet(rset));
+			}
+		} catch (SQLException e) {
+			throw new CompanyReviewException("회사 리뷰 게시판 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return companyReview;
 	}
 
 	

@@ -14,7 +14,7 @@ import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewSer
 /**
  * Servlet implementation class CompanyEnrollServlet
  */
-@WebServlet("/CompanyReviewEnrollServlet")
+@WebServlet("/review/company/companyReviewEnroll")
 public class CompanyReviewEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();

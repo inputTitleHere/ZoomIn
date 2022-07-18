@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%--@ include file="/WEB-INF/views/common/header.jsp" --%>
+
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 	<div id="account">
 		<a href ="" id="writeResume">이력서 작성</a>
@@ -15,7 +15,5 @@
 		<input id="searchBox" type="text">
 		 <button class="custom-btn btn-3"><span>검색</span></button>
 	</div>
-	<div id="mainCategory">
-		
-	</div>
+
 
