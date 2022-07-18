@@ -6,10 +6,25 @@
 
 <%
 RecruitBoard rb = (RecruitBoard) request.getAttribute("recruitBoard");
+Member lm = (Member)session.getAttribute("loginMember");
+RecruitMember rm=null;
+if(lm instanceof RecruitMember){
+	rm = (RecruitMember)session.getAttribute("loginMember");	
+}
 %>
 <link href="<%=request.getContextPath() %>/css/recruit/board/recruit-board-view.css" rel="stylesheet" type="text/css">
 <section id="recruit-board-view">
 	<%-- title 및 content에 대한 escapeXML처리함. --%>
+	<%
+	if(rm!=null && rb.getUid()==rm.getUid()){
+	%>
+	<div class="edit-button-wrapper">
+		<button type="button" class="edit-button" id="update-button" onclick="updateBoard()">수정</button>
+		<button type="button" class="edit-button" id="delete-button" onclick="deleteBoard()">삭제</button>
+	</div>
+	<%
+	}
+	%>
 	<h1><%=rb.getTitle()%></h1>
 	<div class="small-info-wrapper">
 		<div class="small-info">
@@ -50,6 +65,23 @@ RecruitBoard rb = (RecruitBoard) request.getAttribute("recruitBoard");
 	</div>
 
 </section>
+
+
+<form action="<%=request.getContextPath()%>/recruit/board/updateRecruitBoard"
+	name="boardUpdateFrm" method="post">
+	<input type="hidden" name="no" value="<%=rb.getNo()%>" />
+</form>
+
+<script>
+const deleteBoard=()=>{
+	confirm("채용글을 정말 삭제하시겠습니까? 이 행동은 취소될 수 없습니다.");
+	document.boardDelFrm.submit();
+};
+
+const updateBoard=()=>{
+	location.href="<%=request.getContextPath()%>/recruit/board/updateRecruitBoard?No=<%=rb.getNo()%>";
+}
+</script>
 
 
 <br />

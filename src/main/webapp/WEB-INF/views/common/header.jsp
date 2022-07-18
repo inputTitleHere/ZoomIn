@@ -44,6 +44,15 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common/common.css" />
+<script>
+window.addEventListener('load',()=>{
+	<% if(msg!=null){%>
+	alert('<%=msg%>');
+	<%}%>
+});
+
+</script>	
+
 </head>
 
 <%
@@ -53,7 +62,7 @@
 // else show respective menus of either recruiter or applicant.
 loginMember = null;	//관리자 시험위해 넣은 코드
 // 
-System.out.println("loginMember = "+loginMember); // 없으면 null뜸
+//System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 if (loginMember == null) {
 
 %>
