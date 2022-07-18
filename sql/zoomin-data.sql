@@ -34,6 +34,8 @@ insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 3, 8,'4923047853','[
 insert into RECRUIT_JOB_BRIDGE values(6,5);
 insert into RECRUIT_JOB_BRIDGE values(6,6);
 insert into RECRUIT_JOB_BRIDGE values(6,9);
+insert into RECRUIT_BOARD values(seq_recruit_board.nextval, 3, 8,'4923047853','[삼성전자] 삼성 6월 수시채용', default,'대졸 이상','정규직','서울시 삼성전자 사옥',default, '삼성전자에서 2022년 6월 수시채용을 진행합니다.','2022/06/20','2022/05/22');
+insert into RECRUIT_JOB_BRIDGE values(21,9);
 commit;
 select * from recruit_job_bridge order by recruit_board_no asc;
 select * from recruit_board order by no asc;

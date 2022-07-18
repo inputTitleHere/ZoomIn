@@ -1,0 +1,29 @@
+h1{
+  text-align: center;
+}
+
+section{
+  width: fit-content;
+  height: fit-content;
+  margin: 0px auto;
+}
+
+table.recruit-board-item{
+  border: 2px solid black;
+  min-width:800px;
+  width: 80vw;
+  min-height: 300px;
+}
+
+div.write-recruit-button-wrapper{
+  display: flex;
+}
+
+.write-recruit-button-wrapper #write-button{
+  max-width: 800px;
+  width: 60vw;
+  min-width: 500px;
+  margin: 15px auto 10px;
+  height: 45px;
+  font-size: 25px;
+}
