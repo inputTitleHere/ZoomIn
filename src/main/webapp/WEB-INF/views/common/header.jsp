@@ -1,8 +1,8 @@
 <%@page import="com.kh.zoomin.member.dto.Member"%>
-<%@page import="com.kh.zoomin.member.dto.Member"%>
+<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	String msg = (String) session.getAttribute("msg");
 	System.out.println("msg@jsp = " + msg);
@@ -19,8 +19,10 @@
 			if("saveId".equals(name)){
 				saveId = value;
 			}
+
 		}
  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,14 +41,17 @@ window.onload = () => {
 
 
 </script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/common/common.css" />
 <%
 // 여기서 로그인 관련 처리를 수행한다.
 // if not login(by any means) then show login option
 // else show respective menus of either recruiter or applicant.
 
 if(loginMember == null){
+System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 %>
-<%@ include file="/WEB-INF/views/common/noLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
 <%
 }else if(loginMember.getMemberType() == 0){ 
 	//관리자용 jsp include가 들어가야함. 관리자담당분은 추후 추가해주세요
@@ -54,13 +59,14 @@ if(loginMember == null){
 <%
 }else if(loginMember.getMemberType() == 1){
 %>
-<%@ include file="/WEB-INF/views/common/recruiterLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/recruiterLoginHeader.jsp"%>
 <%
 }else if(loginMember.getMemberType() == 2){
 %>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp"%>
 <%
 }
 %>
+
 </head>
 <body>

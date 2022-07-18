@@ -5,7 +5,7 @@ import java.sql.Date;
 import com.kh.zoomin.member.dto.Member;
 
 public class RecruitMember extends Member{
-	
+
 	private int uid;
 	private String companyNo;
 	private String memberId;

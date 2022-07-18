@@ -64,16 +64,17 @@ public class RecruitBoardDao {
 	public List<RecruitBoard> loadRecruitBoardHeaders(Map<String, Object> param, Connection conn) {
 		PreparedStatement pstmt =null;
 		ResultSet rset=null;
-		//loadRecruitBoard=select * from (select row_number() over(order by ? ?) rnum, r.* from recruit_board r) b where rnum between ? and ?
 		// [1번 2번] ? 에는 closure_date asc(마감임박) 또는 uid desc이 들어갈것(최신순) -> param에서 꺼낸다.
-		String sql=null;
+//		loadRecruitBoard=
+//			select * from (select row_number() over(order by #) rnum, r.* rom recruit_board r where closure_date-sysdate>0) b where rnum between ? and ?
+		String sql=prop.getProperty("loadRecruitBoard");
 		RecruitBoardReadMode mode=(RecruitBoardReadMode)param.get("mode");
 		if(mode==RecruitBoardReadMode.NEAR_CLOSURE) {
-			sql=prop.getProperty("loadRecruitBoardClosureDate");
+			sql=sql.replace("#", "closure_date asc");
 		}else if(mode==RecruitBoardReadMode.MOST_RECENT){
-			sql=prop.getProperty("loadRecruitBoardNewest");
+			sql=sql.replace("#", "no desc");
 		}else {
-			throw new RecruitBoardException("채용게시판 조회 오류 : 이상한 enum값"); // 아마 문제 없을것
+			sql=sql.replace("#", "closure_date asc"); // null이거나 이상한 값이면 그냥 기본 설정으로 진행
 		}
 		
 		List<RecruitBoard> result=new ArrayList<RecruitBoard>();
@@ -83,7 +84,7 @@ public class RecruitBoardDao {
 			pstmt.setInt(1, (Integer)param.get("start"));
 			pstmt.setInt(2, (Integer)param.get("end"));
 			rset=pstmt.executeQuery();
-			System.out.println("@RecruitBoardDao sql query = "+rset.getStatement().toString());
+//			System.out.println("@RecruitBoardDao sql query = "+rset.getStatement().toString());
 			// 쿼리 결과 처리
 			while(rset.next()) {
 				result.add(handleRecruitBoard(rset));
@@ -97,7 +98,108 @@ public class RecruitBoardDao {
 		return result;
 	}
 
+	public int totalRecruitBoardCount(Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rset = null;
+		
+		String sql=prop.getProperty("totalRecruitBoardCount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rset=pstmt.executeQuery();
+			
+			// 단일결과를 반환하므로 한번만 rset.next를 한다.
+			rset.next();
+			result = rset.getInt(1);
+		}catch(SQLException e) {
+			throw new RecruitBoardException("총 채용게시글수 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public RecruitBoard viewRecruitBoard(int boardNo, Connection conn) {
+		RecruitBoard result=null;
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		// viewRecruitBoard=select * from recruit_board where no=?
+		String sql=prop.getProperty("viewRecruitBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result=handleRecruitBoard(rset);
+			}
+			
+		}catch(SQLException e) {
+			throw new RecruitBoardException("단별 채용게시글 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<RecruitBoard> loadRecruiterBoard(Map<String, Object> param, Connection conn) {
+		PreparedStatement pstmt =null;
+		ResultSet rset=null;
+		List<RecruitBoard> result=new ArrayList<RecruitBoard>();
+		String sql=prop.getProperty("loadRecruiterBoard");
+//		loadRecruiterBoard=select * from recruit_board where "uid"=? order by #
+		
+		// SQL 구문에 대한 상세 처리(#를 대체함)
+		RecruitBoardReadMode mode=(RecruitBoardReadMode)param.get("recruiterMode"); // 20220717기준 무조건 null임. null타입도 casting가능함 그냥 null일뿐
+		if(mode==RecruitBoardReadMode.NEAR_CLOSURE) {
+			sql=sql.replace("#", "closure_date asc");
+		}else if(mode==RecruitBoardReadMode.MOST_RECENT){
+			sql=sql.replace("#", "no desc");
+		}else {
+			sql=sql.replace("#", "closure_date asc"); // null이거나 이상한 값이면 그냥 기본 설정으로 진행
+		}
+		
+		try {			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (Integer)param.get("uid"));
+			rset=pstmt.executeQuery();
+			// 쿼리 결과 처리
+			while(rset.next()) {
+				result.add(handleRecruitBoard(rset));
+			}
+		}catch(SQLException e) {
+			throw new RecruitBoardException("채용게시판 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertRecruitBoard(RecruitBoard rb, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql = prop.getProperty("insertRecruitBoard");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			
+		}catch(SQLException e) {
+			throw new RecruitBoardException("채용글 삽입 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 
 	
 
+
 }
+

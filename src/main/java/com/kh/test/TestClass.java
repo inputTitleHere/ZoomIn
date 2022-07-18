@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class TestClass {
@@ -15,6 +17,10 @@ public class TestClass {
 
 	public static void main(String[] args) {
 		
+		Map<String, String> paramTest = new HashMap<String, String>();
+		System.out.println(paramTest.get("testKey"));
+		
+		/*
 		Connection conn=null;
 		PreparedStatement pstmt =null;
 		ResultSet rset =null;
@@ -40,7 +46,7 @@ public class TestClass {
 			close(pstmt);
 			close(conn);
 		}
-		
+		*/
 	}
 	
 }
