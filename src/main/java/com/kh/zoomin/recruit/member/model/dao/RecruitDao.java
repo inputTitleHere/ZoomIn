@@ -12,9 +12,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
-import com.kh.zoomin.recruit.member.model.exception.RecruitException;
-import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
-import com.kh.zoomin.applicant.member.model.exception.ApplicantException;
 import com.kh.zoomin.member.exception.MemberException;
 import com.kh.zoomin.recruit.member.RecruitMember;
 
@@ -32,7 +29,7 @@ public class RecruitDao {
 		}
 	}
 
-	public RecruitMember findById(Connection conn, String memberId) {
+	public RecruitMember findById(Connection conn, String id) {
 		RecruitMember rmember = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -41,7 +38,7 @@ public class RecruitDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(3, memberId);
+			pstmt.setString(4, id);
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) { 
@@ -61,12 +58,12 @@ public class RecruitDao {
 	private RecruitMember handleMemberResultSet(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
 		String companyNo = rset.getString("company_no");
-		String memberId = rset.getString("member_id");
+		String id = rset.getString("id");
 		String password = rset.getString("password");
 		String email = rset.getString("email");
 		Boolean supervisor = rset.getBoolean(0);
 		Date regDate = rset.getDate("reg_date");
-		return new RecruitMember(uid, email, email, email, email, supervisor, regDate);
+		return new RecruitMember(uid, companyNo, id, password, email, supervisor, regDate);
 
 	}
 

@@ -30,11 +30,11 @@ public class RecruitLoginServlet extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			
 			//1. 사용자입력값 처리 (아이디, 비번) 
-			String memberId = request.getParameter("memberId");
+			String id = request.getParameter("id");
 			String password = request.getParameter("password");
 			
 			//2. 업무로직
-			RecruitMember rmember = res.findById(memberId);
+			RecruitMember rmember = res.findById(id);
 			HttpSession session = request.getSession(true); 
 			System.out.println(session.getId());
 			
@@ -49,6 +49,7 @@ public class RecruitLoginServlet extends HttpServlet {
 			
 			//3. 리다이렉트
 			String location = request.getHeader("Referer"); //현재 페이지 오기전 url정보
+			//수정필요한 부분 
 			response.sendRedirect(location); 
 		} catch (Exception e) {
 			e.printStackTrace();

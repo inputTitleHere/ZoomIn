@@ -31,18 +31,23 @@ public class ApplicantDao {
 
 
 	// 로그인기능-로그인 아이디 인식
-	public ApplicantMember findById(Connection conn, String memberId) {
+	public ApplicantMember findAppliId(String id, String password) {
 		ApplicantMember amember = null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("findById");
-		// findById(sql) = select * from member where member_id = ?
+		
+		//로그인 여부
+		String messeage = new String();
+		String page = new String();
+		String sql = prop.getProperty("findAppliId");
+		// (sql) = select * from applicant_member where id = ?
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(3, memberId);
+			pstmt.setString(3, id);
 			rset = pstmt.executeQuery();
-
+			
 			while (rset.next()) { 
 				//다음행이 있을때 rset.next()에 의해 다음행 이동
 				amember = handleMemberResultSet(rset);
@@ -59,12 +64,14 @@ public class ApplicantDao {
 
 	private ApplicantMember handleMemberResultSet(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
-		String memberName = rset.getString("member_name");
-		String memberId = rset.getString("member_id");
+		String name = rset.getString("name");
+		String id = rset.getString("id");
 		String password = rset.getString("password");
 		String phone = rset.getString("phone");
 		String email = rset.getString("email");
 		Date regDate = rset.getDate("reg_date");
-		return new ApplicantMember(uid, memberName, memberId, password, phone, email, regDate);
+		return new ApplicantMember(uid, name, id, password, phone, email, regDate);
 	}
+
+
 }

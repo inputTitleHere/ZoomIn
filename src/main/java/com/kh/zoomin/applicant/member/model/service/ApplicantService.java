@@ -8,14 +8,13 @@ import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 
 public class ApplicantService {
 
-	public ApplicantMember findById(String memberId) {
+	public ApplicantMember findAppliId(String id, String password) {
 		Connection conn = getConnection();
 		ApplicantDao ad = new ApplicantDao();
-		ApplicantMember amember = ad.findById(conn, memberId);
+		ApplicantMember amember = ad.findAppliId(id, password);
 		close(conn);
 		return amember;
 	}
-
 
 
 }

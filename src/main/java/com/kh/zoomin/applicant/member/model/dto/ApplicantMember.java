@@ -7,24 +7,24 @@ import com.kh.zoomin.member.dto.Member;
 public class ApplicantMember extends Member{
 
 	private int uid;
-	private String memberName;
-	private String memberId;
+	private String name;
+	private String id;
 	private String password;
 	private String phone;
 	private String email;
 	private Date regDate;
 	
-	public ApplicantMember(int uid, String memberName, String memberId, String password, String phone, String email, Date regDate) {
+	public ApplicantMember(int uid, String name, String id, String password, String phone, String email, Date regDate) {
 		super(2);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicantMember(int memberType, int uid, String memberName, String memberId, String password, String phone,
+	public ApplicantMember(int memberType, int uid, String name, String id, String password, String phone,
 			String email, Date regDate) {
 		super(memberType);
 		this.uid = uid;
-		this.memberName = memberName;
-		this.memberId = memberId;
+		this.name = name;
+		this.id = id;
 		this.password = password;
 		this.phone = phone;
 		this.email = email;
@@ -39,20 +39,20 @@ public class ApplicantMember extends Member{
 		this.uid = uid;
 	}
 	
-	public String getMemberName() {
-		return memberName;
+	public String getName() {
+		return name;
 	}
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getId() {
+		return id;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberId(String id) {
+		this.id = id;
 	}
 
 	public String getPassword() {
@@ -89,7 +89,7 @@ public class ApplicantMember extends Member{
 
 	@Override
 	public String toString() {
-		return "ApplicantMember [uid=" + uid + ", memberName=" + memberName + ", memberId=" + memberId + ", password=" + password + ", phone=" + phone
+		return "ApplicantMember [uid=" + uid + ", name=" + name + ", id=" + id + ", password=" + password + ", phone=" + phone
 				+ ", email=" + email + ", regDate=" + regDate + "]";
 	}
 	

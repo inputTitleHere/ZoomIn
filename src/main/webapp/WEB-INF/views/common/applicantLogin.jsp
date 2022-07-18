@@ -1,75 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember" %>
+<%@ page import="com.kh.zoomin.applicant.member.model.dao.ApplicantDao" %>
 <%@ page import="com.kh.zoomin.member.dto.Member" %>
-
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	ApplicantMember amember = null;
-	String id = request.getParameter("member_id");
-	String pw = request.getParameter("member_name");
+	
+	String id= request.getParameter("id");
+	String password = request.getParameter("password");
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>구직자 로그인</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <!-- /applicant/login 서블릿 이동 -->
 <body>
-	<header>
-		<div id="account">
-			<a href="recruiterLogin.jsp" id="logIn">구인자 로그인</a> <a
-				href="applicantLogin.jsp" id="logIn">구직자 로그인</a> <a href=""
-				id="recruiterAsign">구인자 회원가입</a> <a href="" id="applicantAsign">구직자
-				회원가입</a>
-		</div>
-		<div id="logodiv">
-			<img id="logo" alt=""
-				src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-		</div>
-		<div id="searchBoxdiv">
-			<input id="searchBox" type="text">
-			<button class="custom-btn btn-3">
-				<span>검색</span>
-			</button>
-		</div>
-	</header>
-	<div id="container">
-		<tbody>
-			<div class="login-container">
-				<% if(loginMember.getMemberType() == 2) { %>
-				<!-- 로그인폼 시작 -->
-				<form id="applicantFrm" name="applicantFrm"
-					action="<%= request.getContextPath() %>/applicant/login"
-					method="POST">
-					<fieldset id="inputs">
-						<td><input id="username" type="text"
-							onblur="if(this.value=='')this.value='Username';"
-							onfocus="if(this.value=='Username')this.value='';"
-							value="Username" /> <input id="password" type="text"
-							onblur="if(this.value=='')this.value='Password';"
-							onfocus="if(this.value=='Password')this.value='';"
-							value="Password" /></td>
-					</fieldset>
-					<fieldset id="actions">
-						<input type="button" value="구인자 로그인"
-							onclick="location.href='<%= request.getContextPath() %>/';">
-					</fieldset>
-				</form>
-				<!-- 로그인 폼 끝 -->
-				<% } else { %>
-				<table id="login">
-				<tr>
-					<td>[<%= loginMember.getMemberName() %>]님, 안녕하세요.</td>
-				</tr>
-				</table>
-				<% } %>
-			</div>
-		</tbody>
-
+<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<div class="jumbotron">
+	<div class="container">
+		<h1 class="display-3">로그인</h1>
 	</div>
+</div>
+<div class="container" align="center">
+	<div class="col-md-4 col-me-offset-4">
+		<h3 class="form-signin-heading">Please sign in</h3>
+
+		<form class="form-signin" action="<%= request.getContextPath() %>/applicant/login" method="post">
+			<div class"form-group">
+				<label class="sr-only">User Name</label>
+				<input name="id" class="form-control" placeholder="ID" required autofocus>
+			</div>
+			<div class="form-group">
+				<label class="sr-only">Password</label>
+				<input type="password" name="password" class="form-control" placeholder="Password" required>
+			</div>
+			<button class="btn btn-lg btn-success btn-block" type="submit">로그인</button>
+			<button class="btn btn-lg btn-secondary btn-block" type="button" onclick="location.href='addMember.jsp'">회원가입</button>
+		</form>
+	</div>
+</div>
+
 
 </body>
 </html>
