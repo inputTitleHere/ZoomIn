@@ -4,26 +4,24 @@ import java.sql.Date;
 
 public class RecruitBoard {
 
-	private int no; 				// 해당 게시글의 고유번호이다.
-	private int uid; 				// 게시글 작성자(구인자)의 고유번호이다.
-	private int categoryNumber; 	// 소속 카테고리 정보이다. 
-	private String company_no; 		// 사업자 등록번호는 문자열로 저장하였다.
-	private String title;			//
-	private String careerYears;		//
-	private String schoolStatus;	//
-	private String workType;		//
-	private String officeLocation;	//
-	private String salary;			//
-	private String content;			//
-	private Date closureDate;		//	
-	private Date regDate;			//
-	
-	
+	private int no; // 해당 게시글의 고유번호이다.
+	private int uid; // 게시글 작성자(구인자)의 고유번호이다.
+	private int categoryNumber; // 소속 카테고리 정보이다.
+	private String companyNo; // 사업자 등록번호는 문자열로 저장하였다.
+	private String title; //
+	private String careerYears; //
+	private String schoolStatus; //
+	private String workType; //
+	private String officeLocation; //
+	private String salary; //
+	private String content; //
+	private Date closureDate; //
+	private Date regDate; //
 
 	public RecruitBoard() {
 		super();
 	}
-	
+
 	public RecruitBoard(int no, int uid, int categoryNumber, String company_no, String title, String careerYears,
 			String schoolStatus, String workType, String officeLocation, String salary, String content,
 			Date closureDate, Date regDate) {
@@ -31,7 +29,7 @@ public class RecruitBoard {
 		this.no = no;
 		this.uid = uid;
 		this.categoryNumber = categoryNumber;
-		this.company_no = company_no;
+		this.companyNo = company_no;
 		this.title = title;
 		this.careerYears = careerYears;
 		this.schoolStatus = schoolStatus;
@@ -42,7 +40,6 @@ public class RecruitBoard {
 		this.closureDate = closureDate;
 		this.regDate = regDate;
 	}
-	
 
 	public int getNo() {
 		return no;
@@ -68,12 +65,12 @@ public class RecruitBoard {
 		this.categoryNumber = categoryNumber;
 	}
 
-	public String getCompany_no() {
-		return company_no;
+	public String getCompanyNo() {
+		return companyNo;
 	}
 
-	public void setCompany_no(String company_no) {
-		this.company_no = company_no;
+	public void setCompanyNo(String company_no) {
+		this.companyNo = company_no;
 	}
 
 	public String getTitle() {
@@ -148,23 +145,43 @@ public class RecruitBoard {
 		this.regDate = regDate;
 	}
 
-	
+	public RecruitBoard setDefaults() {
+		if ("".equals(careerYears)) {
+			careerYears="경력무관";
+		}
+		if ("".equals(schoolStatus)) {
+			schoolStatus="학력무관";
+		}
+		if ("".equals(workType)) {
+			workType="미정";
+		}
+		if ("".equals(officeLocation)) {
+			officeLocation="미정";
+		}
+		if ("".equals(salary)) {
+			salary="회사내규";
+		}
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return "RecruitBoard [no=" + no + ", uid=" + uid + ", categoryNumber=" + categoryNumber + ", company_no="
-				+ company_no + ", title=" + title + ", careerYears=" + careerYears + ", schoolStatus=" + schoolStatus
+				+ companyNo + ", title=" + title + ", careerYears=" + careerYears + ", schoolStatus=" + schoolStatus
 				+ ", workType=" + workType + ", officeLocation=" + officeLocation + ", salary=" + salary + ", content="
 				+ content + ", closureDate=" + closureDate + ", regDate=" + regDate + "]";
 	}
-	
+
 	@Deprecated
 	/**
-	 * TODO : A method that returns an HTML style String to be used directly inside a JSP or other formats.
+	 * TODO : A method that returns an HTML style String to be used directly inside
+	 * a JSP or other formats.
+	 * 
 	 * @return
 	 */
 	public String toHTML() {
 		// todo
 		return null;
 	}
-	
+
 }

@@ -45,7 +45,7 @@ if (cookies != null) {
 // else show respective menus of either recruiter or applicant.
 
 // 
-System.out.println("loginMember = "+loginMember); // 없으면 null뜸
+//System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 if (loginMember == null) {
 %>
 <%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
