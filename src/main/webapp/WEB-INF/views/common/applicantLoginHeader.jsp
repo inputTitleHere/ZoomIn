@@ -16,8 +16,6 @@
 		 <button class="custom-btn btn-3"><span>검색</span></button>
 	</div>
 	<div id="mainCategory">
-		<nav>
-			<a href="<%= request.getContextPath() %>/CompanyReviewUpdateServlet">리뷰</a>
-		</nav>
+		
 	</div>
 
