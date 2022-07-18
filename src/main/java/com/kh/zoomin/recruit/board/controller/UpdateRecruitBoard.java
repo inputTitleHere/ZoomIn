@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 import com.kh.zoomin.recruit.board.exception.RecruitBoardException;
@@ -72,6 +73,8 @@ public class UpdateRecruitBoard extends HttpServlet {
 		int result = rbs.updateRecruitBoard(rb.setDefaults());
 		
 		// 리다이렉트처리
+		HttpSession session =request.getSession();
+		session.setAttribute("msg","채용게시판 수정이 완료되었습니다.");
 		response.sendRedirect(request.getContextPath()+"/recruit/board/viewRecruitBoard?boardNo="+no);
 		}catch(Exception e) {
 			throw e;

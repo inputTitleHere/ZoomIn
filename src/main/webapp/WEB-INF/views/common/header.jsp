@@ -38,6 +38,15 @@ if (cookies != null) {
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common/common.css" />
+<script>
+window.addEventListener('load',()=>{
+	<% if(msg!=null){%>
+	alert('<%=msg%>');
+	<%}%>
+});
+
+</script>	
+
 </head>
 <%
 // 여기서 로그인 관련 처리를 수행한다.
