@@ -23,7 +23,14 @@ public class boardCountServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//업무로직 : 오늘 업데이트된 게시글 수 
+		//사용자 입력값 처리
+		String dateStart = request.getParameter("dateStart");
+		String dateEnd = request.getParameter("dateEnd");
+		
+		//업무로직
+		//날짜별 조회
+		
+		//오늘 업데이트된 게시글 수 
 		int todayComCnt = supervisorService.getTodayComCnt();	//select count(*) from company_review where reg_date = sysdate
 		int todaySalCnt = supervisorService.getTodaySalCnt();	//select count(*) from salary_review where reg_date = sysdate
 		
@@ -32,10 +39,12 @@ public class boardCountServlet extends HttpServlet {
 		
 		//응답처리
 		HttpSession session = request.getSession();
+		request.setAttribute("dateStart", dateStart);
+		request.setAttribute("dateEnd", dateEnd);
 		session.setAttribute("todayComCnt", todayComCnt);
 		session.setAttribute("todayComCnt", todaySalCnt);
 		session.setAttribute("totalBoardCnt", totalBoardCnt);
-		request.getRequestDispatcher("/WEB-INF/views/supervisor/supervisorIndex.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/supervisor/statistic.jsp").forward(request, response);
 	}
 
 }

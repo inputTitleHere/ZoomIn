@@ -25,24 +25,31 @@ public class visitCountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자 입력값
-		String start = request.getParameter("dateStart");
-		System.out.println("start = " + start);
+		String dateStart = request.getParameter("dateStart");
+		String dateEnd = request.getParameter("dateEnd");
+		//System.out.println("dateStart = " + dateStart + ", dateEnd = " + dateEnd );
 		
 		//업무로직		
 		HttpSession session = request.getSession();
 		
+		//날짜별 조회 
+		int visitCount = supervisorService.getVisitCount(dateStart, dateEnd);
+		
 		//총 방문자 조회
 		int totalCount = supervisorService.getTotalCount();
-		System.out.println("totalCnt = " + totalCount);
+		//System.out.println("totalCnt = " + totalCount);
 		
 		//오늘 방문자 조회
 		int todayCount = supervisorService.getTodayCount();	
-		System.out.println("todayCount = " + todayCount);
+		//System.out.println("todayCount = " + todayCount);
 		
 		//응답처리 리다이렉트
+		request.setAttribute("dateStart", dateStart);
+		request.setAttribute("dateEnd", dateEnd);
+		session.setAttribute("visitCount", visitCount);
 		session.setAttribute("totalCount", totalCount);	
 		session.setAttribute("todayCount", todayCount);	
-		request.getRequestDispatcher("/WEB-INF/views/supervisor/supervisorIndex.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/supervisor/statistic.jsp").forward(request, response);
 	}
 
 }
