@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
@@ -6,31 +7,33 @@
 	pageEncoding="UTF-8"%>
 
 <%
-		String msg = (String) session.getAttribute("msg");
-		if (msg != null)
-			session.removeAttribute("msg");
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		
-		// -- 백승윤 START -- //
-		// 구인자 테스트옹 loginMember객체
-		loginMember = new RecruitMember(); // 임시로 Naver 계정 객체 중 company_no하고 uid만 가져온다.
-		session.setAttribute("loginMember", loginMember);
-		// -- 백승윤 END -- //
-		
-		String saveId = null;
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie c : cookies) {
-				String name = c.getName();
-				String value = c.getValue();
-				// System.out.println("[cookie] " + name + "=" + value);
-				if ("saveId".equals(name)) {
-					saveId = value;
-		
-				}
+
+	String msg = (String) session.getAttribute("msg");
+	if (msg != null)
+		session.removeAttribute("msg");
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	
+	// -- 백승윤 START -- //
+	// 구인자 테스트옹 loginMember객체
+	ApplicantMember am = new ApplicantMember();
+	am.setUid(11);
+	
+	// -- 백승윤 END -- //
+	
+	String saveId = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie c : cookies) {
+			String name = c.getName();
+			String value = c.getValue();
+			// System.out.println("[cookie] " + name + "=" + value);
+			if ("saveId".equals(name)) {
+				saveId = value;
 			}
-		
+	
 		}
+	}
+
 %>
 
 <!DOCTYPE html>
@@ -50,6 +53,18 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
+
+//isempty 함수  null 체크용 -김승환-
+function isEmpty(value){
+	console.log(value);
+	if(value == "" || value == null || value == undefined || value == "undefined"){
+		console.log("true");
+		return true;
+	}else{
+		console.log("false");
+		return false;
+	}
+}
 
 </script>	
 

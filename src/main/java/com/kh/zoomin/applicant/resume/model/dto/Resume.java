@@ -1,38 +1,38 @@
 package com.kh.zoomin.applicant.resume.model.dto;
 
+import java.util.Date;
+
 public class Resume {
-	String id;
-	String name;
-	String birthday;
-	Gender gender;
-	String email;
-	String phoneNum;
-	String address;
-	SchoolType schoolType;
-	String schoolName;
-	Status schoolStatus;
-	String majorName;
-	double grade;
-	double totalPoint;
-	String companyName;
-	int career;
-	Status careerStatus;
+	private int no;
+	private int uid;
+	private int categoryNumber;
+	private String name;
+	private Date birthday;
+	private Gender gender;
+	private String address;
+	private SchoolType schoolType;
+	private String schoolName;
+	private Status schoolStatus;
+	private String majorName;
+	private double grade;
+	private double totalPoint;
+	
 	
 	public Resume() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Resume(String id, String name, String birthday, Gender gender, String email, String phoneNum, String address,
+	
+	public Resume(int uid, int categoryNumber, String name, Date birthday, Gender gender, String address, 
 			SchoolType schoolType, String schoolName, Status schoolStatus, String majorName, double grade,
-			double totalPoint, String companyName, int career, Status careerStatus) {
+			double totalPoint) {
 		super();
-		this.id = id;
+		
+		this.uid = uid;
+		this.categoryNumber = categoryNumber;
 		this.name = name;
 		this.birthday = birthday;
 		this.gender = gender;
-		this.email = email;
-		this.phoneNum = phoneNum;
 		this.address = address;
 		this.schoolType = schoolType;
 		this.schoolName = schoolName;
@@ -40,146 +40,84 @@ public class Resume {
 		this.majorName = majorName;
 		this.grade = grade;
 		this.totalPoint = totalPoint;
-		this.companyName = companyName;
-		this.career = career;
-		this.careerStatus = careerStatus;
 	}
-
-	public String getId() {
-		return id;
+	public int getNo() {
+		return no;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setNo(int no) {
+		this.no = no;
 	}
-
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-
 	public Gender getGender() {
 		return gender;
 	}
-
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhoneNum() {
-		return phoneNum;
-	}
-
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
-	}
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	public int getCategoryNumber() {
+		return categoryNumber;
+	}
+	public void setCategoryNumber(int categoryNumber) {
+		this.categoryNumber = categoryNumber;
+	}
 	public SchoolType getSchoolType() {
 		return schoolType;
 	}
-
 	public void setSchoolType(SchoolType schoolType) {
 		this.schoolType = schoolType;
 	}
-
 	public String getSchoolName() {
 		return schoolName;
 	}
-
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
 	}
-
 	public Status getSchoolStatus() {
 		return schoolStatus;
 	}
-
 	public void setSchoolStatus(Status schoolStatus) {
 		this.schoolStatus = schoolStatus;
 	}
-
 	public String getMajorName() {
 		return majorName;
 	}
-
 	public void setMajorName(String majorName) {
 		this.majorName = majorName;
 	}
-
 	public double getGrade() {
 		return grade;
 	}
-
 	public void setGrade(double grade) {
 		this.grade = grade;
 	}
-
 	public double getTotalPoint() {
 		return totalPoint;
 	}
-
 	public void setTotalPoint(double totalPoint) {
 		this.totalPoint = totalPoint;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public int getCareer() {
-		return career;
-	}
-
-	public void setCareer(int career) {
-		this.career = career;
-	}
-
-	public Status getCareerStatus() {
-		return careerStatus;
-	}
-
-	public void setCareerStatus(Status careerStatus) {
-		this.careerStatus = careerStatus;
-	}
-
-	@Override
-	public String toString() {
-		return "Resume [id=" + id + ", name=" + name + ", birthday=" + birthday + ", gender=" + gender + ", email="
-				+ email + ", phoneNum=" + phoneNum + ", address=" + address + ", schoolType=" + schoolType
-				+ ", schoolName=" + schoolName + ", schoolStatus=" + schoolStatus + ", majorName=" + majorName
-				+ ", grade=" + grade + ", totalPoint=" + totalPoint + ", companyName=" + companyName + ", career="
-				+ career + ", careerStatus=" + careerStatus + "]";
 	}
 	
 	
