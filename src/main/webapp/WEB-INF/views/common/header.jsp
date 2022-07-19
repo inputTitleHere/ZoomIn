@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
@@ -21,11 +22,16 @@
 			if("saveId".equals(name)){
 				saveId = value;
 			}
+// -- 백승윤 START -- //
+// 구인자 테스트옹 loginMember객체
+ApplicantMember am = new ApplicantMember();
+am.setUid("11");
 
-
+// -- 백승윤 END -- //
 
 	}
 }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +48,18 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
+
+//isempty 함수  null 체크용 -김승환-
+function isEmpty(value){
+	console.log(value);
+	if(value == "" || value == null || value == undefined || value == "undefined"){
+		console.log("true");
+		return true;
+	}else{
+		console.log("false");
+		return false;
+	}
+}
 
 </script>	
 
