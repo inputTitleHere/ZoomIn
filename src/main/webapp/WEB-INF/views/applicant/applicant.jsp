@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/applicant.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section>
-<div class="title" id="">
+<div class="title" id="subtitle">
 	<a id="recruitInfo">채용정보</a>
 	<a id="companyInfo">기업정보</a>
 	<a id="salaryInfo">연봉정보</a>
