@@ -260,6 +260,7 @@ alter table resume add constraint ck_school_type check (school_type in ('H1', 'C
 alter table resume add constraint ck_school_status check (school_status in ('A', 'B', 'C'));
 
 --방문자용 통계 테이블
+--drop table visit
 create table visit (
 	v_date date not null
 );
@@ -270,7 +271,7 @@ insert into visit values (to_date('2022-07-11', 'yyyy-mm-dd'));
 insert into visit values (to_date('2022-07-12', 'yyyy-mm-dd'));
 insert into visit values (to_date('2022-07-13', 'yyyy-mm-dd'));
 insert into visit values (to_date('2022-07-14', 'yyyy-mm-dd'));
-insert into visit values (to_date('2022-07-17', 'yyyy-mm-dd'));
+insert into visit values (to_date('2022-07-15', 'yyyy-mm-dd'));
 
 --방문자 수 증가
 insert into visit values (sysdate);
@@ -279,18 +280,20 @@ insert into visit values (sysdate);
 select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
 
 --총 방문자수 
-select count(*) from visit;
+select * from visit;
 
---7월 11일부터 7월 18일까지
-select count(*) from visit where v_date between '2022-07-11' and '2022-07-18';
+--날짜별 방문자 수 
+select * from visit where v_date between to_date('2022-07-14', 'yyyy-mm-dd') and to_date('2022-07-14', 'yyyy-mm-dd') + 0.99999;
 
 commit;
 
-select count(*) from company_review where reg_date = '2022-07-13';
+select count(*) from company_review where to_date(reg_date, 'yyyy-mm-dd') = to_date('2022-07-18', 'yyyy-mm-dd');
 select count(*) from salary_review where to_date(reg_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
---today확인용 insert
+
+--today확인용 게시글 insert
 select * from salary_review;
 insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, sysdate);
+select * from company_review;
 
 --게시판 전체 수 (union all)
 select 
@@ -301,6 +304,17 @@ from (
     select count(*) as Cnt from company_review
 );
 --select sum(Cnt) from (select count(*) as Cnt from salary_review union all select count(*) as Cnt from company_review)
+
+--날짜별 조회하기
+--select count(*) from(select "uid", reg_date from salary_review  union all  select "uid", reg_date from company_review) where reg_date between to_date(? , 'yyyy-mm-dd') and to_date(? , 'yyyy-mm-dd') + 0.99999
+select
+    *
+from(
+    select "uid", reg_date from salary_review
+    union all
+    select "uid", reg_date from company_review
+)
+where reg_date between to_date('2022-07-18' , 'yyyy-mm-dd') and to_date('2022-07-18' , 'yyyy-mm-dd') + 0.99999;
 
 -- 이윤정 END --
 

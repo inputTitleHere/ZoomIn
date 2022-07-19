@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
 
+	<!-- data 불러오기 : 오늘포함 최근 1주일 date, date별 new방문자수, date별 new게시글 수  -->
+
+
+
 
 	<!-- 관리자 메인페이지 -->
 

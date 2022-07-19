@@ -29,6 +29,7 @@ public class boardCountServlet extends HttpServlet {
 		
 		//업무로직
 		//날짜별 조회
+		int boardCnt = supervisorService.getBoardCount(dateStart, dateEnd);
 		
 		//오늘 업데이트된 게시글 수 
 		int todayComCnt = supervisorService.getTodayComCnt();	//select count(*) from company_review where reg_date = sysdate
@@ -41,6 +42,7 @@ public class boardCountServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setAttribute("dateStart", dateStart);
 		request.setAttribute("dateEnd", dateEnd);
+		session.setAttribute("boardCnt", boardCnt);
 		session.setAttribute("todayComCnt", todayComCnt);
 		session.setAttribute("todayComCnt", todaySalCnt);
 		session.setAttribute("totalBoardCnt", totalBoardCnt);

@@ -114,6 +114,14 @@ public class SupervisorService {
 		return visitCnt;
 	}
 
+	//날짜별 게시글 수 조회
+	public int getBoardCount(String dateStart, String dateEnd) {
+		Connection conn = getConnection();
+		int boardCnt = supervisorDao.getBoardCount(conn, dateStart, dateEnd);
+		close(conn);
+		return boardCnt;
+	}
+
 	
 	
 }

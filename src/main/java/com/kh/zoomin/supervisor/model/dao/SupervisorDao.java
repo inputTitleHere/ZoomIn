@@ -300,13 +300,37 @@ public class SupervisorDao {
 			if(rset.next())
 				visitCnt = rset.getInt(1);
 		} catch (SQLException e) {
-			throw new SupervisorException("날짜별 게시글 수 조회 오류!", e);
+			throw new SupervisorException("날짜별 방문자수 조회 오류!", e);
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		
 		return visitCnt;
+	}
+
+	//날짜별 게시글 수 조회
+	public int getBoardCount(Connection conn, String dateStart, String dateEnd) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int boardCnt = 0;
+		String sql = prop.getProperty("getBoardCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dateStart);
+			pstmt.setString(2, dateEnd);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				boardCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("날짜별 게시글 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		
+		return boardCnt;
 	}
 	
 

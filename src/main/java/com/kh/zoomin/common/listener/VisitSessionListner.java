@@ -30,55 +30,21 @@ public class VisitSessionListner implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent se)  { 
          
     	if(se.getSession().isNew()) {
-        	 System.out.println("세션 생성 성공!");
+        	 //System.out.println("세션 생성 성공!");
         	 HttpSession session = se.getSession();
 
      		try {
-     			//방문자 수 증가처리
+     			//세션 생성 시 방문자 수 증가처리
      			int setCount = supervisorService.setCount();
      			//System.out.println("setCount = " + setCount);	
-     			
-     			//오늘 방문자 수 구하기
-     			int todayCount = supervisorService.getTodayCount();	
-     			//System.out.println("todayCount = " + todayCount);
-     			session.setAttribute("todayCount", todayCount);		//세션에 저장
-     			
-     			//총 방문자 수 구하기
-     			int totalCount = supervisorService.getTotalCount();
-     			//System.out.println("totalCnt = " + totalCount);
-     			session.setAttribute("totalCount", totalCount);		//세션에 저장
      			
      		} catch (Exception e) {
      			new SupervisorException("방문자 수 카운터 오류", e);
      		}
-        	 //count(se);
+        	 
          }
     }
 
-	private void count(HttpSessionEvent se) {	
-		
-		HttpSession session = se.getSession();
-
-		try {
-			//방문자 수 증가처리
-			int setCount = supervisorService.setCount();
-			System.out.println("setCount = " + setCount);	//0?
-			
-			//오늘 방문자 수 구하기
-			int todayCount = supervisorService.getTodayCount();	
-			System.out.println("todayCount = " + todayCount);
-			session.setAttribute("todayCount", todayCount);		//세션에 저장
-			
-			//총 방문자 수 구하기
-			int totalCount = supervisorService.getTotalCount();
-			System.out.println("totalCnt = " + totalCount);
-			session.setAttribute("totalCount", totalCount);		//세션에 저장
-			
-		} catch (Exception e) {
-			new SupervisorException("방문자 수 카운터 오류", e);
-		}
-		
-	}
 
 	/**
      * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
