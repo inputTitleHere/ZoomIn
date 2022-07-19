@@ -17,7 +17,7 @@ RecruitMember recruitMember = (RecruitMember)session.getAttribute("loginMember")
 		<a href ="" id="logOut">로그아웃</a>
 	</div>
 	<div id="logodiv">
-		<a href="<%=request.getContextPath()%>/">
+		<a href="<%=request.getContextPath()%>/WEB-INF/views/recruit/recruitIndex.jsp">
 			<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
 		</a>
 	</div>

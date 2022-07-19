@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.common.ZoominUtils"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -6,9 +7,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 List<RecruitBoard> rbl = (List<RecruitBoard>) request.getAttribute("boardList");
+Member loginMember = (Member)session.getAttribute("loginMember");
 
 Date currDate = new Date();
 SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
