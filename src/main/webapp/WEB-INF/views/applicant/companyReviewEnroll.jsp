@@ -138,7 +138,7 @@ $(content).keyup((e) => {
     } 
     else {
         $counter.css('color', 'red');
-        alert('너무 길어서 제출이 불가합니다.');
+        alert('너무 길어서 제출이 불가합니다. 내용을 줄여주세요.');
     }
 })
 </script>
