@@ -47,7 +47,7 @@
 	<form id="resumeFrm" name = "resumeFrm" action="<%=request.getContextPath()%>/ResumeServlet" method="POST">
 	<input type="hidden" name="result" value="<%=result%>"/>
 		<div class="resumeDev">
-			<div class="resumeTitle">인적사항</div>
+			<div class="resumeTitle">인적사항*</div>
 			<div class="resumeContext">
 				<table id="infoTable">
 					<tr>
@@ -82,20 +82,20 @@
 						</td>
 					</tr>
 					<tr>
-						<th>주소 : </th>
+						<th>주소* : </th>
 						<td colspan="3"><input type="text" name="address" id="address" value="<%=address%>"/></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 		<div class="resumeDev">
-			<div class="resumeTitle">학력사항</div>
+			<div class="resumeTitle">학력사항*</div>
 			<div class="resumeContext">
 				<table>
 					<tr>
 						<th>학교명* : </th>
 						<td><input type="text" name="schoolName" id="schoolName" value="<%=schoolName%>"/></td>
-						<th>전공명 : </th>
+						<th>전공명* : </th>
 						<td><input type="text" name="majorName" id="majorName" value="<%=majorName%>"/></td>
 					</tr>
 					<tr>
@@ -118,9 +118,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th>학점 : </th>
+						<th>학점* : </th>
 						<td><input type="text" name="grade" id="grade" value="<%=grade%>"/></td>
-						<th>총점 : </th>
+						<th>총점* : </th>
 						<td><input type="text" name="totalPoint" id="totalPoint" value="<%=totalPoint%>"/></td>
 					</tr>
 				</table>
@@ -142,23 +142,21 @@
 	document.getElementById("btnResumeSubmit").onclick = (e) =>{
 		if(isEmpty($("#categoryNumber").val()) || isEmpty($("#name").val()) || isEmpty($("#birthday").val()) || isEmpty($("#gender").val()) || isEmpty($("#address").val()) || isEmpty($("#schoolType").val())
 				|| isEmpty($("#schoolName").val()) || isEmpty($("#schoolStatus").val()) || isEmpty($("#majorName").val()) || isEmpty($("#grade").val()) || isEmpty($("#totalPoint").val())){
-		alert("빈간없이 입력해주세요!");
+		alert("빈칸없이 입력해주세요!");
 		console.log($("#categoryNumber").val());
 		}else{			
-		document.resumeFrm.submit();
-		alert("저장되었습니다!");			
+		document.resumeFrm.submit();		
 		}
 	};
 	
 	document.getElementById("btnResumeDelete").onclick = (e) =>{
 			document.resumeDelFrm.submit();
-			alert("삭제 되었습니다!");
+			
 	};
 	
 	document.getElementById("btnResumeUpdate").onclick = (e) =>{
 		//현재는 btnResumeUpdate 눌렀을때 update 실행이 아닌 alert 창 확인 눌렀을때 실행됨.
 		document.resumeFrm.submit();
-		alert("수정되었습니다!");
 	};
 	
 	$("select[name = categoryNumber]").change(function(){
@@ -178,17 +176,7 @@
 			$("#btnResumeDelete").hide();
 		}
 	});
-	
-	function isEmpty(value){
-		console.log(value);
-		if(value == "" || value == null || value == undefined || value == "undefined"){
-			console.log("true");
-			return true;
-		}else{
-			console.log("false");
-			return false;
-		}
-	}
+
 	
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

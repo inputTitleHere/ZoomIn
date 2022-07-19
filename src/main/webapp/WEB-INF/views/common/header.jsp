@@ -30,6 +30,7 @@ if (cookies != null) {
 		}
 	}
 }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +47,18 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
+
+//isempty 함수  null 체크용 -김승환-
+function isEmpty(value){
+	console.log(value);
+	if(value == "" || value == null || value == undefined || value == "undefined"){
+		console.log("true");
+		return true;
+	}else{
+		console.log("false");
+		return false;
+	}
+}
 
 </script>	
 

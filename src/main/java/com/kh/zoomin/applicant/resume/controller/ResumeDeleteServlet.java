@@ -57,7 +57,10 @@ public class ResumeDeleteServlet extends HttpServlet {
 			String msg = "";
 			
 			if(result > 0) {
-				msg = "이력서 성공적으로 등록!";
+				msg = "이력서 삭제 성공!";
+				session.setAttribute("msg", msg);
+			}else {
+				msg = "이력서 삭제 실패!";
 				session.setAttribute("msg", msg);
 			}
 			//현재 페이지 리다이렉트

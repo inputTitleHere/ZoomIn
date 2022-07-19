@@ -63,7 +63,7 @@ public class ResumeServlet extends HttpServlet {
 		}else {
 			request.setAttribute("result", "no");
 		}
-		request.getRequestDispatcher("/WEB-INF/views/applicant/Resume.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/applicant/resume.jsp")
 			.forward(request, response);
 	}
 	
@@ -114,10 +114,11 @@ public class ResumeServlet extends HttpServlet {
 			String msg = "";
 			
 			if(result > 0) {
-				msg = "이력서 성공적으로 등록!";
+				msg = "이력서 성공적으로 저장!";
 				session.setAttribute("msg", msg);
 			}else {
-				msg = "이력서 등록 실패!";
+				msg = "이력서 저장 실패!";
+				session.setAttribute("msg", msg);
 			}
 			//현재 페이지 리다이렉트
 			String referer = request.getHeader("Referer");
