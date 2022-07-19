@@ -1,4 +1,4 @@
-package com.kh.zoomin.applicant.resume.model.service;
+package com.kh.zoomin.applicant.information.model.service;
 
 import static com.kh.zoomin.common.JdbcTemplate.*;
 
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import com.kh.zoomin.applicant.resume.model.dao.ResumeDao;
 import com.kh.zoomin.applicant.resume.model.dto.Resume;
 
-public class ResumeService {
+public class ApplicantInfoService {
 	
 	private ResumeDao ResumeDao = new ResumeDao();
 	/**

@@ -4,8 +4,8 @@
 	
 	padding-top:50px;
 	border-bottom : solid 1px black;
+	
 }
-
 .resumeDev{
 	border-left : solid 1px black;
 	border-right : solid 1px black;
@@ -14,9 +14,45 @@
 
 .resumeTitle{	
 	border-top : solid 1px black;
-	border-bottom : solid 1px black;
+	border-bottom: solid 1px black;
+	text-align : center;
+	height : 40px;	
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	font-weight: bold;
 }
-
 .resumeContext{
-	
+	height : 200px;
+	padding-top : 20px;
+	padding-bottom : 20px;
+}
+table{
+	display : flex;
+	justify-content : center;
+	align-items : center;
+}
+input{
+	width : 200px;
+	height : 30px;
+}
+select{
+	width : 200px;
+	height : 30px;	
+}
+th,td{
+	padding : 15px;
+}
+#address{
+	width :550px;
+	height :50px;
+}
+#btndesign{
+	margin-top : 70px;
+	display : flex;
+	justify-content : center;
+	align-items : center;
+}
+#btnResumeDelete{
+	margin-left : 50px;
 }
