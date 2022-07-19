@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.applicant.member.model.service.ApplicantService;
+import com.kh.zoomin.common.ZoominMvcUtils;
 
 /**
  * Servlet implementation class ApplicantJoinServlet
@@ -35,27 +36,25 @@ public class ApplicantJoinServlet extends HttpServlet {
 	//이름, 아이디, 비밀번호, 핸드폰번호, 이메일 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			// 1. 인코딩처리
+			//인코딩처리
 			request.setCharacterEncoding("utf-8");
 			
-			// 2. 사용자입력값처리			
+			//사용자입력값 받기		
 			String name = request.getParameter("name");
-			String id = request.getParameter("id");
-			//HelloMvcUtis 아직 안만들었음. 
-			String password = HelloMvcUtils.getEncryptedPassword(request.getParameter("password"), id);
+			String id = request.getParameter("id"); 
+			String password = ZoominMvcUtils.getEncryptedPassword(request.getParameter("password"), id);
 			String phone = request.getParameter("phone");
 			String email = request.getParameter("email");
 
 			ApplicantMember amember = 
-					//RecruitMember와 똑같은 문제.... memberType때문에 이런듯. 
-					new ApplicantMember(0, id, name, password, phone, email, null);
+					new ApplicantMember(0, name, id, password, phone, email, null);
 			System.out.println("amember@ApplicantJoinServlet = " + amember);
 			
-			// 3. 업무로직 : db insert
-			int result = ApplicantService.insertApplicant(amember); 
+			//업무로직 
+			int result = as.addApplicant(amember); 
 			System.out.println("result@MemberEnrollServlet = " + result);
 			
-			// 4. 응답처리 : redirect
+			//응답
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", "회원가입이 정상적으로 처리되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/");

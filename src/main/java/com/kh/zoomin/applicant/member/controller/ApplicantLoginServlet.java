@@ -38,7 +38,7 @@ public class ApplicantLoginServlet extends HttpServlet {
 			System.out.println(id + "," + password);
 			
 			//2. 업무로직
-			ApplicantMember amember = as.findAppliId(id, password);
+			ApplicantMember amember = as.findAppliId(id);
 			System.out.println("amamber= " + amember);
 			
 			//로그인 여부

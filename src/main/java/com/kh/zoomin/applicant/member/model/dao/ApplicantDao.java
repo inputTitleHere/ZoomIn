@@ -30,7 +30,7 @@ public class ApplicantDao {
 	}
 
 	// 로그인기능-로그인 아이디 인식
-	public ApplicantMember findAppliId(Connection conn, String id, String password) {
+	public ApplicantMember findAppliId(Connection conn, String id) {
 		ApplicantMember amember = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -69,6 +69,30 @@ public class ApplicantDao {
 		Date regDate = rset.getDate("reg_date");
 		return new ApplicantMember(uid, name, id, password, phone, email, regDate);
 	}
+
+	public int addApplicant(Connection conn, ApplicantMember amember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("addApplicant");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  amember.getName());
+			pstmt.setString(2,  amember.getId());
+			pstmt.setString(3,  amember.getPassword());
+			pstmt.setString(4,  amember.getPhone());
+			pstmt.setString(5,  amember.getEmail());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new MemberException("회원가입 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		} 
+		return result;
+	}
+
+
 
 
 }

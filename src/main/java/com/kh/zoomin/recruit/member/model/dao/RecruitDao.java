@@ -35,7 +35,7 @@ public class RecruitDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("findrecruId");
-		// findrecruId(sql) = select * from recruit_member where member_id = ?
+		// findrecruId(sql) = select * from recruit_member where id = ?
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -64,9 +64,13 @@ public class RecruitDao {
 		String id = rset.getString("id");
 		String password = rset.getString("password");
 		String email = rset.getString("email");
-		Boolean supervisor = rset.getBoolean(0);
+		String isSupervisor = rset.getString("supervisor");
+		Boolean supervisor = false;
+		if ("Y".equals(isSupervisor)) {
+			supervisor = true;
+		} 
 		Date regDate = rset.getDate("reg_date");
-		return new RecruitMember(uid, companyNo, name, id, password, email, supervisor, regDate);
+		return new RecruitMember(1, uid, companyNo, name, id, password, email, supervisor, regDate);
 
 	}
 
