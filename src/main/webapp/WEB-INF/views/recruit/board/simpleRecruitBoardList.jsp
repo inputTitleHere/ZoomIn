@@ -10,7 +10,9 @@
 
 <script>
 window.addEventHandler('load',()=>{
-	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/recruit/board/",
+	});
 });
 
 </script>
