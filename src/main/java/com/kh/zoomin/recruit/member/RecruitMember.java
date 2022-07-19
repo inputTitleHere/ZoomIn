@@ -8,6 +8,7 @@ public class RecruitMember extends Member{
 
 	private int uid;
 	private String companyNo;
+	private String name;
 	private String id;
 	private String password;
 	private String email;
@@ -15,20 +16,21 @@ public class RecruitMember extends Member{
 	private Date regDate;
 	
 
-	public RecruitMember(int uid, String companyNo, String id, String password, String phone, String email, Boolean supervisor, Date regDate) {
-		this(1, uid, companyNo, id, password, email, supervisor, regDate);
-	}
-
-	public RecruitMember(int memberType, int uid, String companyNo, String id, String password, String email,
-			boolean supervisor, Date regDate) {
-		super(1);
+	public RecruitMember(int memberType, int uid, String companyNo, String name, String id, String password,
+			String email, boolean supervisor, Date regDate) {
+		super(memberType);
 		this.uid = uid;
 		this.companyNo = companyNo;
+		this.name = name;
 		this.id = id;
 		this.password = password;
 		this.email = email;
 		this.supervisor = supervisor;
 		this.regDate = regDate;
+	}
+	
+	public RecruitMember(int uid, String companyNo, String name, String id, String password, String phone, String email, Boolean supervisor, Date regDate) {
+		this(1, uid, companyNo, name, id, password, email, supervisor, regDate);
 	}
 
 	public int getUid() {
@@ -45,6 +47,14 @@ public class RecruitMember extends Member{
 
 	public void setCompanyNo(String companyNo) {
 		this.companyNo = companyNo;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getid() {
@@ -68,9 +78,18 @@ public class RecruitMember extends Member{
 	}
 
 	public void setSupervisor(boolean supervisor) {
-		if(supervisor)
 		this.supervisor = supervisor;
 	}
+
+//	private boolean isNotSupervisor(boolean supervisor) {
+//		if(this.supervisor == true) {
+//			supervisor : 0 = 
+//		} else {
+//			return false;
+//		}
+//		return supervisor;
+//
+//	}
 
 	public Date getRegDate() {
 		return regDate;
@@ -90,8 +109,9 @@ public class RecruitMember extends Member{
 
 	@Override
 	public String toString() {
-		return "RecruitMember [uid=" + uid + ", companyNo=" + companyNo + ", memberId=" + id + ", password="
-				+ password + ", email=" + email + ", supervisor=" + supervisor + ", regDate=" + regDate + "]";
+		return "RecruitMember [uid=" + uid + ", companyNo=" + companyNo + ", name=" + name + ", id=" + id
+				+ ", password=" + password + ", email=" + email + ", supervisor=" + supervisor + ", regDate=" + regDate
+				+ "]";
 	}
 
 

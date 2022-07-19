@@ -261,3 +261,9 @@ alter table resume add constraint ck_school_status check (school_status in ('A',
 
 -- 이윤정 END --
 
+--김승환 테스트용
+select * from resume;
+delete from resume where resume_no=41;
+select  * from applicant_member;
+insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김테스트', 'ktest', 1234, 01055559999, 'ktest@mail.com', default);
+commit;

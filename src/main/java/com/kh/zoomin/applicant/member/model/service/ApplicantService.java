@@ -16,5 +16,10 @@ public class ApplicantService {
 		return amember;
 	}
 
+	public static int insertApplicant(ApplicantMember amember) {
+		
+		return 0;
+	}
+
 
 }

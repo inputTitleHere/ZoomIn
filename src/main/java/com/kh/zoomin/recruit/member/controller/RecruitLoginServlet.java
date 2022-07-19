@@ -32,23 +32,33 @@ public class RecruitLoginServlet extends HttpServlet {
 			//1. 사용자입력값 처리 (아이디, 비번) 
 			String id = request.getParameter("id");
 			String password = request.getParameter("password");
+			//입력값 확인용
+			System.out.println("id = " + id);
+			System.out.println("password = " + password);
 			
 			//2. 업무로직
-			RecruitMember rmember = res.findrecruId(id);
-			HttpSession session = request.getSession(true); 
-			System.out.println(session.getId());
+			RecruitMember rmember = res.findrecruId(id, password);
+			System.out.println("rmember= " + rmember);
+
+			String message = null; 
+			HttpSession session = request.getSession(); 
 			
 			//로그인 여부 판단. 로그인 성공
-			if(rmember != null && password.equals(rmember.getPassword())) {
+			if(rmember != null) {
+				session.setAttribute("id", id);
+				session.setAttribute("msg", message);
 				session.setAttribute("loginMember", rmember);
+				session.setAttribute("msg", "로그인 성공입니다.");
+				
 			}
 			else {
 				//로그인 실패
-				session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+				message = "아이디 또는 비밀번호가 일치하지 않습니다.";
+				request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
 			}
 			
 			//3. 리다이렉트
-			response.sendRedirect("index.jsp"); 
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +66,7 @@ public class RecruitLoginServlet extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/common/recruitLogin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
     }
 	
 

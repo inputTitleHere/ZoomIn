@@ -1,4 +1,4 @@
-package com.kh.zoomin.applicant.resume.model.dao;
+package com.kh.zoomin.applicant.information.model.dao;
 
 import static com.kh.zoomin.common.JdbcTemplate.close;
 
@@ -20,12 +20,12 @@ import com.kh.zoomin.applicant.resume.model.dto.Status;
 import com.kh.zoomin.applicant.resume.model.exception.ResumeException;
 
 
-public class ResumeDao {
+public class ApplicantInfoDao {
 
 	private Properties prop = new Properties();
 	
-	public ResumeDao() {
-		String filename = ResumeDao.class.getResource("/sql/zoomin/applicant/applicant-query.properties").getPath();
+	public ApplicantInfoDao() {
+		String filename = ApplicantInfoDao.class.getResource("/sql/zoomin/applicant/applicant-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (IOException e) {

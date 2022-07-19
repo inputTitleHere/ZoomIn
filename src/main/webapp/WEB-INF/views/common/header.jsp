@@ -1,3 +1,5 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
+<%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
 <%@page import="javax.websocket.Session"%>
@@ -34,6 +36,18 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
+
+//isempty 함수  null 체크용 -김승환-
+function isEmpty(value){
+	console.log(value);
+	if(value == "" || value == null || value == undefined || value == "undefined"){
+		console.log("true");
+		return true;
+	}else{
+		console.log("false");
+		return false;
+	}
+}
 
 </script>	
 
