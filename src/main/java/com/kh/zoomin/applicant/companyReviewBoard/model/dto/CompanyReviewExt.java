@@ -8,11 +8,8 @@ public class CompanyReviewExt extends CompanyReview {
 		super();
 	}
 
-	public CompanyReviewExt(int no, String content, int stars, int workLifeBalance, int levelUp, int workIntensity,
-			int potential, int salarySatisfaction, Date regDate) {
-		super(no, salarySatisfaction, content, no, content, stars, workLifeBalance, levelUp, workIntensity, 
-				potential, salarySatisfaction, regDate);
+	public CompanyReviewExt(int uid, String companyNo, int categoryNumber, String content, int stars,
+			int workLifeBalance, int levelUp, int workIntensity, int potential, int salarySatisfaction, Date regDate) {
+		super();
 	}
-
-	
 }

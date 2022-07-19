@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
@@ -35,7 +36,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("utf-8");
-
+			CompanyReview companyReview = new CompanyReview();
 			// 사용자 입력값 처리
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));
@@ -50,15 +51,25 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			int potential = Integer.parseInt(request.getParameter("potential"));
 			int salarySatisfaction = Integer.parseInt(request.getParameter("salarySatisfaction"));
 			
-			
-			CompanyReview companyReview = new CompanyReview(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
+			companyReview.setUid(uid);
+			companyReview.setCompanyNo(companyNo);
+			companyReview.setCategoryNumber(categoryNumber);
+			companyReview.setContent(content);
+			companyReview.setStars(stars);
+			companyReview.setWorkLifeBalance(workLifeBalance);
+			companyReview.setLevelUp(levelUp);
+			companyReview.setWorkIntensity(workIntensity);
+			companyReview.setPotential(potential);
+			companyReview.setSalarySatisfaction(salarySatisfaction);
+//			companyReview = new CompanyReview(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			
 			// 업무로직
 			int result = companyReviewService.insertCompanyReview(companyReview);
 			
 			// redirect
+			HttpSession session = request.getSession();
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
+			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -3,10 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp"%> 
 <%
-	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
-	CompanyReviewExt companyReviewExt = (CompanyReviewExt) request.getAttribute("companyReviewExt"); 
+	
 %>
 <section id="company-review-view-container">
 	<h1>ReviewView.jsp회사 리뷰 페이지</h1>

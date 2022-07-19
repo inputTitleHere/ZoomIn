@@ -53,7 +53,7 @@ public class CompanyReviewUpdateServlet extends HttpServlet {
 			int workIntensity = Integer.parseInt(request.getParameter("workIntensity"));
 			int potential = Integer.parseInt(request.getParameter("potential"));
 			int salarySatisfaction = Integer.parseInt(request.getParameter("salarySatisfaction"));
-			CompanyReviewExt companyReview = new CompanyReviewExt(no, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
+			CompanyReviewExt companyReview = new CompanyReviewExt(salarySatisfaction, content, no, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			
 			System.out.println("companyReview = " + companyReview);
 			

@@ -15,7 +15,7 @@ import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewSer
 /**
  * Servlet implementation class CompanyReviewViewServlet
  */
-@WebServlet("/CompanyReviewViewServlet")
+@WebServlet("/review/company/companyReviewBoard")
 public class CompanyReviewViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();
@@ -27,33 +27,7 @@ public class CompanyReviewViewServlet extends HttpServlet {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
 			
-			Cookie[] cookies = request.getCookies();
-			String reviewCookieVal = "";
-			boolean hasRead = false;
-			
-			if(cookies != null) {
-				for(Cookie c : cookies) {
-					String name = c.getName();
-					String value = c.getValue();
-					if("reviewCookie".equals(name)) {
-						reviewCookieVal = value;
-						if(value.contains("[" + no + "]")) {
-							hasRead = true;
-						}
-						break;
-					}
-				}
-			}
-			
-			if(!hasRead) {
-				Cookie cookie = new Cookie("reviewCookie", reviewCookieVal + "[" + no + "]");
-				cookie.setPath(request.getContextPath() + "/CompanyReviewViewServlet");
-				cookie.setMaxAge(365 * 24 * 60 * 60);
-				response.addCookie(cookie);
-				System.out.println("[boardCookie 새로 발급되었음 : " + cookie.getValue() + "]");
-			}
-			
-			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no, hasRead);
+			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
 			request.setAttribute("companyReview", companyReview);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewView.jsp")
 				.forward(request, response);
@@ -64,4 +38,11 @@ public class CompanyReviewViewServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 }

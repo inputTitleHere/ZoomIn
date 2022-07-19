@@ -39,21 +39,7 @@ public class CompanyReview {
 		this.regDate = regDate;
 	}
 
-	public CompanyReview(int uid, String companyNo, int categoryNumber, String content, int stars,
-			int workLifeBalance, int levelUp, int workIntensity, int potential, int salarySatisfaction, Date regDate) {
-		super();
-		this.uid = uid;
-		this.companyNo = companyNo;
-		this.categoryNumber = categoryNumber;
-		this.content = content;
-		this.stars = stars;
-		this.workLifeBalance = workLifeBalance;
-		this.levelUp = levelUp;
-		this.workIntensity = workIntensity;
-		this.potential = potential;
-		this.salarySatisfaction = salarySatisfaction;
-		this.regDate = regDate;
-	}
+	
 	
 	public int getNo() {
 		return no;

@@ -31,10 +31,6 @@ public class CompanyReviewService {
 	}
 
 	public CompanyReview findByCompanyReviewNo(int no) {
-		return findByCompanyReviewNo(no, true);
-	}
-	
-	public CompanyReview findByCompanyReviewNo(int no, boolean hasRead) {
 		Connection conn = getConnection();
 		CompanyReview companyReview = null;
 		try {
