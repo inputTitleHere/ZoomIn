@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 	<div id="account">
-		<a href ="" id="writeResume">이력서 작성</a>
+		<a href ="applicantLogin.jsp" id="writeResume">이력서 작성</a>
 		<a href ="" id="info">회원정보</a>
 		<a href ="" id="logOut">로그아웃</a>
 	</div>

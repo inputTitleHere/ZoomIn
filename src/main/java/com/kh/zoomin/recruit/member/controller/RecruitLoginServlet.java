@@ -1,7 +1,6 @@
-package com.kh.zoomin.applicant.member.controller;
+package com.kh.zoomin.recruit.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.zoomin.applicant.member.model.dao.ApplicantDao;
-import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
-import com.kh.zoomin.applicant.member.model.service.ApplicantService;
+import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.recruit.member.model.service.RecruitService;
 
 /**
- * Servlet implementation class ApplicantLoginServlet
+ * Servlet implementation class RecruitLoginServlet
  */
-@WebServlet("/applicant/login")
-public class ApplicantLoginServlet extends HttpServlet {
+@WebServlet("/recruit/login")
+public class RecruitLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ApplicantService as= new ApplicantService();
+	private RecruitService res = new RecruitService();
+       
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -30,43 +29,44 @@ public class ApplicantLoginServlet extends HttpServlet {
 			//인코딩처리
 			request.setCharacterEncoding("utf-8");
 			
-			//1. 사용자입력값 처리 (아이디, 비번) 폼입력값
+			//1. 사용자입력값 처리 (아이디, 비번) 
 			String id = request.getParameter("id");
 			String password = request.getParameter("password");
+			//입력값 확인용
 			System.out.println("id = " + id);
 			System.out.println("password = " + password);
-			System.out.println(id + "," + password);
 			
 			//2. 업무로직
-			ApplicantMember amember = as.findAppliId(id);
-			System.out.println("amamber= " + amember);
+			RecruitMember rmember = res.findrecruId(id, password);
+			System.out.println("rmember= " + rmember);
+
+			String message = null; 
+			HttpSession session = request.getSession(); 
 			
-			//로그인 여부
-			String message = null;
-			
-			if(amember != null) {
-				message = amember + "님, 환영합니다.";
-				
-				//세션 객체 인스턴스
-				HttpSession session = request.getSession();
+			//로그인 여부 판단. 로그인 성공
+			if(rmember != null) {
 				session.setAttribute("id", id);
 				session.setAttribute("msg", message);
-				session.setAttribute("loginMember", amember); //객체저장 
-			} else {
-				message = "아이디 또는 비밀번호가 일치하지 않습니다.";
-				request.getRequestDispatcher("/WEB-INF/views/common/applicantLogin.jsp").forward(request, response);
+				session.setAttribute("loginMember", rmember);
+				session.setAttribute("msg", "로그인 성공입니다.");
+				
 			}
-
+			else {
+				//로그인 실패
+				message = "아이디 또는 비밀번호가 일치하지 않습니다.";
+				request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
+			}
+			
 			//3. 리다이렉트
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/common/applicantLogin.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
     }
 	
 
