@@ -278,7 +278,7 @@ insert into visit values (sysdate);
 
 --오늘 방문자 수
 select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
-
+select sysdate from dual;
 --총 방문자수 
 select * from visit;
 
@@ -305,7 +305,7 @@ from (
 );
 --select sum(Cnt) from (select count(*) as Cnt from salary_review union all select count(*) as Cnt from company_review)
 
---날짜별 조회하기
+--게시글 날짜별 조회하기
 --select count(*) from(select "uid", reg_date from salary_review  union all  select "uid", reg_date from company_review) where reg_date between to_date(? , 'yyyy-mm-dd') and to_date(? , 'yyyy-mm-dd') + 0.99999
 select
     *
@@ -316,6 +316,46 @@ from(
 )
 where reg_date between to_date('2022-07-18' , 'yyyy-mm-dd') and to_date('2022-07-18' , 'yyyy-mm-dd') + 0.99999;
 
+--최근 일주일 데이터 가져오기(방문자)
+-- select trunc(v_date) as "date", count(*) cnt from  visit where  v_date >= to_char((sysdate-7), 'yyyymmdd') group by  trunc(v_date)
+select 
+   (v_date) as "date",
+    count(*) cnt
+from 
+    visit 
+where
+     v_date >= to_char((sysdate-7), 'yyyymmdd') 
+group by 
+    (v_date)
+order by
+    1;
+
+---최근 일주일 데이터 가져오기(게시판)
+--select trunc(reg_date) as "date", count(*) cnt from(select "uid", reg_date from salary_review union all  select "uid", reg_date from company_review) where reg_date >= to_char((sysdate-7), 'yyyymmdd') group by trunc(reg_date)
+select
+    trunc(reg_date) as "date",
+    count(*) cnt
+from(
+    select "uid", reg_date from salary_review
+    union all
+    select "uid", reg_date from company_review
+)
+where 
+    reg_date >= to_char((sysdate-7), 'yyyymmdd')
+group by 
+    trunc(reg_date);
+--게시판관리
+select * from salary_review;
+select * from category;
+select * from position_category;
+--연봉게시판 전체조회 
+--select no, id, company_no, domain, salary, work_year, position_name, s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number order by reg_date desc;
+select
+    no, id, company_no, domain, salary, work_year, position_name, s.reg_date
+from 
+    salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number
+order by
+    reg_date desc;
 -- 이윤정 END --
 
 --김승환 테스트용

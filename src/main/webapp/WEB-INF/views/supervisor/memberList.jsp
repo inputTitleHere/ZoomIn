@@ -137,16 +137,16 @@ div.search-recruit{
 				--%>
 				</tbody>
 			</table>
-		<style>
-        #tbl-applicantMember, #tbl-recruitMember{
-            border: 1px solid black;
-            border-collapse: collapse;
-            margin: 5px 5px;
-        }
-        tr, td, th{
-            border: 1px solid black;
-            padding: 10px;
-        }
+<style>
+     #tbl-applicantMember, #tbl-recruitMember{
+		 border: 1px solid black;
+		 border-collapse: collapse;
+		 margin: 5px 5px;
+	 }
+		tr, td, th{
+		    border: 1px solid black;
+		    padding: 10px;
+		}
     </style>
 		
 		

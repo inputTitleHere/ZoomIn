@@ -15,6 +15,8 @@ import java.util.Properties;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.supervisor.model.dto.SalaryReview;
+import com.kh.zoomin.supervisor.model.dto.WeekData;
 import com.kh.zoomin.supervisor.model.exception.SupervisorException;
 
 
@@ -332,7 +334,91 @@ public class SupervisorDao {
 		
 		return boardCnt;
 	}
+
+	//일주일간 방문자 수 조회
+	public List<WeekData> getVisitData(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<WeekData> visitList = new ArrayList<>();
+		String sql = prop.getProperty("getVisitData");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Date day = rset.getDate("date");
+				int cnt = rset.getInt("cnt");
+				visitList.add(new WeekData(day, cnt));
+			}
+		} catch (Exception e) {
+			throw new SupervisorException("일주일간 방문자 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return visitList;
+	}
 	
+	//일주일간 게시글 수 조회
+	public List<WeekData> getBoardData(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<WeekData> boardList = new ArrayList<>();
+		String sql = prop.getProperty("getBoardData");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Date day = rset.getDate("date");
+				int cnt = rset.getInt("cnt");
+				boardList.add(new WeekData(day, cnt));
+			}
+		} catch (Exception e) {
+			throw new SupervisorException("일주일간 게시글 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return boardList;
+	}
+
+	//연봉리뷰 전체조회
+	public List<SalaryReview> getSalReviewAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SalaryReview> salList = new ArrayList<>();
+		String sql = prop.getProperty("getSalReviewAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				salList.add(handleSalReviewRset(rset));	
+			}
+		} catch (Exception e) {
+			throw new SupervisorException("연봉리뷰 전체 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		
+		return salList;
+	}
+
+	private SalaryReview handleSalReviewRset(ResultSet rset) throws SQLException {
+		int no = rset.getInt("no");
+		String writer = rset.getString("id");
+		String companyNo = rset.getString("company_no");
+		String category = rset.getString("domain");	
+		int salary = rset.getInt("salary");
+		int workYear = rset.getInt("work_year");
+		String jobPosition = rset.getString("position_name");
+		Date regDate = rset.getDate("reg_date");
+		return new SalaryReview(no, writer, companyNo, category, salary, workYear, jobPosition, regDate);
+	}
+
+
 
 	
 

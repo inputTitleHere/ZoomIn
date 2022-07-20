@@ -1,15 +1,20 @@
 package com.kh.zoomin.supervisor.model.service;
 
-import static com.kh.zoomin.common.JdbcTemplate.*;
+import static com.kh.zoomin.common.JdbcTemplate.close;
+import static com.kh.zoomin.common.JdbcTemplate.commit;
 import static com.kh.zoomin.common.JdbcTemplate.getConnection;
+import static com.kh.zoomin.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.RecruitMember;
 import com.kh.zoomin.supervisor.model.dao.SupervisorDao;
+import com.kh.zoomin.supervisor.model.dto.SalaryReview;
+import com.kh.zoomin.supervisor.model.dto.WeekData;
 
 public class SupervisorService {
 	
@@ -120,6 +125,33 @@ public class SupervisorService {
 		int boardCnt = supervisorDao.getBoardCount(conn, dateStart, dateEnd);
 		close(conn);
 		return boardCnt;
+	}
+
+	//일주일간 방문자 수 조회 
+	public List<WeekData> getVisitData() {
+		List<WeekData> visitList = new ArrayList<>();
+		Connection conn = getConnection();
+		visitList = supervisorDao.getVisitData(conn);
+		close(conn);
+		return visitList;
+	}
+
+	//일주일간 게시글 수 조회
+	public List<WeekData> getBoardData() {
+		List<WeekData> boardList = new ArrayList<>();
+		Connection conn = getConnection();
+		boardList = supervisorDao.getBoardData(conn);
+		close(conn);
+		return boardList;
+	}
+
+	//연봉리뷰 전체조회
+	public List<SalaryReview> getSalReviewAll() {
+		List<SalaryReview> salList = new ArrayList<>();
+		Connection conn = getConnection();
+		salList = supervisorDao.getSalReviewAll(conn);
+		close(conn);
+		return salList;
 	}
 
 	
