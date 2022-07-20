@@ -21,7 +21,7 @@
 	</div>
 	<table class="company-review-list">
 		<tr>
-			<th>uid</th>
+			<th>a</th>
 			<!-- <th>회사명</th> -->
 			<th>분야</th>
 			<th>별점</th>
