@@ -16,7 +16,7 @@ import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewSer
 /**
  * Servlet implementation class CompanyReviewUpdateServlet
  */
-@WebServlet("/CompanyReviewUpdateServlet")
+@WebServlet("/review/company/companyReviewUpdate")
 public class CompanyReviewUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();
@@ -27,6 +27,7 @@ public class CompanyReviewUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
+			int uid = 5;
 			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
 			
 			request.setAttribute("companyReview", companyReview);
@@ -60,7 +61,7 @@ public class CompanyReviewUpdateServlet extends HttpServlet {
 			int result = companyReviewService.updateCompanyReview(companyReview);
 			
 			request.getSession().setAttribute("msg", "리뷰를 성공적으로 수정했습니다.");
-			response.sendRedirect(request.getContextPath() + "/applicant/companyReview?no=" + no);
+			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewUpdate?no=" + no);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

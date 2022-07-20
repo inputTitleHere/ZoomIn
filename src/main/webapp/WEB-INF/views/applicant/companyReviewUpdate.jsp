@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <section id="company-review-view-container">
 	<h1>회사 리뷰 수정</h1>
+	
 </section>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -21,6 +21,7 @@ import com.kh.zoomin.member.dto.Member;
  * Servlet implementation class CompanyReviewList
  */
 @WebServlet("/review/company/companyReviewList")
+
 public class CompanyReviewList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();

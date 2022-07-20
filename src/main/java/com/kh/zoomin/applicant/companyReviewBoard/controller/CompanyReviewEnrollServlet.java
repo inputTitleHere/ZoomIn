@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
+import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
 
 /**
@@ -24,6 +25,11 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		int no = Integer.parseInt(request.getParameter("no"));
+//		int uid = Integer.parseInt(request.getParameter("uid"));
+		// 로그인 된 사람이 없어서 현재 위 두개를 안받고 47번 줄에서 저렇게 설정을 해줘야하나?
+		
+		HttpSession session = request.getSession();
 		request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewEnroll.jsp")
 			.forward(request, response);
 		
@@ -40,6 +46,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			// 사용자 입력값 처리
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));
+//			int uid = 5;
 			String companyNo = request.getParameter("companyNo");
 			int categoryNumber = Integer.parseInt(request.getParameter("categoryNumber"));
 			
@@ -61,7 +68,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			companyReview.setWorkIntensity(workIntensity);
 			companyReview.setPotential(potential);
 			companyReview.setSalarySatisfaction(salarySatisfaction);
-//			companyReview = new CompanyReview(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
+			companyReview = new CompanyReviewExt(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			
 			// 업무로직
 			int result = companyReviewService.insertCompanyReview(companyReview);
@@ -69,6 +76,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			// redirect
 			HttpSession session = request.getSession();
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
+			System.out.println(request.getContextPath());
 			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
 			
 		} catch (Exception e) {

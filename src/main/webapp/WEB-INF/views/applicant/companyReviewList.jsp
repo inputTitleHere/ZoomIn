@@ -10,6 +10,9 @@
 <%
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 	List<CompanyReview> board = (List<CompanyReview>) request.getAttribute("board");
+	CompanyReviewExt companyReviewExt = (CompanyReviewExt) request.getAttribute("ext");
+	CompanyReviewExt cre = new CompanyReviewExt();
+	
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
 <section id="companyReview-container">
@@ -17,17 +20,21 @@
 	<div id="companyReview-btn-add">
 		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewEnroll'">리뷰 등록하기</button>
 	</div>
+	<div id="companyReview-btn-update">
+		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewUpdate'">리뷰 수정하기</button>
+	</div>
 	<br />
 	<table class="company-review-list">
 		<tr>
 			<th>번호</th>
-			<th>카테고리넘버</th>
+			<th>회사명</th>
+			<th>분야</th>
 			<th>별점</th>
-			<th>워라벨</th>
+			<!-- <th>워라벨</th>
 			<th>승진 가능성</th>
 			<th>업무 강도</th>
 			<th>회사 잠재력</th>
-			<th>연봉 만족도</th>
+			<th>연봉 만족도</th> -->
 			<th>내용</th>
 			<th>등록 날짜</th>
 		</tr>	
@@ -36,14 +43,30 @@
 		for(CompanyReview companyReview : list){
 %>
 		<tr>
-			<td><%= companyReview.getNo() %></td>
-			<td><%= companyReview.getCategoryNumber() %></td>
+			<td><a href="<%= request.getContextPath() %>/review/company/companyReviewBoard"><%= companyReview.getNo() %></a></td>
+			<td>
+				<% if(companyReview.getCompanyNo() == cre.getCompanyNo()) %>
+					
+					<%= cre.getCompanyName() %>
+			</td>
+			<td>
+				<% if(companyReview.getCategoryNumber()==1) %>IT/웹/통신
+				<% if(companyReview.getCategoryNumber()==2) %>미디어/디자인
+				<% if(companyReview.getCategoryNumber()==3) %>의료/제약/복지	
+				<% if(companyReview.getCategoryNumber()==4) %>건설업
+				<% if(companyReview.getCategoryNumber()==5) %>서비스업
+				<% if(companyReview.getCategoryNumber()==6) %>은행/금융업
+				<% if(companyReview.getCategoryNumber()==7) %>유통/무역/운송
+				<% if(companyReview.getCategoryNumber()==8) %>제조/화학
+				<% if(companyReview.getCategoryNumber()==9) %>기관/협회
+				<% if(companyReview.getCategoryNumber()==110) %>교육업
+			</td>
 			<td><%= companyReview.getStars() %></td>
-			<td><%= companyReview.getWorkLifeBalance() %></td>
+			<%-- <td><%= companyReview.getWorkLifeBalance() %></td>
 			<td><%= companyReview.getLevelUp() %></td>
 			<td><%= companyReview.getWorkIntensity() %></td>			
 			<td><%= companyReview.getPotential() %></td>
-			<td><%= companyReview.getSalarySatisfaction() %></td>
+			<td><%= companyReview.getSalarySatisfaction() %></td> --%>
 			<td><%= companyReview.getContent() %></td>
 			<td><%= companyReview.getRegDate() %></td>
 		</tr>

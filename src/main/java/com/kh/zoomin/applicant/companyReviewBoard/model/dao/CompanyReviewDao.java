@@ -74,6 +74,7 @@ public class CompanyReviewDao {
 			
 			while(rset.next()) {
 				companyReview = handleCompanyReviewResultSet(rset);
+//				companyReview = handleCompanyReviewExtendsResultSet(rset);
 			}
 			
 		} catch (Exception e) {
@@ -101,6 +102,25 @@ public class CompanyReviewDao {
 		return new CompanyReview(no, uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, regDate);
 	}
 
+	private CompanyReviewExt handleCompanyReviewExtendsResultSet(ResultSet rset) throws SQLException {
+		int no = rset.getInt("no");
+		int uid = rset.getInt("uid");
+		String companyNo = rset.getString("company_no");
+		int categoryNumber = rset.getInt("category_number");
+		String content = rset.getString("content");
+		int stars = rset.getInt("stars");
+		int workLifeBalance = rset.getInt("work_life_balance");
+		int levelUp = rset.getInt("level_up");
+		int workIntensity = rset.getInt("work_intensity");
+		int potential = rset.getInt("potential");
+		int salarySatisfaction = rset.getInt("salary_satisfaction");
+		String companyName = rset.getString("company_name");
+		Date regDate = rset.getDate("reg_date");
+		CompanyReviewExt companyReviewExt = new CompanyReviewExt(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, regDate);
+		companyReviewExt.setCompanyName(companyName);
+		return companyReviewExt;
+	}
+	
 	public int updateCompanyReview(Connection conn, CompanyReviewExt companyReview) {
 		PreparedStatement pstmt = null;
 		int result = 0;
