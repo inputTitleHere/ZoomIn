@@ -10,19 +10,34 @@
 	System.out.println("msg@jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg"); 
 	Member loginMember = (Member) session.getAttribute("loginMember");
+	ApplicantMember am=null;
+	RecruitMember rm=null;
+	
+	if(loginMember instanceof ApplicantMember){
+		am=(ApplicantMember)loginMember;
+	}else if(loginMember instanceof RecruitMember){
+		rm=(RecruitMember)loginMember;
+	}
+	
 	
 	String saveId = null;
 	Cookie[] cookies = request.getCookies();
 
-	if(cookies != null)
+	if(cookies != null){
 		for(Cookie c : cookies){
 			String name = c.getName();
 			String value = c.getValue();
 			System.out.println("[cookie] " + name + " = " + value);
 			
 			}
-		
+	}
  %>
+<%
+
+
+
+%>
+
 
 <!DOCTYPE html>
 <html>
