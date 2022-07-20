@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
+import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.recruit.member.RecruitMember;
 import com.kh.zoomin.supervisor.model.dao.SupervisorDao;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
@@ -166,6 +167,15 @@ public class SupervisorService {
 		return comList;
 	}
 
+	//채용게시판 전체조회
+	public List<RecruitBoard> getRecBoardAll(Map<String, Object> param) {
+		List<RecruitBoard> recList = new ArrayList<>();
+		Connection conn = getConnection();
+		recList = supervisorDao.getRecBoardAll(conn, param);
+		close(conn);
+		return recList;
+	}
+	
 	//연봉리뷰 전체 게시글 수 조회
 	public int getTotalSalReviewCnt() {
 		Connection conn = getConnection();
@@ -198,6 +208,48 @@ public class SupervisorService {
 		}
 		return result;
 	}
+
+	public int getTotalComRecruitCnt() {
+		Connection conn = getConnection();
+		int totalComRecruitCnt = supervisorDao.getTotalComRecruitCnt(conn);
+		close(conn);
+		return totalComRecruitCnt;
+	}
+
+	//채용게시판삭제
+	public int deleteComBoard(String[] comBoardNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = supervisorDao.deleteComBoard(conn, comBoardNo);
+			if(comBoardNo.length == result)
+				commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {			
+			close(conn);
+		}
+		return result;
+	}
+
+	//회사리뷰게시판 삭제
+	public int deleteComReview(String[] comBoardNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = supervisorDao.deleteComReview(conn, comBoardNo);
+			if(comBoardNo.length == result)
+				commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {			
+			close(conn);
+		}
+		return result;
+	}
+
 
 
 	

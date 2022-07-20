@@ -363,15 +363,16 @@ select * from salary_review;
 select * from category;
 select * from position_category;
 --연봉게시판 전체조회 
---select no, id, company_no, domain, salary, work_year, position_name, s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number order by reg_date desc;
-select * from(select row_number () over (order by s.reg_date desc) rnum,  no, id, company_no, domain, salary, work_year, position_name, s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number)where  rnum between 11 and 20;
-        
-
+select * from(select row_number () over (order by s.reg_date desc) rnum,no,domain,company_name,id,salary,work_year,position_name,s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join company_table m on s.company_no = m.company_no join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number)where  rnum between 11 and 20;
 --회사리뷰게시판 전체조회
-select * from company_review where no = '22';
-select * from(select row_number () over (order by c.reg_date desc) rnum, no, id, content, c.reg_date from company_review c join applicant_member a on c."uid" = a."uid")where  rnum between 11 and 20; 
+select * from company_review;
+delete from company_review where no = '22';
+select * from(select row_number () over (order by c.reg_date desc) rnum, no, company_name, content, id, c.reg_date from company_review c join applicant_member a on c."uid" = a."uid" join company_table t on c.company_no = t.company_no)where  rnum between 11 and 20;
+--채용게시판 전체조회
+select * from (select row_number () over (order by r.reg_date desc) rnum, r.no, c.domain, company_name, m.name, title, r.reg_date, closure_date from recruit_board r join category c on r.category_number = c.category_number join company_table t on t.company_no = r.company_no join recruit_member m on r."uid" = m."uid")where rnum between 6 and 10 ;
+select * from recruit_board;
 
-insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, default); 
+commit;
 -- 이윤정 END --
 
 --김승환 테스트용

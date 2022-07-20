@@ -1,7 +1,6 @@
 package com.kh.zoomin.supervisor.model.dao;
 
-import static com.kh.mvc.common.JdbcTemplate.close;
-import static com.kh.zoomin.common.JdbcTemplate.*;
+import static com.kh.zoomin.common.JdbcTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.kh.mvc.board.model.exception.BoardException;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.RecruitMember;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
+import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 import com.kh.zoomin.supervisor.model.exception.SupervisorException;
@@ -38,7 +37,7 @@ public class SupervisorDao {
 		}
 	}
 	
-	private ApplicantMember handleApplicantMemberRset(ResultSet rset) {
+	private ApplicantMember handleApplicantMemberRset(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
 		String name = rset.getString("name");
 		String id = rset.getString("id");
@@ -50,15 +49,16 @@ public class SupervisorDao {
 	}
 	
 	
-	private RecruitMember handleRecruitMemberRset(ResultSet rset) {
+	private RecruitMember handleRecruitMemberRset(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
 		String companyNo = rset.getString("companyNo");
 		String name = rset.getString("name");
 		String id = rset.getString("id");
 		String password = rset.getString("password");
 		String email = rset.getString("email");
+		Boolean supervisor = rset.getBoolean("supervisor");
 		Date regDate = rset.getDate("reg_date");
-		return new RecruitMember(uid, companyNo, name, id, password, email, regDate);
+		return new RecruitMember(uid, companyNo, name, id, password, email, supervisor, regDate);
 	}
 	
 	
@@ -414,14 +414,14 @@ public class SupervisorDao {
 
 	private SalaryReview handleSalReviewRset(ResultSet rset) throws SQLException {
 		int no = rset.getInt("no");
+		String category = rset.getString("domain");	//회사분류
+		String companyName = rset.getString("company_name");
 		String writer = rset.getString("id");
-		String companyNo = rset.getString("company_no");
-		String category = rset.getString("domain");	
 		int salary = rset.getInt("salary");
 		int workYear = rset.getInt("work_year");
 		String jobPosition = rset.getString("position_name");
 		Date regDate = rset.getDate("reg_date");
-		return new SalaryReview(no, writer, companyNo, category, salary, workYear, jobPosition, regDate);
+		return new SalaryReview(no, category, companyName, writer, salary, workYear, jobPosition, regDate);
 	}
 
 	public List<CompanyReview> getComReviewAll(Connection conn, Map<String, Object> param) {
@@ -450,10 +450,47 @@ public class SupervisorDao {
 
 	private CompanyReview handleComReviewRset(ResultSet rset) throws SQLException {
 		int no = rset.getInt("no");
-		String id = rset.getString("id");
+		String companyName = rset.getString("company_name");
 		String content = rset.getString("content");
+		String id = rset.getString("id");
 		Date regDate = rset.getDate("reg_date");
-		return new CompanyReview(no, id, content, regDate);
+		return new CompanyReview(no,companyName, content, id, regDate);
+	}
+
+	//채용게시글 전체조회
+	public List<RecruitBoard> getRecBoardAll(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<RecruitBoard> recList = new ArrayList<>();
+		String sql = prop.getProperty("getRecBoardAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				recList.add(handleRecBoardRset(rset));	
+			}
+		} catch (Exception e) {
+			throw new SupervisorException("회사리뷰 전체 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		
+		return recList;
+	}
+	
+	private RecruitBoard handleRecBoardRset(ResultSet rset) throws SQLException {
+		int no = rset.getInt("no");
+		String category = rset.getString("domain");
+		String companyName = rset.getString("company_name");
+		String recruiter = rset.getString("name");
+		String title = rset.getString("title");
+		Date regDate = rset.getDate("reg_date");
+		Date closureDate = rset.getDate("closure_date");
+		return new RecruitBoard(no, category, companyName, recruiter, title, regDate, closureDate);
 	}
 
 	public int getTotalSalReviewCnt(Connection conn) {
@@ -521,6 +558,79 @@ public class SupervisorDao {
 		}		
 		return result;
 	}
+
+	public int getTotalComRecruitCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalComRecruitCnt = 0;
+		String sql = prop.getProperty("getTotalComRecruitCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalComRecruitCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("채용게시판 전체글 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalComRecruitCnt;
+	}
+
+	public int deleteComBoard(Connection conn, String[] comBoardNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteComBoard");
+		int result = 0;	//성공한 행의 개수
+		int[] cnt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i < comBoardNo.length; i++) {
+				pstmt.setString(1, comBoardNo[i]);
+				pstmt.addBatch();	//쿼리 pstmt에 쌓기
+			}
+			cnt = pstmt.executeBatch();		//성공하면 1을 반환
+			for(int i = 0; i < cnt.length; i++) {
+					result++;						
+			}
+			
+		} catch (Exception e) {
+			throw new SupervisorException("채용 게시글 삭제 오류!", e);		
+		} finally {
+			close(pstmt);
+		}		
+		return result;
+	}
+
+	//회사리뷰 게시글 삭제
+	public int deleteComReview(Connection conn, String[] comBoardNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteComReview");
+		int result = 0;	//성공한 행의 개수
+		int[] cnt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i < comBoardNo.length; i++) {
+				pstmt.setString(1, comBoardNo[i]);
+				pstmt.addBatch();	//쿼리 pstmt에 쌓기
+			}
+			cnt = pstmt.executeBatch();		//성공하면 1을 반환
+			for(int i = 0; i < cnt.length; i++) {
+					result++;						
+			}
+			
+		} catch (Exception e) {
+			throw new SupervisorException("채용 게시글 삭제 오류!", e);		
+		} finally {
+			close(pstmt);
+		}		
+		return result;
+	}
+
+	
 
 
 

@@ -7,12 +7,8 @@ import com.kh.zoomin.member.dto.Member;
 public class ApplicantMember extends Member{
 
 	private int uid;
-<<<<<<< HEAD
-	private String memberId;
-=======
 	private String name;
 	private String id;
->>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 	private String password;
 	private String phone;
 	private String email;
@@ -22,14 +18,10 @@ public class ApplicantMember extends Member{
 		this(2, uid, name, id, password, phone, email, regDate);
 	}
 
-<<<<<<< HEAD
-	public ApplicantMember(int uid, String memberId, String password, String phone, String email, Date regDate) {
-		super(2);
-=======
+
 	public ApplicantMember(int memberType, int uid, String name, String id, String password, String phone,
 			String email, Date regDate) {
 		super(memberType);
->>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 		this.uid = uid;
 		this.name = name;
 		this.id = id;
@@ -39,10 +31,7 @@ public class ApplicantMember extends Member{
 		this.regDate = regDate;
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 	public int getUid() {
 		return uid;
 	}

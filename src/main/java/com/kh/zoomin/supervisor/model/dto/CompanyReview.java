@@ -5,18 +5,20 @@ import java.sql.Date;
 public class CompanyReview {
 	int no;
 	String id;
+	String companyName;
 	String content;
 	Date regDate;
-	
+
 	public CompanyReview() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CompanyReview(int no, String id, String content, Date regDate) {
+	public CompanyReview(int no, String companyName, String content, String id, Date regDate) {
 		super();
 		this.no = no;
 		this.id = id;
+		this.companyName = companyName;
 		this.content = content;
 		this.regDate = regDate;
 	}
@@ -53,10 +55,15 @@ public class CompanyReview {
 		this.regDate = regDate;
 	}
 
-	@Override
-	public String toString() {
-		return "CompanyReview [no=" + no + ", id=" + id + ", content=" + content + ", regDate=" + regDate + "]";
+	public String getCompanyName() {
+		return companyName;
 	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	
+
 	
 }

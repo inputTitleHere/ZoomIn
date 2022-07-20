@@ -83,9 +83,9 @@ if (loginMember == null) {
 <%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
 <%
 
-}else if(loginMember.getMemberType() == 0){ 
-	//관리자용 jsp include가 들어가야함. 관리자담당분은 추후 추가해주세요
+}else if(rm != null && rm.isSupervisor()){ 
 %>
+	<%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp"%>
 <%
 }else if(loginMember.getMemberType() == 1){
 

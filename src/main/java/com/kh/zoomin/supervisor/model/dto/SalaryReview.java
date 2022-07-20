@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class SalaryReview {
 	int no;
+	String category;	//회사분류
+	String companyName;
 	String writer;
-	String companyNo;
-	String Category;	//도메인
 	int salary;
 	int workYear;
 	String jobPosition;
@@ -17,13 +17,13 @@ public class SalaryReview {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SalaryReview(int no, String writer, String companyNo, String category, int salary, int workYear,
+	public SalaryReview(int no, String category, String companyName, String writer, int salary, int workYear,
 			String jobPosition, Date regDate) {
 		super();
 		this.no = no;
+		this.category = category;
+		this.companyName = companyName;
 		this.writer = writer;
-		this.companyNo = companyNo;
-		Category = category;
 		this.salary = salary;
 		this.workYear = workYear;
 		this.jobPosition = jobPosition;
@@ -38,28 +38,28 @@ public class SalaryReview {
 		this.no = no;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	public String getWriter() {
 		return writer;
 	}
 
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
-
-	public String getCompanyNo() {
-		return companyNo;
-	}
-
-	public void setCompanyNo(String companyNo) {
-		this.companyNo = companyNo;
-	}
-
-	public String getCategory() {
-		return Category;
-	}
-
-	public void setCategory(String category) {
-		Category = category;
 	}
 
 	public int getSalary() {
@@ -94,12 +94,6 @@ public class SalaryReview {
 		this.regDate = regDate;
 	}
 
-	@Override
-	public String toString() {
-		return "SalaryReview [no=" + no + ", writer=" + writer + ", companyNo=" + companyNo + ", Category=" + Category
-				+ ", salary=" + salary + ", workYear=" + workYear + ", jobPosition=" + jobPosition + ", regDate="
-				+ regDate + "]";
-	}
 	
 	
 }
