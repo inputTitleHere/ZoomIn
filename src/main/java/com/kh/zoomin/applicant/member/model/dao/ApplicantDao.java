@@ -55,7 +55,7 @@ public class ApplicantDao {
 
 	private ApplicantMember handleApplicantResultSet(ResultSet rset) throws SQLException {
 		String memberName = rset.getString("member_name");
-		String memberId = rset.getString("member_id");
+		int memberId = rset.getInt("member_id");
 		String password = rset.getString("password");
 		String phone = rset.getString("phone");
 		String email = rset.getString("email");

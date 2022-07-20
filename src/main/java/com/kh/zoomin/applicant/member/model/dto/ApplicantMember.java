@@ -6,7 +6,7 @@ import com.kh.zoomin.member.dto.Member;
 
 public class ApplicantMember extends Member{
 
-	private String uid;
+	private int uid;
 	private String memberId;
 	private String password;
 	private String phone;
@@ -18,7 +18,7 @@ public class ApplicantMember extends Member{
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplicantMember(String uid, String memberId, String password, String phone, String email, Date regDate) {
+	public ApplicantMember(String memberId, int uid, String password, String phone, String email, Date regDate) {
 		super(2);
 		this.uid = uid;
 		this.memberId = memberId;
@@ -28,11 +28,11 @@ public class ApplicantMember extends Member{
 		this.regDate = regDate;
 	}
 
-	public String getUid() {
+	public int getUid() {
 		return uid;
 	}
 
-	public void setUid(String uid) {
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
 

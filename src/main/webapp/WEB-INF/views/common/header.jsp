@@ -14,7 +14,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 // -- 백승윤 START -- //
 // 구인자 테스트옹 loginMember객체
 ApplicantMember am = new ApplicantMember();
-am.setUid("11");
+am.setUid(11);
 
 // -- 백승윤 END -- //
 
