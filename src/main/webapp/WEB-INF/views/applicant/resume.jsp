@@ -7,7 +7,12 @@
 <!-- section 태그 / div id="title" / h1 -> 변경 금지(공통 css 사용) -->
 
 <%
+<<<<<<< HEAD
 	int uid  = am.getUid();
+=======
+	
+	int uid  = Integer.parseInt(am.getUid());
+>>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 	
 	String result = (String)request.getAttribute("result");
 	int categoryNumber = 0;

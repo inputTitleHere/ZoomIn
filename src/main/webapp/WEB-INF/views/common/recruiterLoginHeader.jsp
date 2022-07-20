@@ -5,11 +5,6 @@
    
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 
-<%
-RecruitMember recruitMember = (RecruitMember)session.getAttribute("loginMember"); // 여기까지 왔으면 일단 loginMember는 있을 것.
-//System.out.println("@recruiterLoginHeader.jsp : UID = "+recruitMember.getUid());
-%>
-
 <body>
 <header>
 	<div id="account">
