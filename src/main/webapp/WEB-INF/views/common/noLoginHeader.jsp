@@ -6,9 +6,10 @@
 <body>
 <header>
 	<div id="account">
-		<a href ="" id="logIn">로그인</a>
+		<a href ="<%= request.getContextPath() %>/recruit/login" id="logIn">구인자 로그인</a>
+		<a href ="<%= request.getContextPath() %>/applicant/login" id="logIn">구직자 로그인</a>
 		<a href ="" id="recruiterAsign">구인자 회원가입</a>
-		<a href ="" id="applicantAsign">구직자 회원가입</a>
+		<a href ="<%= request.getContextPath() %>/applicant/join" id="applicantAsign">구직자 회원가입</a>
 	</div>
 	<div id="logodiv">
 		<a href="<%=request.getContextPath()%>/index.jsp">

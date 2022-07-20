@@ -283,4 +283,5 @@ public class RecruitBoardDao {
 		return result;
 	}
 
+
 }

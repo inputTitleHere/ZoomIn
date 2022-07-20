@@ -1,7 +1,6 @@
-package com.kh.zoomin.applicant.member.controller;
+package com.kh.zoomin.recruit.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ApplicantLogutServlet
+ * Servlet implementation class RecruitLogoutServlet
  */
-@WebServlet("/applicant/logout")
-public class ApplicantLogoutServlet extends HttpServlet {
+@WebServlet("/recruit/logout")
+public class RecruitLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,13 +21,13 @@ public class ApplicantLogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		// 무효화처리. 세션객체가 없을 경우 무효화할것
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();
 
 		response.sendRedirect(request.getContextPath() + "/");
-		
 	}
-	
+
 }
