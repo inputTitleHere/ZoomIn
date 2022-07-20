@@ -3,11 +3,10 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
+<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
 <%
 RecruitBoard rb = (RecruitBoard) request.getAttribute("recruitBoard");
 Member lm = (Member)session.getAttribute("loginMember");
-RecruitMember rm=null;
 if(lm instanceof RecruitMember){
 	rm = (RecruitMember)session.getAttribute("loginMember");	
 }

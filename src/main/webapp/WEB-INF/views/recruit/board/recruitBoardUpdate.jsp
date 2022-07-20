@@ -10,7 +10,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 String closureTime = sdf.format(rb.getClosureDate());
 
 Member lm = (Member)session.getAttribute("loginMember");
-RecruitMember rm=null;
+//RecruitMember rm=null;
 if(lm instanceof RecruitMember){
 	rm = (RecruitMember)session.getAttribute("loginMember");	
 }
