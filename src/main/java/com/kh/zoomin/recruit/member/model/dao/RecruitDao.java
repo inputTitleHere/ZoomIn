@@ -29,7 +29,7 @@ public class RecruitDao {
 		}
 	}
 
-	public RecruitMember findrecruId(Connection conn, String id, String password) {
+	public RecruitMember findrecruId(Connection conn, String id) {
 		RecruitMember rmember = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -72,6 +72,28 @@ public class RecruitDao {
 		Date regDate = rset.getDate("reg_date");
 		return new RecruitMember(1, uid, companyNo, name, id, password, email, supervisor, regDate);
 
+	}
+
+	public int addRecruiter(Connection conn, RecruitMember rmember) {
+		PreparedStatement pstmt = null;
+		int result = 0; 
+		String sql = prop.getProperty("addRecruiter");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rmember.getCompanyNo());
+			pstmt.setString(2, rmember.getName());
+			pstmt.setString(3, rmember.getId());
+			pstmt.setString(4, rmember.getPassword());
+			pstmt.setString(5, rmember.getEmail());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원가입 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

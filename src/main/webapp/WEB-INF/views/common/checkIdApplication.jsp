@@ -34,7 +34,7 @@ boolean result = (boolean) request.getAttribute("checkId");
 		<script>
 			document.checkIdAFrm.onsubmit = (e) => {
 				const frm = e.target;
-				if(!/^[a-zA-Z0-9]{3,}$/.test(checkFrm.id.value)){
+				if(!/^[a-zA-Z0-9]{3,}$/.test(frm.id.value)){
 					alert("유효한 아이디를 입력해주세요.");
 					frm.id.select();
 					return false;

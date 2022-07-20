@@ -17,8 +17,9 @@ import com.kh.zoomin.member.dto.Member;
 
 /**
  * Servlet Filter implementation class LoginFilter
+ * filter 주소명 수정예정 (회원보기, 회원정보수정, 회원탈퇴, 비밀번호 수정)
  */
-@WebFilter("/applicantfilter")
+@WebFilter({"/applicantfilter", "/recruiterfilter"})
 public class LoginFilter implements Filter {
 
     /**

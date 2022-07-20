@@ -33,10 +33,9 @@ public class CheckIdApplicantServlet extends HttpServlet {
 		
 		ApplicantMember amember = ac.findAppliId(id);
 		boolean result = amember == null; 
-		RequestDispatcher check = request.getRequestDispatcher("/WEB-INF/views/common/checkIdApplicant.jsp");
+		RequestDispatcher check = request.getRequestDispatcher("/WEB-INF/views/common/checkIdApplication.jsp");
 		
 		//이 서블릿에선 jsp페이지로 값을 보내기만 할것. jsp페이지에서 id값 사용할 수 있도록 해줌
-		//checkId = true, false. 
 		request.setAttribute("checkId", result);
 		request.setAttribute("id", id);
 		check.forward(request, response);

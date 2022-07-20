@@ -37,7 +37,7 @@ public class RecruitLoginServlet extends HttpServlet {
 			System.out.println("password = " + password);
 			
 			//2. 업무로직
-			RecruitMember rmember = res.findrecruId(id, password);
+			RecruitMember rmember = res.findrecruId(id);
 			System.out.println("rmember= " + rmember);
 
 			String message = null; 
@@ -58,6 +58,7 @@ public class RecruitLoginServlet extends HttpServlet {
 			}
 			
 			//3. 리다이렉트
+//			response.sendRedirect("http://localhost:9090/zoomin/recruit/board/recruitBoardList");
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
