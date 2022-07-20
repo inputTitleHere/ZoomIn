@@ -29,7 +29,7 @@ public class RecruitMember extends Member{
 		this.regDate = regDate;
 	}
 	
-	public RecruitMember(int uid, String companyNo, String name, String id, String password, String phone, String email, Boolean supervisor, Date regDate) {
+	public RecruitMember(int uid, String companyNo, String name, String id, String password, String email, Boolean supervisor, Date regDate) {
 		this(1, uid, companyNo, name, id, password, email, supervisor, regDate);
 	}
 
@@ -57,7 +57,7 @@ public class RecruitMember extends Member{
 		this.name = name;
 	}
 
-	public String getid() {
+	public String getId() {
 		return id;
 	}
 

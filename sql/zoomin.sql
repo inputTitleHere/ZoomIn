@@ -104,6 +104,20 @@ create table recruit_job_bridge(
     constraint fk_recruit_job_bridge_job_category_number foreign key(job_category_number) references job_category(category_number) on delete set null
 );
 
+create table FAVOURITE(
+    "uid" number,
+    recruit_board_no number,
+    constraint fk_favourite_uid foreign key("uid") references applicant_member,
+    constraint fk_favourite_recruit_board_no foreign key(recruit_board_no) references recruit_board
+);
+
+
+create table ENROLL_TABLE(
+    "uid" number,
+    recruit_board_no number,
+    constraint fk_enroll_table_uid foreign key("uid") references applicant_member,
+    constraint fk_enroll_table_board_no foreign key(recruit_board_no) references recruit_board
+);
 
 -- 백승윤 END --
 -- 박우석 START --
