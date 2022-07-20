@@ -1,5 +1,7 @@
 package com.kh.zoomin.supervisor.model.dao;
-import static com.kh.zoomin.common.JdbcTemplate.close;
+
+import static com.kh.mvc.common.JdbcTemplate.close;
+import static com.kh.zoomin.common.JdbcTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.mvc.board.model.exception.BoardException;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.supervisor.model.dto.CompanyReview;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 import com.kh.zoomin.supervisor.model.exception.SupervisorException;
@@ -384,7 +388,7 @@ public class SupervisorDao {
 	}
 
 	//연봉리뷰 전체조회
-	public List<SalaryReview> getSalReviewAll(Connection conn) {
+	public List<SalaryReview> getSalReviewAll(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<SalaryReview> salList = new ArrayList<>();
@@ -392,6 +396,8 @@ public class SupervisorDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				salList.add(handleSalReviewRset(rset));	
@@ -416,6 +422,104 @@ public class SupervisorDao {
 		String jobPosition = rset.getString("position_name");
 		Date regDate = rset.getDate("reg_date");
 		return new SalaryReview(no, writer, companyNo, category, salary, workYear, jobPosition, regDate);
+	}
+
+	public List<CompanyReview> getComReviewAll(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<CompanyReview> comList = new ArrayList<>();
+		String sql = prop.getProperty("getComReviewAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				comList.add(handleComReviewRset(rset));	
+			}
+		} catch (Exception e) {
+			throw new SupervisorException("회사리뷰 전체 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}	
+		
+		return comList;
+	}
+
+	private CompanyReview handleComReviewRset(ResultSet rset) throws SQLException {
+		int no = rset.getInt("no");
+		String id = rset.getString("id");
+		String content = rset.getString("content");
+		Date regDate = rset.getDate("reg_date");
+		return new CompanyReview(no, id, content, regDate);
+	}
+
+	public int getTotalSalReviewCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int getTotalSalReviewCnt = 0;
+		String sql = prop.getProperty("getTotalSalReviewCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				getTotalSalReviewCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("연봉리뷰 전체글 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return getTotalSalReviewCnt;
+	}
+
+	public int getTotalComReviewCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int getTotalComReviewCnt = 0;
+		String sql = prop.getProperty("getTotalComReviewCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				getTotalComReviewCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("회사리뷰 전체글 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return getTotalComReviewCnt;
+	}
+
+	//연봉게시글 삭제
+	public int deleteSalReview(Connection conn, String[] salBoardNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteSalReview");
+		int result = 0;	//성공한 행의 개수
+		int[] cnt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i < salBoardNo.length; i++) {
+				pstmt.setString(1, salBoardNo[i]);
+				pstmt.addBatch();	//쿼리 pstmt에 쌓기
+			}
+			cnt = pstmt.executeBatch();		//성공하면 1을 반환
+			for(int i = 0; i < cnt.length; i++) {
+					result++;						
+			}
+			
+		} catch (Exception e) {
+			throw new SupervisorException("리뷰 게시글 삭제 오류!", e);		
+		} finally {
+			close(pstmt);
+		}		
+		return result;
 	}
 
 

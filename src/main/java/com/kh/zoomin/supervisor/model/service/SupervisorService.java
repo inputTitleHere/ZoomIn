@@ -1,5 +1,7 @@
 package com.kh.zoomin.supervisor.model.service;
 
+
+
 import static com.kh.zoomin.common.JdbcTemplate.close;
 import static com.kh.zoomin.common.JdbcTemplate.commit;
 import static com.kh.zoomin.common.JdbcTemplate.getConnection;
@@ -13,6 +15,7 @@ import java.util.Map;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.RecruitMember;
 import com.kh.zoomin.supervisor.model.dao.SupervisorDao;
+import com.kh.zoomin.supervisor.model.dto.CompanyReview;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 
@@ -146,13 +149,56 @@ public class SupervisorService {
 	}
 
 	//연봉리뷰 전체조회
-	public List<SalaryReview> getSalReviewAll() {
+	public List<SalaryReview> getSalReviewAll(Map<String, Object> param) {
 		List<SalaryReview> salList = new ArrayList<>();
 		Connection conn = getConnection();
-		salList = supervisorDao.getSalReviewAll(conn);
+		salList = supervisorDao.getSalReviewAll(conn, param);
 		close(conn);
 		return salList;
 	}
+
+	//회사리뷰 전체조회
+	public List<CompanyReview> getComReviewAll(Map<String, Object> param) {
+		List<CompanyReview> comList = new ArrayList<>();
+		Connection conn = getConnection();
+		comList = supervisorDao.getComReviewAll(conn, param);
+		close(conn);
+		return comList;
+	}
+
+	//연봉리뷰 전체 게시글 수 조회
+	public int getTotalSalReviewCnt() {
+		Connection conn = getConnection();
+		int totalSalReviewCnt = supervisorDao.getTotalSalReviewCnt(conn);
+		close(conn);
+		return totalSalReviewCnt;
+	}
+
+	//회사리뷰 전체 게시글 수 조회
+	public int getTotalComReviewCnt() {
+		Connection conn = getConnection();
+		int totalComReviewCnt = supervisorDao.getTotalComReviewCnt(conn);
+		close(conn);
+		return totalComReviewCnt;
+	}
+
+	//연봉리뷰 게시글 삭제
+	public int deleteSalReview(String[] salBoardNo) {		
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = supervisorDao.deleteSalReview(conn, salBoardNo);
+			if(salBoardNo.length == result)
+				commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {			
+			close(conn);
+		}
+		return result;
+	}
+
 
 	
 	

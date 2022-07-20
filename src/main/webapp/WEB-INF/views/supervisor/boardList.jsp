@@ -1,3 +1,5 @@
+<%@page import="com.kh.zoomin.common.ZoominUtils"%>
+<%@page import="com.kh.zoomin.supervisor.model.dto.CompanyReview"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.zoomin.supervisor.model.dto.SalaryReview"%>
@@ -6,34 +8,53 @@
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
 <%
 	List<SalaryReview> salList = (List<SalaryReview>) request.getAttribute("salList"); 
+	List<CompanyReview> comList = (List<CompanyReview>) request.getAttribute("comList"); 
+	
 %>
 
 <style>
-    form{
-        display: flex;
-        margin: 0 10px;
-    }
-    div{
-        margin: 0 20px;
-    }
-    #search-container{
-    height: 20%;
-    }
-    #tbl-salary-board{
-    	border-collapse: collapse;
-	    margin: 5px 5px;
-	    display: flex;
-	    justify-content: center;
-	}
-	tr, td, th{
-	    border: 1px solid black;
-	    padding: 10px;
-	}
+form{
+    display: flex;
+    margin: 0 10px;
+}
+div{
+    margin: 0 20px;
+}
+#search-container{
+	height: 20%;
+}
+#tbl-salary-board, #tbl-company-board{
+	border-collapse: collapse;
+	 margin: 5px 5px;
+	 display: flex;
+	 justify-content: center;
+}
+tr, td, th{
+    border: 1px solid black;
+    padding: 10px;
+}
+/*페이지바*/
+	div#pagebar{margin-top:10px; text-align:center;}
+	div#pagebar span.cPage{color: #0066ff; margin-right: 5px;}
+	div#pagebar a{margin-right: 5px;}
+/*테이블 숨김처리*/
+.salary-board-manage{
+	display:none;
+}
+.company-board-manage{
+	display:none;
+}
+#salDelFrm{
+	display: flex;
+    margin: 0 10px;
+    justify-content: center;
+    flex-direction: column;
+    align-content: space-around;
+}
 </style>
 </head>
 <body>
-	<h1>관리자 게시판 관리</h1>
-    
+    <!-- 
     <section id="search-container">
         <form action="<%= request.getContextPath()%>/supervisor/boardFinder">
 
@@ -50,7 +71,6 @@
                     <option value="none">== 선택 ==</option>
                     <option value="boardWriter">작성자</option>
                     <option value="boardContent">내용</option>
-                    <option value="boardTitle">제목</option>
                 </select>
             </div>
             <div id="board-search-keyword">
@@ -59,11 +79,33 @@
             </div>
         </form>
     </section>
-    
-	<h1>연봉게시판</h1>
+     -->
+	
+	<div id="btl-search-board">
+		<button id="btl-salary">연봉</button>
+		<button id="btl-company">회사리뷰</button>
+	</div>
+	<script>
+		document.querySelector("#btl-salary").addEventListener('click', (e) => {
+			document.querySelector(".salary-board-manage").style.display = "block";
+			document.querySelector(".company-board-manage").style.display = "none";
+		});
+		document.querySelector("#btl-company").addEventListener('click', (e) => {
+			document.querySelector(".company-board-manage").style.display = "block";
+			document.querySelector(".salary-board-manage").style.display = "none";
+		});
+		
+	</script>
+
+
+    <div class="salary-board-manage">
+    <form action="<%= request.getContextPath() %>/supervisor/salReviewDel" method="post" id="salDelFrm">
+    <div id="btl-del">
+    	<input type="submit" value="삭제"/>
+    </div>
     <table id="tbl-salary-board">
-    	<thead>
     		<tr>
+    			<th><input type="checkbox" name="allChk" id="allChk" /></th>
     			<th>no</th>
     			<th>작성자</th>
     			<th>회사번호</th>
@@ -78,11 +120,16 @@
     				for(SalaryReview sal : salList){
     		%>		
     			<tr>
-    				<td><%= sal.getNo() %></td>
+    				<td>
+    					<input type="checkbox" name="chk" value="<%= sal.getNo() %>" />
+   					</td>
+    				<td>
+    					<a href="#"><%= sal.getNo() %></a>
+    				</td>
     				<td>
     					<a href="javascript:memberView();"><%= sal.getWriter() %></a>
     					<input type="hidden" name=<%= sal.getWriter() %> />   		
-   					</td>
+   					</td>  					
     				<td><%= sal.getCompanyNo() %></td>
     				<td><%= sal.getCategory() %></td>
     				<td><%= sal.getSalary() %></td>
@@ -99,9 +146,13 @@
     				<td colspan="8">조회된 게시글이 없습니다.</td>
     			</tr>
     		<% 	} %>
-    	</thead>
     </table>
-    
+	</form>
+	    <div id='pagebar'>
+			<%= request.getAttribute("salPagebar") %>
+			
+		</div>
+    </div>
     <%-- 회원정보조회(팝업) --%>
     <form action="<%= request.getContextPath() %>/supervisor/memberView" name="memberViewFrm">
     		<%
@@ -127,25 +178,53 @@
     	frm.target = title;
     	frm.submit();
     }
+    
+    //전체선택
+    document.querySelector("#allChk").addEventListener('click', (e) => {
+    	const chk = document.querySelectorAll("[name=chk]");
+    	const rowCnt = chk.length;
+    	const check = document.querySelector("#allChk").checked;
+    	if(check){
+    		for(let i = 0; i < rowCnt; i++){
+    			chk[i].checked = true;
+    		}
+    	} else {
+    		for(let i = 0; i < rowCnt; i++){
+    			chk[i].checked = false;
+    		}
+    	}
+    })
+    
     </script>
     
-    
-    <h1>채용게시판</h1>
+    <div class="company-board-manage">
+    <h1>리뷰게시판</h1>
     <table id="tbl-company-board">
-    	<thead>
     		<tr>
     			<th>no</th>
     			<th>작성자</th>
     			<th>content</th>
     			<th>등록일</th>
     		</tr>
-    	</thead>
+    		<%
+    			if(comList != null && !comList.isEmpty()){
+    				for(CompanyReview com : comList){
+    		%>	
+    		<tr>
+    			<td><%= com.getNo() %></td>
+    			<td><%= com.getId() %></td>
+    			<td><%= ZoominUtils.escapeXml(com.getContent()) %></td>
+    			<td><%= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(com.getRegDate()) %></td>
+    		</tr>
+    		<%
+    				}
+    			}
+    		%>
     </table>
-    
-    
-    
-    
-    
-    <h1>리뷰게시판</h1>
+	<div id='pagebar'>
+		<%= request.getAttribute("comPagebar") %>
+	</div>
+	</div>
+
 </body>
 </html>

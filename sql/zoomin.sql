@@ -350,12 +350,14 @@ select * from category;
 select * from position_category;
 --연봉게시판 전체조회 
 --select no, id, company_no, domain, salary, work_year, position_name, s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number order by reg_date desc;
-select
-    no, id, company_no, domain, salary, work_year, position_name, s.reg_date
-from 
-    salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number
-order by
-    reg_date desc;
+select * from(select row_number () over (order by s.reg_date desc) rnum,  no, id, company_no, domain, salary, work_year, position_name, s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number)where  rnum between 11 and 20;
+        
+
+--회사리뷰게시판 전체조회
+select * from company_review where no = '22';
+select * from(select row_number () over (order by c.reg_date desc) rnum, no, id, content, c.reg_date from company_review c join applicant_member a on c."uid" = a."uid")where  rnum between 11 and 20; 
+
+insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, default); 
 -- 이윤정 END --
 
 --김승환 테스트용

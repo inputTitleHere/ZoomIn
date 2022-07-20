@@ -36,7 +36,7 @@ public class FindDataServlet extends HttpServlet {
 		//date별 게시글 수 가져오기
 		List<WeekData> boardList = new ArrayList<>();
 		boardList = supervisorService.getBoardData();
-		System.out.println("boardList = " + boardList);
+		//System.out.println("boardList = " + boardList);
 				
 		//응답요청 : json으로 변환해서 저장하기
 		Gson gson = new Gson();
