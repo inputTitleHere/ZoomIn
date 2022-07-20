@@ -6,10 +6,10 @@
 <%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
 <%
 RecruitBoard rb = (RecruitBoard) request.getAttribute("recruitBoard");
-Member lm = (Member)session.getAttribute("loginMember");
-if(lm instanceof RecruitMember){
-	rm = (RecruitMember)session.getAttribute("loginMember");	
-}
+boolean isFaved=(request.getAttribute("isFaved")==null?false:(boolean)request.getAttribute("isFaved"));
+boolean isEnrolled=(request.getAttribute("isEnrolled")==null?false:(boolean)request.getAttribute("isEnrolled"));
+System.out.println("@recruitBoardView.jsp : isFaved="+isFaved+", isEnrolled="+isEnrolled);
+
 %>
 <link href="<%=request.getContextPath() %>/css/recruit/board/recruit-board-view.css" rel="stylesheet" type="text/css">
 <section id="recruit-board-view">
@@ -51,11 +51,27 @@ if(lm instanceof RecruitMember){
 					</tr>
 				</tbody>
 			</table>
+			<%if(loginMember != null &&loginMember.getMemberType()==2){ %>
 			<div class="button-wrapper">
 				<%-- placeholde용 버튼들 --%>
-				<div id="fav-button">채용글 찜하기</div>
-				<div id="enroll-button">당장 입사 지원</div>
+				<div id="fav-button-wrapper">
+					<form action="" class="fav-frm">
+						<input type="hidden" value="<%=((ApplicantMember)loginMember).getUid() %>" name="uid" id="uid" />
+						<input type="hidden" value="<%=rb.getNo() %>" name="boardNo" id="boardNo" />
+						<input type="hidden" value="<%=isFaved%>" name="isFaved" id="isFaved" style="display:none;"/>
+						<button class="register-buttons <%=isFaved?"active":""%>" id="fav-button">찜하기</button>
+					</form>
+				</div>
+				<div id="enroll-button-wrapper">
+					<form action="" class="enroll-frm">		
+						<input type="hidden" value="<%=((ApplicantMember)loginMember).getUid() %>" name="uid" id="uid" />
+						<input type="hidden" value="<%=rb.getNo() %>" name="boardNo" id="boardNo" />
+						<input type="hidden" value="<%= isEnrolled%>" name="isEnrolled" id="isEnrolled"/>
+						<button class="register-buttons <%=isEnrolled?"active":""%>" id="enroll-button">지원하기</button>
+					</form>
+				</div>
 			</div>
+			<%} %>
 		</div><%-- small-info --%>
 	</div>
 	<%-- 메인 컨텐트 영역 --%>
@@ -80,8 +96,91 @@ const deleteBoard=()=>{
 const updateBoard=()=>{
 	location.href="<%=request.getContextPath()%>/recruit/board/updateRecruitBoard?No=<%=rb.getNo()%>";
 }
-</script>
 
+window.addEventListener('load',()=>{
+	const favFrms=document.querySelectorAll(".fav-frm");
+  const enrollFrms=document.querySelectorAll(".enroll-frm");
+	
+	favFrms.forEach((item)=>{
+		item.addEventListener('submit',(e)=>{
+      e.preventDefault();
+			favourite(e);
+		})		
+	})
+	enrollFrms.forEach((item)=>{
+		item.addEventListener('submit',(e)=>{
+			e.preventDefault();
+			enroll(e);
+		})
+	})
+	
+})
+
+
+
+const favourite=(e)=>{
+	//console.log(e.target.boardNo.value);
+	//console.log(e.target.uid.value);
+	//console.log(e.target.isFaved.value);
+	// ajax처리할것.
+	$.ajax({
+			url:'<%=request.getContextPath()%>/recruit/board/addFavourite',
+			data:{
+				"boardNo":e.target.boardNo.value,
+				"uid":e.target.uid.value,
+				"isFaved":e.target.isFaved.value
+			},
+			method:'post',
+      success(response){
+        //console.log("response:"+response);
+        const button   = document.querySelector("#fav-button");
+        const favValue = document.querySelector("#isFaved");
+        if(response==='true'){
+        	//console.log("attempt to add Active");
+        	button.classList.add("active");
+        	favValue.value=response;
+        }else{
+        	//console.log("attempt to remove Active");
+        	button.classList.remove("active");
+        	favValue.value=response;
+        }
+      },
+			error:console.log
+	});
+};
+const enroll=(e)=>{
+  // e으로 form이 들어옴
+  console.log(e.target.boardNo.value);
+	console.log(e.target.uid.value);
+	// ajax처리
+	$.ajax({
+		url:'<%=request.getContextPath()%>/recruit/board/addEnroll',
+		data:{
+			"boardNo":e.target.boardNo.value,
+			"uid":e.target.uid.value,
+			"isEnrolled":e.target.isEnrolled.value
+		},
+		method:'post',
+  success(response){
+    console.log("response:"+response);
+    const button   = document.querySelector("#enroll-button");
+    const enroll = document.querySelector("#isEnrolled");
+    if(response==='true'){
+    	console.log("attempt to add Active");
+    	button.classList.add("active");
+    	enroll.value=response;
+    }else{
+    	console.log("attempt to remove Active");
+    	button.classList.remove("active");
+    	enroll.value=response;
+    }
+  },
+		error:console.log
+	});
+};
+
+
+</script>
 
 <br />
 <br />

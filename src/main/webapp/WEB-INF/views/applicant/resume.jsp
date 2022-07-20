@@ -8,7 +8,7 @@
 
 <%
 	
-	int uid  = Integer.parseInt(am.getUid());
+	int uid  = am.getUid();
 	
 	String result = (String)request.getAttribute("result");
 	int categoryNumber = 0;
