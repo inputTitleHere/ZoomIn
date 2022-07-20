@@ -12,7 +12,7 @@
 		<a href ="" id="logOut">로그아웃</a>
 	</div>
 	<div id="logodiv">
-		<a href="<%=request.getContextPath()%>/">
+		<a href="<%=request.getContextPath()%>/recruit/board/recruitBoardList">
 			<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
 		</a>
 	</div>

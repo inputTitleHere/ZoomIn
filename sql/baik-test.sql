@@ -8,7 +8,8 @@ select * from applicant_member order by "uid";
 
 select * from recruit_member;
 select * from recruit_board where "uid"=1 order by closure_date-sysdate asc;
+select * from category order by category_number;
 
+delete from recruit_board where no in (49,50,51);
 
-update resume set name='이윤정' where "uid"=8;
 commit;

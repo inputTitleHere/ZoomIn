@@ -10,7 +10,7 @@
 <body>
 <header>
 	<div id="account">
-		<a href ="applicantLogin.jsp" id="writeResume">이력서 작성</a>
+		<a href ="<%=request.getContextPath() %>/ResumeServlet" id="writeResume">이력서 작성</a>
 		<a href ="" id="info">회원정보</a>
 		<a href ="" id="logOut">로그아웃</a>
 	</div>
