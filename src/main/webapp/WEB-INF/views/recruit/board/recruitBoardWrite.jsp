@@ -4,7 +4,7 @@
     
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-RecruitMember rm = (RecruitMember)session.getAttribute("loginMember");
+//RecruitMember rm = (RecruitMember)session.getAttribute("loginMember");
 
 %>
 

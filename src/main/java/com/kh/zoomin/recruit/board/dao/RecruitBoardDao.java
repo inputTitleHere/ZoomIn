@@ -171,7 +171,8 @@ public class RecruitBoardDao {
 			rset = pstmt.executeQuery();
 			// 쿼리 결과 처리
 			while (rset.next()) {
-				result.add(handleRecruitBoard(rset));
+				RecruitBoard rb=handleRecruitBoard(rset);
+				result.add(rb);
 			}
 		} catch (SQLException e) {
 			throw new RecruitBoardException("채용게시판 조회 오류", e);
@@ -282,5 +283,137 @@ public class RecruitBoardDao {
 		}
 		return result;
 	}
+
+	public boolean isRecruitBoardFaved(int boardNo, int uid, Connection conn) {
+		boolean isFaved=false;
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		// select count(*) from FAVOURITE where boardNo=? and "uid"=?
+		String sql=prop.getProperty("isFaved");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, uid);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				int count=rset.getInt(1);
+				if(count>0) {
+					isFaved=true;
+				}
+			}
+			
+		}catch(SQLException e) {
+			throw new RecruitBoardException("찜 조회 오류",e);
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return isFaved;
+	}
+
+	public boolean isRecruitBoardEnrolled(int boardNo, int uid, Connection conn) {
+		boolean isEnrolled=false;
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		// select count(*) from ENROLL_TABLE where boardNo=? and "uid"=?
+		String sql=prop.getProperty("isEnrolled");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, uid);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				int count=rset.getInt(1);
+				if(count>0) {
+					isEnrolled=true;
+				}
+			}
+			
+		}catch(SQLException e) {
+			throw new RecruitBoardException("지원하기 조회 오류",e);
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return isEnrolled;
+	}
+
+	public int setFavourite(int boardNo, int applicantUid, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		//insert into FAVOURITE values(?(uid), ?(boardNo))
+		String sql = prop.getProperty("setFavourite");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, applicantUid);
+			pstmt.setInt(2, boardNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			throw new RecruitBoardException("찜하기 set 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int removeFavourite(int boardNo, int applicantUid, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		// removeFavourite=delete from FAVOURITE where "uid"=? and recruit_board_no=?
+		String sql = prop.getProperty("removeFavourite");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, applicantUid);
+			pstmt.setInt(2, boardNo);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			throw new RecruitBoardException("찜 취소하기 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int setEnroll(int boardNo, int applicantUid, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		//insert into ENROLL_TABLE values(?(uid), ?(boardNo))
+		String sql = prop.getProperty("setEnroll");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, applicantUid);
+			pstmt.setInt(2, boardNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			throw new RecruitBoardException("이력서 등록하기 set 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int removeEnroll(int boardNo, int applicantUid, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		// removeEnroll=delete from ENROLL_TABLE where "uid"=? and recruit_board_no=?
+		String sql = prop.getProperty("removeEnroll");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, applicantUid);
+			pstmt.setInt(2, boardNo);
+			result=pstmt.executeUpdate();
+		}catch (SQLException e) {
+			throw new RecruitBoardException("찜 취소하기 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 }

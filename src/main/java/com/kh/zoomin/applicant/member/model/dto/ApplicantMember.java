@@ -7,27 +7,42 @@ import com.kh.zoomin.member.dto.Member;
 public class ApplicantMember extends Member{
 
 	private int uid;
+<<<<<<< HEAD
 	private String memberId;
+=======
+	private String name;
+	private String id;
+>>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 	private String password;
 	private String phone;
 	private String email;
 	private Date regDate;
 	
-	public ApplicantMember() {
-		super(2);
-		// TODO Auto-generated constructor stub
+	public ApplicantMember(int uid, String name, String id, String password, String phone, String email, Date regDate) {
+		this(2, uid, name, id, password, phone, email, regDate);
 	}
 
+<<<<<<< HEAD
 	public ApplicantMember(int uid, String memberId, String password, String phone, String email, Date regDate) {
 		super(2);
+=======
+	public ApplicantMember(int memberType, int uid, String name, String id, String password, String phone,
+			String email, Date regDate) {
+		super(memberType);
+>>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 		this.uid = uid;
-		this.memberId = memberId;
+		this.name = name;
+		this.id = id;
 		this.password = password;
 		this.phone = phone;
 		this.email = email;
 		this.regDate = regDate;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 	public int getUid() {
 		return uid;
 	}
@@ -35,13 +50,21 @@ public class ApplicantMember extends Member{
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
-
-	public String getMemberId() {
-		return memberId;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setMemberId(String id) {
+		this.id = id;
 	}
 
 	public String getPassword() {
@@ -78,10 +101,9 @@ public class ApplicantMember extends Member{
 
 	@Override
 	public String toString() {
-		return "ApplicantMember [uid=" + uid + ", memberId=" + memberId + ", password=" + password + ", phone=" + phone
+		return "ApplicantMember [uid=" + uid + ", name=" + name + ", id=" + id + ", password=" + password + ", phone=" + phone
 				+ ", email=" + email + ", regDate=" + regDate + "]";
 	}
 	
 	
-
 }
