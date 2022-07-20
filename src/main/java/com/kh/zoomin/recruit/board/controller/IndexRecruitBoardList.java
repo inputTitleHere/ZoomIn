@@ -33,8 +33,8 @@ public class IndexRecruitBoardList extends HttpServlet {
 		int start=1;
 		int end=5;
 		Map<String, Object> param=new HashMap<String, Object>();
-		param.put("start", 1);
-		param.put("end", 5);
+		param.put("start", start);
+		param.put("end", end);
 		param.put("mode",RecruitBoardReadMode.NEAR_CLOSURE);
 		// db 달려오기
 		List<RecruitBoard> recruitBoard = rbs.loadRecruitBoardHeaders(param); 
