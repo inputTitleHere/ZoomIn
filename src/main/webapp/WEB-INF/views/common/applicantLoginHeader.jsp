@@ -1,48 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-
-
-
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/common/common.css" />
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
-	<div id="account">
-		<a href ="<%=request.getContextPath() %>/ResumeServlet" id="writeResume">이력서 작성</a>
-		<a href ="" id="info">회원정보</a>
-		<a href ="" id="logOut">로그아웃</a>
-	</div>
-	<div id="logodiv">
-		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-	</div>
-	<div id="searchBoxdiv">
-		<input id="searchBox" type="text">
-		 <button class="custom-btn btn-3"><span>검색</span></button>
-	</div>
 <style type="text/css">
-
 #account {
 	text-allign: center;
 	width: 
 }
-
 ul li {
 	list-style: none;
 }
-
 a {
 	text-decoration: none;
 	color: #333;
 }
-
 #manu_a {
 	text-allign: center;
 }
-
 #menu {
 	font:bold 15px "malgun gothic";
 	width:150px;
@@ -52,15 +32,12 @@ a {
 	line-height: 50px;
 	margin: 0 auto;
 	text-allign: center;
-
 }
-
 #menu > ul > li {
 	float:left;
 	width:150px;
 	position:relative;
 }
-
 #menu > ul > li > ul {
 	width: 130px;
 	display: none;
@@ -68,16 +45,13 @@ a {
 	font-size: 14px;
 	background: white;
 }
-
 #menu > ul > li:hover > ul {
 	display:block;
 }
-
 #menu > ul > li > ul > li:hover {
 	background: orange;
 	transition: ease 2s;
 }
-
 </style>
 <body>
 	<header>
@@ -100,7 +74,7 @@ a {
 
 			</div>
 		</div>
-		
+		</div>
 
 		<div id="logodiv">
 			<img id="logo" alt=""
@@ -114,4 +88,3 @@ a {
 
 		</div>
 	</header>
->>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
