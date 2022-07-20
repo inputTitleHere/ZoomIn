@@ -25,9 +25,8 @@ public class CompanyReviewViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-//			이렇게하면 안되는데 왜 아래로 하면 될까 
 //			int no = Integer.parseInt(request.getParameter("no"));
-			int no = 9; // 9번 게시글의 상세리뷰 보기 가능
+			int no = 22; // 9번 게시글의 상세리뷰 보기 가능
 			
 			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
 			request.setAttribute("companyReview", companyReview);
@@ -40,11 +39,4 @@ public class CompanyReviewViewServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 }

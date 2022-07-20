@@ -1,15 +1,9 @@
-<%@page import="com.kh.zoomin.member.dto.Member"%>
-<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
-<%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ApplicantMember applicantMember = (ApplicantMember) request.getAttribute("applicantMember");
-	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
-	CompanyReviewExt companyReviewExt = (CompanyReviewExt) session.getAttribute("companyReviewExt"); 
-	
-	
+	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview2.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -26,30 +20,37 @@ h2 {
 	</div>
 	<div id="logodiv">
 		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-	</div>
-	<div id="searchBoxdiv">
+	</div> 
+	<%-- <div id="searchBoxdiv">
 		<input id="searchBox" type="text">
 		 <button class="custom-btn btn-3"><span>검색</span></button>
-	</div>
+	</div> --%>
 <section id="company-review-view-container">
 	<h2>-회사 리뷰 등록-</h2>
 
 	<form 
 		name="companyReviewEnrollFrm"
-		action="<%= request.getContextPath() %>/review/company/companyReviewList"
+		action="<%= request.getContextPath() %>/review/company/companyReviewEnroll"
 		method="post"
 	>
-	
 		<table id="tbl-company-review">
 			<tr>
 				<th>작성자 번호</th>
 				<td>
-					
+					<input type="text" name="uid"/>
 				</td>
 			</tr>
 			<tr>
-				<th>회사</th>
-				<td></td>
+				<th>회사명</th>
+				<td>
+					<input type="text" name ="company_no"/>
+				</td>
+			</tr>
+			<tr>
+				<th>분야</th>
+				<td>
+					<input type="text" name ="category_number"/>
+				</td>
 			</tr>
 			<tr>
 	            <th>평점</th>
@@ -66,7 +67,7 @@ h2 {
 	        <tr>
 	            <th>워라벨</th>
 	            <td>
-	            	<select name="wlb" id="aaaa">
+	            	<select name="work_life_balance" id="aaaa">
 		            	<option value="1">1점</option>
 		            	<option value="2">2점</option>
 		            	<option value="3">3점</option>
@@ -78,7 +79,7 @@ h2 {
 	        <tr>
 	            <th>승진 가능성</th>
 	            <td>
-	            	<select name="levup" id="aaaa">
+	            	<select name="level_up" id="aaaa">
 		            	<option value="1">1점</option>
 		            	<option value="2">2점</option>
 		            	<option value="3">3점</option>
@@ -90,7 +91,7 @@ h2 {
 	        <tr>
 	            <th>업무 강도</th>
 	            <td>
-	            	<select name="work_inten" id="aaaa">
+	            	<select name="work_intensity" id="aaaa">
 		            	<option value="1">1점</option>
 		            	<option value="2">2점</option>
 		            	<option value="3">3점</option>
@@ -102,7 +103,7 @@ h2 {
 	        <tr>
 	            <th>발전 가능성</th>
 	            <td>
-	            	<select name="poten" id="aaaa">
+	            	<select name="potential" id="aaaa">
 		            	<option value="1">1점</option>
 		            	<option value="2">2점</option>
 		            	<option value="3">3점</option>
@@ -114,7 +115,7 @@ h2 {
 	        <tr>
 	            <th>연봉 만족도</th>
 	            <td>
-					<select name="salary_satis" id="aaaa">
+					<select name="salary_satisfaction" id="aaaa">
 		            	<option value="1">1점</option>
 		            	<option value="2">2점</option>
 		            	<option value="3">3점</option>
@@ -132,7 +133,6 @@ h2 {
 		            </p>     
 				</td>
 			</tr>
-		
 		</table>
 	</form>
 	
@@ -142,7 +142,7 @@ h2 {
 	</div>
 
 <script type="text/javascript">
-document.getElementById("btnSubmit").onclick = (e) =>{
+document.querySelector("#btnSubmit").onclick = () =>{
 	document.companyReviewEnrollFrm.submit();
 };
 

@@ -48,6 +48,7 @@ public class CompanyReviewList extends HttpServlet {
 			param.put("end", end);
 			
 			List<CompanyReview> list = companyReviewService.findAll(param);
+			System.out.println("list = " + list);
 			
 			int totalContent = companyReviewService.getTotalContent();
 			String url = request.getRequestURI(); 

@@ -2,7 +2,9 @@ package com.kh.zoomin.applicant.companyReviewBoard.model.dto;
 
 import java.sql.Date;
 
-public class CompanyReview {
+import com.kh.zoomin.member.dto.Member;
+
+public class CompanyReview extends Member{
 
 	private int no;
 	private int uid;
@@ -18,13 +20,12 @@ public class CompanyReview {
 	private Date regDate;
 	
 	public CompanyReview() {
-		super();
-		// TODO Auto-generated constructor stub
+		super(2);
 	}
 
 	public CompanyReview(int no, int uid, String companyNo, int categoryNumber, String content, int stars,
 			int workLifeBalance, int levelUp, int workIntensity, int potential, int salarySatisfaction, Date regDate) {
-		super();
+		super(2);
 		this.no = no; // 회사리뷰 고유번호
 		this.uid = uid;
 		this.companyNo = companyNo;

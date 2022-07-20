@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 
 /**
  * Servlet implementation class CompanyEnrollServlet
@@ -29,7 +30,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 //		int uid = Integer.parseInt(request.getParameter("uid"));
 		// 로그인 된 사람이 없어서 현재 위 두개를 안받고 47번 줄에서 저렇게 설정을 해줘야하나?
 		
-		HttpSession session = request.getSession();
+		HttpSession loginSession = request.getSession();
 		request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewEnroll.jsp")
 			.forward(request, response);
 		
@@ -43,20 +44,23 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			CompanyReview companyReview = new CompanyReview();
+			HttpSession loginSession = request.getSession();
+			ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
 			// 사용자 입력값 처리
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));
-//			int uid = 5;
-			String companyNo = request.getParameter("companyNo");
-			int categoryNumber = Integer.parseInt(request.getParameter("categoryNumber"));
+			uid = 5;
+			String companyNo = request.getParameter("company_no");
+			int categoryNumber = Integer.parseInt(request.getParameter("category_number"));
 			
 			String content = request.getParameter("content");
 			int stars = Integer.parseInt(request.getParameter("stars"));
-			int workLifeBalance = Integer.parseInt(request.getParameter("workLifeBalance"));
-			int levelUp = Integer.parseInt(request.getParameter("levelUp"));
-			int workIntensity = Integer.parseInt(request.getParameter("workIntensity"));
+			int workLifeBalance = Integer.parseInt(request.getParameter("work_life_balance"));
+			int levelUp = Integer.parseInt(request.getParameter("level_up"));
+			int workIntensity = Integer.parseInt(request.getParameter("work_intensity"));
 			int potential = Integer.parseInt(request.getParameter("potential"));
-			int salarySatisfaction = Integer.parseInt(request.getParameter("salarySatisfaction"));
+			int salarySatisfaction = Integer.parseInt(request.getParameter("salary_satisfaction"));
+			companyReview = new CompanyReviewExt(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			
 			companyReview.setUid(uid);
 			companyReview.setCompanyNo(companyNo);
@@ -68,15 +72,14 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			companyReview.setWorkIntensity(workIntensity);
 			companyReview.setPotential(potential);
 			companyReview.setSalarySatisfaction(salarySatisfaction);
-			companyReview = new CompanyReviewExt(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			
+			System.out.println("companyReview = " + companyReview);
 			// 업무로직
 			int result = companyReviewService.insertCompanyReview(companyReview);
 			
 			// redirect
-			HttpSession session = request.getSession();
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			System.out.println(request.getContextPath());
+			
 			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
 			
 		} catch (Exception e) {

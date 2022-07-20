@@ -99,7 +99,8 @@ public class CompanyReviewDao {
 		int potential = rset.getInt("potential");
 		int salarySatisfaction = rset.getInt("salary_satisfaction");
 		Date regDate = rset.getDate("reg_date");
-		return new CompanyReview(no, uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, regDate);
+		return new CompanyReview(no, uid, companyNo, categoryNumber, content, stars, 
+				workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, regDate);
 	}
 
 	private CompanyReviewExt handleCompanyReviewExtendsResultSet(ResultSet rset) throws SQLException {
@@ -181,9 +182,9 @@ public class CompanyReviewDao {
 			
 			rset = pstmt.executeQuery();
 			
-			System.out.println("ok");
 			while(rset.next()) {
-				list.add(handleCompanyReviewResultSet(rset));
+				CompanyReview companyReview = handleCompanyReviewResultSet(rset);
+				list.add(companyReview);
 			}
 		} catch (SQLException e) {
 			throw new CompanyReviewException("리뷰 목록 조회 오류", e);

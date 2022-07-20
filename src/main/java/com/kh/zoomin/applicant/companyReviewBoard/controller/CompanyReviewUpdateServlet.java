@@ -27,7 +27,7 @@ public class CompanyReviewUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
-			int uid = 5;
+			
 			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
 			
 			request.setAttribute("companyReview", companyReview);

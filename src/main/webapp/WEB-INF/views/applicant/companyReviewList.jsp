@@ -1,18 +1,11 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.List"%>
-<%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <%
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
-	List<CompanyReview> board = (List<CompanyReview>) request.getAttribute("board");
-	CompanyReviewExt companyReviewExt = (CompanyReviewExt) request.getAttribute("ext");
-	CompanyReviewExt cre = new CompanyReviewExt();
-	
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
 <section id="companyReview-container">
@@ -30,11 +23,6 @@
 			<th>회사명</th>
 			<th>분야</th>
 			<th>별점</th>
-			<!-- <th>워라벨</th>
-			<th>승진 가능성</th>
-			<th>업무 강도</th>
-			<th>회사 잠재력</th>
-			<th>연봉 만족도</th> -->
 			<th>내용</th>
 			<th>등록 날짜</th>
 		</tr>	
@@ -45,9 +33,7 @@
 		<tr>
 			<td><a href="<%= request.getContextPath() %>/review/company/companyReviewBoard"><%= companyReview.getNo() %></a></td>
 			<td>
-				<% if(companyReview.getCompanyNo() == cre.getCompanyNo()) %>
-					
-					<%= cre.getCompanyName() %>
+				<%= companyReview.getCompanyNo() %>
 			</td>
 			<td>
 				<% if(companyReview.getCategoryNumber()==1) %>IT/웹/통신
@@ -59,14 +45,9 @@
 				<% if(companyReview.getCategoryNumber()==7) %>유통/무역/운송
 				<% if(companyReview.getCategoryNumber()==8) %>제조/화학
 				<% if(companyReview.getCategoryNumber()==9) %>기관/협회
-				<% if(companyReview.getCategoryNumber()==110) %>교육업
+				<% if(companyReview.getCategoryNumber()==10) %>교육업
 			</td>
 			<td><%= companyReview.getStars() %></td>
-			<%-- <td><%= companyReview.getWorkLifeBalance() %></td>
-			<td><%= companyReview.getLevelUp() %></td>
-			<td><%= companyReview.getWorkIntensity() %></td>			
-			<td><%= companyReview.getPotential() %></td>
-			<td><%= companyReview.getSalarySatisfaction() %></td> --%>
 			<td><%= companyReview.getContent() %></td>
 			<td><%= companyReview.getRegDate() %></td>
 		</tr>
