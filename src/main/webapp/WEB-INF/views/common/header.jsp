@@ -7,7 +7,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String msg = (String) session.getAttribute("msg");
-	System.out.println("msg@jsp = " + msg);
+	//System.out.println("msg@jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg"); 
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	ApplicantMember am=null;

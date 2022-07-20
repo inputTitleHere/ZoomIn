@@ -2,13 +2,14 @@ package com.kh.zoomin.applicant.member.model.service;
 
 import static com.kh.zoomin.common.JdbcTemplate.close;
 import static com.kh.zoomin.common.JdbcTemplate.commit;
-import static com.kh.zoomin.common.JdbcTemplate.rollback;
 import static com.kh.zoomin.common.JdbcTemplate.getConnection;
+import static com.kh.zoomin.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 
 import com.kh.zoomin.applicant.member.model.dao.ApplicantDao;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
+import com.kh.zoomin.member.exception.MemberException;
 
 public class ApplicantService {
 	private ApplicantDao ad = new ApplicantDao();
@@ -30,6 +31,23 @@ public class ApplicantService {
 		} catch(Exception e) {
 			rollback(conn);
 			throw e; 
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteMember(String id) {
+		Connection conn = null; 
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = ad.deleteApplicant(conn, id);
+			if(result == 0)
+				throw new MemberException("해당 회원은 존재하지 않습니다.");
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
 		} finally {
 			close(conn);
 		}

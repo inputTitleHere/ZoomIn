@@ -76,11 +76,11 @@ public class ApplicantDao {
 		String sql = prop.getProperty("addApplicant");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,  amember.getName());
-			pstmt.setString(2,  amember.getId());
-			pstmt.setString(3,  amember.getPassword());
-			pstmt.setString(4,  amember.getPhone());
-			pstmt.setString(5,  amember.getEmail());
+			pstmt.setString(1, amember.getName());
+			pstmt.setString(2, amember.getId());
+			pstmt.setString(3, amember.getPassword());
+			pstmt.setString(4, amember.getPhone());
+			pstmt.setString(5, amember.getEmail());
 			
 			result = pstmt.executeUpdate();
 
@@ -89,6 +89,24 @@ public class ApplicantDao {
 		} finally {
 			close(pstmt);
 		} 
+		return result;
+	}
+
+	public int deleteApplicant(Connection conn, String id) {
+		//dml. preparedstatment 객체생성/쿼리/객체반환
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteApplicant");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			throw new MemberException("회원 탈퇴 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

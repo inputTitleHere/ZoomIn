@@ -1,4 +1,4 @@
-package com.kh.zoomin.recruit.member.controller;
+package com.kh.zoomin.applicant.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RecruiterJoinServlet
+ * Servlet implementation class ApplicantUpdateServlet
  */
-@WebServlet("/recruiter/join")
-public class RecruiterJoinServlet extends HttpServlet {
+@WebServlet("/applicant/update")
+public class ApplicantUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecruiterJoinServlet() {
+    public ApplicantUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

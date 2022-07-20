@@ -21,7 +21,7 @@
 					<th>아이디<sup></sup></th>
 					<td>
 						<input type="text" placeholder="3글자이상" name="id" id="aId" value="" required> 
-						<input type="button" value="중복검사" onclick="checkId();" /> 
+						<input type="button" value="중복검사" onclick="checkIdApplication();" /> 
 						<input type="hidden" id="idValid" value="0" />
 					</td>
 				</tr>
@@ -29,7 +29,7 @@
 					<th>비밀번호<sup></sup></th>
 					<td>
 					<input type="password" name="password" id="aPassword"
-						value="password" placeholder="숫자와 특수문자를 포함 3글자 이상" required><br>
+						value="password" placeholder="숫자와 특수문자를 포함 4글자 이상" required><br>
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +61,7 @@
 		</form>
 	<script>
 	//사용자가 입력한 id 중복여부 검사 시작 
-	const checkId = () => {
+	const checkIdApplication = () => {
 		const id = document.querySelector("#aId");
 		if(!/^[a-zA-Z0-9]{3,}$/.test(id.value)){
 			alert("유효한 아이디를 입력해주세요.");
