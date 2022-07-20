@@ -2,7 +2,15 @@
     pageEncoding="UTF-8"%>
 
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
 	<div id="account">
 		<a href ="<%=request.getContextPath() %>/ResumeServlet" id="writeResume">이력서 작성</a>
 		<a href ="" id="info">회원정보</a>
@@ -15,16 +23,6 @@
 		<input id="searchBox" type="text">
 		 <button class="custom-btn btn-3"><span>검색</span></button>
 	</div>
-
-
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/common/common.css" />
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <style type="text/css">
 
 #account {
@@ -102,7 +100,7 @@ a {
 
 			</div>
 		</div>
-		</div>
+		
 
 		<div id="logodiv">
 			<img id="logo" alt=""
