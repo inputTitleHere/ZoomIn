@@ -41,6 +41,22 @@ public class RecruitBoard {
 		this.regDate = regDate;
 	}
 
+	public RecruitBoard(RecruitBoard recruitBoard) {
+		this.no = recruitBoard.getNo();
+		this.uid = recruitBoard.getUid();
+		this.categoryNumber = recruitBoard.getCategoryNumber();
+		this.companyNo = recruitBoard.getCompanyNo();
+		this.title = recruitBoard.getTitle();
+		this.careerYears = recruitBoard.getCareerYears();
+		this.schoolStatus = recruitBoard.getSchoolStatus();
+		this.workType = recruitBoard.getWorkType();
+		this.officeLocation = recruitBoard.getOfficeLocation();
+		this.salary = recruitBoard.getSalary();
+		this.content = recruitBoard.getContent();
+		this.closureDate = recruitBoard.getClosureDate();
+		this.regDate = recruitBoard.getRegDate();
+	}
+	
 	public int getNo() {
 		return no;
 	}

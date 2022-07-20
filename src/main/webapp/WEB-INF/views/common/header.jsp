@@ -25,16 +25,11 @@
 		for(Cookie c : cookies){
 			String name = c.getName();
 			String value = c.getValue();
-			System.out.println("[cookie] " + name + " = " + value);
+			//System.out.println("[cookie] " + name + " = " + value);
 			
 			}
 	}
  %>
-<%
-
-
-
-%>
 
 
 <!DOCTYPE html>
