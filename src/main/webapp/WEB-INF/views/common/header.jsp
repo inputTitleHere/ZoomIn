@@ -10,6 +10,15 @@
 	System.out.println("msg@jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg"); 
 	Member loginMember = (Member) session.getAttribute("loginMember");
+	ApplicantMember am=null;
+	RecruitMember rm=null;
+	
+	if(loginMember instanceof ApplicantMember){
+		am=(ApplicantMember)loginMember;
+	}else if(loginMember instanceof RecruitMember){
+		rm=(RecruitMember)loginMember;
+	}
+	
 	
 	Cookie[] cookies = request.getCookies();
 	if(cookies != null){
@@ -21,6 +30,12 @@
 			}
 	}
  %>
+<%
+
+
+
+%>
+
 
 <!DOCTYPE html>
 <html>
