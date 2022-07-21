@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.common.ZoominUtils"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -31,7 +32,9 @@
 		for(CompanyReview companyReview : list){
 %>
 		<tr>
-			<td><a href="<%= request.getContextPath() %>/review/company/companyReviewBoard"><%= companyReview.getNo() %></a></td>
+			<td>
+				<a href="<%= request.getContextPath() %>/review/company/companyReviewBoard?no=<%= companyReview.getNo() %>"><%= companyReview.getNo() %></a>
+			</td>
 			<td>
 				<%= companyReview.getCompanyNo() %>
 			</td>

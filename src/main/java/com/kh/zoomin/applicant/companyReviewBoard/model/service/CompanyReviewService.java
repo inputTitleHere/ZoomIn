@@ -51,7 +51,6 @@ public class CompanyReviewService {
 		Connection conn = getConnection();
 		int result = 0;
 		try {
-			// 게시글 수정
 			result = companyReviewDao.updateCompanyReview(conn, companyReview);
 			commit(conn);
 		} catch (Exception e) {

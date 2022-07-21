@@ -3,8 +3,9 @@ package com.kh.zoomin.applicant.companyReviewBoard.model.dto;
 import java.sql.Date;
 
 import com.kh.zoomin.member.dto.Member;
+import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 
-public class CompanyReview extends Member{
+public class CompanyReview{
 
 	private int no;
 	private int uid;
@@ -20,12 +21,12 @@ public class CompanyReview extends Member{
 	private Date regDate;
 	
 	public CompanyReview() {
-		super(2);
+		super();
 	}
 
 	public CompanyReview(int no, int uid, String companyNo, int categoryNumber, String content, int stars,
 			int workLifeBalance, int levelUp, int workIntensity, int potential, int salarySatisfaction, Date regDate) {
-		super(2);
+		super();
 		this.no = no; // 회사리뷰 고유번호
 		this.uid = uid;
 		this.companyNo = companyNo;
@@ -39,9 +40,22 @@ public class CompanyReview extends Member{
 		this.salarySatisfaction = salarySatisfaction;
 		this.regDate = regDate;
 	}
+	
+	public CompanyReview(CompanyReview companyReview) {
+		this.no = companyReview.getNo();
+		this.uid = companyReview.getUid();
+		this.companyNo = companyReview.getCompanyNo();
+		this.categoryNumber = companyReview.getCategoryNumber();
+		this.content = companyReview.getContent();
+		this.stars = companyReview.getStars();
+		this.workLifeBalance = companyReview.getWorkLifeBalance();
+		this.levelUp = companyReview.getLevelUp();
+		this.workIntensity = companyReview.getWorkIntensity();
+		this.potential = companyReview.getPotential();
+		this.salarySatisfaction = companyReview.getSalarySatisfaction();
+		this.regDate = companyReview.getRegDate();
+	}
 
-	
-	
 	public int getNo() {
 		return no;
 	}
@@ -137,7 +151,7 @@ public class CompanyReview extends Member{
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "CompanyReview [no=" + no + ", uid=" + uid + ", companyNo=" + companyNo + ", categoryNumber="
@@ -145,9 +159,5 @@ public class CompanyReview extends Member{
 				+ ", levelUp=" + levelUp + ", workIntensity=" + workIntensity + ", potential=" + potential
 				+ ", salarySatisfaction=" + salarySatisfaction + ", regDate=" + regDate + "]";
 	}
-	
-	
-	
-	
 	
 }

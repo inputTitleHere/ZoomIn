@@ -49,10 +49,8 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			// 사용자 입력값 처리
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));
-			uid = 5;
 			String companyNo = request.getParameter("company_no");
 			int categoryNumber = Integer.parseInt(request.getParameter("category_number"));
-			
 			String content = request.getParameter("content");
 			int stars = Integer.parseInt(request.getParameter("stars"));
 			int workLifeBalance = Integer.parseInt(request.getParameter("work_life_balance"));
@@ -60,18 +58,19 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			int workIntensity = Integer.parseInt(request.getParameter("work_intensity"));
 			int potential = Integer.parseInt(request.getParameter("potential"));
 			int salarySatisfaction = Integer.parseInt(request.getParameter("salary_satisfaction"));
-			companyReview = new CompanyReviewExt(uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
+			companyReview = new CompanyReview(0, uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
+			System.out.println("companyReviewEnroll = " + companyReview);
 			
-			companyReview.setUid(uid);
-			companyReview.setCompanyNo(companyNo);
-			companyReview.setCategoryNumber(categoryNumber);
-			companyReview.setContent(content);
-			companyReview.setStars(stars);
-			companyReview.setWorkLifeBalance(workLifeBalance);
-			companyReview.setLevelUp(levelUp);
-			companyReview.setWorkIntensity(workIntensity);
-			companyReview.setPotential(potential);
-			companyReview.setSalarySatisfaction(salarySatisfaction);
+//			companyReview.setUid(uid);
+//			companyReview.setCompanyNo(companyNo);
+//			companyReview.setCategoryNumber(categoryNumber);
+//			companyReview.setContent(content);
+//			companyReview.setStars(stars);
+//			companyReview.setWorkLifeBalance(workLifeBalance);
+//			companyReview.setLevelUp(levelUp);
+//			companyReview.setWorkIntensity(workIntensity);
+//			companyReview.setPotential(potential);
+//			companyReview.setSalarySatisfaction(salarySatisfaction);
 			
 			System.out.println("companyReview = " + companyReview);
 			// 업무로직

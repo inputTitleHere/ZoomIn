@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
+import com.kh.zoomin.common.ZoominMvcUtils;
+import com.kh.zoomin.common.ZoominUtils;
 
 /**
  * Servlet implementation class CompanyReviewViewServlet
@@ -25,10 +27,17 @@ public class CompanyReviewViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-//			int no = Integer.parseInt(request.getParameter("no"));
-			int no = 22; // 9번 게시글의 상세리뷰 보기 가능
+			int no = Integer.parseInt(request.getParameter("no"));
 			
 			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
+			System.out.println("companyReview = " + companyReview);
+			
+			//xss 공격대비
+			companyReview.setContent(ZoominUtils.escapeXml(companyReview.getContent()));
+			
+			// 개행문자 변환처리
+			companyReview.setContent(ZoominUtils.convertLineFeedToBr(companyReview.getContent()));
+			
 			request.setAttribute("companyReview", companyReview);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewView.jsp")
 				.forward(request, response);

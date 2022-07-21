@@ -9,20 +9,25 @@
 <title>Insert title here</title>
 </head>
 <style type="text/css">
+
 #account {
 	text-allign: center;
 	width: 
 }
+
 ul li {
 	list-style: none;
 }
+
 a {
 	text-decoration: none;
 	color: #333;
 }
+
 #manu_a {
 	text-allign: center;
 }
+
 #menu {
 	font:bold 15px "malgun gothic";
 	width:150px;
@@ -32,12 +37,15 @@ a {
 	line-height: 50px;
 	margin: 0 auto;
 	text-allign: center;
+
 }
+
 #menu > ul > li {
 	float:left;
 	width:150px;
 	position:relative;
 }
+
 #menu > ul > li > ul {
 	width: 130px;
 	display: none;
@@ -45,13 +53,16 @@ a {
 	font-size: 14px;
 	background: white;
 }
+
 #menu > ul > li:hover > ul {
 	display:block;
 }
+
 #menu > ul > li > ul > li:hover {
 	background: orange;
 	transition: ease 2s;
 }
+
 </style>
 <body>
 	<header>

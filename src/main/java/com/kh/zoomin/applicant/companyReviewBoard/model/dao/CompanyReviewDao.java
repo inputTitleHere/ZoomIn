@@ -143,7 +143,7 @@ public class CompanyReviewDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			throw new CompanyReviewException("리뷰 수정 오류", e);
+			throw new CompanyReviewException("회사 리뷰 업데이트 오류", e);
 		} finally {
 			close(pstmt);
 		}
@@ -162,7 +162,7 @@ public class CompanyReviewDao {
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			throw new CompanyReviewException("리뷰 삭제 오류", e);
+			throw new CompanyReviewException("회사 리뷰 삭제 오류", e);
 		} finally {
 			close(pstmt);
 		}

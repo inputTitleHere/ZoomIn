@@ -7,10 +7,10 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%> 
 <%
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
-	Member lm = (Member)session.getAttribute("loginMember");
+	/* Member lm = (Member)session.getAttribute("loginMember");
 	if(loginMember instanceof ApplicantMember){
 		am = (ApplicantMember)session.getAttribute("loginMember");
-	}
+	} */
 %>
 <style>
 .edit-button {
@@ -34,11 +34,18 @@ h1 {
 </style>
 <section id="company-review-view-container">
 	<h1>리뷰 상세보기</h1>
-	<!-- companyReviewViewServlet에 int no= 9; 지정후, 웹에서 9번 글 찾아서 들어옴 -->
+	<!-- 작성자 / 관리자만 버튼이 보이게 함 / 맨 아래도 있음-->
+	<%-- <%
+		boolean canEdit = am != null &&(am.getId().equals(companyReview.getUid()) || am.getMemberType() == 0);
+		if(canEdit){
+	%> --%>
 	<div class="edit-button">
 		<button id="update-button1" onclick="updateBoard()">수정</button>
 		<button id="update-button2" onclick="deleteBoard()">삭제</button>
 	</div>
+	<%-- <%
+		}
+	%> --%>
 	<table class="company-review-list">
 		<tr>
 			<th>회사명</th>
@@ -95,16 +102,22 @@ h1 {
 
 </table>
 </section>
-
+<%-- <% if(canEdit) {%> --%>
+<form 
+	action="<%= request.getContextPath() %>/review/company/companyReviewDelete" 
+	method="post"
+	name="companyReviewDelFrm">
+	<input type="text" name="no" value="<%= companyReview.getNo() %>"/>
+</form>
 <script>
 const deleteBoard = () => {
-	confirm("삭제하시겠습니까?");
-	document.boardDelFrm.submit();
+	if(confirm("삭제하시겠습니까?"));
+		document.companyReviewDelFrm.submit();
 };
 
 const updateBoard = () => {
 	location.href = "<%= request.getContextPath() %>/review/company/companyReviewUpdate?no=<%= companyReview.getNo() %>"
 };
 </script>
-
+<%-- <% } %> --%>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

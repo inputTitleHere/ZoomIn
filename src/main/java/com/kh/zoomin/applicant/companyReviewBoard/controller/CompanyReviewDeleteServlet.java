@@ -12,7 +12,7 @@ import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewSer
 /**
  * Servlet implementation class CompanyReviewDeleteServlet
  */
-@WebServlet("/CompanyReviewDeleteServlet")
+@WebServlet("/review/company/companyReviewDelete")
 public class CompanyReviewDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();
@@ -23,11 +23,12 @@ public class CompanyReviewDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println("companyReviewNo = " + no);
 			
 			int result = companyReviewService.deleteCompanyReview(no);
 			
 			request.getSession().setAttribute("msg", "리뷰를 성공적으로 삭제했습니다.");
-			response.sendRedirect(request.getContextPath() + "CompanyReviewViewServlet");
+			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

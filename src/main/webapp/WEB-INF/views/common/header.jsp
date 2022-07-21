@@ -46,6 +46,7 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
+
 //isempty 함수  null 체크용 -김승환-
 function isEmpty(value){
 	console.log(value);
@@ -57,6 +58,7 @@ function isEmpty(value){
 		return false;
 	}
 }
+
 </script>	
 
 </head>
@@ -65,6 +67,7 @@ function isEmpty(value){
 // 여기서 로그인 관련 처리를 수행한다.
 // if not login(by any means) then show login option
 // else show respective menus of either recruiter or applicant.
+
 //System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 if (loginMember == null) {
 %>
