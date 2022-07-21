@@ -54,6 +54,21 @@ public class ApplicantService {
 		return result;
 	}
 
+	public int updateApplicant(ApplicantMember amember) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = ad.updateApplicant(conn, amember);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e; 
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 
 
 }

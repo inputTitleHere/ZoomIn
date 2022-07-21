@@ -111,6 +111,28 @@ public class ApplicantDao {
 		return result;
 	}
 
+	public int updateApplicant(Connection conn, ApplicantMember amember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateApplicant");
+		//sql = update applicant_member set name = ?, phone = ?, email = ? where id = ?
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, amember.getName());
+			pstmt.setString(2, amember.getPhone());
+			pstmt.setString(3, amember.getEmail());
+			pstmt.setString(4, amember.getId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원정보 수정 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 
