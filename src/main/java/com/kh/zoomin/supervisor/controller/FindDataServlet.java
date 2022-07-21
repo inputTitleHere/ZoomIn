@@ -43,6 +43,7 @@ public class FindDataServlet extends HttpServlet {
 		String jsonStrVisit = gson.toJson(visitList);
 		String jsonStrBoard = gson.toJson(boardList);
 		//System.out.println("jsonStrVisit = " + jsonStrVisit); //{"day":"7월 12, 2022","cnt":1},{"day":"7월 15, 2022","cnt":1} 이렇게 넘어옴
+		//System.out.println("jsonStrBoard = " + jsonStrBoard);
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(jsonStrVisit);
 		//response.getWriter().print(jsonStrBoard);

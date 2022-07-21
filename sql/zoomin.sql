@@ -370,6 +370,7 @@ delete from company_review where no = '22';
 select * from(select row_number () over (order by c.reg_date desc) rnum, no, company_name, content, id, c.reg_date from company_review c join applicant_member a on c."uid" = a."uid" join company_table t on c.company_no = t.company_no)where  rnum between 11 and 20;
 --채용게시판 전체조회
 select * from (select row_number () over (order by r.reg_date desc) rnum, r.no, c.domain, company_name, m.name, title, r.reg_date, closure_date from recruit_board r join category c on r.category_number = c.category_number join company_table t on t.company_no = r.company_no join recruit_member m on r."uid" = m."uid")where rnum between 6 and 10 ;
+
 select * from recruit_board;
 
 commit;
