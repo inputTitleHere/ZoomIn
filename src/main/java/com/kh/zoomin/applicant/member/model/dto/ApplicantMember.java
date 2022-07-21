@@ -14,9 +14,6 @@ public class ApplicantMember extends Member{
 	private String email;
 	private Date regDate;
 
-	public ApplicantMember() {
-		super(2);
-	}
 
 	public ApplicantMember(int uid, String name, String id, String password, String phone,
 			String email, Date regDate) {

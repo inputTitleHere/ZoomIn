@@ -70,7 +70,7 @@ public class RecruitDao {
 			supervisor = true;
 		} 
 		Date regDate = rset.getDate("reg_date");
-		return new RecruitMember(1, uid, companyNo, name, id, password, email, supervisor, regDate);
+		return new RecruitMember(uid, companyNo, name, id, password, email, supervisor, regDate);
 
 	}
 
