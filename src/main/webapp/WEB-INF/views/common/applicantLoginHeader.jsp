@@ -2,68 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/common/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/applicant/applicantLoginHeader.css"/>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style type="text/css">
 
-#account {
-	text-allign: center;
-	z-index:10;
-}
-
-ul li {
-	list-style: none;
-}
-
-a {
-	text-decoration: none;
-	color: #333;
-}
-
-#manu_a {
-	text-allign: center;
-}
-
-#menu {
-	font:bold 15px "malgun gothic";
-	width:150px;
-	height: 50px;
-	background: #cccccc05;
-	color: black;
-	line-height: 50px;
-	margin: 0 auto;
-	text-allign: center;
-}
-
-
-#menu ul li {
-	float:left;
-	width:150px;
-	position:relative;
-}
-
-#menu ul li ul {
-	display: none;
-	width: 130px;
-	position: absolute;
-	font-size: 14px;
-	background: white;
-}
-
-#menu ul li:hover ul {
-	display:block;
-}
-
-#menu ul li ul li:hover {
-	background: orange;
-	transition: ease 2s;
-}
-
-</style>
 <body>
 	<header>
 		<div style="width: 168%;" id="account">
