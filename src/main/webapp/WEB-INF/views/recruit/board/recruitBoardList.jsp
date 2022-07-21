@@ -52,10 +52,17 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 				class="closure-date">마감일 : <%=closureDate%></span>
 			</td>
 			<td colspan="3" class="board-title">
-				<%-- 여기에는 Title을 넣는다. --%> <%-- 해당 게시글로 이동하는 링크도 만든다. --%> <a
-				href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=recruitBoard.getNo()%>"
-				target="_blank"> <%=ZoominUtils.escapeXml(recruitBoard.getTitle())%>
-			</a>
+				<%-- 여기에는 Title을 넣는다. --%> <%-- 해당 게시글로 이동하는 링크도 만든다. --%>
+				<%
+				if(loginMember.getMemberType()==2){
+				%> 
+				<a href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=recruitBoard.getNo()%>&uid=<%=am.getUid()%>" target="_blank">
+				<%
+				}else{ %> 
+				<a href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=recruitBoard.getNo()%>" target="_blank">
+				<%} %>
+					<%=ZoominUtils.escapeXml(recruitBoard.getTitle())%>
+				</a>
 			</td>
 
 		</tr>
@@ -106,12 +113,11 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 				<%-- 여기에 원래 기업 아이콘을 삽입하도록 한다. 지금은 기업번호로 대체한다.--%> <%=recruitBoard.getCompanyNo()%>
 			</td>
 			<td colspan="3" class="board-title">
-				<%-- 여기에는 Title을 넣는다. --%> <%-- 해당 게시글로 이동하는 링크도 만든다. --%> <a
-				href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=recruitBoard.getNo()%>"
-				target="_blank"> <%=ZoominUtils.escapeXml(recruitBoard.getTitle())%>
+				<%-- 여기에는 Title을 넣는다. --%> <%-- 해당 게시글로 이동하는 링크도 만든다. --%> 
+				<a href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=recruitBoard.getNo()%>" target="_blank"> <%=ZoominUtils.escapeXml(recruitBoard.getTitle())%>
 			</a>
 			</td>
-			<%if(loginMember.getMemberType()==1){ %>
+			<%if(loginMember != null && loginMember.getMemberType()==1){ %>
 			<td rowspan="2" class="board-remaining-days">
 			<%}else{ %>
 			<td rowspan="1" class="board-remaining-days">
@@ -136,6 +142,7 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 				<%-- 연봉정도 --%> 
 				연봉 : <%=recruitBoard.getSalary()%>
 			</td>
+			<%--
 			<%if(loginMember.getMemberType()==2){ %>
 				<td>
 					<div class="button-wrapper">
@@ -143,6 +150,7 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 						<form action="" class="fav-frm">
 							<input type="hidden" value="<%=((ApplicantMember)loginMember).getUid() %>" name="uid" id="uid" />
 							<input type="hidden" value="<%=recruitBoard.getNo() %>" name="boardNo" id="boardNo" />
+							<input type="hidden" value="" name="isFavourited" id="isFavourited"/>
 							<button>찜하기</button>
 						</form>
 						</div>
@@ -156,6 +164,7 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 					</div>
 				</td>
 			<%} %>
+			--%>
 		</tr>
 
 	</table>
@@ -166,26 +175,22 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 	<%=request.getAttribute("pagebar")%>
 </section>
 
+<%--
 <%if(loginMember.getMemberType()==2){%>
-
-<form action="<%=request.getContextPath()%>/recruit/board/enrollRecruitBoard" method="post" name="enrollRecruitBoard" id="enrollRecruitBoard">
-	<input type="hidden" value="<%=((ApplicantMember)loginMember).getUid() %>" name="uid" id="uid" />
-</form>
-
 <script>
-
-windows.addEventListener('load',()=>{
-	const favFrms=document.querySelectAll(".fav-frm");
-	const enrollFrms=document.querySelectAll(".enroll-frm");
+window.addEventListener('load',()=>{
+	const favFrms=document.querySelectorAll(".fav-frm");
+  const enrollFrms=document.querySelectorAll(".enroll-frm");
 	
 	favFrms.forEach((item)=>{
-		item.addEventListener('submit',()=>{
-			favourite();
+		item.addEventListener('submit',(e)=>{
+      e.preventDefault();
+			favourite(e);
 		})		
 	})
-	enrollFrms.forEach(item,()=>{
-		item.addEventListener('submit',()=>{
-			enroll();
+	enrollFrms.forEach((item)=>{
+		item.addEventListener('submit',(e)=>{
+			enroll(e);
 		})
 	})
 	
@@ -193,14 +198,21 @@ windows.addEventListener('load',()=>{
 
 
 
-const favourite=()=>{
-	
+const favourite=(e)=>{
+	console.log(e.target.boardNo.value);
+	console.log(e.target.uid.value);
 	// ajax처리할것.
 	$.ajax({
-			
+			url:`<%=request.getContextPath()%>/recruit/board/addFavourite?boardNo=${e.target.boardNo.value}&${e.target.uid.value}`,
+      success(response){
+        console.log("CONNECTION SUCCESS");
+      }
 	});
 };
-const enroll=()=>{
+const enroll=(e)=>{
+  // e으로 form이 들어옴
+  console.log(e.target.boardNo.value);
+	console.log(e.target.uid.value);
 	// ajax처리
 	$.ajax({
 		
@@ -211,6 +223,7 @@ const enroll=()=>{
 </script>
 
 <%} %>
+--%>
 <br />
 <br />
 <br />

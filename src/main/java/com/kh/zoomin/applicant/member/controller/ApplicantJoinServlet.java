@@ -52,7 +52,7 @@ public class ApplicantJoinServlet extends HttpServlet {
 			
 			//업무로직 
 			int result = as.addApplicant(amember); 
-			System.out.println("result@MemberEnrollServlet = " + result);
+			System.out.println("result@ApplicantJoinServlet = " + result);
 			
 			//응답
 			HttpSession session = request.getSession();

@@ -37,7 +37,7 @@
 			</div>
 			<button type="submit" class="btn-btn-primary form-control">로그인</button>
 			<button class="btn btn-lg btn-secondary btn-block" type="button"
-				onclick="location.href='joinMember.jsp'">회원가입</button>
+				onclick="location.href='<%= request.getContextPath() %>/recruit/join';">회원가입</button>
 			</form>
 		</div>
 	</div>

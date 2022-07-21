@@ -104,6 +104,20 @@ create table recruit_job_bridge(
     constraint fk_recruit_job_bridge_job_category_number foreign key(job_category_number) references job_category(category_number) on delete set null
 );
 
+create table FAVOURITE(
+    "uid" number,
+    recruit_board_no number,
+    constraint fk_favourite_uid foreign key("uid") references applicant_member,
+    constraint fk_favourite_recruit_board_no foreign key(recruit_board_no) references recruit_board
+);
+
+
+create table ENROLL_TABLE(
+    "uid" number,
+    recruit_board_no number,
+    constraint fk_enroll_table_uid foreign key("uid") references applicant_member,
+    constraint fk_enroll_table_board_no foreign key(recruit_board_no) references recruit_board
+);
 
 -- 백승윤 END --
 -- 박우석 START --
@@ -259,6 +273,106 @@ alter table resume add constraint ck_gender check (gender in ('M', 'F'));
 alter table resume add constraint ck_school_type check (school_type in ('H1', 'C2', 'C3', 'C4'));
 alter table resume add constraint ck_school_status check (school_status in ('A', 'B', 'C'));
 
+--방문자용 통계 테이블
+--drop table visit
+create table visit (
+	v_date date not null
+);
+select * from visit;
+select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
+insert into visit values (to_date(sysdate, 'yyyy-mm-dd'));
+insert into visit values (to_date('2022-07-11', 'yyyy-mm-dd'));
+insert into visit values (to_date('2022-07-12', 'yyyy-mm-dd'));
+insert into visit values (to_date('2022-07-13', 'yyyy-mm-dd'));
+insert into visit values (to_date('2022-07-14', 'yyyy-mm-dd'));
+insert into visit values (to_date('2022-07-15', 'yyyy-mm-dd'));
+
+--방문자 수 증가
+insert into visit values (sysdate);
+
+--오늘 방문자 수
+select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
+select sysdate from dual;
+--총 방문자수 
+select * from visit;
+
+--날짜별 방문자 수 
+select * from visit where v_date between to_date('2022-07-14', 'yyyy-mm-dd') and to_date('2022-07-14', 'yyyy-mm-dd') + 0.99999;
+
+commit;
+
+select count(*) from company_review where to_date(reg_date, 'yyyy-mm-dd') = to_date('2022-07-18', 'yyyy-mm-dd');
+select count(*) from salary_review where to_date(reg_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
+
+--today확인용 게시글 insert
+select * from salary_review;
+insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, sysdate);
+select * from company_review;
+
+--게시판 전체 수 (union all)
+select 
+    sum(Cnt)
+from (
+    select count(*) as Cnt from salary_review
+    union all
+    select count(*) as Cnt from company_review
+);
+--select sum(Cnt) from (select count(*) as Cnt from salary_review union all select count(*) as Cnt from company_review)
+
+--게시글 날짜별 조회하기
+--select count(*) from(select "uid", reg_date from salary_review  union all  select "uid", reg_date from company_review) where reg_date between to_date(? , 'yyyy-mm-dd') and to_date(? , 'yyyy-mm-dd') + 0.99999
+select
+    *
+from(
+    select "uid", reg_date from salary_review
+    union all
+    select "uid", reg_date from company_review
+)
+where reg_date between to_date('2022-07-18' , 'yyyy-mm-dd') and to_date('2022-07-18' , 'yyyy-mm-dd') + 0.99999;
+
+--최근 일주일 데이터 가져오기(방문자)
+-- select trunc(v_date) as "date", count(*) cnt from  visit where  v_date >= to_char((sysdate-7), 'yyyymmdd') group by  trunc(v_date)
+select 
+   (v_date) as "date",
+    count(*) cnt
+from 
+    visit 
+where
+     v_date >= to_char((sysdate-7), 'yyyymmdd') 
+group by 
+    (v_date)
+order by
+    1;
+
+---최근 일주일 데이터 가져오기(게시판)
+--select trunc(reg_date) as "date", count(*) cnt from(select "uid", reg_date from salary_review union all  select "uid", reg_date from company_review) where reg_date >= to_char((sysdate-7), 'yyyymmdd') group by trunc(reg_date)
+select
+    trunc(reg_date) as "date",
+    count(*) cnt
+from(
+    select "uid", reg_date from salary_review
+    union all
+    select "uid", reg_date from company_review
+)
+where 
+    reg_date >= to_char((sysdate-7), 'yyyymmdd')
+group by 
+    trunc(reg_date);
+--게시판관리
+select * from salary_review;
+select * from category;
+select * from position_category;
+--연봉게시판 전체조회 
+select * from(select row_number () over (order by s.reg_date desc) rnum,no,domain,company_name,id,salary,work_year,position_name,s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join company_table m on s.company_no = m.company_no join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number)where  rnum between 11 and 20;
+--회사리뷰게시판 전체조회
+select * from company_review;
+delete from company_review where no = '22';
+select * from(select row_number () over (order by c.reg_date desc) rnum, no, company_name, content, id, c.reg_date from company_review c join applicant_member a on c."uid" = a."uid" join company_table t on c.company_no = t.company_no)where  rnum between 11 and 20;
+--채용게시판 전체조회
+select * from (select row_number () over (order by r.reg_date desc) rnum, r.no, c.domain, company_name, m.name, title, r.reg_date, closure_date from recruit_board r join category c on r.category_number = c.category_number join company_table t on t.company_no = r.company_no join recruit_member m on r."uid" = m."uid")where rnum between 6 and 10 ;
+select * from recruit_board;
+
+commit;
 -- 이윤정 END --
 
 --김승환 테스트용

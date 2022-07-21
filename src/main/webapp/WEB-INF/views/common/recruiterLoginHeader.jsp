@@ -8,8 +8,8 @@
 <body>
 <header>
 	<div id="account">
-		<a href="" id="userInfo">회원정보수정</a>
-		<a href ="" id="logOut">로그아웃</a>
+		<a href="<%= request.getContextPath() %>/applicant/mypage" id="userInfo">회원정보</a>
+		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">로그아웃</a>
 	</div>
 	<div id="logodiv">
 		<a href="<%=request.getContextPath()%>/recruit/board/recruitBoardList">

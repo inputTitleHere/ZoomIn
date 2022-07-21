@@ -110,6 +110,84 @@ public class RecruitBoardService {
 		
 		return result;
 	}
+
+	public boolean isRecruitBoardFaved(int boardNo, int uid) {
+		boolean result=false;
+		Connection conn =getConnection();
+		result=rbd.isRecruitBoardFaved(boardNo, uid, conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public boolean isRecruitBoardEnrolled(int boardNo, int uid) {
+		boolean result=false;
+		Connection conn =getConnection();
+		result=rbd.isRecruitBoardEnrolled(boardNo, uid, conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public int setFavourite(int boardNo, int applicantUid) {
+		int result =0;
+		Connection conn = getConnection();
+		try {
+			result = rbd.setFavourite(boardNo, applicantUid, conn);
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
+		}
+		return result;
+	}
+
+	public int removeFavourite(int boardNo, int applicantUid) {
+		int result=0;
+		Connection conn =getConnection();
+		try {
+			result=rbd.removeFavourite(boardNo, applicantUid, conn);
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
+		}
+		return result;
+	}
+
+	public int setEnroll(int boardNo, int applicantUid) {
+		int result =0;
+		Connection conn = getConnection();
+		try {
+			result = rbd.setEnroll(boardNo, applicantUid, conn);
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
+		}
+		return result;
+	}
+
+	public int removeEnroll(int boardNo, int applicantUid) {
+		int result=0;
+		Connection conn =getConnection();
+		try {
+			result=rbd.removeEnroll(boardNo, applicantUid, conn);
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
+		}
+		return result;
+	}
 	
 	// ====================== 메소드 영역 ============================//
 	

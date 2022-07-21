@@ -6,6 +6,9 @@ public class RecruitBoardExt extends RecruitBoard {
 
 	// 임시로 만들어둠 아직 사용하지 않음 2022/07/17
 	private int enrolledCount;
+	private boolean isFavourited;
+	private boolean isEnrolled;
+	
 	
 	public RecruitBoardExt() {
 		super();
@@ -25,6 +28,13 @@ public class RecruitBoardExt extends RecruitBoard {
 				content, closureDate, regDate);
 		this.enrolledCount = enrolledCount;
 	}
+	
+	public RecruitBoardExt(RecruitBoard recruitBoard,boolean isFavourited, boolean isEnrolled) {
+		super(recruitBoard);
+		this.isFavourited=isFavourited;
+		this.isEnrolled=isEnrolled;
+	}
+	
 
 	public int getEnrolledCount() {
 		return enrolledCount;
