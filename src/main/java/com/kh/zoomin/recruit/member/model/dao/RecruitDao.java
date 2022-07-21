@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.member.exception.MemberException;
-import com.kh.zoomin.recruit.member.RecruitMember;
 
 public class RecruitDao {
 	

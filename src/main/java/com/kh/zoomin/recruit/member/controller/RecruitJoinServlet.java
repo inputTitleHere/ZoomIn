@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.common.ZoominMvcUtils;
-import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.recruit.member.model.service.RecruitService;
 
 /**

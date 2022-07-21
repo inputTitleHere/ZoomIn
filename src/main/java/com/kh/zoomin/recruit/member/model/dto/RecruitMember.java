@@ -1,4 +1,4 @@
-package com.kh.zoomin.recruit.member;
+package com.kh.zoomin.recruit.member.model.dto;
 
 import java.sql.Date;
 
@@ -29,7 +29,7 @@ public class RecruitMember extends Member{
 		this.regDate = regDate;
 	}
 	
-	
+
 	public int getUid() {
 		return uid;
 	}
