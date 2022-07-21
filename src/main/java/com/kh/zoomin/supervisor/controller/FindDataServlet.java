@@ -28,7 +28,7 @@ public class FindDataServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//date별 방문자 수 가져오기 : select trunc(v_date) as "date", count(*) cnt from  visit where  v_date >= to_char((sysdate-7), 'yyyymmdd') group by trunc(v_date)
+		//date별 방문자 수 가져오기
 		List<WeekData> visitList = new ArrayList<>();
 		visitList = supervisorService.getVisitData(); 
 		//System.out.println("visitList = " + visitList);
