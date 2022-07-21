@@ -12,7 +12,7 @@
 
 #account {
 	text-allign: center;
-	width: 
+	ㅋ
 }
 
 ul li {
