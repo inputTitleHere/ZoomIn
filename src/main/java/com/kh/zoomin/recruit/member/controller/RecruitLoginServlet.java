@@ -59,7 +59,7 @@ public class RecruitLoginServlet extends HttpServlet {
 			
 			//3. 리다이렉트
 //			response.sendRedirect("http://localhost:9090/zoomin/recruit/board/recruitBoardList");
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/recruit/board/recruitBoardList");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
