@@ -18,7 +18,7 @@ public class RecruitMember extends Member{
 
 	public RecruitMember(int memberType, int uid, String companyNo, String name, String id, String password,
 			String email, boolean supervisor, Date regDate) {
-		super(memberType);
+		super(1);
 		this.uid = uid;
 		this.companyNo = companyNo;
 		this.name = name;
@@ -27,10 +27,6 @@ public class RecruitMember extends Member{
 		this.email = email;
 		this.supervisor = supervisor;
 		this.regDate = regDate;
-	}
-	
-	public RecruitMember(int uid, String companyNo, String name, String id, String password, String email, Boolean supervisor, Date regDate) {
-		this(1, uid, companyNo, name, id, password, email, supervisor, regDate);
 	}
 
 	public int getUid() {

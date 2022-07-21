@@ -13,15 +13,10 @@ public class ApplicantMember extends Member{
 	private String phone;
 	private String email;
 	private Date regDate;
-	
-	public ApplicantMember(int uid, String name, String id, String password, String phone, String email, Date regDate) {
-		this(2, uid, name, id, password, phone, email, regDate);
-	}
 
-
-	public ApplicantMember(int memberType, int uid, String name, String id, String password, String phone,
+	public ApplicantMember(int uid, String name, String id, String password, String phone,
 			String email, Date regDate) {
-		super(memberType);
+		super(2);
 		this.uid = uid;
 		this.name = name;
 		this.id = id;
