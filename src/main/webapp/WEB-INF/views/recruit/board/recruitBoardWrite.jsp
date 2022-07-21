@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
