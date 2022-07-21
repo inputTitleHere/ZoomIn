@@ -54,10 +54,10 @@ public class CompanyBoardList extends HttpServlet {
 		// 기본적인 채용게시판 처리
 		try {
 			int currentPage = 1;
-			int itemsPerPage = 9;
+			int itemsPerPage = 3;
 			
 			try {
-//				currentPage = Integer.parseInt(request.getParameter("cPage"));
+				currentPage = Integer.parseInt(request.getParameter("cPage"));
 			} catch (NumberFormatException e) {
 			}
 
@@ -70,19 +70,23 @@ public class CompanyBoardList extends HttpServlet {
 			
 
 			//컴퍼니 테이블 데이터 불러오기
+			CompanyInfo res = new CompanyInfo();
 			List<CompanyInfo> result = applicantInfoService.findByCompany(param);
 			request.setAttribute("boardList", result);
 			
 			// 컴퍼니 테이블 총 데이터 수 조회하기
 			int totalCount = applicantInfoService.totalCompanyCount();
 			String url = request.getRequestURI();
-			String pagebarHTML = ZoominUtils.getPageBar(currentPage, itemsPerPage, totalCount, url);
+			String pagebarHTML = ZoominUtils.getApplicantPageBar(currentPage, itemsPerPage, totalCount, url);
 			request.setAttribute("pagebar", pagebarHTML);
-
+			res.setResult(result);
+			res.setPageBar(pagebarHTML);
+			
+			System.out.println(pagebarHTML);
 			// 3. view 처리
 			// 2. 응답 json으로 작성
 			Gson gson = new Gson();
-			String jsonStr = gson.toJson(result);
+			String jsonStr = gson.toJson(res);
 			System.out.println("jsonStr = " + jsonStr);
 			
 			response.setContentType("application/json; charset=utf-8");

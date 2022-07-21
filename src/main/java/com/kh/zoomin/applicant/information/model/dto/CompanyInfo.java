@@ -1,10 +1,14 @@
 package com.kh.zoomin.applicant.information.model.dto;
 
+import java.util.List;
+
 public class CompanyInfo {
 	private String companyNo;
 	private String companyName;
 	private String companyLogo;
 	private String companyInfo;
+	private List<CompanyInfo> result;
+	private String pageBar;
 	public CompanyInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -15,6 +19,18 @@ public class CompanyInfo {
 		this.companyName = companyName;
 		this.companyLogo = companyLogo;
 		this.companyInfo = companyInfo;
+	}
+	public String getPageBar() {
+		return pageBar;
+	}
+	public void setPageBar(String pageBar) {
+		this.pageBar = pageBar;
+	}
+	public List<CompanyInfo> getResult() {
+		return result;
+	}
+	public void setResult(List<CompanyInfo> result) {
+		this.result = result;
 	}
 	public String getCompanyNo() {
 		return companyNo;
