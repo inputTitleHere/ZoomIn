@@ -15,7 +15,8 @@ System.out.println("@recruitBoardView.jsp : isFaved="+isFaved+", isEnrolled="+is
 <section id="recruit-board-view">
 	<%-- title 및 content에 대한 escapeXML처리함. --%>
 	<%
-	if(rm!=null && rb.getUid()==rm.getUid()){
+	//관리자 일때 수정, 삭제버튼 보이도록 했습니다(이윤정)
+	if((rm!=null && rb.getUid()==rm.getUid()) || (rm!=null && rm.isSupervisor())){
 	%>
 	<div class="edit-button-wrapper">
 		<button type="button" class="edit-button" id="update-button" onclick="updateBoard()">수정</button>
