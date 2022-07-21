@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.member.exception.MemberException;
-import com.kh.zoomin.recruit.member.RecruitMember;
 
 public class RecruitDao {
 	
@@ -70,7 +70,7 @@ public class RecruitDao {
 			supervisor = true;
 		} 
 		Date regDate = rset.getDate("reg_date");
-		return new RecruitMember(1, uid, companyNo, name, id, password, email, supervisor, regDate);
+		return new RecruitMember(uid, companyNo, name, id, password, email, supervisor, regDate);
 
 	}
 

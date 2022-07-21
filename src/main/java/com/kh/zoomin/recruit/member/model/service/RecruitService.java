@@ -5,7 +5,7 @@ import static com.kh.zoomin.common.JdbcTemplate.*;
 import java.sql.Connection;
 
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
-import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 
 public class RecruitService {
 	private RecruitDao rd = new RecruitDao();
