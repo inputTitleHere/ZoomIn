@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -18,6 +20,7 @@ import com.kh.zoomin.applicant.resume.model.dto.Resume;
 import com.kh.zoomin.applicant.resume.model.dto.SchoolType;
 import com.kh.zoomin.applicant.resume.model.dto.Status;
 import com.kh.zoomin.applicant.resume.model.exception.ResumeException;
+import com.kh.zoomin.recruit.board.exception.RecruitBoardException;
 
 
 public class ResumeDao {
@@ -167,5 +170,36 @@ public class ResumeDao {
 		}
 		return result;
 	}
+	// 백승윤 START
+	/**
+	 * 구인자가 자기 채용글에 지원한 구직자들의 리스트를 추출하는 쿼리입니다. 
+	 * @param boardNo
+	 * @param conn
+	 * @return
+	 */
+	public List<Resume> loadEnrolledList(int boardNo, Connection conn) {
+		List<Resume> result = new ArrayList<Resume>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+//		select * from RESUME where "uid" in (select "uid" from ENROLL_TABLE where recruit_board_no=?);
+		String sql = prop.getProperty("loadEnrolledList");
+		try{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleResumeResultSet(rset));
+			}
+		}catch (SQLException e) {
+			throw new RecruitBoardException("지원자 리스트 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// 백승윤 END
 
 }

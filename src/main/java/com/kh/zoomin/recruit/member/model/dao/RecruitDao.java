@@ -46,7 +46,7 @@ public class RecruitDao {
 				//다음행이 있을때 rset.next()에 의해 다음행 이동
 				rmember = handleMemberResultSet(rset);
 			}
-			System.out.println("rmember@dao = " + rmember);
+			//System.out.println("rmember@dao = " + rmember);
 
 		} catch (SQLException e) {
 			throw new MemberException("아이디가 존재하지 않습니다.", e);
