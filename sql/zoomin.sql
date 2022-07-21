@@ -381,3 +381,5 @@ delete from resume where resume_no=41;
 select  * from applicant_member;
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김테스트', 'ktest', 1234, 01055559999, 'ktest@mail.com', default);
 commit;
+select * from company_table;
+select * from (select  row_number() over(order by company_no) rnum, c.* from company_table c) b where rnum between 1 and 7 order by rnum asc;

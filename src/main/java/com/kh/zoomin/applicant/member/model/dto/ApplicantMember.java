@@ -25,7 +25,6 @@ public class ApplicantMember extends Member{
 		this.regDate = regDate;
 	}
 
-
 	public int getUid() {
 		return uid;
 	}

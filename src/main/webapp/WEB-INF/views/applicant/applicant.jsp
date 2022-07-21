@@ -17,22 +17,56 @@
 </section>
 <script>
 	document.getElementById("recruitInfo").onclick = (e) =>{
-		$(".context").empty();
-		var info = `<%@ include file="/WEB-INF/views/applicant/recruitInfo.jsp" %>`;
-		$(".context").append(info);
-	};
+	/* 	$(".context").empty();
+		$(".context").append(info);*/
+	}; 
 	
 	document.getElementById("companyInfo").onclick = (e) =>{
-		$(".context").empty();
-		var info = `<%@ include file="/WEB-INF/views/applicant/companyInfo.jsp" %>`;
-		$(".context").append(info);
+		companyAjax(1);
 	};
 	
 	document.getElementById("salaryInfo").onclick = (e) =>{
-		$(".context").empty();
-		var info = `<%@ include file="/WEB-INF/views/applicant/salaryInfo.jsp" %>`;
-		$(".context").append(info);
+		/* $(".context").empty();
+		$(".context").append(info); */
 	};
 	
+	function companyAjax(cPage){
+		$(".context").empty();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/CompanyBoardList?cPage="+cPage,
+			success(response){
+				console.log(response);
+				var cInfo = "<table class='allCompany'>\n";
+		      	for(var i =0; i < 3; i++){
+		      			cInfo += "<tr class='companyList'>\n";
+		      		for(var j =0; j < 3; j++){
+		      			if(response.result[i*3+j] == null){
+		      				cInfo += "<td></td>";	
+		      			}else{
+		      				cInfo += "<td class='company'>\n";
+		      				cInfo += response.result[i*3+j].companyName+"<br/>" +"<br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>" + response.result[i*3+j].companyNo + "<br/>" + "<br/>";
+		      				cInfo += "</td>\n";		      				
+		      			}
+		      		}
+		      			cInfo += "</tr>\n";
+		      	}
+		      		cInfo += "</table>\n";
+		      		cInfo += response.pageBar;
+		      		$(".context").append(cInfo);
+		      		
+		      		$(".paging").on("click",function(){
+		      			var id = this.id;
+		      			var page = id.substring(4);
+		      			if(page == 0){
+		      				page = -1;
+		      			}
+		      			companyAjax(page);
+		    			console.log("paging"+ page);
+		    		});
+			},
+			error:console.log
+		});
+	}
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
