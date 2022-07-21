@@ -17,7 +17,7 @@ import com.kh.zoomin.member.dto.Member;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 import com.kh.zoomin.recruit.board.dto.RecruitBoardReadMode;
 import com.kh.zoomin.recruit.board.service.RecruitBoardService;
-import com.kh.zoomin.recruit.member.RecruitMember;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 
 /**
  * Servlet implementation class MainRecruitBoardList

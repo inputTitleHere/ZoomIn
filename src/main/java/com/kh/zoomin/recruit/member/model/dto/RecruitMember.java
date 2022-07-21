@@ -1,4 +1,4 @@
-package com.kh.zoomin.recruit.member;
+package com.kh.zoomin.recruit.member.model.dto;
 
 import java.sql.Date;
 
@@ -16,9 +16,9 @@ public class RecruitMember extends Member{
 	private Date regDate;
 	
 
-	public RecruitMember(int memberType, int uid, String companyNo, String name, String id, String password,
+	public RecruitMember(int uid, String companyNo, String name, String id, String password,
 			String email, boolean supervisor, Date regDate) {
-		super(memberType);
+		super(1);
 		this.uid = uid;
 		this.companyNo = companyNo;
 		this.name = name;
@@ -29,9 +29,6 @@ public class RecruitMember extends Member{
 		this.regDate = regDate;
 	}
 	
-	public RecruitMember(int uid, String companyNo, String name, String id, String password, String email, Boolean supervisor, Date regDate) {
-		this(1, uid, companyNo, name, id, password, email, supervisor, regDate);
-	}
 
 	public int getUid() {
 		return uid;
