@@ -59,6 +59,7 @@ public class ApplicantDao {
 		return amember;
 	}
 
+
 	private ApplicantMember handleMemberResultSet(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
 		String name = rset.getString("name");
