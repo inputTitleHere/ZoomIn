@@ -1,0 +1,115 @@
+/* 메뉴관련스타일 */
+nav {background:rgb(255 159 3 / 25%); width:100%; margin-top:40px;}
+/* ul태그의 가운데정렬 */
+ul.super-nav{
+	margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 50px;
+    align-items: center;
+}
+ul.super-nav li { 
+	list-style-type: none; 
+	width: 8em; 
+	height: 2em;
+	float: left; 
+	text-align: center; 
+	/* 메뉴밑줄트랜지션용 */
+	position:relative;	
+}
+ul.super-nav li a {
+    /*a태그의 display기본값은 inline임*/
+    /* inline요소의 padding, margin은 제대로 동작하지 않음.(컨텐츠의 시각요소기준으로 제멋대로임	) */
+	display: block;
+	padding:.4em;
+	text-decoration: none;
+	color: #292929;
+}
+/* hover시 배경색 변경 */
+ul.super-nav li:hover{
+	background-color: #fea20094;
+}
+ul.super-nav li:hover > a{
+	color:#FFF; /* 글자색*/
+}
+/* 메뉴밑줄효과 */
+ul.super-nav li span.animate_line{
+	position: absolute;
+	/* position:absolute;=> display:block;으로 되면서, 너비, 높이를 가진다. */
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: #FCE72E;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+ul.super-nav li:hover span.animate_line{
+	width:100%;
+}
+
+/* 인덱스화면 그래프 */
+
+
+/* 회원관리 */
+#tbl-applicantMember, #tbl-recruitMember{
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 5px 5px;
+}
+tr, td, th{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+
+/* 게시판관리 */
+#tbl-salary-board{
+    margin: 5px 5px;
+    display: flex;
+    justify-content: center;
+}
+tr, td, th{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+/* 통계관리 */
+h1{
+	display: flex;
+    justify-content: center;
+}
+.date-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px;
+}
+#statistic-date-start, #statistic-date-end{
+	    margin: 10px 40px;
+}
+#btn-statistic{
+    display: flex;
+    justify-content: center;
+}
+button {
+	width: 200px;
+    height: 50px;
+    margin: 10px 40px;
+}
+.tbl-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+}
+#tbl-visit-statistic, #tbl-board-statistic{
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px;
+}
+tr, td, th{
+    border: 1px solid black;
+    padding: 30px;
+}

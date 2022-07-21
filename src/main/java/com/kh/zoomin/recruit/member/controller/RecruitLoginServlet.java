@@ -49,7 +49,7 @@ public class RecruitLoginServlet extends HttpServlet {
 				session.setAttribute("msg", message);
 				session.setAttribute("loginMember", rmember);
 				session.setAttribute("msg", "로그인 성공입니다.");
-				
+				System.out.println(rmember.getMemberType());
 			}
 			else {
 				//로그인 실패
@@ -57,6 +57,10 @@ public class RecruitLoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
 			}
 			
+			//관리자 로그인 (이윤정)
+			if(rmember.isSupervisor()) {
+				request.getRequestDispatcher("/WEB-INF/views/supervisor/supervisorIndex.jsp").forward(request, response);
+			}
 			//3. 리다이렉트
 //			response.sendRedirect("http://localhost:9090/zoomin/recruit/board/recruitBoardList");
 			response.sendRedirect(request.getContextPath()+"/recruit/board/recruitBoardList");
