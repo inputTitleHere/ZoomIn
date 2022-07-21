@@ -7,7 +7,7 @@
 <!-- section 태그 / div id="title" / h1 -> 변경 금지(공통 css 사용) -->
 
 <%
-	
+
 	int uid  = am.getUid();
 	
 	String result = (String)request.getAttribute("result");
