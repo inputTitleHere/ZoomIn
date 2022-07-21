@@ -12,11 +12,7 @@
 
 #account {
 	text-allign: center;
-<<<<<<< HEAD
-	ㅋ
-=======
 	z-index:10;
->>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 }
 
 ul li {
