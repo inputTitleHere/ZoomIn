@@ -8,7 +8,7 @@ public class RecruitBoard {
 	private int uid; // 게시글 작성자(구인자)의 고유번호이다.
 	private int categoryNumber; // 소속 카테고리 정보이다.
 	private String companyNo; // 사업자 등록번호는 문자열로 저장하였다.
-	private String title; //
+	private String title; // 제목이다.
 	private String careerYears; //
 	private String schoolStatus; //
 	private String workType; //
