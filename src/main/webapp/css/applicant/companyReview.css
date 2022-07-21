@@ -1,0 +1,37 @@
+h1{
+  text-align: center;
+}
+
+section{
+  width: fit-content;
+  height: fit-content;
+  margin: 0px auto;
+}
+
+.company-review-list {
+	border: 1px solid black;
+	border-collapse: collapse;
+	display: flex;
+
+}
+.company-review-list th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+.company-review-list td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#write-button {
+	align-items: flex-end;
+}
+
+#pagebar {
+	text-align: center;
+}
+
+#companyReview-btn-add {
+	text-align: right;
+	
+}
