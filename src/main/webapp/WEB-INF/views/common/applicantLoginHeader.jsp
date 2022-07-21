@@ -12,7 +12,11 @@
 
 #account {
 	text-allign: center;
+<<<<<<< HEAD
 	ㅋ
+=======
+	z-index:10;
+>>>>>>> branch 'master' of https://github.com/inputTitleHere/zoomin.git
 }
 
 ul li {
@@ -37,28 +41,28 @@ a {
 	line-height: 50px;
 	margin: 0 auto;
 	text-allign: center;
-
 }
 
-#menu > ul > li {
+
+#menu ul li {
 	float:left;
 	width:150px;
 	position:relative;
 }
 
-#menu > ul > li > ul {
-	width: 130px;
+#menu ul li ul {
 	display: none;
+	width: 130px;
 	position: absolute;
 	font-size: 14px;
 	background: white;
 }
 
-#menu > ul > li:hover > ul {
+#menu ul li:hover ul {
 	display:block;
 }
 
-#menu > ul > li > ul > li:hover {
+#menu ul li ul li:hover {
 	background: orange;
 	transition: ease 2s;
 }
@@ -69,16 +73,13 @@ a {
 		<div style="width: 168%;" id="account">
 			<div id="menu">
 				<ul>
-					<li><span class="menu">MENU</span>
+					<li>
+						<span class="menu">MENU</span>
 						<ul>
-							<li><a href="<%=request.getContextPath()%>/ResumeServlet"
-								id="writeResume">이력서 작성</a></li>
-							<li><a href="<%=request.getContextPath()%>/recruit/update"
-								id="recruitUpdate">회원정보수정</a></li>
-							<li><a href="<%=request.getContextPath()%>/recruit/delete"
-								id="recruitDelete">회원탈퇴</a></li>
-							<li><a href="<%=request.getContextPath()%>/recruit/logout"
-								id="logOut">로그아웃</a></li>
+							<li><a href="<%=request.getContextPath()%>/ResumeServlet"	id="writeResume">이력서 작성</a></li>
+							<li><a href="<%=request.getContextPath()%>/recruit/update" id="recruitUpdate">회원정보수정</a></li>
+							<li><a href="<%=request.getContextPath()%>/recruit/delete" id="recruitDelete">회원탈퇴</a></li>
+							<li><a href="<%=request.getContextPath()%>/recruit/logout" id="logOut">로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -1,4 +1,4 @@
-<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

@@ -1,7 +1,7 @@
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.oreilly.servlet.CookieNotFoundException"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
-<%@page import="com.kh.zoomin.recruit.member.RecruitMember"%>
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
 <%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

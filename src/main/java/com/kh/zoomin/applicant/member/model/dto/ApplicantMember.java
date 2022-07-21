@@ -14,8 +14,8 @@ public class ApplicantMember extends Member{
 	private String email;
 	private Date regDate;
 
-	public ApplicantMember(int uid, String name, String id, String password, String phone,
-			String email, Date regDate) {
+
+	public ApplicantMember(int uid, String name, String id, String password, String phone,String email, Date regDate) {
 		super(2);
 		this.uid = uid;
 		this.name = name;
