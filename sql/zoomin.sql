@@ -188,6 +188,13 @@ alter table salary_review add constraint fk_salary_review_category_number foreig
 alter table salary_review add constraint fk_salary_review_job_position foreign key(job_position) references POSITION_CATEGORY(category_number) on delete set null;
 
 create sequence seq_SALARY_REVIEW_no;
+
+create table recruit_job_bridge(
+    recruit_board_no number not null,
+    job_category_number number not null,
+    constraint fk_recruit_job_bridge_recruit_board_no foreign key(recruit_board_no) references recruit_board(no) on delete cascade,
+    constraint fk_recruit_job_bridge_job_category_number foreign key(job_category_number) references job_category(category_number) on delete set null
+);
 -- 박우석 END -- 
 -- 김지윤 START --
 --구직자 멤버 테이블
@@ -382,3 +389,5 @@ delete from resume where resume_no=41;
 select  * from applicant_member;
 insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '김테스트', 'ktest', 1234, 01055559999, 'ktest@mail.com', default);
 commit;
+select * from company_table;
+select * from (select  row_number() over(order by company_no) rnum, c.* from company_table c) b where rnum between 1 and 7 order by rnum asc;

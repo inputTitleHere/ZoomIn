@@ -95,7 +95,13 @@ select * from COMPANY_TABLE;
 insert into COMPANY_TABLE values ('1948653785', '현대', null, '전자쪽에 발을 뻗치는 현대입니다.');
 insert into COMPANY_TABLE values ('8153268498', '벤츠코리아', null, '최고의 전기차를 만들기 위해 노력하는 벤츠입니다.');
 insert into COMPANY_TABLE values ('4988653629', 'KH전자', null, '최상위 레벨의 인재들이 모인 기업 KH전자입니다.');
-
+-- 연습
+select * from company_review order by no desc;
+select * from company_table;
+select * from (select row_number() over(order by reg_date desc) rnum, c.* from company_review c) a where rnum between 1 and 5;
+select * from (company_review cr join company_table ct on cr.company_no = ct.company_no);
+select * from company_review where no = 4;
+select count(*) from company_review;
 -- 업무 카테고리 테이블
 select * from CATEGORY order by category_number asc;
 insert into CATEGORY values (3, '의료/제약/복지/');
@@ -320,4 +326,7 @@ insert into recruit_board
 insert into recruit_job_bridge values(3, 4);
 commit;
 -- 이윤정 END --
-
+select 
+    * 
+from 
+    (select row_number() over(order by reg_date desc) rnum, c.* from company_review c) a where rnum between 1 and 5;
