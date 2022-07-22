@@ -15,7 +15,7 @@ commit;
 
 select * from enroll_table;
 
-
+select * from RESUME where "uid" in (select "uid" from ENROLL_TABLE where recruit_board_no=4);
 
 select * from recruit_board where "uid"=1 order by closure_date-sysdate asc;
 select * from category order by category_number;
