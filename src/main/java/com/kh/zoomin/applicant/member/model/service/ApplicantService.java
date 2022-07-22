@@ -69,6 +69,21 @@ public class ApplicantService {
 		return result;
 	}
 
+	public int updatePwApllicant(String id, String nextPw) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = ad.updatePwApplicant(conn, id, nextPw);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 
 
 }

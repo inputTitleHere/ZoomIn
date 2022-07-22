@@ -1,4 +1,4 @@
-package com.kh.zoomin.applicant.member.controller;
+package com.kh.zoomin.recruit.member.controller;
 
 import java.io.IOException;
 
@@ -8,58 +8,68 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
-import com.kh.zoomin.applicant.member.model.service.ApplicantService;
 import com.kh.zoomin.common.ZoominMvcUtils;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
+import com.kh.zoomin.recruit.member.model.service.RecruitService;
 
 /**
- * Servlet implementation class UpdatePwApplicant
+ * Servlet implementation class UpdatePwRecruiter
  */
-@WebServlet("/applicant/updatePw")
-public class UpdatePwApplicant extends HttpServlet {
+@WebServlet("/recruit/updatePw")
+public class UpdatePwRecruiterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ApplicantService as = new ApplicantService();
+	private RecruitService rs = new RecruitService();
        
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//사용자 입력값
+			//입력값
 			String id = request.getParameter("id"); 
 			//이전 아이디
 			String prevPw = ZoominMvcUtils.getEncryptedPassword(request.getParameter("prevPw"), id);
-			//이후 아이디
+			//new 아이디
 			String nextPw = ZoominMvcUtils.getEncryptedPassword(request.getParameter("nextPw"), id);
 			
-			ApplicantMember amember = as.findAppliId(id);
+			RecruitMember rmember = rs.findrecruId(id);
+			
+			//sql: update recruit_member set password = ? where id = ?
+			//메시지 저장x 초기화
 			String msg = null;
 			String path = null;
-			//sql: update applicant_member set password = ? where id = ?
-			//applicant 멤버와 db에서 갖고온 이전 아이디가 같아야함 
-			if(amember != null && prevPw.equals(amember.getPassword())) {
-				int result = as.updatePwApllicant(id, prevPw);
+			//recruit 멤버여야 하고 db에서 갖고온것과 이전아이디가 동일해야함
+			if(rmember != null && prevPw.equals(rmember.getPassword())) {
+				int result = rs.updatePwRecruiter(id, nextPw);
 				msg = "성공적으로 비밀번호가 변경되었습니다.";
-				path = request.getContextPath() + "applicant/myPage";
+				path = request.getContextPath() + "/recruit/myPage";
 				
 				//구직자는 /applicant/myPage = ApplicantViewServlet
 				//구인자는 /recruit/myPage = RecruitViewServlet
+				RecruitMember loginMember = (RecruitMember) request.getSession().getAttribute("loginMember");
+				loginMember.setPassword(nextPw);
+				
 			} else {
 				msg = "기존 비밀번호가 일치하지 않습니다.";
-				path = request.getContextPath() + "applicant/updatePw";
+				path = request.getContextPath() + "/recruit/updatePw";
 			}
 			
+			//응답
 			request.getSession().setAttribute("msg", msg);
-			
+			response.sendRedirect(path);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 	}
-
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher(getServletInfo());
+		request.getRequestDispatcher("/WEB-INF/views/common/updatePwRecruiter.jsp").forward(request, response);
 	}
+
 
 }
