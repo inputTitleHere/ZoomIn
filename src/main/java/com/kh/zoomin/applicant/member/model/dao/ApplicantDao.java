@@ -43,12 +43,12 @@ public class ApplicantDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
-			System.out.println("rset = " + rset);
+//			System.out.println("rset = " + rset);
 			while (rset.next()) { 
 				//다음행이 있을때 rset.next()에 의해 다음행 이동
 				amember = handleMemberResultSet(rset);
 			}
-			System.out.println("amember@dao = " + amember);
+//			System.out.println("amember@dao = " + amember);
 
 		} catch (SQLException e) {
 			throw new MemberException("아이디가 존재하지 않습니다.", e);
@@ -108,6 +108,47 @@ public class ApplicantDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int updateApplicant(Connection conn, ApplicantMember amember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateApplicant");
+		//sql = update applicant_member set name = ?, phone = ?, email = ? where id = ?
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, amember.getName());
+			pstmt.setString(2, amember.getPhone());
+			pstmt.setString(3, amember.getEmail());
+			pstmt.setString(4, amember.getId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원정보 수정 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updatePwApplicant(Connection conn, String id, String nextPw) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwApplicant");
+		//sql = update applicant_member set password = ? where id = ?
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nextPw);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			throw new MemberException("비밀번호 변경 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		} 
 		return result;
 	}
 

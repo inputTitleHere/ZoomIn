@@ -4,6 +4,7 @@
 <html>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/applicant/applicantLoginHeader.css"/>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
