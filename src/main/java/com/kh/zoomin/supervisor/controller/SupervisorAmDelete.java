@@ -26,8 +26,8 @@ public class SupervisorAmDelete extends HttpServlet {
 
 		//업무로직 
 		int result = ss.deleteAmember(amUid);
-		//System.out.println("result = " + result);
-		System.out.println("result = " + result);
+
+		
 		//응답처리 
 		response.sendRedirect(request.getContextPath() + "/supervisor/memberList");
 	}

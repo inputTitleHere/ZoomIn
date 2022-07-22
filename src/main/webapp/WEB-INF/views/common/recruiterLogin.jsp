@@ -51,7 +51,7 @@ window.addEventListener('load',()=>{
 		<div class="collg"></div>
 		<div class="collg"></div>
 		<div class="form-group-container" style="padding-top: 20px;">
-			<form name="loginRFrm" method="POST" action="<%=request.getContextPath()%>/recruit/login" />
+			<form name="loginRFrm" method="POST" action="<%=request.getContextPath()%>/recruit/login">
 			<h3 style="text-allign: center;">로그인 화면</h3>
 			<div class="form-group">
 				<input type="text" id="id" class="Rid" name="id" placeholder="Username" maxlength="20">

@@ -15,9 +15,11 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
+import com.kh.zoomin.supervisor.model.dto.AmemberLog;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
 import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.supervisor.model.dto.Rmember;
+import com.kh.zoomin.supervisor.model.dto.RmemberLog;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 import com.kh.zoomin.supervisor.model.exception.SupervisorException;
@@ -721,6 +723,66 @@ public class SupervisorDao {
 			close(pstmt);
 		}		
 		return result;
+	}
+
+	public List<AmemberLog> getAmemberLogAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<AmemberLog> amLogList = new ArrayList<>();
+		String sql = prop.getProperty("getAmemberLogAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				int no = rset.getInt("no");
+				int uid = rset.getInt("uid");
+				String name = rset.getString("name");
+				String id = rset.getString("phone");
+				String phone = rset.getString("phone");
+				String email = rset.getString("email");
+				String log = rset.getString("log");
+				Date logDate = rset.getDate("log_date");
+				amLogList.add(new AmemberLog(no, uid, name, id, phone, email, log, logDate));
+			}
+				
+		} catch (SQLException e) {
+			throw new SupervisorException("구직자 log 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return amLogList;
+	}
+
+	public List<RmemberLog> getRmemberLogAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<RmemberLog> rmLogList = new ArrayList<>();
+		String sql = prop.getProperty("getRmemberLogAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				int no = rset.getInt("no");
+				int uid = rset.getInt("uid");
+				String companyNo = rset.getString("company_no");
+				String name = rset.getString("name");
+				String id = rset.getString("id");
+				String email = rset.getString("email");
+				String log = rset.getString("log");
+				Date logDate = rset.getDate("log_date");
+				rmLogList.add(new RmemberLog(no, uid, companyNo, name, id, email, log, logDate));
+			}
+				
+		} catch (SQLException e) {
+			throw new SupervisorException("구인자 log 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rmLogList;
 	}
 
 

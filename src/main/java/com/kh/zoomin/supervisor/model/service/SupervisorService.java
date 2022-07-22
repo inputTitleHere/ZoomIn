@@ -16,7 +16,9 @@ import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.supervisor.model.dto.Rmember;
+import com.kh.zoomin.supervisor.model.dto.RmemberLog;
 import com.kh.zoomin.supervisor.model.dao.SupervisorDao;
+import com.kh.zoomin.supervisor.model.dto.AmemberLog;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
@@ -297,6 +299,21 @@ public class SupervisorService {
 			close(conn);
 		}
 		return result;
+	}
+
+	
+	public List<AmemberLog> getAmemberLogAll() {
+		Connection conn = getConnection();
+		List<AmemberLog> amLogList = supervisorDao.getAmemberLogAll(conn);
+		close(conn);
+		return amLogList;
+	}
+
+	public List<RmemberLog> getRmemberLogAll() {
+		Connection conn = getConnection();
+		List<RmemberLog> rmLogList = supervisorDao.getRmemberLogAll(conn);
+		close(conn);
+		return rmLogList;
 	}
 
 	
