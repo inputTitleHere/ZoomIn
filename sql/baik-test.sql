@@ -13,7 +13,11 @@ select * from favourite;
 delete from favourite where "uid"=1;
 commit;
 
+select * from company_table;
+select * from COMPANY_REVIEW where company_no=4923047853;
+select * from company_review order by company_no;
 select * from enroll_table;
+select * from category order by category_number;
 
 select * from RESUME where "uid" in (select "uid" from ENROLL_TABLE where recruit_board_no=4);
 
