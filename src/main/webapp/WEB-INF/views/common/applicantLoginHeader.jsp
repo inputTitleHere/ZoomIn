@@ -19,9 +19,8 @@
 						<span class="menu">MENU</span>
 						<ul>
 							<li><a href="<%=request.getContextPath()%>/ResumeServlet"	id="writeResume">이력서 작성</a></li>
-							<li><a href="<%=request.getContextPath()%>/recruit/update" id="recruitUpdate">회원정보수정</a></li>
-							<li><a href="<%=request.getContextPath()%>/recruit/delete" id="recruitDelete">회원탈퇴</a></li>
-							<li><a href="<%=request.getContextPath()%>/recruit/logout" id="logOut">로그아웃</a></li>
+							<li><a href="<%=request.getContextPath()%>/applicant/update" id="myPage">마이페이지</a></li>
+							<li><a href="<%=request.getContextPath()%>/applicant/logout" id="logOut">로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -37,7 +37,7 @@ public class ApplicantService {
 		return result;
 	}
 
-	public int deleteMember(String id) {
+	public int deleteApplicant(String id) {
 		Connection conn = null; 
 		int result = 0;
 		try {

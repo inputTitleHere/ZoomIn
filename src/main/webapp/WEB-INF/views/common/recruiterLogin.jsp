@@ -14,7 +14,7 @@ function loginCheck() {
 	}
 		
 	const password = document.querySelector("#password");
-	if(!/^[0-9]{4,}$/.test(password.value)){
+	if(!/^.{4,}$/.test(password.value)){
 		alert("유효한 비밀번호를 입력해주세요.");
 		password.select();
 		return false;
@@ -51,13 +51,13 @@ window.addEventListener('load',()=>{
 		<div class="collg"></div>
 		<div class="collg"></div>
 		<div class="form-group-container" style="padding-top: 20px;">
-			<form name="loginRFrm" method="POST" action="<%=request.getContextPath()%>/recruit/login" />
+			<form name="loginRFrm" method="POST" action="<%=request.getContextPath()%>/recruit/login">
 			<h3 style="text-allign: center;">로그인 화면</h3>
 			<div class="form-group">
 				<input type="text" id="id" class="Rid" name="id" placeholder="Username" maxlength="20">
 			</div>
 			<div class="form-group">
-				<input type="password" id="password" class="Rpassword" name="password" placeholder="Password" maxlength="20">
+				<input type="password" id="password" class="Rpassword" name="password" placeholder="Password">
 			</div>
 			<button type="submit" class="btn-login" onclick="return loginCheck()">로그인</button>
 			<button class="btn-Rjoin" type="button" onclick="location.href='<%= request.getContextPath() %>/recruit/join';">회원가입</button>
