@@ -15,7 +15,6 @@ public class SalaryReview {
 	
 	public SalaryReview() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public SalaryReview(int no, int uid, String companyNo, int categoryNumber, int salary, int workYear,
