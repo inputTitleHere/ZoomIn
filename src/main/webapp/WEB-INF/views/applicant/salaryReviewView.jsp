@@ -72,7 +72,6 @@ const deleteBoard = () => {
 	if(confirm("삭제하시겠습니까?"));
 		document.salaryReviewDelFrm.submit();
 };
-
 const updateBoard = () => {
 	location.href = "<%= request.getContextPath() %>/review/salary/salaryReviewUpdate?no=<%= salaryReview.getNo() %>"
 };

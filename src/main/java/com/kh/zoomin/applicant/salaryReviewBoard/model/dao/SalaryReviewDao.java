@@ -12,10 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import static com.kh.zoomin.common.JdbcTemplate.*;
-import com.kh.zoomin.applicant.companyReviewBoard.model.dao.CompanyReviewDao;
-import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
-import com.kh.zoomin.applicant.companyReviewBoard.model.exception.CompanyReviewException;
+
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
+import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReviewExt;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.exception.SalaryReviewException;
 
 public class SalaryReviewDao {
@@ -23,7 +22,7 @@ public class SalaryReviewDao {
 	private Properties prop = new Properties();
 	
 	public SalaryReviewDao() {
-		String filename = CompanyReviewDao.class.getResource("/sql/zoomin/applicant/salaryreview-query.properties").getPath();
+		String filename = SalaryReviewDao.class.getResource("/sql/zoomin/applicant/salaryreview-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filename));
 		} catch (Exception e) {
@@ -107,7 +106,7 @@ public class SalaryReviewDao {
 				totalContent = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			throw new CompanyReviewException("총 리뷰 조회 오류", e);
+			throw new SalaryReviewException("총 리뷰 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -132,13 +131,57 @@ public class SalaryReviewDao {
 				salaryReview = handleSalaryReviewResultSet(rset);
 			}
 		} catch (SQLException e) {
-			throw new CompanyReviewException("연봉 리뷰 1건 조회 오류", e);
+			throw new SalaryReviewException("연봉 리뷰 1건 조회 오류", e);
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		
 		return salaryReview;
+	}
+
+	public int deleteSalaryReview(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		// delete from salary_review where no = ?
+		String sql = prop.getProperty("deleteSalaryReview");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw new SalaryReviewException("연봉 리뷰 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateSalaryReview(Connection conn, SalaryReviewExt salaryReview) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		// update salary_review set category_number = ?, salary = ?, work_year = ?, job_position = ? where no = ?
+		String sql = prop.getProperty("updateSalaryReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, salaryReview.getCompanyNo());
+			pstmt.setInt(2, salaryReview.getSalary());
+			pstmt.setInt(3, salaryReview.getWorkYear());
+			pstmt.setString(4, salaryReview.getJobPosition());
+			pstmt.setInt(5, salaryReview.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new SalaryReviewException("연봉 리뷰 수정 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

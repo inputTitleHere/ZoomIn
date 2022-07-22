@@ -9,6 +9,7 @@ import java.util.Map;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dao.SalaryReviewDao;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
+import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReviewExt;
 
 public class SalaryReviewService {
 
@@ -59,5 +60,36 @@ public class SalaryReviewService {
 			close(conn);
 		}
 		return salaryReview;
+	}
+
+	public int deleteSalaryReview(int no) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = salaryReviewDao.deleteSalaryReview(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public int updateSalaryReview(SalaryReviewExt salaryReview) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = salaryReviewDao.updateSalaryReview(conn, salaryReview);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
 	}
 }

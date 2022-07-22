@@ -10,7 +10,12 @@
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <section id="salaryReview-container">
 	<h2>-연봉 리뷰 게시판-</h2>
-	
+	<div id="companyReview-btn-add">
+		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewEnroll'">리뷰 등록하기</button>
+	</div>
+	<div id="companyReview-btn-update">
+		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewUpdate'">리뷰 수정하기</button>
+	</div>
 	<table class="salary-review-list">
 		<tr>
 			<th>번호</th>
