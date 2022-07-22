@@ -15,9 +15,9 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
-import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
 import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
+import com.kh.zoomin.supervisor.model.dto.Rmember;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 import com.kh.zoomin.supervisor.model.exception.SupervisorException;
@@ -37,7 +37,7 @@ public class SupervisorDao {
 		}
 	}
 	
-	private ApplicantMember handleApplicantMemberRset(ResultSet rset) throws SQLException {
+	private ApplicantMember handleAMemberRset(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
 		String name = rset.getString("name");
 		String id = rset.getString("id");
@@ -49,31 +49,32 @@ public class SupervisorDao {
 	}
 	
 	
-	private RecruitMember handleRecruitMemberRset(ResultSet rset) throws SQLException {
+	private Rmember handleRmemberRset(ResultSet rset) throws SQLException {
 		int uid = rset.getInt("uid");
-		String companyNo = rset.getString("companyNo");
-		String name = rset.getString("name");
+		String companyNo = rset.getString("company_no");
+		String comName = rset.getString("company_name");
+		String recruiter = rset.getString("name");
 		String id = rset.getString("id");
-		String password = rset.getString("password");
 		String email = rset.getString("email");
-		Boolean supervisor = rset.getBoolean("supervisor");
+		//Boolean supervisor = rset.getBoolean("supervisor");
 		Date regDate = rset.getDate("reg_date");
-		return new RecruitMember(uid, companyNo, name, id, password, email, supervisor, regDate);
+		return new Rmember(uid, companyNo, comName, recruiter, id, email, regDate);
 	}
 	
 	
-	public List<ApplicantMember> findApplicantMemberAll(Connection conn) {
+	public List<ApplicantMember> findApplicantMemberAll(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<ApplicantMember> applicantMemberList = new ArrayList<>();
 		String sql = prop.getProperty("findApplicantMemberAll");
-		System.out.println(sql);
+
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				ApplicantMember applicantMember = handleApplicantMemberRset(rset);
-				applicantMemberList.add(applicantMember);
+				applicantMemberList.add(handleAMemberRset(rset));
 			}
 		} catch (Exception e) {
 			throw new SupervisorException("구인자 전체 조회 오류!", e);
@@ -85,18 +86,19 @@ public class SupervisorDao {
 		return applicantMemberList;
 	}
 
-	public List<RecruitMember> findRecruitMemberAll(Connection conn) {
+	public List<Rmember> findRecruitMemberAll(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<RecruitMember> recruitMemberList = new ArrayList<>();
+		List<Rmember> recruitMemberList = new ArrayList<>();
 		String sql = prop.getProperty("findRecruitMemberAll");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				RecruitMember recruitMember = handleRecruitMemberRset(rset);
-				recruitMemberList.add(recruitMember);
+				recruitMemberList.add(handleRmemberRset(rset));
 			}
 		} catch (Exception e) {
 			throw new SupervisorException("구직자 전체 조회 오류!", e);
@@ -108,59 +110,59 @@ public class SupervisorDao {
 		return recruitMemberList;
 	}
 
-	public List<ApplicantMember> findApplicantMemberLike(Connection conn, Map<String, Object> param) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		List<ApplicantMember> applicantMemberList = new ArrayList<>();
-		String sql = prop.getProperty("findApplicantMemberLike");
-		//findApplicantMemberLike = select * from applicantMember where # like ?
-		
-		//# 컬럼명 처리하기
-		String col = (String) param.get("searchType");
-		String val = (String) param.get("searchKeyword");
-		sql = sql.replace("#", col);
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + val + "%");
-			rset = pstmt.executeQuery();
-			while(rset.next())
-				applicantMemberList.add(handleApplicantMemberRset(rset));			
-		} catch (SQLException e) {
-			throw new SupervisorException("관리자 회원검색 오류!", e);
-		} finally {
-			close(rset);
-			close(pstmt);
-		}				
-		return applicantMemberList;
-	}
-
-	public List<RecruitMember> findRecruitMemberLike(Connection conn, Map<String, Object> param) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		List<RecruitMember> recruitMemberList = new ArrayList<>();
-		String sql = prop.getProperty("findApplicantMemberLike");
-		//findRecruitMemberLike = select * from recruitMember where # like ?
-		
-		//# 컬럼명 처리하기
-		String col = (String) param.get("searchType");
-		String val = (String) param.get("searchKeyword");
-		sql = sql.replace("#", col);
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%" + val + "%");
-			rset = pstmt.executeQuery();
-			while(rset.next())
-				recruitMemberList.add(handleRecruitMemberRset(rset));			
-		} catch (SQLException e) {
-			throw new SupervisorException("관리자 회사검색 오류!", e);
-		} finally {
-			close(rset);
-			close(pstmt);
-		}				
-		return recruitMemberList;
-	}
+//	public List<ApplicantMember> findApplicantMemberLike(Connection conn, Map<String, Object> param) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		List<ApplicantMember> applicantMemberList = new ArrayList<>();
+//		String sql = prop.getProperty("findApplicantMemberLike");
+//		//findApplicantMemberLike = select * from applicantMember where # like ?
+//		
+//		//# 컬럼명 처리하기
+//		String col = (String) param.get("searchType");
+//		String val = (String) param.get("searchKeyword");
+//		sql = sql.replace("#", col);
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, "%" + val + "%");
+//			rset = pstmt.executeQuery();
+//			while(rset.next())
+//				applicantMemberList.add(handleApplicantMemberRset(rset));			
+//		} catch (SQLException e) {
+//			throw new SupervisorException("관리자 회원검색 오류!", e);
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}				
+//		return applicantMemberList;
+//	}
+//
+//	public List<RecruitMember> findRecruitMemberLike(Connection conn, Map<String, Object> param) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		List<RecruitMember> recruitMemberList = new ArrayList<>();
+//		String sql = prop.getProperty("findApplicantMemberLike");
+//		//findRecruitMemberLike = select * from recruitMember where # like ?
+//		
+//		//# 컬럼명 처리하기
+//		String col = (String) param.get("searchType");
+//		String val = (String) param.get("searchKeyword");
+//		sql = sql.replace("#", col);
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, "%" + val + "%");
+//			rset = pstmt.executeQuery();
+//			while(rset.next())
+//				recruitMemberList.add(handleRecruitMemberRset(rset));			
+//		} catch (SQLException e) {
+//			throw new SupervisorException("관리자 회사검색 오류!", e);
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}				
+//		return recruitMemberList;
+//	}
 
 	//오늘의 방문자 수 
 	public int getTodayCount(Connection conn) {
@@ -630,7 +632,96 @@ public class SupervisorDao {
 		return result;
 	}
 
+	public int getTotalAmCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalAmCnt = 0;
+		String sql = prop.getProperty("getTotalAmCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalAmCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("구직자 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalAmCnt;
+	}
 	
+	public int getTotalRmCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalRmCnt = 0;
+		String sql = prop.getProperty("getTotalRmCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalRmCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("구인자 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalRmCnt;
+	}
+
+	//구직자 삭제
+	public int deleteAmember(Connection conn, String[] amUid) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAmember");
+		int result = 0;	//성공한 행의 개수
+		int[] cnt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i < amUid.length; i++) {
+				pstmt.setString(1, amUid[i]);
+				pstmt.addBatch();	//쿼리 pstmt에 쌓기
+			}
+			cnt = pstmt.executeBatch();		//성공하면 1을 반환
+			for(int i = 0; i < cnt.length; i++) {
+					result++;						
+			}
+			
+		} catch (Exception e) {
+			throw new SupervisorException("구직자 삭제 오류!", e);		
+		} finally {
+			close(pstmt);
+		}		
+		return result;
+	}
+
+	public int deleteRmember(Connection conn, String[] rmUid) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteRmember");
+		int result = 0;	//성공한 행의 개수
+		int[] cnt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			for(int i = 0; i < rmUid.length; i++) {
+				pstmt.setString(1, rmUid[i]);
+				pstmt.addBatch();	//쿼리 pstmt에 쌓기
+			}
+			cnt = pstmt.executeBatch();		//성공하면 1을 반환
+			for(int i = 0; i < cnt.length; i++) {
+					result++;						
+			}
+			
+		} catch (Exception e) {
+			throw new SupervisorException("구인자 삭제 오류!", e);		
+		} finally {
+			close(pstmt);
+		}		
+		return result;
+	}
 
 
 

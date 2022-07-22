@@ -377,10 +377,66 @@ delete from company_review where no = '22';
 select * from(select row_number () over (order by c.reg_date desc) rnum, no, company_name, content, id, c.reg_date from company_review c join applicant_member a on c."uid" = a."uid" join company_table t on c.company_no = t.company_no)where  rnum between 11 and 20;
 --채용게시판 전체조회
 select * from (select row_number () over (order by r.reg_date desc) rnum, r.no, c.domain, company_name, m.name, title, r.reg_date, closure_date from recruit_board r join category c on r.category_number = c.category_number join company_table t on t.company_no = r.company_no join recruit_member m on r."uid" = m."uid")where rnum between 6 and 10 ;
-
-select * from recruit_board;
-
+select * from applicant_member where "uid" = 3 ;
+select * from (select row_number () over (order by reg_date desc) rnum, a.*  from applicant_member a)where  rnum between 1 and 5;
+select * from (select row_number () over (order by reg_date desc) rnum,"uid", r.company_no, company_name, name, id, email, reg_date from recruit_member r join company_table c on r.company_no = c.company_no)where  rnum between 1 and 5;
+select * from company_review c full outer join salary_review  s on c."uid" = s."uid" where c."uid" in 16;
+--트리거 이용 멤버관리
+select * from tb_amember_log;
+--insert
+insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '이윤정', 'j1234', 1234, 01045674567, 'yjyj@gmail.com', default);
 commit;
+rollback;
+select * from applicant_member;
+--updete
+update APPLICANT_MEMBER set name = '김윤정' where "uid" = 82;
+--delete
+delete from APPLICANT_MEMBER where "uid" = '85';
+create table tb_amember_log(
+    no number,
+    "uid" number not null,
+    name varchar2(30),
+    id varchar2(50),
+    phone char(11),
+    email varchar(100),
+    log varchar2(2000) not null,
+    log_date date default sysdate,
+    constraint pk_tb_amember_log_no primary key(no)
+);
+create sequence seq_tb_amember_log_no;
+--drop trigger trig_amember_log
+commit;
+create or replace trigger trig_amember_log
+    after
+    insert or update or delete on applicant_member
+    for each row
+begin
+    if inserting then
+        insert into tb_amember_log (no, "uid", name, id, phone, email, log)
+        values( seq_tb_amember_log_no.nextval, :new."uid", :new.name, :new.id, :new.phone, :new.email, :new.id || ' 회원가입');  
+    elsif updating then
+        if :old.name != :new.name then
+            insert into tb_amember_log (no, "uid", name, id, phone, email, log)
+            values( seq_tb_amember_log_no.nextval, :old."uid", :new.name, :old.id, :old.phone, :old.email, :old.id || '님이' || :old.name || '에서' || :new.name || '으로 정보 변경' );  
+        end if;
+        if :old.id != :new.id then
+            insert into tb_amember_log (no, "uid", name, id, phone, email, log)
+            values( seq_tb_amember_log_no.nextval, :old."uid", :old.name, :new.id, :old.phone, :old.email, :old.id || '님이' || :old.id || '에서' || :new.id || '으로 정보 변경' );  
+        end if;
+        if :old.phone != :new.phone then
+            insert into tb_amember_log (no, "uid", name, id, phone, email, log)
+            values(seq_tb_amember_log_no.nextval,:old."uid", :old.name, :old.id, :new.phone, :old.email, :old.id || '님이' || :old.phone || '에서' || :new.phone || '으로 정보 변경' );  
+        end if;
+        if :old.email != :new.email then
+            insert into tb_amember_log (no, "uid", name, id, phone, email, log)
+            values(seq_tb_amember_log_no.nextval, :old."uid", :old.name, :old.id, :old.phone, :new.email, :old.id || '님이' || :old.email || '에서' || :new.email || '으로 정보 변경' );  
+        end if;
+    elsif deleting then
+         insert into tb_amember_log (no, "uid", name, id, phone, email, log)
+         values( seq_tb_amember_log_no.nextval,:old."uid", :old.name, :old.id, :old.phone, :old.email, :old.id || ' 님이 회원탈퇴');  
+    end if;
+end;
+
 -- 이윤정 END --
 
 --김승환 테스트용

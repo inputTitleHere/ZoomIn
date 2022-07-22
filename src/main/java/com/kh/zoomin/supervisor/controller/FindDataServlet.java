@@ -2,7 +2,9 @@ package com.kh.zoomin.supervisor.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,14 +40,12 @@ public class FindDataServlet extends HttpServlet {
 		boardList = supervisorService.getBoardData();
 		//System.out.println("boardList = " + boardList);
 				
-		//응답요청 : json으로 변환해서 저장하기
-		Gson gson = new Gson();
-		String jsonStrVisit = gson.toJson(visitList);
-		String jsonStrBoard = gson.toJson(boardList);
-
+		//응답요청 : json으로 변환해서 저장하기		
+		Map<String, List<WeekData>> value = new HashMap<>();
+		value.put("visitList", visitList);
+		value.put("boardList", boardList);
 		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print(jsonStrVisit);
-		//response.getWriter().print(jsonStrBoard);
+		new Gson().toJson(value, response.getWriter());	//맵으로 한번에 보냄!
 	}
 
 }

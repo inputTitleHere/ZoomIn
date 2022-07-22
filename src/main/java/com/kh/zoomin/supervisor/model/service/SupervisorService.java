@@ -15,6 +15,7 @@ import java.util.Map;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
+import com.kh.zoomin.supervisor.model.dto.Rmember;
 import com.kh.zoomin.supervisor.model.dao.SupervisorDao;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
@@ -25,36 +26,36 @@ public class SupervisorService {
 	private SupervisorDao supervisorDao = new SupervisorDao();
 	
 	//DQL : select * from applicantMember
-	public List<ApplicantMember> findApplicantMemberAll(){
+	public List<ApplicantMember> findApplicantMemberAll(Map<String, Object> param){
 		Connection conn = getConnection();
-		List<ApplicantMember> applicantMemberList = supervisorDao.findApplicantMemberAll(conn);
+		List<ApplicantMember> applicantMemberList = supervisorDao.findApplicantMemberAll(conn, param);
 		close(conn);
 		return applicantMemberList;
 	}
 	
 	//DQL : select * from recruitMember
-	public List<RecruitMember> findRecruitMemberAll(){
+	public List<Rmember> findRecruitMemberAll(Map<String, Object> param){
 		Connection conn = getConnection();
-		List<RecruitMember> recruitMemberList = supervisorDao.findRecruitMemberAll(conn);
+		List<Rmember> recruitMemberList = supervisorDao.findRecruitMemberAll(conn, param);
 		close(conn);
 		return recruitMemberList;
 	}
 
 	//DQL : select * from applicantMember where # like ?
-	public List<ApplicantMember> findApplicantMemberLike(Map<String, Object> param) {
-		Connection conn = getConnection();
-		List<ApplicantMember> applicantMemberList = supervisorDao.findApplicantMemberLike(conn, param);
-		close(conn);
-		return applicantMemberList;
-	}
-
-	//DQL : select * from recruitMember where # like ?
-	public List<RecruitMember> findRecruitMemberLike(Map<String, Object> param) {
-		Connection conn = getConnection();
-		List<RecruitMember> recruitMemberList = supervisorDao.findRecruitMemberLike(conn, param);
-		close(conn);
-		return recruitMemberList;
-	}
+//	public List<ApplicantMember> findApplicantMemberLike(Map<String, Object> param) {
+//		Connection conn = getConnection();
+//		List<ApplicantMember> applicantMemberList = supervisorDao.findApplicantMemberLike(conn, param);
+//		close(conn);
+//		return applicantMemberList;
+//	}
+//
+//	//DQL : select * from recruitMember where # like ?
+//	public List<RecruitMember> findRecruitMemberLike(Map<String, Object> param) {
+//		Connection conn = getConnection();
+//		List<RecruitMember> recruitMemberList = supervisorDao.findRecruitMemberLike(conn, param);
+//		close(conn);
+//		return recruitMemberList;
+//	}
 
 	//today방문자 수 조회
 	//select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd')
@@ -250,7 +251,53 @@ public class SupervisorService {
 		return result;
 	}
 
+	public int getTotalAmCnt() {
+		Connection conn = getConnection();
+		int totalAmCnt = supervisorDao.getTotalAmCnt(conn);
+		close(conn);
+		return totalAmCnt;
+	}
 
+	public int getTotalRmCnt() {
+		Connection conn = getConnection();
+		int totalRmCnt = supervisorDao.getTotalRmCnt(conn);
+		close(conn);
+		return totalRmCnt;
+	}
+
+	//구직자 삭제 
+	public int deleteAmember(String[] amUid) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = supervisorDao.deleteAmember(conn, amUid);
+			if(amUid.length == result)
+				commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {			
+			close(conn);
+		}
+		return result;
+	}
+
+	//구인자 삭제
+	public int deleteRmember(String[] rmUid) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = supervisorDao.deleteRmember(conn, rmUid);
+			if(rmUid.length == result)
+				commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {			
+			close(conn);
+		}
+		return result;
+	}
 
 	
 	

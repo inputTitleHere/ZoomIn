@@ -259,8 +259,7 @@ tr, td, th{
     			<td><%= rec.getCompanyName()%></td>
     			<td><%= rec.getRecruiter() %></td>
     			<td>
-    				<a href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=rec.getNo()%>"><%= ZoominUtils.escapeXml(rec.getTitle()) %></a>  
-    				<input type="hidden" name="" /> 				
+    				<a href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=rec.getNo()%>"><%= ZoominUtils.escapeXml(rec.getTitle()) %></a>  			
    				</td>
     			<td><%= new SimpleDateFormat("yyyy-MM-dd").format(rec.getClosureDate()) %></td>
     			<td><%= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(rec.getRegDate()) %></td>
