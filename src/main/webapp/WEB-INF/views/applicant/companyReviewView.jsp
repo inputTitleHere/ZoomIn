@@ -12,26 +12,8 @@
 		am = (ApplicantMember)session.getAttribute("loginMember");
 	} */
 %>
-<style>
-.edit-button {
-	text-align: right;
-}
-#update-button1 {
-	
-}
-h1 {
-	text-align: center;
-	font-size: 40px;
-}
-.company-review-list {
-	font-size: 20px;
-	margin-left: 150px;
-}
-.company-review-list th {
-	height: 40px;
-	padding-right: 30px;
-}
-</style>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
+
 <section id="company-review-view-container">
 	<h1>리뷰 상세보기</h1>
 	<!-- 작성자 / 관리자만 버튼이 보이게 함 / 맨 아래도 있음-->

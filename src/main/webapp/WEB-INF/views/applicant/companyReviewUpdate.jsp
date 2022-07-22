@@ -40,7 +40,7 @@
 			<tr>
 				<th>평점</th>
 				<td>
-					<select name="stars" id="aaaa">
+					<select name="stars" id="aaaa" value="<%= companyReview.getStars() %>">
 		            	<option value="1">1점</option>
 		            	<option value="2">2점</option>
 		            	<option value="3">3점</option>

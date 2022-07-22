@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,8 @@
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp"%>
 <%
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
+	HttpSession loginSession = request.getSession();
+	ApplicantMember member = (ApplicantMember) loginSession.getAttribute("loginMember");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview2.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -38,7 +41,7 @@ h2 {
 			<tr>
 				<th>작성자 번호</th>
 				<td>
-					<input type="text" name="uid"/>
+					<input type="text" name="uid" />
 				</td>
 			</tr>
 			<tr>
