@@ -20,6 +20,9 @@ public class TestClass {
 		Map<String, String> paramTest = new HashMap<String, String>();
 		System.out.println(paramTest.get("testKey"));
 		
+		String res =String.format("=?%s", "srcsrc");
+		System.out.println(res);
+		
 		/*
 		Connection conn=null;
 		PreparedStatement pstmt =null;

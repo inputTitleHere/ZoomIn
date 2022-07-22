@@ -99,5 +99,21 @@ public class CompanyReviewService {
 		return companyReview;
 	}
 
+	// 백승윤 START
+	public List<CompanyReview> findByCompanyNo(Map<String, Object> param) {
+		List<CompanyReview> result=null;
+		Connection conn = getConnection();
+		result=companyReviewDao.findByCompanyNo(param, conn);
+		close(conn);
+		return result;
+	}
+
+	public int getTotalContent(String companyNo) {
+		Connection conn = getConnection();
+		int totalContent = companyReviewDao.getTotalContent(companyNo,conn); 
+		close(conn);
+		return totalContent;		
+	}
+	// 백승윤 END
 	
 }

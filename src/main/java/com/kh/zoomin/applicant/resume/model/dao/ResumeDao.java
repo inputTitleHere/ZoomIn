@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -193,6 +194,57 @@ public class ResumeDao {
 			}
 		}catch (SQLException e) {
 			throw new RecruitBoardException("지원자 리스트 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public List<Resume> findResumeByCategory(Map<String, Object> param, Connection conn) {
+		List<Resume> result=new ArrayList<Resume>();
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		// select * from (select row_number() over(order by resume_no desc) rnum, c.* from RESUME c where category_number=?) b where b.rnum between ? and ? order by b.rnum asc
+		String sql = prop.getProperty("findResumeByCategory");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (int)param.get("category"));
+			pstmt.setInt(2, (int)param.get("start"));
+			pstmt.setInt(3, (int)param.get("end"));
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleResumeResultSet(rset));
+			}
+			
+		}catch(SQLException e) {
+			throw new ResumeException("이력서 분야별 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int findResumeCountByCategory(int category, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rset= null;
+//		select count(*) from Resume where category_number=?
+		String sql = prop.getProperty("getResumeCountByCategory");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, category);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result=rset.getInt(1);
+			}
+		}catch(SQLException e) {
+			throw new ResumeException("카테고리별 이력서 조회 오류",e);
 		}finally {
 			close(rset);
 			close(pstmt);

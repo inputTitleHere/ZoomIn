@@ -2,10 +2,15 @@ h1{
   text-align: center;
 }
 
+.recruit-board-section{
+	width :1024px;
+	margin:20px auto;
+}
+
 table.recruit-board-item{
   border: 2px solid black;
   min-width:800px;
-  width: 80vw;
+  width: 100%;
   min-height: 300px;
 }
 

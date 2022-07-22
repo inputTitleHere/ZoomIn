@@ -3,7 +3,7 @@
 <%@page import="com.kh.zoomin.applicant.resume.model.dto.Resume"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
 <%
 Resume resume = (Resume)request.getAttribute("resume");
 String title = (String)request.getAttribute("title");
@@ -48,7 +48,9 @@ case C:{
 
 
 %>
+<% if(title!=null){%>
 <h2><%=title %> </h2>
+<%} %>
 <div class="resume">
 	<table>
 		<tbody>

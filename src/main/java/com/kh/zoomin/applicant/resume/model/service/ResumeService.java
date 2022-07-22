@@ -3,13 +3,15 @@ package com.kh.zoomin.applicant.resume.model.service;
 import static com.kh.zoomin.common.JdbcTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
 
 import com.kh.zoomin.applicant.resume.model.dao.ResumeDao;
 import com.kh.zoomin.applicant.resume.model.dto.Resume;
 
 public class ResumeService {
 	
-	private ResumeDao ResumeDao = new ResumeDao();
+	private ResumeDao resumeDao = new ResumeDao();
 	/**
 	 * DML요청 - service
 	 * 1. Connection객체 생성
@@ -26,7 +28,7 @@ public class ResumeService {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = ResumeDao.insertResume(conn,resume);
+			result = resumeDao.insertResume(conn,resume);
 			commit(conn);
 		}
 		catch(Exception e) {
@@ -41,7 +43,7 @@ public class ResumeService {
 	
 	public Resume findByResume(int uid) {
 		Connection conn = getConnection();
-		Resume resume = ResumeDao.findByResume(conn,uid);
+		Resume resume = resumeDao.findByResume(conn,uid);
 		close(conn);
 		return resume;
 	}
@@ -51,7 +53,7 @@ public class ResumeService {
 		int result= 0;
 		Connection conn = getConnection();
 		try {
-			result = ResumeDao.deleteResume(conn,uid);
+			result = resumeDao.deleteResume(conn,uid);
 			commit(conn);
 		}
 		catch(Exception e) {
@@ -68,7 +70,7 @@ public class ResumeService {
 		int result= 0;
 		Connection conn = getConnection();
 		try {
-			result = ResumeDao.updateResume(conn,resume);
+			result = resumeDao.updateResume(conn,resume);
 			commit(conn);
 		}
 		catch(Exception e) {
@@ -80,5 +82,21 @@ public class ResumeService {
 		}
 		return result;
 	}
+	// 백승윤 START
+	public List<Resume> findResumeByCategory(Map<String, Object> param) {
+		List<Resume> result=null;
+		Connection conn = getConnection();
+		result=resumeDao.findResumeByCategory(param,conn);
+		close(conn);
+		return result;
+	}
+	// 백승윤 END
 
+	public int findResumeCountByCategory(int category) {
+		int result=0;
+		Connection conn = getConnection();
+		result=resumeDao.findResumeCountByCategory(category,conn);
+		close(conn);
+		return result;
+	}
 }

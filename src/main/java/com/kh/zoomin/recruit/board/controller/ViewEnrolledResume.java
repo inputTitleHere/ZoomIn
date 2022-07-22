@@ -23,8 +23,14 @@ public class ViewEnrolledResume extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int uid=Integer.parseInt(request.getParameter("uid"));
-		int boardNo=Integer.parseInt(request.getParameter("boardNo"));
-		String title=new RecruitBoardService().findBoardByNo(boardNo).getTitle();
+		int boardNo=-1;
+		try {
+			boardNo=Integer.parseInt(request.getParameter("boardNo"));			
+		}catch(NumberFormatException e) {}
+		String title=null;
+		if(boardNo!=-1) {
+			title=new RecruitBoardService().findBoardByNo(boardNo).getTitle();			
+		}
 		Resume resume = new ResumeService().findByResume(uid);
 		
 		request.setAttribute("resume", resume);
