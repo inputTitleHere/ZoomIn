@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.common.ZoominUtils;
+import com.kh.zoomin.company.dto.Company;
+import com.kh.zoomin.company.service.CompanyService;
 import com.kh.zoomin.member.dto.Member;
 
 /**
@@ -25,6 +28,7 @@ import com.kh.zoomin.member.dto.Member;
 public class CompanyReviewList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService companyReviewService = new CompanyReviewService();
+	private CompanyService companyService = new CompanyService();
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +36,7 @@ public class CompanyReviewList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession();
-			Member member = (Member)session.getAttribute("loginMember");
+			ApplicantMember am = (ApplicantMember)session.getAttribute("loginMember");
 			
 			int numPerPage = 5;
 			int cPage = 1;
@@ -48,7 +52,7 @@ public class CompanyReviewList extends HttpServlet {
 			param.put("end", end);
 			
 			List<CompanyReview> list = companyReviewService.findAll(param);
-			System.out.println("list = " + list);
+			System.out.println("list들 = " + list);
 			
 			int totalContent = companyReviewService.getTotalContent();
 			String url = request.getRequestURI(); 
@@ -56,6 +60,7 @@ public class CompanyReviewList extends HttpServlet {
 			
 			// view
 			request.setAttribute("list", list);
+		
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewList.jsp")
 				.forward(request, response);
