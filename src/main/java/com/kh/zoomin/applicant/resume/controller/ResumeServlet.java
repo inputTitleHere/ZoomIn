@@ -39,8 +39,8 @@ public class ResumeServlet extends HttpServlet {
 		// 2. 사용자입력값 처리
 		HttpSession loginSession = request.getSession();
 		ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
-//		int uid = Integer.parseInt(member.getUid());
-		int uid = 21;
+		int uid = member.getUid();
+		
 		// 3. 업무로직
 		Resume result = ResumeService.findByResume(uid);
 		//4. 응답처리 
@@ -73,9 +73,7 @@ public class ResumeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession loginSession = request.getSession();
 		ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
-		// 김지윤님 applicantMember 수정후에 Integer.parseInt 제거 할것!
-//		int uid = Integer.parseInt(member.getUid()) ; 로그인 기능 구현후 uid 수정
-		int uid = 21;	
+		int uid = member.getUid() ; 
 		try {
 			//인코딩처리
 			request.setCharacterEncoding("utf-8");
