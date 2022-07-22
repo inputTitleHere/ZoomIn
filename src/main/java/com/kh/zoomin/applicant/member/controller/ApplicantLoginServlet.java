@@ -40,26 +40,33 @@ public class ApplicantLoginServlet extends HttpServlet {
 			//2. 업무로직
 			ApplicantMember amember = as.findAppliId(id);
 			System.out.println("amamber= " + amember);
+			HttpSession session = request.getSession();
 			
 			//로그인 여부
-			String message = null;
+			String msg = null;
+			String path = null;
 			
-			if(amember != null) {
+			if(amember != null && password.equals(amember.getPassword())) {
 				//세션 객체 인스턴스
-				HttpSession session = request.getSession();
-				session.setAttribute("id", id);
+//				session.setAttribute("id", id);
 				session.setAttribute("loginMember", amember); //객체저장 
-				session.setAttribute("msg", "로그인 성공입니다.");
+				msg = "로그인 성공입니다.";
+				path = "/zoomin";
+				
 			} else {
-				message = "아이디 또는 비밀번호가 일치하지 않습니다.";
-				request.getRequestDispatcher("/WEB-INF/views/common/applicantLogin.jsp").forward(request, response);
+				msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
+//				session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+				System.out.println("아이디 또는 비밀번호가 일치하지 않습니다.");
+				path = request.getContextPath() + "/applicant/login";
 			}
 
 			//3. 리다이렉트
-			response.sendRedirect("http://localhost:9090/zoomin/index.jsp");
+			request.getSession().setAttribute("msg", msg);
+			response.sendRedirect(path);
 //			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 

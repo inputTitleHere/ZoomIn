@@ -96,6 +96,43 @@ public class RecruitDao {
 		return result;
 	}
 
+	public int deleteRecruiter(Connection conn, String id) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteRecruiter");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원 탈퇴 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updatePwRecruiter(Connection conn, String id, String nextPw) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwRecruiter");
+		//sql = update recruit_member set password = ? where id = ?
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nextPw);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new MemberException("바밀번호 변경 오류입니다.", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }

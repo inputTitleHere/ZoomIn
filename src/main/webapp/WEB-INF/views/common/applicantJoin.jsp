@@ -106,7 +106,7 @@ document.joinAFrm.onsubmit = (e) => {
 
 	const password = document.querySelector("#aPassword");
 	if(!/^[a-zA-Z0-9!@#$%^&*()]{4,}$/.test(password.value)){
-		alert("비밀번호는 숫자와 특수문자!@#$%^&* 포함 최소 4글자이상이어야 합니다.");
+		alert("비밀번호는 최소 4글자이상이어야 합니다.");
 		password.select();
 		return false;
 	}
