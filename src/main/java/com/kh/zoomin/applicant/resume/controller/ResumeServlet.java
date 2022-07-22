@@ -40,8 +40,7 @@ public class ResumeServlet extends HttpServlet {
 		HttpSession loginSession = request.getSession();
 		ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
 		int uid = member.getUid();
-		
-		// 3. 업무로직
+
 		Resume result = ResumeService.findByResume(uid);
 		//4. 응답처리 
 		if(result != null) {

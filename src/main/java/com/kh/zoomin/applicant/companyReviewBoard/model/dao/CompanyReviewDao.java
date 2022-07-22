@@ -36,7 +36,7 @@ public class CompanyReviewDao {
 		int result = 0;
 		// insertReview = insert into COMPANY_REVIEW values (seq_no, ?, ?, ?, ?, ?,?,?,?,?,?, default)
 		String sql = prop.getProperty("insertCompanyReview");
-		System.out.println(companyReview);
+		System.out.println("companyReview = " + companyReview);
 		try {
 			pstmt = conn.prepareStatement(sql);
 
