@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/applicant.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
-<section>
+<section id="applicantSection">
 <div class="title" id="subtitle">
 	<a id="recruitInfo">채용정보</a>
 	<a id="companyInfo">기업정보</a>
@@ -17,8 +17,7 @@
 </section>
 <script>
 	document.getElementById("recruitInfo").onclick = (e) =>{
-	/* 	$(".context").empty();
-		$(".context").append(info);*/
+		applicantAjax(1);
 	}; 
 	
 	document.getElementById("companyInfo").onclick = (e) =>{
@@ -29,6 +28,29 @@
 		/* $(".context").empty();
 		$(".context").append(info); */
 	};
+	
+	function applicantAjax(cPage){
+		$(".context").empty();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/applicant/applicantBoardList?cPage="+cPage,
+			success(response){
+				console.log(response);
+				var info = response;
+				$(".context").append(info);
+				
+				$(".paging").on("click",function(){
+	      			var id = this.id;
+	      			var page = id.substring(4);
+	      			if(page == 0){
+	      				page = -1;
+	      			}
+	      			applicantAjax(page);
+	    			console.log("paging"+ page);
+	    		});
+			},
+			error:console.log
+		});
+	}
 	
 	function companyAjax(cPage){
 		$(".context").empty();
@@ -67,6 +89,10 @@
 			error:console.log
 		});
 	}
+	
+	$(document).ready(function(){
+		applicantAjax(1);
+	});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

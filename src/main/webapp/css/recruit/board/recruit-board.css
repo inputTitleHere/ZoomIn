@@ -2,12 +2,6 @@ h1{
   text-align: center;
 }
 
-section{
-  width: fit-content;
-  height: fit-content;
-  margin: 0px auto;
-}
-
 table.recruit-board-item{
   border: 2px solid black;
   min-width:800px;
