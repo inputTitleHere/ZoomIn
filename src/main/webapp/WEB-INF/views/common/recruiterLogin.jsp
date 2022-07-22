@@ -46,7 +46,7 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
-
+</script>
 	<div class="container" align="center">
 		<div class="collg"></div>
 		<div class="collg"></div>
