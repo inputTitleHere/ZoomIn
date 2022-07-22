@@ -39,21 +39,19 @@ public class RecruitLoginServlet extends HttpServlet {
 			//2. 업무로직
 			RecruitMember rmember = res.findrecruId(id);
 			System.out.println("rmember= " + rmember);
-
-			String message = null; 
 			HttpSession session = request.getSession(); 
+
+			String msg = null; 
 			
 			//로그인 여부 판단. 로그인 성공
-			if(rmember != null) {
-				session.setAttribute("id", id);
-				session.setAttribute("msg", message);
+			if(rmember != null && password.equals(rmember.getPassword())) {
 				session.setAttribute("loginMember", rmember);
-				session.setAttribute("msg", "로그인 성공입니다.");
-				System.out.println(rmember.getMemberType());
+				msg = "로그인 성공입니다.";
+//				System.out.println(rmember.getMemberType());
 			}
 			else {
 				//로그인 실패
-				message = "아이디 또는 비밀번호가 일치하지 않습니다.";
+				msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 				request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
 			}
 			
@@ -62,8 +60,8 @@ public class RecruitLoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/views/supervisor/supervisorIndex.jsp").forward(request, response);
 			}
 			//3. 리다이렉트
-//			response.sendRedirect("http://localhost:9090/zoomin/recruit/board/recruitBoardList");
-			response.sendRedirect(request.getContextPath()+"/recruit/board/recruitBoardList");
+			request.getSession().setAttribute("msg", msg);
+			response.sendRedirect(request.getContextPath() +"/recruit/board/recruitBoardList");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

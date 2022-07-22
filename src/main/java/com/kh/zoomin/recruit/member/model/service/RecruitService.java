@@ -1,9 +1,13 @@
 package com.kh.zoomin.recruit.member.model.service;
 
-import static com.kh.zoomin.common.JdbcTemplate.*;
+import static com.kh.zoomin.common.JdbcTemplate.close;
+import static com.kh.zoomin.common.JdbcTemplate.commit;
+import static com.kh.zoomin.common.JdbcTemplate.getConnection;
+import static com.kh.zoomin.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 
+import com.kh.zoomin.member.exception.MemberException;
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
 import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 
@@ -25,6 +29,41 @@ public class RecruitService {
 		int result = 0;
 		try {
 			result = rd.addRecruiter(conn, rmember);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteRecruiter(String id) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = rd.deleteRecruiter(conn, id);
+			//연결 후 아이디를 삭제
+			//만약 결과가 없을때 회원존재x 
+			if(result == 0)
+				throw new MemberException("해당 회원은 존재하지 않습니다.");
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int updatePwRecruiter(String id, String nextPw) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = rd.updatePwRecruiter(conn, id, nextPw);
 			commit(conn);
 		} catch(Exception e) {
 			rollback(conn);
