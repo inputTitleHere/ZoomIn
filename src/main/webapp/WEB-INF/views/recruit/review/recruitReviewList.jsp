@@ -8,21 +8,19 @@
 <%@page
 	import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+
 
 <%
 Member rrlLm = (Member) session.getAttribute("loginMember");
 if (rrlLm != null && rrlLm.getMemberType() == 1) {
 %>
 <%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp"%>
-<%
-} else {
-%>
+<%} else {%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<%
-}
-%>
+<%}%>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/recruit/board/recruit-review-view.css" />
 <%
 List<CompanyReview> companyReviewList = (List<CompanyReview>) request.getAttribute("companyReview");
 List<SalaryReview> salaryReviewList = (List<SalaryReview>) request.getAttribute("salaryReview");
@@ -138,8 +136,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 		</section>
 	</div>
 </div>
-
-
 
 </body>
 </html>
