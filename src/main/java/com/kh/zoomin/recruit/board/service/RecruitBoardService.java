@@ -196,6 +196,14 @@ public class RecruitBoardService {
 		close(conn);
 		return result;
 	}
+
+	public List<RecruitBoard> loadRecruitBoardByCompanyNo(String companyNo) {
+		List<RecruitBoard> result=null;
+		Connection conn = getConnection();
+		result=rbd.loadRecruitBoardByCompanyNo(companyNo, conn);
+		close(conn);
+		return result;
+	}
 	
 	// ====================== 메소드 영역 ============================//
 	
