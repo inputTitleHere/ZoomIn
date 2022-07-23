@@ -29,7 +29,8 @@ public class SalaryReviewDeleteServlet extends HttpServlet {
 		System.out.println("result = " + result);
 		
 		//응답처리 
-		response.sendRedirect(request.getContextPath() + "/supervisor/BoardList");
+		//response.sendRedirect(request.getContextPath() + "/supervisor/BoardList");
+		response.sendRedirect(request.getHeader("Referer"));
 	}
 
 }

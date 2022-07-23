@@ -73,12 +73,13 @@ tr, td, th{
 </head>
 <body>
 
-	<div id="btl-search-board">
-		<button id="btl-salary">연봉게시판</button>
-		<button id="btl-company">회사리뷰게시판</button>
-		<button id="btl-recruit">채용게시판</button>
+	<div class="btn-board" id="search-board">
+		<button id="btn-salary">연봉게시판</button>
+		<button id="btn-company">회사리뷰게시판</button>
+		<button id="btn-recruit">채용게시판</button>
 	</div>
-	<script>
+	
+	<!--
 		document.querySelector("#btl-salary").addEventListener('click', (e) => {
 			document.querySelector(".salary-board-manage").style.display = "block";
 			document.querySelector(".company-board-manage").style.display = "none";
@@ -95,14 +96,19 @@ tr, td, th{
 			document.querySelector(".company-board-manage").style.display = "none";
 		});
 		
-	</script>
+	-->
 
 
     <div class="salary-board-manage">
-    <form action="<%= request.getContextPath() %>/supervisor/salReviewDel" method="post" id="salDelFrm">
-    <div id="btl-del">
-    	<input type="submit" value="연봉게시판 삭제"/>
-    </div>
+    <form action="<%= request.getContextPath() %>/supervisor/salReviewDel" method="post" name="salDelFrm">
+    	<input type="button" id="btn-salDel" value="연봉게시판 삭제"/>
+    <script>
+    document.querySelector("#btn-salDel").addEventListener('click', (e) => {
+    	if(confirm("정말 삭제하시겠습니까?"))
+    		document.salDelFrm.submit();
+    });
+
+    </script>
     <h1>연봉게시판</h1>
     <table id="tbl-salary-board">
     		<tr>
@@ -170,7 +176,7 @@ tr, td, th{
     
     <%-- 회사리뷰 게시판 --%>
     <div class="company-board-manage">
-	<form action="<%= request.getContextPath() %>/supervisor/comReviewDel" method="post" id="ReviewDelFrm">
+	<form action="<%= request.getContextPath() %>/supervisor/comReviewDel" method="post" name="comDelFrm">
 	<h1>회사 리뷰 게시판</h1>
     <table id="tbl-company-board">
     		<tr>
@@ -202,18 +208,24 @@ tr, td, th{
     			}
     		%>
     </table>
-    <div class="under-table">
-		<div id='pagebar'>
-			<%= request.getAttribute("comPagebar") %>
+	    <div class="under-table">
+			<div id='pagebar'>
+				<%= request.getAttribute("comPagebar") %>
+			</div>
+			<input type="button" id="btn-comDel" value="회사리뷰삭제"/>
 		</div>
-		<input type="submit" value="회사리뷰삭제"/>
+		</form>
 	</div>
-	</form>
-	</div>
+	<script>
+		document.querySelector("#btn-comDel").addEventListener('click', (e) => {
+			if(confirm("정말 삭제하시겠습니까?"))
+				document.comDelFrm.submit();
+		});
+	</script>
 
 	<%--채용게시판 --%>
 	<div class="recruit-board-manage">
-		<form action="<%= request.getContextPath() %>/supervisor/comRecruitDel" method="post" id="comDelFrm">
+		<form action="<%= request.getContextPath() %>/supervisor/comRecruitDel" method="post" name="recDelFrm">
 		<h1>채용 게시판</h1>
 		<table id="tbl-recruit-board">
 			<tr>
@@ -239,7 +251,7 @@ tr, td, th{
     			<td><%= rec.getCompanyName()%></td>
     			<td><%= rec.getRecruiter() %></td>
     			<td>
-    				<a href="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=rec.getNo()%>"><%= ZoominUtils.escapeXml(rec.getTitle()) %></a>  			
+    				<a href="javascript:recruitView();"><%= ZoominUtils.escapeXml(rec.getTitle()) %></a>  			
    				</td>
     			<td><%= new SimpleDateFormat("yyyy-MM-dd").format(rec.getClosureDate()) %></td>
     			<td><%= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(rec.getRegDate()) %></td>
@@ -249,17 +261,41 @@ tr, td, th{
     			}
     		%>
 		</table>
-		<div class="under-table">
-			<div id='pagebar'>
-				<%= request.getAttribute("recPagebar") %>			
+			<div class="under-table">
+				<div id='pagebar'>
+					<%= request.getAttribute("recPagebar") %>			
+				</div>
+	    		<input type="submit" id="btn-recDel" value="채용글삭제"/>
 			</div>
-    	<input type="submit" value="채용글삭제"/>
-		</div>
 		</form>
 	</div>
+	<script>
+		document.querySelector("#btn-recDel").addEventListener('click', (e) => {
+			if(confirm("정말 삭제하시겠습니까?"))
+				document.recDelFrm.sumit();
+		})
+	</script>
+	
+	<%-- 채용정보조회(팝업) --%>
+    		<%
+	    		if(recList != null && !recList.isEmpty()){
+					for(RecruitBoard rec : recList){
+    		%>   	
+    <form action="<%=request.getContextPath()%>/recruit/board/viewRecruitBoard?boardNo=<%=rec.getNo()%>" name="recruitViewFrm">
+    		<input type="hidden" name="boardNo" value="<%= rec.getNo() %>"/>
+    		<%
+    				}
+    			}
+    		%>
+    </form>
+	
 
 
 <script>
+
+
+
+	//회원정보 상세보기
     const memberView = () => {
     	//팝업창 제어
     	const title = "memberViewPopup";
@@ -271,6 +307,18 @@ tr, td, th{
     	frm.target = title;
     	frm.submit();
     }
+    
+    //채용글 상세보기
+    const recruitView = () => {
+    	const title = "recruitViewPopup";
+    	const spec = "width=1000px,height=800px";
+    	const popup = open("", title, spec);
+    	
+    	const frm = document.recruitViewFrm;
+    	frm.target = title;
+    	frm.submit();
+    }
+    
     
     //전체선택
     document.querySelectorAll(".allChk").forEach((target) => {
