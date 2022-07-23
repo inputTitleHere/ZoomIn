@@ -4,8 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp"%>
-
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 	/* Company company = (Company) request.getAttritube("company"); */	
