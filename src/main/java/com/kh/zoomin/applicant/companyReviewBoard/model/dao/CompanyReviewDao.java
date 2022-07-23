@@ -215,30 +215,28 @@ public class CompanyReviewDao {
 		return totalContent;
 	}
 
-	public List<CompanyReview> loadCompanyReview(Map<String, Object> param, Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("loadCompanyReview");
-		// loadCompanyReview = select * from (select row_number() over(order by reg_date desc) rnum, c.* from company_review c) a where rnum between ? and ?
-		List<CompanyReview> companyReview = new ArrayList<>();
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("start"));
-			pstmt.setInt(2, (int) param.get("end"));
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				companyReview.add(handleCompanyReviewResultSet(rset));
-			}
-		} catch (SQLException e) {
-			throw new CompanyReviewException("회사 리뷰 게시판 조회 오류", e);
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return companyReview;
-	}
+	
+
+	
+	
+
+	/*
+	 * public List<CompanyReview> loadCompanyReview(Map<String, Object> param,
+	 * Connection conn) { PreparedStatement pstmt = null; ResultSet rset = null;
+	 * String sql = prop.getProperty("loadCompanyReview"); // loadCompanyReview =
+	 * select * from (select row_number() over(order by reg_date desc) rnum, c.*
+	 * from company_review c) a where rnum between ? and ? List<CompanyReview>
+	 * companyReview = new ArrayList<>(); try { pstmt = conn.prepareStatement(sql);
+	 * pstmt.setInt(1, (int) param.get("start")); pstmt.setInt(2, (int)
+	 * param.get("end"));
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * while(rset.next()) { companyReview.add(handleCompanyReviewResultSet(rset)); }
+	 * } catch (SQLException e) { throw new
+	 * CompanyReviewException("회사 리뷰 게시판 조회 오류", e); } finally { close(rset);
+	 * close(pstmt); } return companyReview; }
+	 */
 
 	// 백승윤 START
 	public List<CompanyReview> findByCompanyNo(Map<String, Object> param, Connection conn) {

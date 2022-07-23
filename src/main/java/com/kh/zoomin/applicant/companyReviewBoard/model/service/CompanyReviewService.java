@@ -91,13 +91,16 @@ public class CompanyReviewService {
 		return totalContent;
 	}
 
-	public List<CompanyReview> loadCompanyReview(Map<String, Object> param) {
-		Connection conn = getConnection();
-		List<CompanyReview> companyReview = null;
-		companyReview = companyReviewDao.loadCompanyReview(param, conn);
-		close(conn);
-		return companyReview;
-	}
+	
+
+	/*
+	 * public List<CompanyReview> loadCompanyReview(Map<String, Object> param) {
+	 * Connection conn = getConnection(); List<CompanyReview> companyReview = null;
+	 * companyReview = companyReviewDao.loadCompanyReview(param, conn); close(conn);
+	 * return companyReview; }
+	 */
+
+	
 
 	// 백승윤 START
 	public List<CompanyReview> findByCompanyNo(Map<String, Object> param) {

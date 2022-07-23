@@ -1,12 +1,13 @@
+<%@page import="com.kh.zoomin.company.dto.Company"%>
 <%@page import="com.kh.zoomin.common.ZoominUtils"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp"%>
-
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
+	/* Company company = (Company) request.getAttritube("company"); */	
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
 <section id="companyReview-container">
