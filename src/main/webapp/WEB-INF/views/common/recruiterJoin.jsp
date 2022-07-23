@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,60 +7,55 @@
 <title>Insert title here</title>
 </head>
 <body>
-<body>
 	<h2>기업 회원가입</h2>
 	<div>
-		<form name="joinRFrm" id="joinRFrm" action="" method="POST"/>
-			<table>
-				<tr>
-					<th>사업자등록번호<sup></sup></th>
-					<td>
-						<input type="text" name="companyNo" id="companyNo" value="" placeholder="(-)없이 숫자만 입력" maxlength="10" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>이름<sup></sup></th>
-					<td>
-						<input type="text" name="name" id="name" value="" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>아이디<sup></sup></th>
-					<td>
-						<input type="text" placeholder="3글자이상" name="id" id="rId" value="" required> 
-						<input type="button" value="중복검사" onclick="checkIdRecruiter();" /> 
-						<input type="hidden" id="idValid" value="0" />
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호<sup></sup></th>
-					<td>
-					<input type="password" name="password" id="rPassword"
-						value="password" placeholder="숫자와 특수문자를 포함 4글자 이상" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호 재입력<sup></sup></th>
-					<td>
-						<input type="password" id="passwordCheck" value="password" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>이메일주소</th>
-					<td>
-						<input type="email" placeholder="@이후 메일주소까지 작성" name="email" id="email" value=""><br>
-					</td>
-				</tr>
-				</table>
-				<input type="submit" value="가입" >
-				<input type="reset" value="취소">
-			</form>
-		</div>
+		<form name="joinRFrm" id="joinRFrm" action="" method="POST">
+		<table>
+			<tr>
+				<th>사업자등록번호<sup></sup></th>
+				<td><input type="text" name="companyNo" id="companyNo" value=""
+					placeholder="(-)없이 숫자만 입력" maxlength="10" required><br>
+				</td>
+			</tr>
+			<tr>
+				<th>이름<sup></sup></th>
+				<td><input type="text" name="name" id="name" value="" required><br>
+				</td>
+			</tr>
+			<tr>
+				<th>아이디<sup></sup></th>
+				<td><input type="text" placeholder="3글자이상" name="id" id="rId"
+					value="" required> <input type="button" value="중복검사"
+					onclick="checkIdRecruiter();" /> <input type="hidden" id="idValid"
+					value="0" /></td>
+			</tr>
+			<tr>
+				<th>비밀번호<sup></sup></th>
+				<td><input type="password" name="password" id="rPassword"
+					value="" placeholder="숫자와 특수문자를 포함 4글자 이상" required><br>
+				</td>
+			</tr>
+			<tr>
+				<th>비밀번호 재입력<sup></sup></th>
+				<td><input type="password" id="passwordCheck" value=""
+					required><br></td>
+			</tr>
+			<tr>
+				<th>이메일주소</th>
+				<td><input type="email" placeholder="@이후 메일주소까지 작성"
+					name="email" id="email" value=""><br></td>
+			</tr>
+		</table>
+		<input type="submit" value="가입"> <input type="reset"
+			value="취소">
+		</form>
+	</div>
 	<section>
-		<form action="<%=request.getContextPath()%>/recruit/checkId" name="checkIdRFrm">
+		<form action="<%=request.getContextPath()%>/recruit/checkId"
+			name="checkIdRFrm">
 			<input type="hidden" name="id" />
 		</form>
-	<script>
+		<script>
 	//사용자가 입력한 id 중복여부 검사 시작 
 	const checkIdRecruiter = () => {
 		const id = document.querySelector("#rId");
@@ -120,6 +115,6 @@ document.joinAFrm.onsubmit = (e) => {
 	
 }
 	</script>
-</section>
+	</section>
 </body>
 </html>

@@ -18,6 +18,8 @@ import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.service.SalaryReviewService;
 import com.kh.zoomin.company.dto.Company;
 import com.kh.zoomin.company.service.CompanyService;
+import com.kh.zoomin.recruit.board.dto.RecruitBoard;
+import com.kh.zoomin.recruit.board.service.RecruitBoardService;
 
 /**
  * Servlet implementation class RecruitReivewList
@@ -25,6 +27,7 @@ import com.kh.zoomin.company.service.CompanyService;
 @WebServlet("/recruit/review/recruitReviewList")
 public class RecruitReivewList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private RecruitBoardService rbs = new RecruitBoardService();
 	private CompanyReviewService crs = new CompanyReviewService();
 	private SalaryReviewService srs = new SalaryReviewService();
 	private CompanyService cs = new CompanyService();
@@ -55,6 +58,9 @@ public class RecruitReivewList extends HttpServlet {
 		Company company = cs.getCompanyByNo(companyNo);
 		request.setAttribute("company", company);
 		
+		// 채용정보 회수하기
+		List<RecruitBoard> recruitBoardList = rbs.loadRecruitBoardByCompanyNo(company.getCompanyNo());
+		request.setAttribute("recruitBoardList", recruitBoardList);
 		
 		// 리뷰회수용 parameter 세팅
 		Map<String,Object> paramCompany=new HashMap<String, Object>();

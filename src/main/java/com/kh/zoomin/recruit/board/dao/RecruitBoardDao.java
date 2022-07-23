@@ -416,6 +416,29 @@ public class RecruitBoardDao {
 		return result;
 	}
 
+	public List<RecruitBoard> loadRecruitBoardByCompanyNo(String companyNo, Connection conn) {
+		List<RecruitBoard> result=new ArrayList<RecruitBoard>();
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+//		select * from recruit_board where company_no=?
+		String sql = prop.getProperty("loadRecruitBoardByCompanyNo");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, companyNo);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleRecruitBoard(rset));
+			}
+		}catch(SQLException e) {
+			throw new RecruitBoardException("회사번호로 채용글 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 
