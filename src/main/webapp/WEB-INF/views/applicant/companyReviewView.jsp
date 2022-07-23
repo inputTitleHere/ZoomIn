@@ -1,12 +1,14 @@
+<%@page import="com.kh.zoomin.company.dto.Company"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp"%> 
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
+	Company company = (Company) request.getAttribute("company");
+/* 	List<Company> company = (List<Company>) request.getAttribute("company"); */
 	/* Member lm = (Member)session.getAttribute("loginMember");
 	if(loginMember instanceof ApplicantMember){
 		am = (ApplicantMember)session.getAttribute("loginMember");
@@ -28,10 +30,13 @@
 	<%-- <%
 		}
 	%> --%>
+	
 	<table class="company-review-list">
 		<tr>
 			<th>회사명</th>
-			<td><%= companyReview.getCompanyNo() %></td>
+			<td>
+				<%= company.getCompanyName() %>
+			</td>
 		</tr>			
 		<tr>
 			<th>분야</th>
