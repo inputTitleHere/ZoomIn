@@ -12,6 +12,7 @@
 	//System.out.println("msg@jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg"); 
 	Member loginMember = (Member) session.getAttribute("loginMember");
+	System.out.println("loginMember = " + loginMember);
 	ApplicantMember am=null;
 	RecruitMember rm=null;
 	
@@ -65,7 +66,7 @@ function isEmpty(value){
 
 </script>	
 
-</head>
+
 
 <%
 
@@ -80,7 +81,7 @@ if (loginMember == null) {
 <%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
 <%
 
-}else if(rm != null && rm.isSupervisor()){ 
+}else if(rm != null && loginMember.getMemberType() == 0){ 
 %>
 	<%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp"%>
 <%
@@ -99,4 +100,3 @@ if (loginMember == null) {
 %>
 
 </head>
-<body>

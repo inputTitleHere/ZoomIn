@@ -2,18 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
 	
-		<!-- 관리자 메인페이지 -->
-	<button id="btn-findData">데이터 불러오기</button>
-	<script>
-	//시험용 버튼
-	document.querySelector("#btn-findData").addEventListener('click', (e) => {
-		//location.href="<%= request.getContextPath() %>/supervisor/findData";
-		findData();
-	});
-	</script>
-    <div style="width: 900px; height: 900px;">
-        <!--차트가 그려질 부분-->
-        <canvas id="myChart"></canvas>
+		<!-- 관리자 랜딩페이지 -->
+	
+	
+	
+    <div id="chart" >
+        <canvas id="myChart">
+	        <!--차트가 그려질 부분-->
+        </canvas>
     </div>
 
 	<script>
@@ -23,17 +19,26 @@
 			url : '<%= request.getContextPath() %>/supervisor/findData',
 			dataType:'json',
 			success(response){
-				console.log(response)
+				//console.log(response);	{boardList: Array(4), visitList: Array(5)}
+				const {visitList, boardList} = response;
+				//console.log(visitList);	[{…}, {…}, {…}, {…}, {…}]
 				let days = [];	//가로축
-				let cnts = []; 	//세로축
-				response.forEach((data) => {
-					
-					const {day, cnt} = data;	
-					days.push(day.substr(3,2));
-					cnts.push(cnt);
+				let visitCnts = []; 	//세로축
+				let boardCnts = [];
+				
+				visitList.forEach((data) => {
+					//console.log(data);	//{day: '7월 14, 2022', cnt: 1}
+					const {day, cnt} = data;					
+					days.push(day.substr(3,2));		//일별로 자름
+					visitCnts.push(cnt);		//방문자 수 
+					})
+				boardList.forEach((data) => {
+					const {cnt} = data;
+					boardCnts.push(cnt);
 				})
 				
-				const context = document.getElementById('myChart').getContext('2d');
+					
+			const context = document.getElementById('myChart').getContext('2d');
 				
 				const myChart = new Chart(context, {      	
 		            type: 'bar', // 차트의 형태
@@ -43,21 +48,19 @@
 		                    { //데이터
 		                        label: '일일 방문자 수', //차트 제목
 		                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-		                        data: cnts,
+		                        data: visitCnts,
 		                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
 		                        borderColor: 'rgba(255, 99, 132, 1)',
 		                        borderWidth: 2 //경계선 굵기
 		                    } ,
-		                    /*{
+		                    {
 		                        label: '일일 게시글 수 ',
 		                        fill: false,
-		                        data: [
-		                            8, 10, 12, 13, 5, 3, 2 
-		                        ],
+		                        data: boardCnts,
 		                        backgroundColor: 'rgb(51, 102, 255, 0.2)',
 		                        borderColor: 'rgb(51, 102, 255, 1)',
 		                        borderWidth: 2
-		                    } */
+		                    } 
 		                ]
 		            },
 		            options: {
@@ -80,7 +83,15 @@
 	};
 	
 	</script>
-
+	<button id="btn-sch-statistic">기간별 통계보기</button>
+	<script>
+	window.onload = () => {
+		findData();
+	}
+	document.querySelector("#btn-sch-statistic").addEventListener('click', (e) => {
+		location.href="<%= request.getContextPath()%>/supervisor/Statistic";
+	})
+	</script>
 
 </body>
 </html>

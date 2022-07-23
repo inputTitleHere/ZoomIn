@@ -2,7 +2,9 @@ package com.kh.zoomin.supervisor.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +30,7 @@ public class FindDataServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//date별 방문자 수 가져오기 : select trunc(v_date) as "date", count(*) cnt from  visit where  v_date >= to_char((sysdate-7), 'yyyymmdd') group by trunc(v_date)
+		//date별 방문자 수 가져오기
 		List<WeekData> visitList = new ArrayList<>();
 		visitList = supervisorService.getVisitData(); 
 		//System.out.println("visitList = " + visitList);
@@ -38,14 +40,13 @@ public class FindDataServlet extends HttpServlet {
 		boardList = supervisorService.getBoardData();
 		//System.out.println("boardList = " + boardList);
 				
-		//응답요청 : json으로 변환해서 저장하기
-		Gson gson = new Gson();
-		String jsonStrVisit = gson.toJson(visitList);
-		String jsonStrBoard = gson.toJson(boardList);
-		//System.out.println("jsonStrVisit = " + jsonStrVisit); //{"day":"7월 12, 2022","cnt":1},{"day":"7월 15, 2022","cnt":1} 이렇게 넘어옴
+		//응답요청 : json으로 변환해서 저장하기		
+		Map<String, List<WeekData>> value = new HashMap<>();
+		value.put("visitList", visitList);
+		value.put("boardList", boardList);
 		response.setContentType("application/json; charset=utf-8");
-		response.getWriter().print(jsonStrVisit);
-		//response.getWriter().print(jsonStrBoard);
+		new Gson().toJson(value, response.getWriter());	//맵으로 한번에 보냄!
+		
 	}
 
 }
