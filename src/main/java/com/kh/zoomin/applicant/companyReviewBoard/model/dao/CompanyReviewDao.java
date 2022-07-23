@@ -238,5 +238,55 @@ public class CompanyReviewDao {
 	 * close(pstmt); } return companyReview; }
 	 */
 
+	// 백승윤 START
+	public List<CompanyReview> findByCompanyNo(Map<String, Object> param, Connection conn) {
+		List<CompanyReview> result = new ArrayList<CompanyReview>();
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		// select * from (select row_number() over(order by reg_date desc) rnum, * from company_review where company_no=?) where rnum between ? and ?
+		String sql= prop.getProperty("findByCompanyNo");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, (String)param.get("companyNo"));
+			pstmt.setInt(2, (int)param.get("companyStart"));
+			pstmt.setInt(3, (int)param.get("companyEnd"));
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				result.add(handleCompanyReviewResultSet(rset));
+			}
+			
+		}catch (SQLException e) {
+			throw new CompanyReviewException("사업자 등록번호 따라 회사리뷰 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getTotalContent(String companyNo, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContent = 0;
+//		select count(*) from company_review where company_no=?
+		String sql = prop.getProperty("getTotalContentByCompanyNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, companyNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContent = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new CompanyReviewException("사업자 번호에 따른 총 리뷰 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+	// 백승윤 END
 	
 }

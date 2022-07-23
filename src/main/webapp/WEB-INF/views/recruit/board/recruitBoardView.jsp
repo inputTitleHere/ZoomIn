@@ -2,13 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
 <%
 RecruitBoard rb = (RecruitBoard) request.getAttribute("recruitBoard");
 boolean isFaved=(request.getAttribute("isFaved")==null?false:(boolean)request.getAttribute("isFaved"));
 boolean isEnrolled=(request.getAttribute("isEnrolled")==null?false:(boolean)request.getAttribute("isEnrolled"));
-System.out.println("@recruitBoardView.jsp : isFaved="+isFaved+", isEnrolled="+isEnrolled);
+//System.out.println("@recruitBoardView.jsp : isFaved="+isFaved+", isEnrolled="+isEnrolled);
 
 %>
 <link href="<%=request.getContextPath() %>/css/recruit/board/recruit-board-view.css" rel="stylesheet" type="text/css">
@@ -71,6 +70,14 @@ System.out.println("@recruitBoardView.jsp : isFaved="+isFaved+", isEnrolled="+is
 						<button class="register-buttons <%=isEnrolled?"active":""%>" id="enroll-button">지원하기</button>
 					</form>
 				</div>
+			</div>
+			<%}else if(rm!=null && rb.getUid()==rm.getUid()){ %>
+			<div class="view-enroll-wrapper">
+				<form action="<%=request.getContextPath()%>/recruit/board/viewEnrolled" method="post">
+					<input type="hidden" value="<%=rb.getNo()%>" name="boardNo" id="view-enroll-boardNo" />
+					<input type="hidden" value="<%=rb.getTitle() %>" name="title" id="view-enroll-title"/>
+					<button class="view-enroll-button">지원자 조회하기</button>
+				</form>
 			</div>
 			<%} %>
 		</div><%-- small-info --%>

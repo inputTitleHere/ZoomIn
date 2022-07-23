@@ -184,4 +184,51 @@ public class SalaryReviewDao {
 		return result;
 	}
 
+	// 백승윤 START
+	public List<SalaryReview> findByCompanyNo(Map<String, Object> param, Connection conn) {
+		List<SalaryReview> result=new ArrayList<SalaryReview>();
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		// select * from (select row_number() over(order by reg_date desc) rnum, * from salary_review where company_no=?) where rnum between ? and ?
+		String sql=prop.getProperty("findByCompanyNo");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, (String)param.get("companyNo"));
+			pstmt.setInt(2, (int)param.get("salaryStart"));
+			pstmt.setInt(3, (int)param.get("salaryEnd"));
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleSalaryReviewResultSet(rset));
+			}
+		}catch (SQLException e) {
+			throw new SalaryReviewException("사업자등록번호에 따른 연봉리뷰 조회 오류", e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int getTotalContent(String companyNo, Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalContent = 0;
+//		select count(*) from salary_review where company_no=?
+		String sql = prop.getProperty("getTotalContentByCompanyNo");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, companyNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContent = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new SalaryReviewException("총 리뷰 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+	// 백승윤 END
 }

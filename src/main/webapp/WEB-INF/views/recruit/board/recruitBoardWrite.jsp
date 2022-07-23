@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
     
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
 <%
 //RecruitMember rm = (RecruitMember)session.getAttribute("loginMember");
 
