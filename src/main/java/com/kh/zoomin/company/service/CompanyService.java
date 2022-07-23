@@ -1,7 +1,6 @@
 package com.kh.zoomin.company.service;
 
-import static com.kh.zoomin.common.JdbcTemplate.close;
-import static com.kh.zoomin.common.JdbcTemplate.getConnection;
+import static com.kh.zoomin.common.JdbcTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -27,6 +26,30 @@ public class CompanyService {
 		company = companyDao.getCompanyByNo(conn, companyNo);
 		close(conn);
 		return company;
+	}
+
+	public boolean isCompanyExist(String companyNo) {
+		Connection conn = getConnection();
+		boolean result=false;
+		result=companyDao.isCompanyExist(companyNo, conn);
+		close(conn);
+		return result;
+	}
+
+	public int insertNewCompany(Company company) {
+		int result=0;
+		Connection conn = getConnection();
+		try {
+			result=companyDao.insertNewCompany(company,conn);
+			commit(conn);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		
+		return result;
 	}
 	
 	
