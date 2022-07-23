@@ -1,0 +1,52 @@
+
+
+#account {
+	z-index:10;
+}
+
+ul li {
+	list-style: none;
+}
+
+#menu a {
+	text-decoration: none;
+	color: #333;
+}
+
+#menu {
+	float: left;
+	font:bold 22px "malgun gothic";
+	width:150px;
+	height: 50px;
+	background: #cccccc05;
+	color: black;
+	line-height: 50px;
+	margin: 0 auto;
+	text-align: right;
+}
+
+
+#menu ul li {
+	text-align: center;
+	vertical-align: middle;
+	float:left;
+	width:150px;
+	position:relative;
+}
+
+#menu ul li ul {
+	width: 130px;
+	position: absolute;
+	font-size: 16px;
+	background: white;
+}
+
+#menu ul li:hover ul {
+	display:block;
+}
+
+#menu ul li ul li:hover {
+	background: orange;
+	transition: ease 2s;
+}
+

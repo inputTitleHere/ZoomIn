@@ -7,27 +7,26 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 
 <body>
-	<header>
-		<div style="width: 168%;" id="account">
-			<div id="menu">
-				<ul>
-					<li>
-						<span class="menu">MENU</span>
-						<ul>
-							<li><a href="<%=request.getContextPath()%>/ResumeServlet"	id="writeResume">이력서 작성</a></li>
-							<li><a href="<%=request.getContextPath()%>/applicant/update" id="myPage">마이페이지</a></li>
-							<li><a href="<%=request.getContextPath()%>/applicant/logout" id="logOut">로그아웃</a></li>
-						</ul>
-					</li>
-				</ul>
+<header>
+	<div style="width: 168%;" id="account">
+		<div id="menu">
+			<ul>
+				<li>
+					<span class="menu">MENU</span>
+					<ul>
+						<li><a href="<%=request.getContextPath()%>/ResumeServlet"	id="writeResume">이력서 작성</a></li>
+						<li><a href="<%=request.getContextPath()%>/applicant/update" id="myPage">마이페이지</a></li>
+						<li><a href="<%=request.getContextPath()%>/applicant/logout" id="logOut">로그아웃</a></li>
+					</ul>
+				</li>
+			</ul>
 
-			</div>
 		</div>
-		</div>
+	</div>
 
 		<div id="logodiv">
 			<img id="logo" alt=""
