@@ -10,10 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.service.SalaryReviewService;
 import com.kh.zoomin.common.ZoominUtils;
+import com.kh.zoomin.company.service.CompanyService;
+import com.kh.zoomin.member.dto.Member;
 
 /**
  * Servlet implementation class SalaryReivewList
@@ -22,12 +26,22 @@ import com.kh.zoomin.common.ZoominUtils;
 public class SalaryReivewList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SalaryReviewService salaryReviewService = new SalaryReviewService();
-
+	private CompanyService companyService = new CompanyService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
+			Member member = (Member)session.getAttribute("loginMember");
+			if(member instanceof ApplicantMember) {
+				ApplicantMember applicantMember = (ApplicantMember) member;
+				int uid = applicantMember.getUid();
+				
+//				int result = salaryReviewService.
+				
+			}
+			
 			int numPerPage = 5;
 			int cPage = 1;
 			try {
