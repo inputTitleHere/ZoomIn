@@ -41,6 +41,7 @@ public class CompanyService {
 		Company company = companyDao.getCompanyByName(conn, userVal);
 		close(conn);
 		return company;
+	}
 
 	public boolean isCompanyExist(String companyNo) {
 		Connection conn = getConnection();
