@@ -16,6 +16,7 @@ import org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReport.QueryStats;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
+import com.kh.zoomin.applicant.information.model.dto.CompanyInfo;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.service.SalaryReviewService;
 import com.kh.zoomin.common.ZoominUtils;
@@ -51,6 +52,10 @@ public class RecruitReivewList extends HttpServlet {
 		int salaryStart=(currSalaryReivewPage-1)*itemsPerPage+1;
 		int salaryEnd=salaryStart+itemsPerPage-1;
 		
+		// 회사정보 회수하기
+//		CompanyInfo ci = 
+		
+		// 리뷰회수용 parameter 세팅
 		Map<String,Object> paramCompany=new HashMap<String, Object>();
 		Map<String,Object> paramSalary=new HashMap<String, Object>();
 		paramCompany.put("companyStart", companyStart);
