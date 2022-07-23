@@ -4,11 +4,25 @@
     pageEncoding="UTF-8"%>
    
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/recruiter/recruitLoginHeader.css"/>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+</head>
 <body>
 <header>
-	<div id="account">
-		<a href="<%= request.getContextPath() %>/recruit/myPage" id="myPage">마이페이지</a>
+	<div style="width:168%" id="account">
+		<div id="menu">
+			<ul class="main">
+				<li>
+					<span class="menu">MENU</span>
+					<ul>
+						<li><a href="<%= request.getContextPath() %>/recruit/myPage" id="myPage">마이페이지</a></li>
+						<li><a href="<%= request.getContextPath() %>/recruit/logout" id="lougout">로그아웃</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</div>
 	<div id="logodiv">
 		<a href="<%=request.getContextPath()%>/recruit/board/recruitBoardList">
