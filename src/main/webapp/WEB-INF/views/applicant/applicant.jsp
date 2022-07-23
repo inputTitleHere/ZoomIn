@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/applicant.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section id="applicantSection">
@@ -19,14 +18,17 @@
 <script>
 	document.getElementById("recruitInfo").onclick = (e) =>{
 		applicantAjax(1);
+		$("#recruit-board-view").empty();
 	}; 
 	
 	document.getElementById("companyInfo").onclick = (e) =>{
 		companyAjax(1);
+		$("#recruit-board-view").empty();
 	};
 	
 	document.getElementById("salaryInfo").onclick = (e) =>{
 		salaryAjax(1);
+		$("#recruit-board-view").empty();
 	};
 	
 	
@@ -67,7 +69,7 @@
 		      				cInfo += "<td></td>";	
 		      			}else{
 		      				cInfo += "<td class='company'>\n";
-		      				cInfo += "response.result[i*3+j].companyName+"<br/>" +"<br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>" + response.result[i*3+j].companyNo + "<br/>" + "<br/>";
+		      				cInfo += response.result[i*3+j].companyName+"<br/>" +"<br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>" + response.result[i*3+j].companyNo + "<br/>" + "<br/>";
 		      				cInfo += "</td>\n";		      				
 		      			}
 		      		}
@@ -118,6 +120,7 @@
 	
 	$(document).ready(function(){
 		applicantAjax(1);
+		$("#recruit-board-view").empty();
 	});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
