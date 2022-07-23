@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/applicant.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section id="applicantSection">
@@ -25,9 +26,9 @@
 	};
 	
 	document.getElementById("salaryInfo").onclick = (e) =>{
-		/* $(".context").empty();
-		$(".context").append(info); */
+		salaryAjax(1);
 	};
+	
 	
 	function applicantAjax(cPage){
 		$(".context").empty();
@@ -58,7 +59,7 @@
 			url:"<%=request.getContextPath()%>/CompanyBoardList?cPage="+cPage,
 			success(response){
 				console.log(response);
-				var cInfo = "<table class='allCompany'>\n";
+				var cInfo = "<h1>-기업정보 게시판-</h1><table class='allCompany'>\n";
 		      	for(var i =0; i < 3; i++){
 		      			cInfo += "<tr class='companyList'>\n";
 		      		for(var j =0; j < 3; j++){
@@ -73,7 +74,9 @@
 		      			cInfo += "</tr>\n";
 		      	}
 		      		cInfo += "</table>\n";
+		      		cInfo +="<div id='pagebar'>";
 		      		cInfo += response.pageBar;
+		      		cInfo +="</div>";
 		      		$(".context").append(cInfo);
 		      		
 		      		$(".paging").on("click",function(){
@@ -85,6 +88,29 @@
 		      			companyAjax(page);
 		    			console.log("paging"+ page);
 		    		});
+			},
+			error:console.log
+		});
+	}
+	
+	function salaryAjax(cPage){
+		$(".context").empty();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/review/salary/salaryReviewList?cPage="+cPage,
+			success(response){
+				console.log(response);
+				var info = response;
+				$(".context").append(info);
+				
+				$(".paging").on("click",function(){
+	      			var id = this.id;
+	      			var page = id.substring(4);
+	      			if(page == 0){
+	      				page = -1;
+	      			}
+	      			salaryAjax(page);
+	    			console.log("paging"+ page);
+	    		});
 			},
 			error:console.log
 		});

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.zoomin.applicant.resume.model.dto.Resume;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
 import com.kh.zoomin.recruit.board.dto.RecruitBoardReadMode;
 import com.kh.zoomin.recruit.board.exception.RecruitBoardException;
@@ -414,6 +415,8 @@ public class RecruitBoardDao {
 		}
 		return result;
 	}
+
+	
 
 
 }

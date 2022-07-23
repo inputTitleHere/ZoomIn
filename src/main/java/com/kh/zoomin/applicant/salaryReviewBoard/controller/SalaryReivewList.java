@@ -45,7 +45,7 @@ public class SalaryReivewList extends HttpServlet {
 			
 			int totalContent = salaryReviewService.getTotalContent();
 			String url = request.getRequestURI();
-			String pagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalContent, url);
+			String pagebar = ZoominUtils.getApplicantPageBar(cPage, numPerPage, totalContent, url);
 			
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);

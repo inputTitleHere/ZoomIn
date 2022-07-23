@@ -6,8 +6,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
+	
+<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %> 
 <%
 List<RecruitBoard> rbl = (List<RecruitBoard>) request.getAttribute("boardList");
 //Member loginMember = (Member)session.getAttribute("loginMember");
@@ -30,7 +30,7 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 		onclick="location.href='<%=request.getContextPath()%>/recruit/board/writeRecruitBoard'">신규
 		채용 공고글 작성하기</button>
 </div>
-<section id="my-recruit-board">
+<section id="my-recruit-board" class="recruit-board-section">
 
 	<%
 	if (recruiterBoard == null) {
@@ -96,7 +96,7 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 %>
 <%-- 채용게시글 위치 --%>
 <h1>-채용게시판-</h1>
-<section id="recruit-board">
+<section id="recruit-board" class="recruit-board-section">
 	<%
 	if (rbl != null) {
 		for (RecruitBoard recruitBoard : rbl) {

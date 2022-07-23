@@ -8,7 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -18,6 +21,7 @@ import com.kh.zoomin.applicant.resume.model.dto.Resume;
 import com.kh.zoomin.applicant.resume.model.dto.SchoolType;
 import com.kh.zoomin.applicant.resume.model.dto.Status;
 import com.kh.zoomin.applicant.resume.model.exception.ResumeException;
+import com.kh.zoomin.recruit.board.exception.RecruitBoardException;
 
 
 public class ResumeDao {
@@ -105,8 +109,8 @@ public class ResumeDao {
 		String schoolName = rset.getString("school_name");
 		Status schoolStatus = Status.valueOf(rset.getString("school_status"));
 		String majorName = rset.getString("major_name");
-		int grade = rset.getInt("grade");
-		int totalPoint = rset.getInt("total_point");
+		double grade = rset.getDouble("grade");
+		double totalPoint = rset.getDouble("total_point");
 		
 		return new Resume(uid, categoryNumber, name, birthday,
 				gender, address, schoolType, schoolName, schoolStatus, majorName, grade, totalPoint);
@@ -167,5 +171,87 @@ public class ResumeDao {
 		}
 		return result;
 	}
+	// 백승윤 START
+	/**
+	 * 구인자가 자기 채용글에 지원한 구직자들의 리스트를 추출하는 쿼리입니다. 
+	 * @param boardNo
+	 * @param conn
+	 * @return
+	 */
+	public List<Resume> loadEnrolledList(int boardNo, Connection conn) {
+		List<Resume> result = new ArrayList<Resume>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+//		select * from RESUME where "uid" in (select "uid" from ENROLL_TABLE where recruit_board_no=?);
+		String sql = prop.getProperty("loadEnrolledList");
+		try{
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleResumeResultSet(rset));
+			}
+		}catch (SQLException e) {
+			throw new RecruitBoardException("지원자 리스트 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public List<Resume> findResumeByCategory(Map<String, Object> param, Connection conn) {
+		List<Resume> result=new ArrayList<Resume>();
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		// select * from (select row_number() over(order by resume_no desc) rnum, c.* from RESUME c where category_number=?) b where b.rnum between ? and ? order by b.rnum asc
+		String sql = prop.getProperty("findResumeByCategory");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, (int)param.get("category"));
+			pstmt.setInt(2, (int)param.get("start"));
+			pstmt.setInt(3, (int)param.get("end"));
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleResumeResultSet(rset));
+			}
+			
+		}catch(SQLException e) {
+			throw new ResumeException("이력서 분야별 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int findResumeCountByCategory(int category, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rset= null;
+//		select count(*) from Resume where category_number=?
+		String sql = prop.getProperty("getResumeCountByCategory");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, category);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result=rset.getInt(1);
+			}
+		}catch(SQLException e) {
+			throw new ResumeException("카테고리별 이력서 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// 백승윤 END
 
 }

@@ -26,11 +26,9 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int no = Integer.parseInt(request.getParameter("no"));
-//		int uid = Integer.parseInt(request.getParameter("uid"));
-		// 로그인 된 사람이 없어서 현재 위 두개를 안받고 47번 줄에서 저렇게 설정을 해줘야하나?
+		request.setCharacterEncoding("utf-8");
 		
-		HttpSession loginSession = request.getSession();
+		
 		request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewEnroll.jsp")
 			.forward(request, response);
 		
@@ -44,9 +42,15 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			CompanyReview companyReview = new CompanyReview();
-			HttpSession loginSession = request.getSession();
-			ApplicantMember member = (ApplicantMember)loginSession.getAttribute("loginMember");
+//			HttpSession loginSession = request.getSession();
+//			ApplicantMember applicantMember = (ApplicantMember)loginSession.getAttribute("applicantMember");
+//			System.out.println("applicantMember = " + applicantMember);
 			// 사용자 입력값 처리
+			
+//			int uid = applicantMember.getUid();
+//			String name = applicantMember.getName();
+
+//			int uid = companyReviewService.getWriterUid(name);
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));
 			String companyNo = request.getParameter("company_no");
@@ -61,24 +65,24 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			companyReview = new CompanyReview(0, uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			System.out.println("companyReviewEnroll = " + companyReview);
 			
-//			companyReview.setUid(uid);
-//			companyReview.setCompanyNo(companyNo);
-//			companyReview.setCategoryNumber(categoryNumber);
-//			companyReview.setContent(content);
-//			companyReview.setStars(stars);
-//			companyReview.setWorkLifeBalance(workLifeBalance);
-//			companyReview.setLevelUp(levelUp);
-//			companyReview.setWorkIntensity(workIntensity);
-//			companyReview.setPotential(potential);
-//			companyReview.setSalarySatisfaction(salarySatisfaction);
+			companyReview.setUid(uid);
+			companyReview.setCompanyNo(companyNo);
+			companyReview.setCategoryNumber(categoryNumber);
+			companyReview.setContent(content);
+			companyReview.setStars(stars);
+			companyReview.setWorkLifeBalance(workLifeBalance);
+			companyReview.setLevelUp(levelUp);
+			companyReview.setWorkIntensity(workIntensity);
+			companyReview.setPotential(potential);
+			companyReview.setSalarySatisfaction(salarySatisfaction);
 			
-			System.out.println("companyReview = " + companyReview);
+			System.out.println("companyReviewEnroll = " + companyReview);
 			// 업무로직
 			int result = companyReviewService.insertCompanyReview(companyReview);
 			
 			// redirect
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			
+			request.setAttribute("companyReview", companyReview);
 			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
 			
 		} catch (Exception e) {
