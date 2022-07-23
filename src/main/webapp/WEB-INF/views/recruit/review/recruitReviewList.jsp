@@ -11,7 +11,7 @@ if(rrlLm!=null&&rrlLm.getMemberType()==1){
 %>
 <%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
 <%}else{ %>
-<%@ include file="/WEB-INF/views/applicant/applicant.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%} %>
 <%
 List<CompanyReview> companyReviewList=(List<CompanyReview>)request.getAttribute("companyReview");
