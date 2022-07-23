@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.zoomin.common.ZoominUtils;
-import com.kh.zoomin.supervisor.model.dto.ComLog;
-import com.kh.zoomin.supervisor.model.dto.RecLog;
+import com.kh.zoomin.supervisor.model.dto.AmemberLog;
+import com.kh.zoomin.supervisor.model.dto.RmemberLog;
 import com.kh.zoomin.supervisor.model.service.SupervisorService;
 
 /**
- * Servlet implementation class comBoardLog
+ * Servlet implementation class RmemberLog
  */
-@WebServlet("/supervisor/comBoardLog")
-public class comBoardLog extends HttpServlet {
+@WebServlet("/supervisor/rMemberLog")
+public class RmLog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
 
@@ -44,16 +44,16 @@ public class comBoardLog extends HttpServlet {
 		
 		//업무로직
 		//A.content영역
-		List<ComLog> comLogList = ss.getComLogAll(param);
+		List<RmemberLog> rmLogList = ss.getRmemberLogAll(param);		
 		//B.pagebar영역
-		int totalComLogCnt = ss.getTotalComLogCnt();
+		int totalRmLogCnt = ss.getTotalRmLogCnt();
 		String url = request.getRequestURI();
-		String comLogPagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalComLogCnt, url);
+		String rmLogPagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalRmLogCnt, url);
 		
 		//응답처리
-		request.setAttribute("comLogList", comLogList);
-		request.setAttribute("comLogPagebar", comLogPagebar);
-		request.getRequestDispatcher("/WEB-INF/views/supervisor/comBoardLog.jsp").forward(request, response);
+		request.setAttribute("rmLogList", rmLogList);
+		request.setAttribute("rmLogPagebar", rmLogPagebar);
+		request.getRequestDispatcher("/WEB-INF/views/supervisor/rmLog.jsp").forward(request, response);
 	}
 
 }

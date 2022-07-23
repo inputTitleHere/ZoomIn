@@ -19,7 +19,7 @@ import com.kh.zoomin.supervisor.model.service.SupervisorService;
  * Servlet implementation class recBoardLog
  */
 @WebServlet("/supervisor/recBoardLog")
-public class recBoardLog extends HttpServlet {
+public class RecBoardLog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
 

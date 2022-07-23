@@ -21,7 +21,7 @@ import com.kh.zoomin.supervisor.model.service.SupervisorService;
  * Servlet implementation class SupervisorBoardListServlet
  */
 @WebServlet("/supervisor/salBoardList")
-public class salBoardList extends HttpServlet {
+public class SalBoardList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
 	

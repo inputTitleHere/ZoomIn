@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.zoomin.common.ZoominUtils;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
+import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.supervisor.model.service.SupervisorService;
 
 /**
- * Servlet implementation class comBoardList
+ * Servlet implementation class recBoardList
  */
-@WebServlet("/supervisor/comBoardList")
-public class comBoardList extends HttpServlet {
+@WebServlet("/supervisor/recBoardList")
+public class RecBoardList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
 
@@ -28,33 +29,33 @@ public class comBoardList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 사용자 입력값
-				int cPage = 1;
-				int numPerPage = 5;
-				try {
-					cPage = Integer.parseInt(request.getParameter("cPage"));
-				}	catch(NumberFormatException e) {}
-				
-				int start = (cPage - 1) * numPerPage + 1;
-				int end = cPage * numPerPage;
-				
-				Map<String, Object> param = new HashMap<>();
-				param.put("start", start);
-				param.put("end", end);
+		int cPage = 1;
+		int numPerPage = 5;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		}	catch(NumberFormatException e) {}
 		
-				
+		int start = (cPage - 1) * numPerPage + 1;
+		int end = cPage * numPerPage;
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+
+		
 		//2.업무로직 (전체조회) 
 		//A.content영역
-		List<CompanyReview> comList = ss.getComReviewAll(param);
+		List<RecruitBoard> recList = ss.getRecBoardAll(param);
 		
 		//B.pagebar영역
-		int totalComReviewCnt = ss.getTotalComReviewCnt();
+		int totalComRecruitCnt = ss.getTotalComRecruitCnt();
 		String url = request.getRequestURI();	//url : 페이지바를 눌렀을떄 이동할 주소
-		String comPagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalComReviewCnt, url);
+		String recPagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalComRecruitCnt, url);
 		
 		//응답처리
-		request.setAttribute("comList", comList);
-		request.setAttribute("comPagebar", comPagebar);
-		request.getRequestDispatcher("/WEB-INF/views/supervisor/comBoardList.jsp").forward(request, response);
+		request.setAttribute("recList", recList);
+		request.setAttribute("recPagebar", recPagebar);
+		request.getRequestDispatcher("/WEB-INF/views/supervisor/recBoardList.jsp").forward(request, response);
 	}
 
 }
