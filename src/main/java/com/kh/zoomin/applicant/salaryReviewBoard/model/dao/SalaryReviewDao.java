@@ -168,7 +168,7 @@ public class SalaryReviewDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, salaryReview.getCompanyNo());
+			pstmt.setInt(1, salaryReview.getCategoryNumber());
 			pstmt.setInt(2, salaryReview.getSalary());
 			pstmt.setInt(3, salaryReview.getWorkYear());
 			pstmt.setString(4, salaryReview.getJobPosition());

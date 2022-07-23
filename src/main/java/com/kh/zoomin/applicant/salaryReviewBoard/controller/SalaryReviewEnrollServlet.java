@@ -55,7 +55,8 @@ public class SalaryReviewEnrollServlet extends HttpServlet {
 			
 			// redirect
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			response.sendRedirect(request.getContextPath() + "/review/salary/salaryReviewList");
+			request.setAttribute("loginMember", am);
+			response.sendRedirect(request.getContextPath() + "/");
 						
 		} catch (Exception e) {
 			e.printStackTrace();
