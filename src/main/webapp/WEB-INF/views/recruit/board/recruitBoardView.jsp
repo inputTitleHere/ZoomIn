@@ -24,7 +24,8 @@ if(rbvLm!=null&&rbvLm.getMemberType()==1){
 <%
 }else{
 %>
-<%@ include file="/WEB-INF/views/applicant/applicant.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/applicant/applicantNav.jsp" %> --%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%} %>
 
 
