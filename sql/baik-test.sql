@@ -6,8 +6,8 @@ select closure_date-sysdate from recruit_board;
 select * from resume order by "uid" asc;
 
 select * from applicant_member order by "uid";
-select * from recruit_member;
-select * from recruit_board order by no;
+select * from recruit_member order by "uid";
+select * from recruit_board order by company_no;
 
 select * from favourite;
 delete from favourite where "uid"=1;
