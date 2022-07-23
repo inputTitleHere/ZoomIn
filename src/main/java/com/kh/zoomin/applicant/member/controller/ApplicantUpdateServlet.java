@@ -43,12 +43,14 @@ public class ApplicantUpdateServlet extends HttpServlet {
 			
 			//응답
 			HttpSession session = request.getSession();
-			String msg = "";
+			String msg = null;
 			
 			if(result > 0) {
 				msg = "회원정보 수정완료했습니다.";
 				session.setAttribute("loginMember", as.findAppliId(id));
+				session.setAttribute("loginMember", amember);
 			}
+			
 			session.setAttribute("msg", msg);
 			response.sendRedirect(request.getContextPath() + "/applicant/myPage"); //ApplicantViewServlet
 			
@@ -57,5 +59,9 @@ public class ApplicantUpdateServlet extends HttpServlet {
 			throw e;
 		}
 	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/views/common/applicantMyPage.jsp").forward(request, response);
+    }
 
 }

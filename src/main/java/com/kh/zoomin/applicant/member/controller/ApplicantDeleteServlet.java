@@ -29,7 +29,7 @@ public class ApplicantDeleteServlet extends HttpServlet {
 			String id = request.getParameter("id");
 			
 			//2. 서비스단으로 연결. Enumeration 인터페이스로 값을 갖고오기로.
-			int result = as.deleteMember(id);
+			int result = as.deleteApplicant(id);
 			HttpSession session = request.getSession();
 			Enumeration<String> names = session.getAttributeNames();
 			while(names.hasMoreElements()) {
