@@ -1,7 +1,6 @@
 package com.kh.zoomin.supervisor.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,26 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.zoomin.supervisor.model.service.SupervisorService;
 
 /**
- * Servlet implementation class SalaryReviewDelete
+ * Servlet implementation class SupervisorAmDelete
  */
-@WebServlet("/supervisor/salReviewDel")
-public class SalaryReviewDeleteServlet extends HttpServlet {
+@WebServlet("/supervisor/applicantMemberDelete")
+public class SupervisorAmDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자 입력값 처리
-		String[] salBoardNo = request.getParameterValues("chk"); 
+		String[] amUid = request.getParameterValues("chk"); 
 
-		//업무로직 : delete from salary_board where no = ?
-		int result = ss.deleteSalReview(salBoardNo);
-		System.out.println("result = " + result);
+		//업무로직 
+		int result = ss.deleteAmember(amUid);
+
 		
 		//응답처리 
-		//response.sendRedirect(request.getContextPath() + "/supervisor/BoardList");
-		response.sendRedirect(request.getHeader("Referer"));
+		response.sendRedirect(request.getContextPath() + "/supervisor/memberList");
 	}
 
 }
