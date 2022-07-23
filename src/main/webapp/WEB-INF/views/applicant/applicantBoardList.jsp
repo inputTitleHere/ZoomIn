@@ -90,7 +90,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 	}
 	}
 	%>
+	<div id="pagebar">
 	<%=request.getAttribute("pagebar")%>
+	</div>
 <%--
 <%if(loginMember.getMemberType()==2){%>
 <script>
