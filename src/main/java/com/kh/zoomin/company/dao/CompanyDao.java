@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +90,7 @@ public class CompanyDao {
 		return company;
 	}
 
+
 	public List<Company> getCompanyAll(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -137,6 +139,55 @@ public class CompanyDao {
 			close(pstmt);
 		}
 		return company;
+	}
+
+
+	public boolean isCompanyExist(String companyNo, Connection conn) {
+		boolean result=false;
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		// select count(*) from company_table where company_no=?
+		String sql = prop.getProperty("countCompanyExist");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			System.out.println("@companyDao Line101"+companyNo);
+			pstmt.setString(1, companyNo);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				if(rset.getInt(1)>0) {
+					result=true;
+				}
+			}
+		}catch(SQLException e) {
+			throw new CompanyReviewException("회사 존재 조회 오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertNewCompany(Company company, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+//		insert into company_table values(?,?,?,?)
+		String sql = prop.getProperty("insertNewCompany");
+		System.out.println("@CompanyDao=>"+company);
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, company.getCompanyNo());
+			pstmt.setString(2, company.getCompanyName());
+			pstmt.setNull(3, Types.VARCHAR);
+			pstmt.setString(4, company.getCompanyInfo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			throw new CompanyException("회사 삽입 오류",e);
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 
