@@ -54,7 +54,7 @@ public class CompanyBoardList extends HttpServlet {
 		// 기본적인 채용게시판 처리
 		try {
 			int currentPage = 1;
-			int itemsPerPage = 3;
+			int itemsPerPage = 6;
 			
 			try {
 				currentPage = Integer.parseInt(request.getParameter("cPage"));
