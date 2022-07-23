@@ -29,7 +29,7 @@ public class SalaryReviewDeleteServlet extends HttpServlet {
 			int result = salaryReviewService.deleteSalaryReview(no);
 			
 			request.getSession().setAttribute("msg", "리뷰를 성공적으로 삭제했습니다.");
-			response.sendRedirect(request.getContextPath() + "/review/salary/salaryReviewList");
+			response.sendRedirect(request.getContextPath() + "/");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
