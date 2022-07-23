@@ -1,3 +1,5 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,17 +7,42 @@
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	SalaryReview salaryReview = (SalaryReview) request.getAttribute("salaryReview");
-	List<SalaryReview> list = (List<SalaryReview>) request.getAttribute("list");
+	
+	Member applicantM = (Member) session.getAttribute("loginMember");
+	ApplicantMember applicant = null;
+	
+	if(applicantM instanceof ApplicantMember){
+		applicant = (ApplicantMember) applicantM;
+	}
+	
+	if(applicantM != null && applicantM.getMemberType()==2){
+%>
+		<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%		
+	}else{
+%>
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%		
+	}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewView.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <section id="salary-review-view-container">
 	<h2>연봉리뷰 상세보기</h2>
+<%
+	System.out.println("applicantMember + "  + applicant);
+	if(applicantM != null && applicantM.getMemberType()==2){
+		if((applicant != null && salaryReview.getUid() == applicant.getUid())){
+%>
+			<div class="edit-button">
+				<button id="update-button1" onclick="updateBoard()">수정</button>
+				<button id="update-button2" onclick="deleteBoard()">삭제</button>
+			</div>
+<%			
+		}
+	}
+%>
 	
-	<div class="edit-button">
-		<button id="update-button1" onclick="updateBoard()">수정</button>
-		<button id="update-button2" onclick="deleteBoard()">삭제</button>
-	</div>
 	<table class="salary-review-list">
 		<tr>
 			<th>번호</th>
