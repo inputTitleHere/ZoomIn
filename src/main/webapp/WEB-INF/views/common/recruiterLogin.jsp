@@ -35,7 +35,7 @@ function loginCheck() {
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/common/recruiterLoginHeader.jsp"%>
+
 <%
 String msg = (String) session.getAttribute("msg");
 if(msg != null) session.removeAttribute("msg"); 

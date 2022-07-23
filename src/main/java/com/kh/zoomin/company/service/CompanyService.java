@@ -42,7 +42,7 @@ public class CompanyService {
 		close(conn);
 		return company;
 	}
-	
+
 	public boolean isCompanyExist(String companyNo) {
 		Connection conn = getConnection();
 		boolean result=false;
