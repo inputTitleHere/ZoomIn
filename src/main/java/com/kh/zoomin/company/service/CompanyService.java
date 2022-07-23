@@ -28,6 +28,20 @@ public class CompanyService {
 		return company;
 	}
 
+
+	public List<Company> getCompanyAll() {
+		Connection conn = getConnection();
+		List<Company> company = companyDao.getCompanyAll(conn);
+		close(conn);
+		return company;
+	}
+
+	public Company getCompanyByName(String userVal) {
+		Connection conn = getConnection();
+		Company company = companyDao.getCompanyByName(conn, userVal);
+		close(conn);
+		return company;
+
 	public boolean isCompanyExist(String companyNo) {
 		Connection conn = getConnection();
 		boolean result=false;
@@ -50,6 +64,7 @@ public class CompanyService {
 		}
 		
 		return result;
+
 	}
 	
 	

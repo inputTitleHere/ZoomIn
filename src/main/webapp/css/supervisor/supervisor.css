@@ -1,3 +1,18 @@
+
+/* 관리자 랜딩 페이지 *//* 인덱스화면 그래프 */
+#btn-manage{
+    width: 200px;
+    height: 100px;
+}
+#chart{
+	width:900px;
+	height:900px;
+	left:50%;
+	margin-left:450px;
+}
+
+
+/* supervisorLoginHeader*/
 /* 메뉴관련스타일 */
 nav {background:rgb(255 159 3 / 25%); width:100%; margin-top:40px;}
 /* ul태그의 가운데정렬 */
@@ -49,10 +64,12 @@ ul.super-nav li:hover span.animate_line{
 	width:100%;
 }
 
-/* 인덱스화면 그래프 */
 
 
 /* 회원관리 */
+#recruitMember-container, #applicantMember-container{
+	display: none;
+}
 #tbl-applicantMember, #tbl-recruitMember{
     border: 1px solid black;
     border-collapse: collapse;
@@ -62,7 +79,26 @@ tr, td, th{
     border: 1px solid black;
     padding: 10px;
 }
-
+/* 구직자 회원관리 */
+#applicantMember-container{
+    display: block;
+    align-content: space-around;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn-member{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+#am, #rm{
+	width: 200px;
+    height: 50px;
+    margin: 30px;
+    margin: 40px;
+    border-radius: 20px;
+}
 
 /* 게시판관리 */
 #tbl-salary-board{
@@ -93,7 +129,7 @@ h1{
     display: flex;
     justify-content: center;
 }
-button {
+button, input[type=button] {
 	width: 200px;
     height: 50px;
     margin: 10px 40px;
@@ -111,5 +147,4 @@ button {
 }
 tr, td, th{
     border: 1px solid black;
-    padding: 30px;
 }
