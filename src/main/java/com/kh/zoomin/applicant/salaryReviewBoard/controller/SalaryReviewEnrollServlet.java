@@ -34,10 +34,8 @@ public class SalaryReviewEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			request.setCharacterEncoding("utf-8");
 			SalaryReview salaryReview = new SalaryReview();
-			HttpSession loginSession = request.getSession();
-			ApplicantMember am = (ApplicantMember) loginSession.getAttribute("loginMember");
+			request.setCharacterEncoding("utf-8");
 			
 			// 사용자 입력값 처리
 			int uid = Integer.parseInt(request.getParameter("uid"));
@@ -48,14 +46,16 @@ public class SalaryReviewEnrollServlet extends HttpServlet {
 			String jobPosition = request.getParameter("job_position");
 			
 			salaryReview = new SalaryReview(uid, companyNo, categoryNumber, salary, workYear, jobPosition, null);
-			System.out.println("salaryReview = " + salaryReview);
+//			System.out.println("salaryReview = " + salaryReview);
 			
 			// 업무로직
 			int result = salaryReviewService.insertSalaryReviewService(salaryReview);
 			
 			// redirect
-			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			request.setAttribute("loginMember", am);
+			HttpSession session = request.getSession();
+//			request.setAttribute("loginMember", am);
+//			ApplicantMember am = (ApplicantMember) loginSession.getAttribute("loginMember");
+			session.setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
 			response.sendRedirect(request.getContextPath() + "/");
 						
 		} catch (Exception e) {
