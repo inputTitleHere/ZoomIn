@@ -109,8 +109,8 @@ public class ResumeDao {
 		String schoolName = rset.getString("school_name");
 		Status schoolStatus = Status.valueOf(rset.getString("school_status"));
 		String majorName = rset.getString("major_name");
-		int grade = rset.getInt("grade");
-		int totalPoint = rset.getInt("total_point");
+		double grade = rset.getDouble("grade");
+		double totalPoint = rset.getDouble("total_point");
 		
 		return new Resume(uid, categoryNumber, name, birthday,
 				gender, address, schoolType, schoolName, schoolStatus, majorName, grade, totalPoint);

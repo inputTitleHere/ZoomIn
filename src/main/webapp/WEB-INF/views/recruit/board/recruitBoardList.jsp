@@ -7,8 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-	
-<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %> <%-- navBar includes header --%>
+<%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %> 
 <%
 List<RecruitBoard> rbl = (List<RecruitBoard>) request.getAttribute("boardList");
 //Member loginMember = (Member)session.getAttribute("loginMember");
