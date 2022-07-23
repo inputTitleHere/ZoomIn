@@ -2,7 +2,7 @@
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
