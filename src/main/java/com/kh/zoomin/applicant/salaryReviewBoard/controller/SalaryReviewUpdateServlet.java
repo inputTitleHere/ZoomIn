@@ -29,8 +29,8 @@ public class SalaryReviewUpdateServlet extends HttpServlet {
 			SalaryReview salaryReview = salaryReviewService.findBySalaryReviewNo(no);
 			
 			request.setAttribute("salaryReview", salaryReview);
-			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewUpdate.jsp")
-				.forward(request, response);
+//			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewUpdate.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewUpdate.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -58,6 +58,7 @@ public class SalaryReviewUpdateServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("msg", "리뷰를 성공적으로 수정했습니다.");
 			response.sendRedirect(request.getContextPath() + "/review/salary/salaryReviewBoard?no=" + no);
+//			response.sendRedirect(request.getContextPath() + "/");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

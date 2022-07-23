@@ -53,11 +53,14 @@ public class ApplicantLoginServlet extends HttpServlet {
 				msg = "로그인 성공입니다.";
 				path = "/zoomin";
 				
+				
 			} else {
 				msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 //				session.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 				System.out.println("아이디 또는 비밀번호가 일치하지 않습니다.");
-				path = request.getContextPath() + "/applicant/login";
+				request.getRequestDispatcher("/WEB-INF/views/common/applicantLogin.jsp").forward(request, response);
+//				path = request.getContextPath() + "/applicant/login";
+				return;
 			}
 
 			//3. 리다이렉트
