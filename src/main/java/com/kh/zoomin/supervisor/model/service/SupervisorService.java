@@ -17,9 +17,12 @@ import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.supervisor.model.dto.Rmember;
 import com.kh.zoomin.supervisor.model.dto.RmemberLog;
+import com.kh.zoomin.supervisor.model.dto.SalLog;
 import com.kh.zoomin.supervisor.model.dao.SupervisorDao;
 import com.kh.zoomin.supervisor.model.dto.AmemberLog;
+import com.kh.zoomin.supervisor.model.dto.ComLog;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
+import com.kh.zoomin.supervisor.model.dto.RecLog;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 
@@ -302,18 +305,74 @@ public class SupervisorService {
 	}
 
 	
-	public List<AmemberLog> getAmemberLogAll() {
+	public List<AmemberLog> getAmemberLogAll(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<AmemberLog> amLogList = supervisorDao.getAmemberLogAll(conn);
+		List<AmemberLog> amLogList = supervisorDao.getAmemberLogAll(conn, param);
 		close(conn);
 		return amLogList;
 	}
 
-	public List<RmemberLog> getRmemberLogAll() {
+	public List<RmemberLog> getRmemberLogAll(Map<String, Object> param) {
 		Connection conn = getConnection();
-		List<RmemberLog> rmLogList = supervisorDao.getRmemberLogAll(conn);
+		List<RmemberLog> rmLogList = supervisorDao.getRmemberLogAll(conn, param);
 		close(conn);
 		return rmLogList;
+	}
+
+	public List<SalLog> getSalLogAll(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<SalLog> salLogList = supervisorDao.getSalLogAll(conn, param);
+		close(conn);
+		return salLogList;
+	}
+
+	public List<RecLog> getRecLogAll(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<RecLog> recLogList = supervisorDao.getRecLogAll(conn, param);
+		close(conn);
+		return recLogList;
+	}
+
+	public List<ComLog> getComLogAll(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<ComLog> comLogList = supervisorDao.getComLogAll(conn, param);
+		close(conn);
+		return comLogList;
+	}
+
+	public int getTotalAmLogCnt() {
+		Connection conn = getConnection();
+		int totalAmLogCnt = supervisorDao.getTotalAmLogCnt(conn);
+		close(conn);
+		return totalAmLogCnt;
+	}
+
+	public int getTotalRmLogCnt() {
+		Connection conn = getConnection();
+		int totalRmLogCnt = supervisorDao.getTotalRmLogCnt(conn);
+		close(conn);
+		return totalRmLogCnt;
+	}
+
+	public int getTotalSalLogCnt() {
+		Connection conn = getConnection();
+		int totalSalLogCnt = supervisorDao.getTotalSalLogCnt(conn);
+		close(conn);
+		return totalSalLogCnt;
+	}
+
+	public int getTotalComLogCnt() {
+		Connection conn = getConnection();
+		int totalComLogCnt = supervisorDao.getTotalComLogCnt(conn);
+		close(conn);
+		return totalComLogCnt;
+	}
+
+	public int getTotalRecLogCnt() {
+		Connection conn = getConnection();
+		int totalRecLogCnt = supervisorDao.getTotalRecLogCnt(conn);
+		close(conn);
+		return totalRecLogCnt;
 	}
 
 	

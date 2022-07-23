@@ -382,16 +382,8 @@ select * from (select row_number () over (order by reg_date desc) rnum, a.*  fro
 select * from (select row_number () over (order by reg_date desc) rnum,"uid", r.company_no, company_name, name, id, email, reg_date from recruit_member r join company_table c on r.company_no = c.company_no)where  rnum between 1 and 5;
 select * from company_review c full outer join salary_review  s on c."uid" = s."uid" where c."uid" in 16;
 --트리거 이용 멤버관리
+--구직자
 select * from tb_amember_log;
---insert
-insert into APPLICANT_MEMBER values(seq_applicant_member_uid.nextval, '이윤정', 'j1234', 1234, 01045674567, 'yjyj@gmail.com', default);
-commit;
-rollback;
-select * from applicant_member;
---updete
-update APPLICANT_MEMBER set name = '김윤정' where "uid" = 82;
---delete
-delete from APPLICANT_MEMBER where "uid" = '85';
 create table tb_amember_log(
     no number,
     "uid" number not null,
@@ -405,6 +397,8 @@ create table tb_amember_log(
 );
 create sequence seq_tb_amember_log_no;
 --drop trigger trig_amember_log
+select * from (select row_number () over (order by r.reg_date desc) rnum,"uid", r.company_no, company_name, name, id, email, reg_date from recruit_member r join company_table c on r.company_no = c.company_no)where  rnum between 15 and 20;
+select * from recruit_member;
 commit;
 create or replace trigger trig_amember_log
     after
@@ -436,7 +430,173 @@ begin
          values( seq_tb_amember_log_no.nextval,:old."uid", :old.name, :old.id, :old.phone, :old.email, :old.id || ' 님이 회원탈퇴');  
     end if;
 end;
+select * from company_table;
+--구인자
+insert into recruit_member values(SEQ_RECRUIT_MEMBER.nextval, '1472583694', '한미약품 인사팀', 'hanmi', 1234, 'hanmi@hanmi.com', default, default);
+select * from tb_rmember_log;
+create table tb_rmember_log(
+    no number,
+    "uid" number not null,
+    company_no varchar2(20),
+    name varchar2(30),
+    id varchar2(50),
+    email varchar(100),
+    log varchar2(2000) not null,
+    log_date date default sysdate,
+    constraint pk_tb_rmember_log_no primary key(no)
+);
+create sequence seq_tb_rmember_log_no;
+create or replace trigger trig_rmember_log
+    after
+    insert or update or delete on recruit_member
+    for each row
+begin
+    if inserting then
+        insert into tb_rmember_log (no, "uid", company_no, name, id, email, log)
+        values( seq_tb_rmember_log_no.nextval, :new."uid", :new.company_no, :new.name, :new.id, :new.email, :new.id || '님이 회원가입하였습니다.');  
+    elsif deleting then
+         insert into tb_rmember_log (no, "uid", company_no, name, id, email, log)
+          values( seq_tb_amember_log_no.nextval, :old."uid", :old.company_no, :old.name, :old.id, :old.email, :old.id || '님이 회원탈퇴하였습니다.');   
+    end if;
+end;
 
+--연봉게시판 log 트리거
+select * from tb_sal_log;
+select * from salary_review;
+--drop table tb_sal_log;
+create table tb_sal_log(
+    no number,
+    board_no number,
+    "uid" number,
+    company_no varchar2(50),
+    log varchar2(500),
+    log_date date default sysdate,
+    constraint pk_tb_sal_log_no primary key(no)
+);
+--create sequence seq_tb_sal_log_no;
+select * from tb_sal_del;
+--drop table tb_sal_del
+create table tb_sal_del(
+    no number not null,
+    "uid" number not null,
+    company_no char(10) not null,
+    category_number number not null,
+    salary number not null,
+    work_year number not null,
+    job_position varchar2(30) not null,
+    reg_date date default sysdate
+);
+drop trigger trig_sal_log;
+
+create or replace trigger trig_sal_log
+    after
+    insert or delete on salary_review
+    for each row
+begin
+    if inserting then
+        insert into tb_sal_log (no, board_no, "uid", company_no, log)
+        values(seq_tb_sal_log_no.nextval, :new.no, :new."uid", :new.company_no,  '새로운 연봉게시글이 등록되었습니다.');   
+    elsif deleting then
+          insert into tb_sal_log (no, board_no, "uid", company_no, log)
+          values(seq_tb_sal_log_no.nextval,:old.no, :old."uid", :old.company_no, '연봉 게시글이 삭제되었습니다.');  
+          insert into tb_sal_del values (:old.no, :old."uid", :old.company_no, :old.category_number, :old.salary, :old.work_year, :old.job_position, :old.reg_date);
+    end if;
+end;
+
+--회사 리뷰 게시판 트리거
+select * from company_review;
+select * from tb_com_log;
+create table tb_com_log(
+    no number,
+    board_no number,
+    "uid" number,
+    company_no varchar2(50),
+    log varchar2(500),
+    log_date date default sysdate,
+    constraint pk_tb_com_log_no primary key(no)
+);
+create sequence seq_tb_com_log_no;
+create table tb_com_del(
+    no number,
+    "uid" number,
+    company_no char(10),
+    category_number number,
+    writer varchar2(50),
+    content varchar2(4000),
+    stars number,
+    work_life_balance number,
+    level_up number,
+    work_intensity number,
+    potential number,
+    salary_satisfaction number,
+    reg_date date default sysdate
+);
+--drop trigger trig_com_log
+create or replace trigger trig_com_log
+    after
+    insert or delete on company_review
+    for each row
+begin
+    if inserting then
+        insert into tb_com_log (no, board_no, "uid", company_no, log)
+        values(seq_tb_com_log_no.nextval, :new.no, :new."uid", :new.company_no,  '새로운 회사 리뷰 게시글이 등록되었습니다.');   
+    elsif deleting then
+          insert into tb_com_log (no, board_no, "uid", company_no, log)
+          values(seq_tb_com_log_no.nextval, :old.no, :old."uid", :old.company_no, '회사리뷰 게시글이 삭제되었습니다.');  
+          insert into tb_com_del (no, "uid", company_no,category_number, content, stars,work_life_balance,level_up, work_intensity,potential,salary_satisfaction,reg_date)
+          values (:old.no, :old."uid", :old.company_no, :old.category_number, :old.content, :old.stars, :old.work_life_balance, :old.level_up,:old.work_intensity, :old.potential, :old.salary_satisfaction, :old.reg_date);
+    end if;
+end;
+--채용정보 게시판 로그만들기
+select * from recruit_board;
+create table tb_rec_log(
+    no number,
+    board_no number,
+    "uid" number,
+    company_no varchar2(50),
+    title varchar2(700),
+    log varchar2(500),
+    log_date date default sysdate,
+    constraint pk_tb_rec_log_no primary key(no)
+);
+create sequence seq_tb_rec_log_no;
+--drop table br_rec_del
+create table tb_rec_del(
+    no number,
+    "uid" number,
+    category_number number,
+    company_no char(10),
+    title varchar2(300) ,
+    career_years_req varchar2(50) ,
+    school_status varchar2(50) ,
+    work_type varchar2(50) ,
+    office_location varchar2(50) ,
+    salary varchar2(50) ,
+    content varchar2(4000),
+    closure_date date,
+    reg_date date
+);
+select * from tb_rec_del;
+select * from tb_rec_log;
+--drop trigger trig_rec_log
+create or replace trigger trig_rec_log
+    after
+    insert or delete on recruit_board
+    for each row
+begin
+    if inserting then
+        insert into tb_rec_log (no, board_no, "uid", company_no, title, log)
+        values(seq_tb_rec_log_no.nextval, :new.no, :new."uid", :new.company_no, :new.title,  '새로운 채용정보 게시글이 등록되었습니다.');   
+    elsif deleting then
+          insert into tb_rec_log (no, board_no, "uid", company_no, title, log)
+          values(seq_tb_rec_log_no.nextval, :old.no, :old."uid", :old.company_no, :old.title, '채용정보 게시글이 삭제되었습니다.');  
+          insert into tb_rec_del values (:old.no, :old."uid",:old.category_number, :old.company_no,:old.title,:old.career_years_req,:old.school_status,:old.work_type,:old.office_location,:old.salary, :old.content, :old.closure_date, :old.reg_date);
+    end if;
+end;
+--로그 게시판 페이징
+select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_amember_log t)where  rnum between 1 and 5;
+select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_com_log t)where  rnum between 1 and 5;
+commit;
 -- 이윤정 END --
 
 --김승환 테스트용

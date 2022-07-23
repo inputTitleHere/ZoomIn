@@ -2,18 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
 	
-		<!-- 관리자 메인페이지 -->
-	<button id="btn-findData">데이터 불러오기</button>
-	<script>
-	//시험용 버튼
-	document.querySelector("#btn-findData").addEventListener('click', (e) => {
-		//location.href="<%= request.getContextPath() %>/supervisor/findData";
-		findData();
-	});
-	</script>
-    <div style="width: 900px; height: 900px;">
-        <!--차트가 그려질 부분-->
-        <canvas id="myChart"></canvas>
+		<!-- 관리자 랜딩페이지 -->
+	
+	
+	
+    <div id="chart" >
+        <canvas id="myChart">
+	        <!--차트가 그려질 부분-->
+        </canvas>
     </div>
 
 	<script>
@@ -23,9 +19,9 @@
 			url : '<%= request.getContextPath() %>/supervisor/findData',
 			dataType:'json',
 			success(response){
-				console.log(response);
+				//console.log(response);	{boardList: Array(4), visitList: Array(5)}
 				const {visitList, boardList} = response;
-				console.log(visitList);
+				//console.log(visitList);	[{…}, {…}, {…}, {…}, {…}]
 				let days = [];	//가로축
 				let visitCnts = []; 	//세로축
 				let boardCnts = [];
@@ -87,7 +83,15 @@
 	};
 	
 	</script>
-
+	<button id="btn-sch-statistic">기간별 통계보기</button>
+	<script>
+	window.onload = () => {
+		findData();
+	}
+	document.querySelector("#btn-sch-statistic").addEventListener('click', (e) => {
+		location.href="<%= request.getContextPath()%>/supervisor/Statistic";
+	})
+	</script>
 
 </body>
 </html>

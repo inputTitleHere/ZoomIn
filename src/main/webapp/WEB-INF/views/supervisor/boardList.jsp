@@ -72,33 +72,7 @@ tr, td, th{
 </style>
 </head>
 <body>
-    <!-- 
-    <section id="search-container">
-        <form action="<%= request.getContextPath()%>/supervisor/boardFinder">
 
-            <div id="select-board">
-                <select id="board-type">
-                    <option value="none">== 게시판선택 ==</option>
-                    <option value="salaryBoard">연봉</option>
-                    <option value="companyBoard">채용</option>
-                    <option value="reviewBoard">리뷰</option>
-                </select>
-            </div>
-            <div id="select-keyword">
-                <select id="board-keyword">
-                    <option value="none">== 선택 ==</option>
-                    <option value="boardWriter">작성자</option>
-                    <option value="boardContent">내용</option>
-                </select>
-            </div>
-            <div id="board-search-keyword">
-                <input type="text" name="searchKeyword" size="30" placeholder="검색어를 입력하세요."value="">
-                <button type="submit">검색</button>
-            </div>
-        </form>
-    </section>
-     -->
-	
 	<div id="btl-search-board">
 		<button id="btl-salary">연봉게시판</button>
 		<button id="btl-company">회사리뷰게시판</button>
@@ -107,12 +81,18 @@ tr, td, th{
 	<script>
 		document.querySelector("#btl-salary").addEventListener('click', (e) => {
 			document.querySelector(".salary-board-manage").style.display = "block";
+			document.querySelector(".company-board-manage").style.display = "none";
+			document.querySelector(".recruit-board-manage").style.display = "none";
 		});
 		document.querySelector("#btl-company").addEventListener('click', (e) => {
 			document.querySelector(".company-board-manage").style.display = "block";
+			document.querySelector(".salary-board-manage").style.display = "none";
+			document.querySelector(".recruit-board-manage").style.display = "none";
 		});
 		document.querySelector("#btl-recruit").addEventListener('click', (e) => {
 			document.querySelector(".recruit-board-manage").style.display = "block";
+			document.querySelector(".salary-board-manage").style.display = "none";
+			document.querySelector(".company-board-manage").style.display = "none";
 		});
 		
 	</script>

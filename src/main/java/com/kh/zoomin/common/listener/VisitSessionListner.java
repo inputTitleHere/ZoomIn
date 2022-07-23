@@ -31,18 +31,16 @@ public class VisitSessionListner implements HttpSessionListener {
          
     	if(se.getSession().isNew()) {
         	 //System.out.println("세션 생성 성공!");
-        	 HttpSession session = se.getSession();
-
-     		try {
-     			//세션 생성 시 방문자 수 증가처리
-     			int setCount = supervisorService.setCount();
-     			//System.out.println("setCount = " + setCount);	
-     			
-     		} catch (Exception e) {
-     			new SupervisorException("방문자 수 카운터 오류", e);
-     		}
-        	 
+        	 HttpSession session = se.getSession(); 
          }
+    	try {
+    		//세션 생성 시 방문자 수 증가처리
+    		int setCount = supervisorService.setCount();
+    		//System.out.println("setCount = " + setCount);	
+  
+    	} catch (Exception e) {
+    		new SupervisorException("방문자 수 카운터 오류", e);
+    	}
     }
 
 

@@ -46,6 +46,7 @@ public class FindDataServlet extends HttpServlet {
 		value.put("boardList", boardList);
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(value, response.getWriter());	//맵으로 한번에 보냄!
+		
 	}
 
 }

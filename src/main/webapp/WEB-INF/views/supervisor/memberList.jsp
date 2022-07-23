@@ -10,64 +10,27 @@
 <%
 	List<ApplicantMember> applicantMemberList = (List<ApplicantMember>) request.getAttribute("applicantMemebrList");
 	List<Rmember> recruitMemberList = (List<Rmember>) request.getAttribute("recruitMemebrList");
-	String type = request.getParameter("searchType");
-	String kw = request.getParameter("searchKeyword");	
 %>
-<%--  
-<style>
-div.search-applicant{
-	display: <%= type == null || "applicant".contains(type) ? "inline-block" : "none" %>;
-}
-div.search-recruit{
-	display: <%= type == null || "recruit".contains(type) ? "inline-block" : "none" %>;
-}
-</style>
- --%>
+
 	<section id="memberList-container">
-		<%-- 회원검색 --%>
-		<div id="search-container">
-	        <select id="searchMemberType">
-	        	<option value="none">회원타입</option>
-	            <option value="aplicantMember">구직자</option>
-	            <option value="recruitMember">구인자</option>
-	        </select>
-			
-	        <!--구직자검색 : 아이디, 이름-->
-	        <div id="search-applicantId" class="search-applicant">
-	            <form action="<%= request.getContextPath()%>/supervisor/memberFinder" method="post">
-	                <input type="hidden" name="searchType" value="applicant-id">
-	                <input type="text" name="searchKeyword" size="30" placeholder="아이디를 입력하세요."value="">
-	                <button type="submit">검색</button>
-	            </form>
-	        </div>	
-	        <div id="search-applicantName" class="search-applicant">
-	            <form action="<%= request.getContextPath()%>/supervisor/memberFinder" method="post">
-	                <input type="hidden" name="searchType" value="applicant_name">
-	                <input type="text" name="searchKeyword" size="30" placeholder="이름을 입력하세요."value="">
-	                <button type="submit">검색</button>
-	            </form>
-	        </div>
-	        	
-	        <!--구인자검색 : 회사명, 회사번호-->
-	        <div id="search-recruitName" class="search-recruit">
-	            <form action="<%= request.getContextPath()%>/supervisor/memberFinder" method="post">
-	                <input type="hidden" name="searchType" value="recruit-name">
-	                <input type="text" name="searchKeyword" size="30" placeholder="회사명을 입력하세요."value="">
-	                <button type="submit">검색</button>
-	            </form>
-	        </div>	
-	        <div id="search-recruitNo" class="search-recruit">
-	            <form action="<%= request.getContextPath()%>/supervisor/memberFinder" method="post">
-	                <input type="hidden" name="searchType" value="recruit-no">
-	                <input type="text" name="searchKeyword" size="30" placeholder="회사번호를 입력하세요."value="">
-	                <button type="submit">검색</button>
-	            </form>
-	        </div>
-    	</div>
-	
-	
+		<div class="btn-member">
+			<input type="button" value="구직자 회원관리" id="am"/>
+			<input type="button" value="구인자 회원관리" id="rm"/>
+		</div>
+		<script>
+		document.querySelector("#am").addEventListener('click', (e) => {
+			document.querySelector("#recruitMember-container").style.display = "none";
+			document.querySelector("#applicantMember-container").style.display = "block";
+		})
+		document.querySelector("#rm").addEventListener('click', (e) => {
+			document.querySelector("#applicantMember-container").style.display = "none";
+			document.querySelector("#recruitMember-container").style.display = "block";
+		})
+		</script>
+
 		<div id="recruitMember-container">
 		<h2>구인자 회원관리</h2>
+		<input type="submit" value="구인자 삭제" />
 		<form action="<%= request.getContextPath() %>/supervisor/recruitMemberDelete" name="recruitFrm" method="post">
 			<table id="tbl-recruitMember">
 				<thead>
@@ -131,7 +94,6 @@ div.search-recruit{
 						<td>ID</td>
 						<td>전화번호</td>
 						<td>이메일</td>
-						<td>작성글</td>
 						<td>가입일</td>
 					</tr>
 				</thead>
@@ -159,7 +121,6 @@ div.search-recruit{
 						</td>
 						<td><%= am.getPhone() %></td>
 						<td><%= am.getEmail() %></td>
-						<td></td>
 						<td><%= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(am.getRegDate()) %></td>
 					</tr>
 				<%

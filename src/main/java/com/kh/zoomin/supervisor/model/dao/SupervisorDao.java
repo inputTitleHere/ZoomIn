@@ -1,6 +1,7 @@
 package com.kh.zoomin.supervisor.model.dao;
 
 import static com.kh.zoomin.common.JdbcTemplate.close;
+import static com.kh.zoomin.common.JdbcTemplate.getConnection;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,10 +17,13 @@ import java.util.Properties;
 
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.supervisor.model.dto.AmemberLog;
+import com.kh.zoomin.supervisor.model.dto.ComLog;
 import com.kh.zoomin.supervisor.model.dto.CompanyReview;
+import com.kh.zoomin.supervisor.model.dto.RecLog;
 import com.kh.zoomin.supervisor.model.dto.RecruitBoard;
 import com.kh.zoomin.supervisor.model.dto.Rmember;
 import com.kh.zoomin.supervisor.model.dto.RmemberLog;
+import com.kh.zoomin.supervisor.model.dto.SalLog;
 import com.kh.zoomin.supervisor.model.dto.SalaryReview;
 import com.kh.zoomin.supervisor.model.dto.WeekData;
 import com.kh.zoomin.supervisor.model.exception.SupervisorException;
@@ -725,7 +729,7 @@ public class SupervisorDao {
 		return result;
 	}
 
-	public List<AmemberLog> getAmemberLogAll(Connection conn) {
+	public List<AmemberLog> getAmemberLogAll(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<AmemberLog> amLogList = new ArrayList<>();
@@ -733,12 +737,14 @@ public class SupervisorDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				int no = rset.getInt("no");
 				int uid = rset.getInt("uid");
 				String name = rset.getString("name");
-				String id = rset.getString("phone");
+				String id = rset.getString("id");
 				String phone = rset.getString("phone");
 				String email = rset.getString("email");
 				String log = rset.getString("log");
@@ -755,7 +761,7 @@ public class SupervisorDao {
 		return amLogList;
 	}
 
-	public List<RmemberLog> getRmemberLogAll(Connection conn) {
+	public List<RmemberLog> getRmemberLogAll(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<RmemberLog> rmLogList = new ArrayList<>();
@@ -763,6 +769,8 @@ public class SupervisorDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				int no = rset.getInt("no");
@@ -783,6 +791,197 @@ public class SupervisorDao {
 			close(pstmt);
 		}
 		return rmLogList;
+	}
+
+	public List<SalLog> getSalLogAll(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SalLog> salLogList = new ArrayList<>();
+		String sql = prop.getProperty("getSalLogAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				int no = rset.getInt("no");
+				int uid = rset.getInt("uid");
+				int boardNo = rset.getInt("board_no");
+				String companyNo = rset.getString("company_no");
+				String log = rset.getString("log");
+				Date logDate = rset.getDate("log_date");
+				salLogList.add(new SalLog(no, uid, boardNo, companyNo, log, logDate));
+			}
+				
+		} catch (SQLException e) {
+			throw new SupervisorException("연봉게시판 log 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return salLogList;
+	}
+
+	public List<RecLog> getRecLogAll(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<RecLog> recLogList = new ArrayList<>();
+		String sql = prop.getProperty("getRecLogAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				int no = rset.getInt("no");
+				int boardNo = rset.getInt("board_no");
+				int uid = rset.getInt("uid");
+				String companyNo = rset.getString("company_no");
+				String title = rset.getString("title");
+				String log = rset.getString("log");
+				Date logDate = rset.getDate("log_date");
+				recLogList.add(new RecLog(no, boardNo, uid, companyNo, title, log, logDate));
+			}
+				
+		} catch (SQLException e) {
+			throw new SupervisorException("채용게시판 log 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return recLogList;
+	}
+
+	public List<ComLog> getComLogAll(Connection conn, Map<String, Object> param) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ComLog> comLogList = new ArrayList<>();
+		String sql = prop.getProperty("getComLogAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (int) param.get("start"));
+			pstmt.setInt(2, (int) param.get("end"));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				int no = rset.getInt("no");
+				int boardNo = rset.getInt("board_no");
+				int uid = rset.getInt("uid");
+				String companyNo = rset.getString("company_no");
+				String log = rset.getString("log");
+				Date logDate = rset.getDate("log_date");
+				comLogList.add(new ComLog(no, boardNo, uid, companyNo,log, logDate));
+			}
+				
+		} catch (SQLException e) {
+			throw new SupervisorException("회사 리뷰게시판 log 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return comLogList;
+	}
+
+	public int getTotalAmLogCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalAmLogCnt = 0;
+		String sql = prop.getProperty("getTotalAmLogCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalAmLogCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("구직자 로그 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalAmLogCnt;
+	}
+
+	public int getTotalRmLogCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalRmLogCnt = 0;
+		String sql = prop.getProperty("getTotalRmLogCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalRmLogCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("구인자 로그 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalRmLogCnt;
+	}
+
+	public int getTotalSalLogCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalSalLogCnt = 0;
+		String sql = prop.getProperty("getTotalSalLogCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalSalLogCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("연봉게시판 로그 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalSalLogCnt;
+	}
+
+	public int getTotalComLogCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalComLogCnt = 0;
+		String sql = prop.getProperty("getTotalComLogCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalComLogCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("회사리뷰게시판 로그 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalComLogCnt;
+	}
+
+	public int getTotalRecLogCnt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalRecLogCnt = 0;
+		String sql = prop.getProperty("getTotalRecLogCnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next())
+				totalRecLogCnt = rset.getInt(1);
+		} catch (SQLException e) {
+			throw new SupervisorException("채용게시판 로그 전체 수 조회 오류!", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalRecLogCnt;
 	}
 
 
