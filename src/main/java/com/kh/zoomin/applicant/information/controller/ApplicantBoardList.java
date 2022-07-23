@@ -58,7 +58,7 @@ public class ApplicantBoardList extends HttpServlet {
 		// 기본적인 채용게시판 처리
 		try {
 			int currentPage = 1;
-			int itemsPerPage = 7;
+			int itemsPerPage = 5;
 			// 아래는 만약 모드가 없으면 마감임박부터. 모드설정이 있으면 해당 모드를 사용.
 			RecruitBoardReadMode mode = request.getParameter("mode") == null ? RecruitBoardReadMode.NEAR_CLOSURE
 					: RecruitBoardReadMode.valueOf(request.getParameter("mode"));

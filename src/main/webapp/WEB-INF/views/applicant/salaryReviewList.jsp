@@ -2,22 +2,18 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+
 <%
 	List<SalaryReview> list = (List<SalaryReview>) request.getAttribute("list");
 %>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewList.css" />
-<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
-<section id="salaryReview-container">
-	<h2>-연봉 리뷰 게시판-</h2>
-	<div id="companyReview-btn-add">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewEnroll'">리뷰 등록하기</button>
-	</div>
-	<div id="companyReview-btn-update">
+<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewList.css" /> --%>
+	<h1>-연봉 리뷰 게시판-</h1>
+	
+	<%-- <div id="companyReview-btn-update">
 		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewUpdate'">리뷰 수정하기</button>
-	</div>
+	</div> --%>
 	<table class="salary-review-list">
-		<tr>
+		<tr class="salary">
 			<th>번호</th>
 			<th>작성자</th>
 			<th>회사</th>
@@ -31,7 +27,7 @@
 	if(list != null && !list.isEmpty()){
 		for(SalaryReview salaryReview : list){
 %>			
-		<tr>
+		<tr class="salary">
 			<td>
 				<a href="<%= request.getContextPath() %>/review/salary/salaryReviewBoard?no=<%= salaryReview.getNo() %>"><%= salaryReview.getNo() %></a>
 			</td>
@@ -45,7 +41,7 @@
 				<% if(salaryReview.getCategoryNumber() == 3) %>마케팅팀
 				<% if(salaryReview.getCategoryNumber() == 4) %>영업팀
 				<% if(salaryReview.getCategoryNumber() == 5) %>생산/제조팀
-				<% if(salaryReview.getCategoryNumber() == 6) %>연구개발팀
+				<% if(salaryReview.getCategoryNumber() == 6) %>연구개발팀 
 				<% if(salaryReview.getCategoryNumber() == 7) %>기술팀
 				<% if(salaryReview.getCategoryNumber() == 8) %>서비스팀
 				<% if(salaryReview.getCategoryNumber() == 9) %>IT/인터넷팀
@@ -69,6 +65,8 @@
 	<div id='pagebar'>
 		<%= request.getAttribute("pagebar") %>
 	</div>
-</section>
-
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	<br>
+	<div id="companyReview-btn-add">
+		<button class="custom-btn btn-3" onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewEnroll'"><span>리뷰 등록하기</span></button>
+	</div>
+	
