@@ -26,7 +26,7 @@ public class SearchCompany extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자 입력값
-		String userVal = request.getParameter("userVal");
+		String userVal = request.getParameter("term");
 		System.out.println("userVal = " + userVal);
 		
 		//업무로직 : 사용자 입력값에 해당하는 회사 찾기
