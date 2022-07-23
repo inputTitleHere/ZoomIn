@@ -57,7 +57,8 @@
 	
 	
 	document.querySelector("#search-btn").addEventListener('click', (e) => {
-		location.href="<%= request.getContextPath() %>/search/company";
+		const val = document.querySelector("#searchBox").value;
+		location.href="<%= request.getContextPath() %>/search/company?userVal="+val;
 	});
 	
 </script>

@@ -26,12 +26,13 @@ public class SearchCompany extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자 입력값
-		String userVal = request.getParameter("term");
-		System.out.println("userVal = " + userVal);
+		String userVal = request.getParameter("userVal");		
 		
 		//업무로직 : 사용자 입력값에 해당하는 회사 찾기
 		Company company = cs.getCompanyByName(userVal);	//이름으로 회사 가져오기		
-		System.out.println("회사 ? " + company);
+		
+		company.getCompanyNo();
+		
 	}
 
 }

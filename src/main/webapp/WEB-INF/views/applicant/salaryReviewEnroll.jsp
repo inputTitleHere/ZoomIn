@@ -4,10 +4,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	List<SalaryReview> list = (List<SalaryReview>) request.getAttribute("list");
-	HttpSession loginSession = request.getSession();
-	ApplicantMember am = (ApplicantMember) loginSession.getAttribute("loginMember");
+Member apMember = (Member) session.getAttribute("loginMember");
+ApplicantMember applicantMember = null;
+if(apMember instanceof ApplicantMember){
+	applicantMember = (ApplicantMember) apMember;
+}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewEnroll.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
@@ -23,19 +26,31 @@
 			<tr>
 				<th>작성자 번호</th>
 				<td>
-					<input type="text" name="uid"/>
+					<input type="text" name="uid" value="<%= am.getUid() %>" readonly/>
 				</td>
 			</tr>
 			<tr>
 				<th>회사명</th>
 				<td>
-					<input type="text" name="company_no" />
+					<input type="text" name="company_no"/>
 				</td>
 			</tr>
 			<tr>
 				<th>분야</th>
 				<td>
-					<input type="text" name ="category_number"/>
+					<!-- <input type="text" name ="category_number"/> -->
+					<select name="category_number" id="category_number">
+						<option disabled selected value="">---카테고리 선택---</option>
+						<option value="1">인사팀</option>
+						<option value="2">회계/총무팀</option>
+						<option value="3">마케팅팀</option>
+						<option value="4">영업팀</option>
+						<option value="5">생산/관리팀</option>
+						<option value="6">연구개발팀</option>
+						<option value="7">기술팀</option>
+						<option value="8">서비스팀</option>
+						<option value="9">인터넷팀</option>
+					</select>
 				</td>
 			</tr>
 			<tr>

@@ -596,6 +596,9 @@ end;
 --로그 게시판 페이징
 select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_amember_log t)where  rnum between 1 and 5;
 select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_com_log t)where  rnum between 1 and 5;
+
+select * from company_table where company_name = '국민은행'
+
 commit;
 -- 이윤정 END --
 
