@@ -73,7 +73,8 @@
 	</form>
 	
 	<div id="end">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewList'">취소</button>
+		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewBoard?no=<%= salaryReview.getNo()%>'">취소</button>
+<%-- 		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewList'">취소</button> --%>
 		<button id="btnSubmit">수정하기</button>
 	</div>
 </section>
