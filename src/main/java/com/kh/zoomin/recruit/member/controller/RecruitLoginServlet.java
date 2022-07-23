@@ -53,11 +53,13 @@ public class RecruitLoginServlet extends HttpServlet {
 				//로그인 실패
 				msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 				request.getRequestDispatcher("/WEB-INF/views/common/recruiterLogin.jsp").forward(request, response);
+				return;
 			}
 			
 			//관리자 로그인 (이윤정)
 			if(rmember.isSupervisor()) {
 				request.getRequestDispatcher("/WEB-INF/views/supervisor/supervisorIndex.jsp").forward(request, response);
+				return;
 			}
 			//3. 리다이렉트
 			request.getSession().setAttribute("msg", msg);

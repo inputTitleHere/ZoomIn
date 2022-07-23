@@ -92,4 +92,20 @@ public class SalaryReviewService {
 		}
 		return result;
 	}
+	// 백승윤 START
+	public List<SalaryReview> findByCompanyNo(Map<String, Object> param) {
+		List<SalaryReview> result=null;
+		Connection conn = getConnection();
+		result=salaryReviewDao.findByCompanyNo(param, conn);
+		close(conn);
+		return result;
+	}
+
+	public int getTotalContent(String companyNo) {
+		Connection conn = getConnection();
+		int totalContent = salaryReviewDao.getTotalContent(companyNo,conn); 
+		close(conn);
+		return totalContent;
+	}
+	// 백승윤 END
 }

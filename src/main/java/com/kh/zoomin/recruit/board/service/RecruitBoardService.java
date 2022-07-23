@@ -1,10 +1,10 @@
 package com.kh.zoomin.recruit.board.service;
 
+import com.kh.zoomin.applicant.resume.model.dao.ResumeDao;
+import com.kh.zoomin.applicant.resume.model.dto.Resume;
 import com.kh.zoomin.common.ZoominUtils;
 import com.kh.zoomin.recruit.board.dao.RecruitBoardDao;
 import com.kh.zoomin.recruit.board.dto.RecruitBoard;
-
-import oracle.security.crypto.core.PasswordBasedMAC;
 
 import static com.kh.zoomin.common.JdbcTemplate.*;
 
@@ -186,6 +186,14 @@ public class RecruitBoardService {
 		}finally {
 			close(conn);			
 		}
+		return result;
+	}
+
+	public List<Resume> loadEnrolledList(int boardNo) {
+		List<Resume> result=null;
+		Connection conn = getConnection();
+		result = new ResumeDao().loadEnrolledList(boardNo, conn);
+		close(conn);
 		return result;
 	}
 	
