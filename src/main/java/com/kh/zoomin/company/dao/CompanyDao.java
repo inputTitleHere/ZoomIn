@@ -89,4 +89,55 @@ public class CompanyDao {
 		return company;
 	}
 
+	public List<Company> getCompanyAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Company> list = new ArrayList<>();
+		String sql = prop.getProperty("findAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				String companyNo = rset.getString("company_no");
+				String companyName = rset.getString("company_name");
+				String companyInfo = rset.getString("company_info");
+				Company company = new Company(companyNo, companyName, companyInfo);
+				list.add(company);
+			}
+		} catch (SQLException e) {
+			throw new CompanyReviewException("회사 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public Company getCompanyByName(Connection conn, String userVal) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Company company = null;
+		// select * from company_table where company_name = ?
+		String sql = prop.getProperty("getCompanyByName");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userVal);
+			rset= pstmt.executeQuery();
+			while(rset.next()) {
+				company = handleCompany(rset);
+			}
+			
+		} catch (SQLException e) {
+			throw new CompanyReviewException("회사 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return company;
+	}
+
+
 }

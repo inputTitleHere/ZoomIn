@@ -40,13 +40,13 @@ tr, td, th{
 	div#pagebar a{margin-right: 5px;}
 /*테이블 숨김처리*/
 .salary-board-manage{
-	display:none;
+	display:block;
 }
 .company-board-manage{
-	display:none;
+	display:block;
 }
 .recruit-board-manage{
-	display:none;
+	display:block;
 }
 #salDelFrm{
 	display: flex;
@@ -79,7 +79,7 @@ tr, td, th{
 		<button id="btn-recruit">채용게시판</button>
 	</div>
 	
-	<!--
+	<script>
 		document.querySelector("#btl-salary").addEventListener('click', (e) => {
 			document.querySelector(".salary-board-manage").style.display = "block";
 			document.querySelector(".company-board-manage").style.display = "none";
@@ -96,7 +96,7 @@ tr, td, th{
 			document.querySelector(".company-board-manage").style.display = "none";
 		});
 		
-	-->
+	</script>
 
 
     <div class="salary-board-manage">
