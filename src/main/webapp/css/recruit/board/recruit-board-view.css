@@ -7,6 +7,9 @@ section#recruit-board-view{
 h1{
   text-align: center;
   font-size: 60px;
+  margin-top : 30px;
+  padding-bottom : 30px;
+  border-bottom : 7px solid #F2BB62;
 }
 
 .small-info{
@@ -33,9 +36,14 @@ h1{
 .small-info-data{
   font-size: 20px;
 }
-
+#recruit-board-view{
+  border : 7px solid #F2BB62;
+  height : 70%;	
+}
 #recruit-board-view .content-wrapper{
-  margin: 30px auto;
+  margin-left : 50px;
+  margin-top: 50px;
+  font-size : 30px;
 }
 
 .register-buttons{
@@ -46,4 +54,7 @@ h1{
 
 .active{
   border: 3px solid red;
+}
+.small-info-wrapper{
+	margin-left : 50px;
 }
