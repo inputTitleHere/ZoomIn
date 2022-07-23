@@ -51,7 +51,7 @@ for(Resume resume : rl){
 				<td id="gender"><%=resume.getGender()==Gender.M?"남":"여" %></td>
 				<td id="school-name">학교 : <%=resume.getSchoolName() %></td>
 				<td id="major">전공 : <%=resume.getMajorName() %></td>
-				<td id="grade">학점 : <%=resume.getGrade() %>/<%=resume.getTotalPoint() %></td>
+				<td id="grade">학점 : <%=String.format("%.2f",resume.getGrade()) %>/<%=String.format("%.2f",resume.getTotalPoint()) %></td>
 				<td id="view-button-td">
 					<button id="view-button" onclick="location.href='<%=request.getContextPath()%>/recruit/board/viewEnrolledResume?uid=<%=resume.getUid()%>&boardNo=<%=boardNo%>'">이력서 보기</button>
 				</td>
