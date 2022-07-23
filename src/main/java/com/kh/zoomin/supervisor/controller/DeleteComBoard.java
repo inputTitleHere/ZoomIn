@@ -29,8 +29,8 @@ public class DeleteComBoard extends HttpServlet {
 		//System.out.println("result = " + result);
 		
 		//응답처리 
-		request.getSession().setAttribute("type", "com");
-		response.sendRedirect(request.getContextPath() + "/supervisor/BoardList");
+		//request.getSession().setAttribute("type", "com");
+		response.sendRedirect(request.getContextPath() + "/supervisor/comBoardList");
 	}
 
 }

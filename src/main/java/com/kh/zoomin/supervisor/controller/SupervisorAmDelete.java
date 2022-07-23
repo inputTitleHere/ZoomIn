@@ -29,7 +29,7 @@ public class SupervisorAmDelete extends HttpServlet {
 
 		
 		//응답처리 
-		response.sendRedirect(request.getContextPath() + "/supervisor/memberList");
+		response.sendRedirect(request.getContextPath() + "/supervisor/AmemberList");
 	}
 
 }

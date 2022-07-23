@@ -1,112 +1,24 @@
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.kh.zoomin.supervisor.model.dto.Rmember"%>
-<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
-
 <%
 	List<ApplicantMember> applicantMemberList = (List<ApplicantMember>) request.getAttribute("applicantMemebrList");
-	List<Rmember> recruitMemberList = (List<Rmember>) request.getAttribute("recruitMemebrList");
 %>
-	<script>
-	window.onload = () => {
-		//로드되면 모두 숨김처리.
-		document.querySelectorAll(".member-container").forEach((div, index) => {
-			div.style.display = "none";
-		});
-		//옵션태그 바뀔때마다 표 보여줌.
-		document.querySelector("#searchType").onchange = (e) => {
-			document.querySelectorAll(".member-container").forEach((div, index) => {
-				div.style.display = "none";
-			});
-			let id;
-			switch(e.target.value){
-			case "rm" : id = "recruit"; break;
-			case "am" : id = "applicant"; break;
-			}
-			document.querySelector(`#\${id}Member-container`).style.display = "inline-block";
-		}
-	}
-	</script>
-	
-	<div class="select">
-		<select id="searchType">
-			<option value="none">회원유형을 선택하세요</option>
-            <option value="am">구직자</option>        
-            <option value="rm">구인자</option>
-        </select>
-	</div>
 
-	<section id="memberList-container">
+<body>
 
-		<div id="recruitMember-container" class="member-container">
-		<h2 class="h2">구인자 회원관리</h2>
-		<form action="<%= request.getContextPath() %>/supervisor/recruitMemberDelete" name="recruitFrm" method="post">
-			<table id="tbl-recruitMember">
-				<thead>
-					<tr>
-						<th><input type="checkbox" name="allChk" class="allChk" /></th>
-						<th>UID</th>
-						<th>회사번호</th>
-						<th>회사명</th>
-						<th>RECRUITER</th>
-						<th>ID</th>
-						<th>E-MAIL</th>
-						<th>가입일</th> <%-- 날짜형식 yyyy-MM-dd --%>
-					</tr>
-				</thead>
-				<tbody>
-					<% 
-						if(recruitMemberList == null || recruitMemberList.isEmpty()) {
-					%>
-						<tr>
-							<td colspan="7" align="center">조회 결과가 없습니다.</td>
-						</tr>
-					<%
-						}
-						else {
-							for(Rmember rm : recruitMemberList){
-					%>
-						<tr>
-							<td>
-    							<input type="checkbox" name="chk" value="<%= rm.getUid() %>" />
-   							</td>
-							<td><%= rm.getUid() %></td>
-							<td><%= rm.getComNo() %></td>
-							<td><%= rm.getComName() %></td>
-							<td><%= rm.getRecruiter() %></td>
-							<td><%= rm.getId() %></td>
-							<td><%= rm.getEmail() %></td>
-							<td><%= new SimpleDateFormat("yyyy-MM-dd HH:mm").format(rm.getRegDate()) %></td>
-						</tr>					
-					<%
-							}
-						}
-					%>
-				</tbody>
-			</table>
-		</form>
-			<div id='super-pagebar'>
-				<%= request.getAttribute("rmPagebar") %>
-			</div>
-			<div class="under-tbl-btn">
-			<input type="submit" class="btn" id="rm-delete" value="삭제" />
-			</div>
-		</div>
-	
-		<script>
-    document.querySelector("#rm-delete").addEventListener('click', (e) => {
-    	e.preventDefault()
-    	if(confirm("정말 삭제하시겠습니까?"))
-    		document.recruitFrm.submit();
-    });
-    </script>
-		
-		
-		<div id="applicantMember-container" class="member-container">
+
+<div id="member-btn-container">
+<input type="button" class="btn-member" id="aMember" value="구직자" onclick="location.href='<%= request.getContextPath()%>/supervisor/aMemberList';"/>
+<input type="button" class="btn-member" id="rMember" value="구인자" onclick="location.href='<%= request.getContextPath()%>/supervisor/rMemberList';"/>
+</div>
+
+
+<section id="super-board">
+	<div id="applicantMember-container" class="member-container">
 		<h2 class="h2">구직자 회원관리</h2>
 		<form action="<%= request.getContextPath() %>/supervisor/applicantMemberDelete" name="applicantFrm" method="post">
 			<div id="border">
@@ -160,11 +72,11 @@
 				<%= request.getAttribute("amPagebar") %>
 			</div>
 		<div class="under-tbl-btn">
-			<input type="submit" class="btn" value="삭제" />
+			<input type="submit" class="btn" id="am-delete" value="삭제" />
 		</div>
 			
 		</div>
-		
+</section>		
 		<%-- 팝업폼 --%>
 		<form action="<%= request.getContextPath()%>/supervisor/amWriting" name="amWritingFrm">
 			<%
@@ -178,8 +90,15 @@
 			%>	
 		</form>
 	</section>
-	
+
 <script>
+document.querySelector("#am-delete").addEventListener('click', (e) => {
+	e.preventDefault()
+	if(confirm("정말 삭제하시겠습니까?"))
+		document.applicantFrm.submit();
+});
+
+
 //전체선택
     document.querySelectorAll(".allChk").forEach((target) => {
        	const chk = document.querySelectorAll("[name=chk]");
@@ -211,15 +130,6 @@ const amWritingView = () => {
     
 </script>
 
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
+
 </body>
 </html>

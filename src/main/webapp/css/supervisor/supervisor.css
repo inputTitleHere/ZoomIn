@@ -195,7 +195,33 @@ div#border{
 section#super-board{
 	text-align: center;
 }
+.tb-manage{
+	/*테이블 크기*/
+    width: 1200;
+    height: 300;
+}
+/*게시판 버튼*/
+#board-bttn-container{
+    margin: 30 0 0 10;
+}
+.btn-board{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 50px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn:hover{
+	background: #f2bb62;
 
+}
 
 /* 통계관리 */
 h1{
