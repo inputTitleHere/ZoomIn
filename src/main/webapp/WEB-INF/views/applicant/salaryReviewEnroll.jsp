@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,8 @@
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	List<SalaryReview> list = (List<SalaryReview>) request.getAttribute("list");
+	HttpSession loginSession = request.getSession();
+	ApplicantMember am = (ApplicantMember) loginSession.getAttribute("loginMember");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewEnroll.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
@@ -20,7 +23,7 @@
 			<tr>
 				<th>작성자 번호</th>
 				<td>
-					<input type="text" name="uid" />
+					<input type="text" name="uid"/>
 				</td>
 			</tr>
 			<tr>
@@ -64,7 +67,8 @@
 	</form>
 	
 	<div id="end">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewList'">취소</button>
+		<button onclick="location.href='<%= request.getContextPath() %>'">취소</button>
+<%-- 		<button onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewList'">취소</button> --%>
 		<button id="btnSubmit">리뷰 등록하기</button>
 	</div>
 </section>
