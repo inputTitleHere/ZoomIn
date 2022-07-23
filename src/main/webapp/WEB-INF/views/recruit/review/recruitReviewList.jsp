@@ -13,6 +13,7 @@ if(rrlLm!=null&&rrlLm.getMemberType()==1){
 <%}else{ %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%} %>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/recruit/board/recruit-review-view.css" />
 <%
 List<CompanyReview> companyReviewList=(List<CompanyReview>)request.getAttribute("companyReview");
 List<SalaryReview> salaryReviewList=(List<SalaryReview>)request.getAttribute("salaryReview");
@@ -26,10 +27,13 @@ String salaryReviewPagebar=(String)request.getAttribute("salaryReviewPagebarHTML
 <div class="content-wrapper">
 <h1 style="text-align:center;">[<%=company.getCompanyName() %>]</h1>
 <section class="company-info">
-<div>
+<br>
+<div id="comNo">
+	사업자 번호 :
 	<%=company.getCompanyNo() %>
 </div>
-<div>
+<br>
+<div id="comInfo">
 	<%=company.getCompanyInfo() %>
 </div>
 </section>
