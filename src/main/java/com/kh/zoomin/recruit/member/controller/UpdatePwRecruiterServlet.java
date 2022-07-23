@@ -27,9 +27,9 @@ public class UpdatePwRecruiterServlet extends HttpServlet {
 		try {
 			//입력값
 			String id = request.getParameter("id"); 
-			//이전 아이디
+			//이전 비번
 			String prevPw = ZoominMvcUtils.getEncryptedPassword(request.getParameter("prevPw"), id);
-			//new 아이디
+			//new 비번
 			String nextPw = ZoominMvcUtils.getEncryptedPassword(request.getParameter("nextPw"), id);
 			
 			RecruitMember rmember = rs.findrecruId(id);
@@ -38,16 +38,18 @@ public class UpdatePwRecruiterServlet extends HttpServlet {
 			//메시지 저장x 초기화
 			String msg = null;
 			String path = null;
-			//recruit 멤버여야 하고 db에서 갖고온것과 이전아이디가 동일해야함
+			//recruit 멤버여야 하고 db에서 갖고온것과 이전비번이 동일해야함
 			if(rmember != null && prevPw.equals(rmember.getPassword())) {
 				int result = rs.updatePwRecruiter(id, nextPw);
+				System.out.println("result = " + result);
 				msg = "성공적으로 비밀번호가 변경되었습니다.";
+				System.out.println("성공적으로 비밀번호가 변경되었습니다.");
 				path = request.getContextPath() + "/recruit/myPage";
 				
 				//구직자는 /applicant/myPage = ApplicantViewServlet
 				//구인자는 /recruit/myPage = RecruitViewServlet
-				RecruitMember loginMember = (RecruitMember) request.getSession().getAttribute("loginMember");
-				loginMember.setPassword(nextPw);
+				rmember = (RecruitMember) request.getSession().getAttribute("loginMember");
+				rmember.setPassword(nextPw);
 				
 			} else {
 				msg = "기존 비밀번호가 일치하지 않습니다.";

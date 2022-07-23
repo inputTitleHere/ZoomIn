@@ -1,28 +1,54 @@
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.recruit.board.dto.RecruitBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
+
+<%
+Member rbvLm = (Member) session.getAttribute("loginMember");
+ApplicantMember rbvAm=null;
+RecruitMember rbvRm=null;
+
+if(rbvLm instanceof ApplicantMember){
+	rbvAm=(ApplicantMember)rbvLm;
+}else if(rbvLm instanceof RecruitMember){
+	rbvRm=(RecruitMember)rbvLm;
+
+}
+
+
+if(rbvLm!=null&&rbvLm.getMemberType()==1){
+%>
 <%@ include file="/WEB-INF/views/recruit/recruitNavbar.jsp" %>
+<%
+}else{
+%>
+<%-- <%@ include file="/WEB-INF/views/applicant/applicantNav.jsp" %> --%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%} %>
+
+
 <%
 RecruitBoard rb = (RecruitBoard) request.getAttribute("recruitBoard");
 boolean isFaved=(request.getAttribute("isFaved")==null?false:(boolean)request.getAttribute("isFaved"));
 boolean isEnrolled=(request.getAttribute("isEnrolled")==null?false:(boolean)request.getAttribute("isEnrolled"));
 //System.out.println("@recruitBoardView.jsp : isFaved="+isFaved+", isEnrolled="+isEnrolled);
-
 %>
 <link href="<%=request.getContextPath() %>/css/recruit/board/recruit-board-view.css" rel="stylesheet" type="text/css">
 <section id="recruit-board-view">
 	<%-- title 및 content에 대한 escapeXML처리함. --%>
 	<%
 	//관리자 일때 수정, 삭제버튼 보이도록 했습니다(이윤정)
-	if((rm!=null && rb.getUid()==rm.getUid()) || (rm!=null && rm.isSupervisor())){
+	if(rbvLm!=null&&rbvLm.getMemberType()==1){
+	if((rbvRm!=null && rb.getUid()==rbvRm.getUid()) || (rbvRm!=null && rbvRm.isSupervisor())){
 	%>
 	<div class="edit-button-wrapper">
 		<button type="button" class="edit-button" id="update-button" onclick="updateBoard()">수정</button>
 		<button type="button" class="edit-button" id="delete-button" onclick="deleteBoard()">삭제</button>
 	</div>
 	<%
-	}
+	}}
 	%>
 	<h1><%=rb.getTitle()%></h1>
 	<div class="small-info-wrapper">
@@ -51,12 +77,12 @@ boolean isEnrolled=(request.getAttribute("isEnrolled")==null?false:(boolean)requ
 					</tr>
 				</tbody>
 			</table>
-			<%if(loginMember != null &&loginMember.getMemberType()==2){ %>
+			<%if(rbvLm != null &&rbvLm.getMemberType()==2){ %>
 			<div class="button-wrapper">
 				<%-- placeholde용 버튼들 --%>
 				<div id="fav-button-wrapper">
 					<form action="" class="fav-frm">
-						<input type="hidden" value="<%=((ApplicantMember)loginMember).getUid() %>" name="uid" id="uid" />
+						<input type="hidden" value="<%=((ApplicantMember)rbvLm).getUid() %>" name="uid" id="uid" />
 						<input type="hidden" value="<%=rb.getNo() %>" name="boardNo" id="boardNo" />
 						<input type="hidden" value="<%=isFaved%>" name="isFaved" id="isFaved" style="display:none;"/>
 						<button class="register-buttons <%=isFaved?"active":""%>" id="fav-button">찜하기</button>
@@ -64,14 +90,14 @@ boolean isEnrolled=(request.getAttribute("isEnrolled")==null?false:(boolean)requ
 				</div>
 				<div id="enroll-button-wrapper">
 					<form action="" class="enroll-frm">		
-						<input type="hidden" value="<%=((ApplicantMember)loginMember).getUid() %>" name="uid" id="uid" />
+						<input type="hidden" value="<%=((ApplicantMember)rbvLm).getUid() %>" name="uid" id="uid" />
 						<input type="hidden" value="<%=rb.getNo() %>" name="boardNo" id="boardNo" />
 						<input type="hidden" value="<%= isEnrolled%>" name="isEnrolled" id="isEnrolled"/>
 						<button class="register-buttons <%=isEnrolled?"active":""%>" id="enroll-button">지원하기</button>
 					</form>
 				</div>
 			</div>
-			<%}else if(rm!=null && rb.getUid()==rm.getUid()){ %>
+			<%}else if(rbvRm!=null && rb.getUid()==rbvRm.getUid()){ %>
 			<div class="view-enroll-wrapper">
 				<form action="<%=request.getContextPath()%>/recruit/board/viewEnrolled" method="post">
 					<input type="hidden" value="<%=rb.getNo()%>" name="boardNo" id="view-enroll-boardNo" />

@@ -8,8 +8,7 @@
 <body>
 <header>
 	<div id="account">
-		<a href="<%= request.getContextPath() %>/applicant/mypage" id="userInfo">회원정보</a>
-		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">로그아웃</a>
+		<a href="<%= request.getContextPath() %>/recruit/myPage" id="myPage">마이페이지</a>
 	</div>
 	<div id="logodiv">
 		<a href="<%=request.getContextPath()%>/recruit/board/recruitBoardList">

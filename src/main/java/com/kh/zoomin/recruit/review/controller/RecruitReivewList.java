@@ -1,7 +1,6 @@
 package com.kh.zoomin.recruit.review.controller;
 
 import java.io.IOException;
-import java.nio.channels.AcceptPendingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,14 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jdbc.pool.interceptor.SlowQueryReport.QueryStats;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
-import com.kh.zoomin.applicant.information.model.dto.CompanyInfo;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.service.SalaryReviewService;
-import com.kh.zoomin.common.ZoominUtils;
+import com.kh.zoomin.company.dto.Company;
+import com.kh.zoomin.company.service.CompanyService;
 
 /**
  * Servlet implementation class RecruitReivewList
@@ -29,6 +27,7 @@ public class RecruitReivewList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CompanyReviewService crs = new CompanyReviewService();
 	private SalaryReviewService srs = new SalaryReviewService();
+	private CompanyService cs = new CompanyService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -53,7 +52,9 @@ public class RecruitReivewList extends HttpServlet {
 		int salaryEnd=salaryStart+itemsPerPage-1;
 		
 		// 회사정보 회수하기
-//		CompanyInfo ci = 
+		Company company = cs.getCompanyByNo(companyNo);
+		request.setAttribute("company", company);
+		
 		
 		// 리뷰회수용 parameter 세팅
 		Map<String,Object> paramCompany=new HashMap<String, Object>();

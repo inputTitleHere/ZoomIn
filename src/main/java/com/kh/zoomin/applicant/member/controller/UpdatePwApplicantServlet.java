@@ -41,6 +41,7 @@ public class UpdatePwApplicantServlet extends HttpServlet {
 			if(amember != null && prevPw.equals(amember.getPassword())) {
 				int result = as.updatePwApllicant(id, nextPw);
 				msg = "성공적으로 비밀번호가 변경되었습니다.";
+				System.out.println("성공적으로 비밀번호가 변경되었습니다.");
 				path = request.getContextPath() + "/applicant/myPage";
 				
 				//구직자는 /applicant/myPage = ApplicantViewServlet

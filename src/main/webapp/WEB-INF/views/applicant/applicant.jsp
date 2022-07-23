@@ -18,14 +18,17 @@
 <script>
 	document.getElementById("recruitInfo").onclick = (e) =>{
 		applicantAjax(1);
+		$("#recruit-board-view").empty();
 	}; 
 	
 	document.getElementById("companyInfo").onclick = (e) =>{
 		companyAjax(1);
+		$("#recruit-board-view").empty();
 	};
 	
 	document.getElementById("salaryInfo").onclick = (e) =>{
 		salaryAjax(1);
+		$("#recruit-board-view").empty();
 	};
 	
 	
@@ -117,6 +120,7 @@
 	
 	$(document).ready(function(){
 		applicantAjax(1);
+		$("#recruit-board-view").empty();
 	});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
