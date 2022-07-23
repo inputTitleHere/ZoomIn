@@ -25,7 +25,7 @@
 	</div>
 	<div id="searchBoxdiv">
 		<input id="searchBox" type="text" name="userVal">
-		<button class="custom-btn btn-3" id="search-btn"><span>검색</span></button>
+		<button class="custom-btn btn-3" id="search-btn" onclick="location.href="'<%= request.getContextPath() %>'/search/company";"><span>검색</span></button>
 	</div>
 </header>
 
@@ -55,9 +55,10 @@
 		}
 	});
 	
-	document.querySelector("#search-btn").addEventListener('click', (e) => {
-		location.href="<%= request.getContextPath() %>/search/company";
-	});
+	
+	//document.querySelector("#search-btn").addEventListener('click', (e) => {
+	//	location.href="<%= request.getContextPath() %>/search/company";
+	//});
 	
 </script>
 
