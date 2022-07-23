@@ -68,8 +68,12 @@
 				</div>
 			<div class="under-tbl-btn">
 	    		<input type="submit" class="btn" id="rec-delete" value="삭제"/>
+	    		<input type="button" class="btn" id="rec-log" onclick="javascript:reclog();" value="로그보기"/>
 			</div>
 	</div>
+<form action="<%= request.getContextPath()%>/supervisor/recBoardLog" name="recLogFrm">
+</form>	
+
 </section>
 	<script>
 	document.querySelector("#rec-delete").addEventListener('click', (e) => {
@@ -77,6 +81,17 @@
     	if(confirm("정말 삭제하시겠습니까?"))
     		document.recDelFrm.submit();
     });
+	
+	//로그보기 (새창 띄우기)
+	const reclog = () => {
+		const title = "RecruitBoardLog";
+		const spec = "width=1200px,height=500px";
+		const popup = open("", title, spec);
+		
+		const frm = document.recLogFrm;
+		frm.target = title;
+		frm.submit();
+	}
 	
 	 //전체선택
     document.querySelectorAll(".allChk").forEach((target) => {

@@ -73,6 +73,7 @@
 			</div>
 		<div class="under-tbl-btn">
 			<input type="submit" class="btn" id="am-delete" value="삭제" />
+			<input type="button" class="btn" id="am-log" onclick="javascript:amlog();" value="로그보기" />
 		</div>
 			
 		</div>
@@ -90,6 +91,9 @@
 			%>	
 		</form>
 	</section>
+<!-- 로그 폼 -->
+<form action="<%= request.getContextPath()%>/supervisor/aMemberLog" name="aMemberLogFrm">
+</form>	
 
 <script>
 document.querySelector("#am-delete").addEventListener('click', (e) => {
@@ -97,6 +101,17 @@ document.querySelector("#am-delete").addEventListener('click', (e) => {
 	if(confirm("정말 삭제하시겠습니까?"))
 		document.applicantFrm.submit();
 });
+
+//로그보기
+const amlog = () => {
+	const title = "ApplicantMemberLog";
+	const spec = "width=1200px,height=500px";
+	const popup = open("", title, spec);
+	
+	const frm = document.aMemberLogFrm;
+	frm.target = title;
+	frm.submit();
+}
 
 
 //전체선택

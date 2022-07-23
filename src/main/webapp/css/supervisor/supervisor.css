@@ -13,7 +13,7 @@
 
 
 /* supervisorLoginHeader*/
-/* 메뉴관련스타일 */
+/* nav관련스타일 */
 nav {background:rgb(255 159 3 / 25%); width:100%; margin-top:40px;}
 /* ul태그의 가운데정렬 */
 ul.super-nav{
@@ -68,40 +68,7 @@ ul.super-nav li:hover span.animate_line{
 
 /* 회원관리 */
 
-/*select bar : 회원유형을 선택하세요*/
-select#searchType{
-	margin-top: 30px;
-   margin-left: 100px;
-   text-align: center;
-  color: #444;
-  background-color: #fff;
-  padding: 0.6em 1.4em 0.5em 0.8em;
-  margin: 0;
-  border: 1px solid #aaa;
-  border-radius: 0.5em;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance : none;
-}
-select#searchType:hover {
-  border-color: #888;
-}
 
-select#searchType:focus {
-  border-color: #aaa;
-  box-shadow: 0 0 1px 3px #f2bb62;
-  box-shadow: 0 0 0 3px -moz-mac-focusring;
-  color: #222;
-  outline: none;
-}
-select#searchType:disabled {
-  opacity: 0.5;
-}
-.select{
-	margin-left: 100px;
-    margin-top: 100px;
-}
 /*전체 section*/
 section#memberList-container{
 	text-align: center;
@@ -138,7 +105,7 @@ tbody tr:hover{
 td{
 	padding : 5px;
 }
-/*테이블 감싸는 div (배경색때문에)*/
+/*테이블 감싸는 div (배경색때문에) -> 쓸지말지 고민..*/
 div#border{
 	border: 1px solid white; 
  	background-color: #ffebb5; 
@@ -151,6 +118,7 @@ div#border{
     justify-content: flex-end;
     flex-direction: row;
     flex-wrap: nowrap;
+    padding-right: 200px;
 }
 .btn{
 	background: rgb(242 214 98 / 42%);
@@ -201,12 +169,14 @@ section#super-board{
     height: 300;
 }
 /*게시판 버튼*/
-#board-bttn-container{
-    margin: 30 0 0 10;
+div#board-btn-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50;
 }
 .btn-board{
 	background: rgb(242 214 98 / 42%);
-  	width: 80px;
+  	width: 100px;
 	height: 50px;
 	line-height: 42px;
 	padding: 0;
@@ -222,6 +192,32 @@ section#super-board{
 	background: #f2bb62;
 
 }
+
+/*회원관리 버튼*/
+div#member-btn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 50;
+}
+.btn-member{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 50px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn-member:hover{
+	background: #f2bb62;
+}
+
 
 /* 통계관리 */
 h1{

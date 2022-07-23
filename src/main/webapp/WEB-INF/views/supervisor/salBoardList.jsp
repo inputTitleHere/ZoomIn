@@ -80,8 +80,13 @@
 		</div>
 		<div class="under-tbl-btn">
 		<input type="submit" class="btn" id="sal-delete" value="삭제"/>
+		<input type="button" class="btn" id="sal-log" onclick="javascript:sallog();" value="로그보기"/>
 		</div>
     </div>
+    
+<!-- 로그보기 폼 -->
+<form action="<%= request.getContextPath()%>/supervisor/salBoardLog" name="salLogFrm">
+</form>	
 
     <script>
     document.querySelector("#sal-delete").addEventListener('click', (e) => {
@@ -91,6 +96,18 @@
     		document.salDelFrm.submit();
     	}
     });
+    
+    
+	//로그보기 (새창 띄우기)
+	const sallog = () => {
+		const title = "SalaryBoardLog";
+		const spec = "width=1200px,height=500px";
+		const popup = open("", title, spec);
+		
+		const frm = document.salLogFrm;
+		frm.target = title;
+		frm.submit();
+	}
     </script>
     
     <%-- 회원정보조회(팝업) --%>

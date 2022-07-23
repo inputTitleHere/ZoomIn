@@ -68,16 +68,36 @@
 			</div>
 			<div class="under-tbl-btn">
 			<input type="submit" class="btn" id="rm-delete" value="삭제" />
+			<input type="button" class="btn" id="rm-log" onclick="javascript:rmlog();" value="로그보기" />
 			</div>
 		</div>
 </section>	
-		<script>
-    document.querySelector("#rm-delete").addEventListener('click', (e) => {
-    	e.preventDefault()
-    	if(confirm("정말 삭제하시겠습니까?"))
-    		document.recruitFrm.submit();
-    });
-    
+
+<!-- 로그 폼 -->
+<form action="<%= request.getContextPath()%>/supervisor/rMemberLog" name="rMemberLogFrm">
+</form>	
+
+
+<script>
+  document.querySelector("#rm-delete").addEventListener('click', (e) => {
+  	e.preventDefault()
+  	if(confirm("정말 삭제하시겠습니까?"))
+  		document.recruitFrm.submit();
+  });
+  
+//로그보기
+  const rmlog = () => {
+  	const title = "RecruitMemberLog";
+  	const spec = "width=1200px,height=500px";
+  	const popup = open("", title, spec);
+  	
+  	const frm = document.rMemberLogFrm;
+  	frm.target = title;
+  	frm.submit();
+  }
+  
+  
+  
   //전체선택
     document.querySelectorAll(".allChk").forEach((target) => {
        	const chk = document.querySelectorAll("[name=chk]");

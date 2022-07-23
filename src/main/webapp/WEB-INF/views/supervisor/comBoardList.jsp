@@ -61,9 +61,13 @@
 			</div>
 	    <div class="under-tbl-btn">
 			<input type="submit" class="btn" id="com-delete" value="삭제"/>
+			<input type="button" class="btn" id="com-log" onclick="javascript:comlog();" value="로그보기"/>
 		</div>
 	</div>
   </section>
+
+<form action="<%= request.getContextPath()%>/supervisor/comBoardLog" name="comLogFrm">
+</form>
 	
 	<script>
 	document.querySelector("#com-delete").addEventListener('click', (e) => {
@@ -71,6 +75,17 @@
     	if(confirm("정말 삭제하시겠습니까?"))
     		document.comDelFrm.submit();
     });
+
+	//로그보기 (새창 띄우기)
+	const comlog = () => {
+		const title = "CompanyBoardLog";
+		const spec = "width=1200px,height=500px";
+		const popup = open("", title, spec);
+		
+		const frm = document.comLogFrm;
+		frm.target = title;
+		frm.submit();
+	}
 	
 	
 	 //전체선택
