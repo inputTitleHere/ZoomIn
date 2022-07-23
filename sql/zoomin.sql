@@ -598,7 +598,7 @@ select * from(select row_number () over (order by t.log_date desc) rnum, t.* fro
 select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_com_log t)where  rnum between 1 and 5;
 
 select * from company_table where company_name = '국민은행'
-
+insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, default); 
 commit;
 -- 이윤정 END --
 

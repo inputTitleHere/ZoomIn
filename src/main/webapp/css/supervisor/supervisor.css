@@ -67,26 +67,117 @@ ul.super-nav li:hover span.animate_line{
 
 
 /* 회원관리 */
-#recruitMember-container, #applicantMember-container{
-	display: none;
+
+/*select bar : 회원유형을 선택하세요*/
+select#searchType{
+	margin-top: 30px;
+   margin-left: 100px;
+   text-align: center;
+  color: #444;
+  background-color: #fff;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  margin: 0;
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance : none;
+}
+select#searchType:hover {
+  border-color: #888;
+}
+
+select#searchType:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 1px 3px #f2bb62;
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222;
+  outline: none;
+}
+select#searchType:disabled {
+  opacity: 0.5;
+}
+.select{
+	margin-left: 100px;
+    margin-top: 100px;
+}
+/*전체 section*/
+section#memberList-container{
+	text-align: center;
+}
+/*테이블 제목*/
+.h2{
+    text-align: center;
+}
+/*기본테이블 설정*/
+table{
+	border-collapse: collapse;
+	margin: auto;
+}
+thead{			
+	background-color: rgb(242 187 98);
+	padding: 10px;
+    text-align: center;
+    font-weight: bolder;
 }
 #tbl-applicantMember, #tbl-recruitMember{
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin: 5px 5px;
+    width: 1200px;
+ 	height: 250px;
+	margin: auto;
 }
-tr, td, th{
-    border: 1px solid black;
+tbody tr, td, th{
+    border: 1px solid white;
     padding: 10px;
+    text-align: center;
 }
-/* 구직자 회원관리 */
-#applicantMember-container{
-    display: block;
-    align-content: space-around;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+tbody tr:hover{
+	background-color: rgb(255 159 0 / 41%);
+	cursor:pointer;
 }
+td{
+	padding : 5px;
+}
+/*테이블 감싸는 div (배경색때문에)*/
+div#border{
+	border: 1px solid white; 
+ 	background-color: #ffebb5; 
+	box-shadow: inset 0 0 6px #deb13a;
+	width: 1200px; height: 250px;
+}
+/*삭제버튼*/
+.under-tbl-btn{
+	display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.btn{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn:hover{
+	background: #f2bb62;
+
+}
+/*페이지 바 */
+#super-pagebar{
+    font-size: larger;
+    display: contents;
+	width : 100%;
+	text-align : center;
+}
+
 .btn-member{
     display: flex;
     justify-content: center;
@@ -101,15 +192,10 @@ tr, td, th{
 }
 
 /* 게시판관리 */
-#tbl-salary-board{
-    margin: 5px 5px;
-    display: flex;
-    justify-content: center;
+section#super-board{
+	text-align: center;
 }
-tr, td, th{
-    border: 1px solid black;
-    padding: 10px;
-}
+
 
 /* 통계관리 */
 h1{
@@ -145,6 +231,4 @@ button, input[type=button] {
     border-collapse: collapse;
     margin: 20px;
 }
-tr, td, th{
-    border: 1px solid black;
-}
+

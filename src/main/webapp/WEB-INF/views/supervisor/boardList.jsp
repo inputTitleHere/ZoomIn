@@ -11,106 +11,76 @@
 	List<SalaryReview> salList = (List<SalaryReview>) request.getAttribute("salList"); 
 	List<CompanyReview> comList = (List<CompanyReview>) request.getAttribute("comList"); 
 	List<RecruitBoard> recList = (List<RecruitBoard>) request.getAttribute("recList"); 	
+	String type = (String) session.getAttribute("type");  //sal,com,req
+	if(type != null) session.removeAttribute("type");	//자바변수에 담고 폐기
 %>
 
-<style>
-form{
-    display: flex;
-    margin: 0 10px;
-}
-div{
-    margin: 0 20px;
-}
-#search-container{
-	height: 20%;
-}
-#tbl-salary-board, #tbl-company-board, #tbl-recruit-board{
-	border-collapse: collapse;
-	 margin: 5px 5px;
-	 display: flex;
-	 justify-content: center;
-}
-tr, td, th{
-    border: 1px solid black;
-    padding: 10px;
-}
-/*페이지바*/
-	div#pagebar{margin-top:10px; text-align:center;}
-	div#pagebar span.cPage{color: #0066ff; margin-right: 5px;}
-	div#pagebar a{margin-right: 5px;}
-/*테이블 숨김처리*/
-.salary-board-manage{
-	display:block;
-}
-.company-board-manage{
-	display:block;
-}
-.recruit-board-manage{
-	display:block;
-}
-#salDelFrm{
-	display: flex;
-    margin: 0 10px;
-    justify-content: center;
-    flex-direction: column;
-    align-content: space-around;
-}
-#comDelFrm{
-	display: flex;
-    margin: 0 10px;
-    justify-content: center;
-    flex-direction: column;
-    align-content: space-around;
-}
-#reviewDelFrm{
-	display: flex;
-    margin: 0 10px;
-    justify-content: center;
-    flex-direction: column;
-    align-content: space-around;
-}
-</style>
 </head>
 <body>
 
-	<div class="btn-board" id="search-board">
-		<button id="btn-salary">연봉게시판</button>
-		<button id="btn-company">회사리뷰게시판</button>
-		<button id="btn-recruit">채용게시판</button>
+	<div class="select">
+		<select id="searchType">
+			<option value="none">게시판 유형을 선택하세요</option>
+            <option value="sal">연봉리뷰게시판</option>        
+            <option value="com">회사리뷰게시판</option>
+            <option value="rec">채용게시판</option>
+        </select>
 	</div>
 	
 	<script>
-		document.querySelector("#btl-salary").addEventListener('click', (e) => {
-			document.querySelector(".salary-board-manage").style.display = "block";
-			document.querySelector(".company-board-manage").style.display = "none";
-			document.querySelector(".recruit-board-manage").style.display = "none";
-		});
-		document.querySelector("#btl-company").addEventListener('click', (e) => {
-			document.querySelector(".company-board-manage").style.display = "block";
-			document.querySelector(".salary-board-manage").style.display = "none";
-			document.querySelector(".recruit-board-manage").style.display = "none";
-		});
-		document.querySelector("#btl-recruit").addEventListener('click', (e) => {
-			document.querySelector(".recruit-board-manage").style.display = "block";
-			document.querySelector(".salary-board-manage").style.display = "none";
-			document.querySelector(".company-board-manage").style.display = "none";
+
+	window.onload = (e) => {
+		//처음로드시 모두 감춤
+		document.querySelectorAll(".board-container").forEach((div, index) => {
+			div.style.display = "none";
 		});
 		
+		//세션값에 따라 보여줌(각 서블릿에서 세션보냄)
+		const type = "<%= type %>";
+			
+		if(type != null){	
+			let id = "com";
+			switch(type){
+			case "sal" : id = "sal"; break;
+			case "com" : id = "com"; break;
+			case "rec" : id = "rec"; break;
+			}
+			console.log("id = " + id)
+			document.querySelector("#searchType").value = id;
+			document.querySelector(`#\${id}Board-container`).style.display = "inline-block";
+		}
+		
+		else { 
+			document.querySelectorAll(".board-container").forEach((div, index) => {
+				div.style.display = "none";
+			});
+		}	
+			
+
+	}
+	
+		//옵션태그 바뀔때마다 표 보여줌.
+		document.querySelector("#searchType").addEventListener('change', (e) => {
+			document.querySelectorAll(".board-container").forEach((div, index) => {
+				div.style.display = "none";
+			});
+			let id;
+			switch(e.target.value){
+			case "sal" : id = "sal"; break;
+			case "com" : id = "com"; break;
+			case "rec" : id = "rec"; break;
+			}
+			document.querySelector(`#\${id}Board-container`).style.display = "inline-block";
+		})	
 	</script>
+ 	
 
-
-    <div class="salary-board-manage">
-    <form action="<%= request.getContextPath() %>/supervisor/salReviewDel" method="post" name="salDelFrm">
-    	<input type="button" id="btn-salDel" value="연봉게시판 삭제"/>
-    <script>
-    document.querySelector("#btn-salDel").addEventListener('click', (e) => {
-    	if(confirm("정말 삭제하시겠습니까?"))
-    		document.salDelFrm.submit();
-    });
-
-    </script>
-    <h1>연봉게시판</h1>
-    <table id="tbl-salary-board">
+<section id="super-board">
+    <div id="salBoard-container" class="board-container">
+	    <h2 class="h2">연봉게시판</h2>
+	    <form action="<%= request.getContextPath() %>/supervisor/salReviewDel" method="post" name="salDelFrm">
+	    <table id="tbl-salary-board">
+    		<thead>
     		<tr>
     			<th><input type="checkbox" name="allChk" class="allChk" /></th>
     			<th>no</th>
@@ -122,6 +92,8 @@ tr, td, th{
     			<th>직급</th>
     			<th>등록일</th>
     		</tr>
+    		</thead>
+    		<tbody>
     		<%
     			if(salList != null && !salList.isEmpty()){
     				for(SalaryReview sal : salList){
@@ -153,13 +125,27 @@ tr, td, th{
     				<td colspan="8">조회된 게시글이 없습니다.</td>
     			</tr>
     		<% 	} %>
-    </table>
+    		</tbody>
+    	</table>
 	</form>
 	    <div id='pagebar'>
-			<%= request.getAttribute("salPagebar") %>
-			
+			<%= request.getAttribute("salPagebar") %>			
+		</div>
+		<div class="under-tbl-btn">
+		<input type="submit" class="btn" id="sal-delete" value="삭제"/>
 		</div>
     </div>
+
+    <script>
+    document.querySelector("#sal-delete").addEventListener('click', (e) => {
+    	e.preventDefault()
+    	if(confirm("정말 삭제하시겠습니까?")){
+    		document.querySelector("#searchType").value = "sal";
+    		document.salDelFrm.submit();
+    	}
+    });
+    </script>
+    
     <%-- 회원정보조회(팝업) --%>
     <form action="<%= request.getContextPath() %>/supervisor/memberView" name="memberViewFrm">
     		<%
@@ -175,10 +161,11 @@ tr, td, th{
     
     
     <%-- 회사리뷰 게시판 --%>
-    <div class="company-board-manage">
+    <div id="comBoard-container" class="board-container">
+	<h2 class="h2">회사 리뷰 게시판</h2>
 	<form action="<%= request.getContextPath() %>/supervisor/comReviewDel" method="post" name="comDelFrm">
-	<h1>회사 리뷰 게시판</h1>
     <table id="tbl-company-board">
+    	<thead>
     		<tr>
     			<th><input type="checkbox" name="allChk" class="allChk" /></th>
     			<th>no</th>
@@ -187,6 +174,8 @@ tr, td, th{
     			<th>작성자</th>
     			<th>등록일</th>
     		</tr>
+    	</thead>
+    	<tbody>
     		<%
     			if(comList != null && !comList.isEmpty()){
     				for(CompanyReview com : comList){
@@ -207,27 +196,31 @@ tr, td, th{
     				}
     			}
     		%>
+    	</tbody>	
     </table>
-	    <div class="under-table">
-			<div id='pagebar'>
+		</form>
+			<div id='super-pagebar'>
 				<%= request.getAttribute("comPagebar") %>
 			</div>
-			<input type="button" id="btn-comDel" value="회사리뷰삭제"/>
+	    <div class="under-tbl-btn">
+			<input type="submit" class="btn" id="com-delete" value="삭제"/>
 		</div>
-		</form>
 	</div>
 	<script>
-		document.querySelector("#btn-comDel").addEventListener('click', (e) => {
-			if(confirm("정말 삭제하시겠습니까?"))
-				document.comDelFrm.submit();
-		});
+	document.querySelector("#com-delete").addEventListener('click', (e) => {
+    	e.preventDefault()
+    	if(confirm("정말 삭제하시겠습니까?"))
+    		document.comDelFrm.submit();
+    });
 	</script>
 
 	<%--채용게시판 --%>
-	<div class="recruit-board-manage">
+	<div id="recBoard-container" class="board-container">
+		<h2 class="h2">채용 게시판</h2>
 		<form action="<%= request.getContextPath() %>/supervisor/comRecruitDel" method="post" name="recDelFrm">
-		<h1>채용 게시판</h1>
+		<div id="boder">
 		<table id="tbl-recruit-board">
+			<thead>
 			<tr>
 				<th><input type="checkbox" name="allChk" class="allChk" /></th>
 				<th>no</th>
@@ -238,6 +231,8 @@ tr, td, th{
 				<th>마감일</th>
 				<th>등록일</th>
 			</tr>
+			</thead>
+			<tbody>
 			<%
     			if(recList != null && !recList.isEmpty()){
     				for(RecruitBoard rec : recList){
@@ -260,20 +255,23 @@ tr, td, th{
     				}
     			}
     		%>
+			</tbody>			
 		</table>
-			<div class="under-table">
-				<div id='pagebar'>
+		</div>
+		</form>
+				<div id='super-pagebar'>
 					<%= request.getAttribute("recPagebar") %>			
 				</div>
-	    		<input type="submit" id="btn-recDel" value="채용글삭제"/>
+			<div class="under-tbl-btn">
+	    		<input type="submit" class="btn" id="rec-delete" value="삭제"/>
 			</div>
-		</form>
 	</div>
 	<script>
-		document.querySelector("#btn-recDel").addEventListener('click', (e) => {
-			if(confirm("정말 삭제하시겠습니까?"))
-				document.recDelFrm.sumit();
-		})
+	document.querySelector("#rec-delete").addEventListener('click', (e) => {
+    	e.preventDefault()
+    	if(confirm("정말 삭제하시겠습니까?"))
+    		document.recDelFrm.submit();
+    });
 	</script>
 	
 	<%-- 채용정보조회(팝업) --%>
@@ -288,13 +286,15 @@ tr, td, th{
     			}
     		%>
     </form>
-	
+</section>  	
+<style>
 
+</style>
+section#super-board{
+	text-align: center;
+}
 
 <script>
-
-
-
 	//회원정보 상세보기
     const memberView = () => {
     	//팝업창 제어

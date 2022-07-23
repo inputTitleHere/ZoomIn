@@ -11,26 +11,39 @@
 	List<ApplicantMember> applicantMemberList = (List<ApplicantMember>) request.getAttribute("applicantMemebrList");
 	List<Rmember> recruitMemberList = (List<Rmember>) request.getAttribute("recruitMemebrList");
 %>
+	<script>
+	window.onload = () => {
+		//로드되면 모두 숨김처리.
+		document.querySelectorAll(".member-container").forEach((div, index) => {
+			div.style.display = "none";
+		});
+		//옵션태그 바뀔때마다 표 보여줌.
+		document.querySelector("#searchType").onchange = (e) => {
+			document.querySelectorAll(".member-container").forEach((div, index) => {
+				div.style.display = "none";
+			});
+			let id;
+			switch(e.target.value){
+			case "rm" : id = "recruit"; break;
+			case "am" : id = "applicant"; break;
+			}
+			document.querySelector(`#\${id}Member-container`).style.display = "inline-block";
+		}
+	}
+	</script>
+	
+	<div class="select">
+		<select id="searchType">
+			<option value="none">회원유형을 선택하세요</option>
+            <option value="am">구직자</option>        
+            <option value="rm">구인자</option>
+        </select>
+	</div>
 
 	<section id="memberList-container">
-		<div class="btn-member">
-			<input type="button" value="구직자 회원관리" id="am"/>
-			<input type="button" value="구인자 회원관리" id="rm"/>
-		</div>
-		<script>
-		document.querySelector("#am").addEventListener('click', (e) => {
-			document.querySelector("#recruitMember-container").style.display = "none";
-			document.querySelector("#applicantMember-container").style.display = "block";
-		})
-		document.querySelector("#rm").addEventListener('click', (e) => {
-			document.querySelector("#applicantMember-container").style.display = "none";
-			document.querySelector("#recruitMember-container").style.display = "block";
-		})
-		</script>
 
-		<div id="recruitMember-container">
-		<h2>구인자 회원관리</h2>
-		<input type="submit" value="구인자 삭제" />
+		<div id="recruitMember-container" class="member-container">
+		<h2 class="h2">구인자 회원관리</h2>
 		<form action="<%= request.getContextPath() %>/supervisor/recruitMemberDelete" name="recruitFrm" method="post">
 			<table id="tbl-recruitMember">
 				<thead>
@@ -75,16 +88,28 @@
 					%>
 				</tbody>
 			</table>
-			<input type="submit" value="구인자 삭제" />
 		</form>
-			<div id='pagebar'>
+			<div id='super-pagebar'>
 				<%= request.getAttribute("rmPagebar") %>
 			</div>
+			<div class="under-tbl-btn">
+			<input type="submit" class="btn" id="rm-delete" value="삭제" />
+			</div>
 		</div>
+	
+		<script>
+    document.querySelector("#rm-delete").addEventListener('click', (e) => {
+    	e.preventDefault()
+    	if(confirm("정말 삭제하시겠습니까?"))
+    		document.recruitFrm.submit();
+    });
+    </script>
 		
-		<div id="applicantMember-container">
-		<h2>구직자 회원관리</h2>
+		
+		<div id="applicantMember-container" class="member-container">
+		<h2 class="h2">구직자 회원관리</h2>
 		<form action="<%= request.getContextPath() %>/supervisor/applicantMemberDelete" name="applicantFrm" method="post">
+			<div id="border">
 			<table id="tbl-applicantMember">
 				<thead>
 					<tr>
@@ -129,11 +154,14 @@
 				%>
 				</tbody>
 			</table>
-			<input type="submit" value="구직자 삭제" />
+			</div>
 		</form>
-			<div id='pagebar'>
+			<div id='super-pagebar'>
 				<%= request.getAttribute("amPagebar") %>
 			</div>
+		<div class="under-tbl-btn">
+			<input type="submit" class="btn" value="삭제" />
+		</div>
 			
 		</div>
 		
@@ -149,19 +177,8 @@
 				}
 			%>	
 		</form>
-	<style>
-     #tbl-applicantMember, #tbl-recruitMember{
-		 border: 1px solid black;
-		 border-collapse: collapse;
-		 margin: 5px 5px;
-	 }
-		tr, td, th{
-		    border: 1px solid black;
-		    padding: 10px;
-		}
-    </style>
-	
 	</section>
+	
 <script>
 //전체선택
     document.querySelectorAll(".allChk").forEach((target) => {
