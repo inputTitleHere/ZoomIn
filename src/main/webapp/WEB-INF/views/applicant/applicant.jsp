@@ -66,7 +66,7 @@
 		      				cInfo += "<td></td>";	
 		      			}else{
 		      				cInfo += "<td class='company'>\n";
-		      				cInfo += response.result[i*3+j].companyName+"<br/>" +"<br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>" + response.result[i*3+j].companyNo + "<br/>" + "<br/>";
+		      				cInfo += "response.result[i*3+j].companyName+"<br/>" +"<br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>" + response.result[i*3+j].companyNo + "<br/>" + "<br/>";
 		      				cInfo += "</td>\n";		      				
 		      			}
 		      		}
