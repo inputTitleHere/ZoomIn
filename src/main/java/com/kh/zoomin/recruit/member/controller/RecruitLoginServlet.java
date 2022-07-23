@@ -47,7 +47,8 @@ public class RecruitLoginServlet extends HttpServlet {
 			if(rmember != null && password.equals(rmember.getPassword())) {
 				session.setAttribute("loginMember", rmember);
 				msg = "로그인 성공입니다.";
-//				System.out.println(rmember.getMemberType());
+				System.out.println("@RecruitLoginServlet 로그인 성공");
+				System.out.println(rmember.getMemberType());
 			}
 			else {
 				//로그인 실패
@@ -62,7 +63,7 @@ public class RecruitLoginServlet extends HttpServlet {
 				return;
 			}
 			//3. 리다이렉트
-			request.getSession().setAttribute("msg", msg);
+			session.setAttribute("msg", msg);
 			response.sendRedirect(request.getContextPath() +"/recruit/board/recruitBoardList");
 		} catch (Exception e) {
 			e.printStackTrace();

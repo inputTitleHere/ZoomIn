@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/applicant.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section id="applicantSection">
