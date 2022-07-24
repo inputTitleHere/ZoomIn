@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReviewExt"%>
 <%@page import="com.kh.zoomin.company.dto.Company"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
@@ -61,7 +62,8 @@
 				<%= salaryReview.getUid() %>
 			</td>
 			<td>
-				<%= salaryReview.getCompanyNo() %></td>
+				<%=((SalaryReviewExt)salaryReview).getCompanyName() %>
+			</td>
 			<td>
 				<% if(salaryReview.getCategoryNumber() == 1) %>인사팀
 				<% if(salaryReview.getCategoryNumber() == 2) %>회계/총무팀
@@ -97,7 +99,7 @@
 	if(loginMember != null && loginMember.getMemberType()==2){
 %>
 		<div id="companyReview-btn-add">
-			<button class="custom-btn btn-3" onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewEnroll'"><span>리뷰 등록하기</span></button>
+			<button class="custom-btn btn-3" onclick="location.href='<%= request.getContextPath() %>/review/salary/salaryReviewEnroll?uid=<%=applicantMember.getUid()%>'"><span>리뷰 등록하기</span></button>
 		</div>
 <%		
 	}
