@@ -1,16 +1,44 @@
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
+String msg = (String) session.getAttribute("msg");
+//System.out.println("msg@jsp = " + msg);
+if(msg != null) session.removeAttribute("msg"); 
+Member loginMember = (Member) session.getAttribute("loginMember");
+System.out.println("loginMember = " + loginMember);
+ApplicantMember am=null;
+RecruitMember rm=null;
+if(loginMember instanceof ApplicantMember){
+	am=(ApplicantMember)loginMember;
+}else if(loginMember instanceof RecruitMember){
+	rm=(RecruitMember)loginMember;
+
+}
+
+
+Cookie[] cookies = request.getCookies();
+if(cookies != null){
+	for(Cookie c : cookies){
+		String name = c.getName();
+		String value = c.getValue();
+		//System.out.println("[cookie] " + name + " = " + value);
+		
+		}
+}
+
 Member apMember = (Member) session.getAttribute("loginMember");
 ApplicantMember applicantMember = null;
 if(apMember instanceof ApplicantMember){
 	applicantMember = (ApplicantMember) apMember;
 }
+/* int uid = Integer.parseInt(request.getParameter("uid"));
+String companyNo = request.getParameter("companyNo"); */
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewEnroll.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
@@ -25,14 +53,14 @@ if(apMember instanceof ApplicantMember){
 		<table id="tbl-salary-review">
 			<tr>
 				<th>작성자 번호</th>
-				<td>
+				<td><%-- <%= applicantMember.getUid() %> --%>
 					<input type="text" name="uid" value="<%= am.getUid() %>" readonly/>
 				</td>
 			</tr>
 			<tr>
 				<th>회사명</th>
-				<td>
-					<input type="text" name="company_no"/>
+				<td><%-- value="<%= companyNo %>"  --%>
+					<input type="text" name="company_no" readonly/>
 				</td>
 			</tr>
 			<tr>

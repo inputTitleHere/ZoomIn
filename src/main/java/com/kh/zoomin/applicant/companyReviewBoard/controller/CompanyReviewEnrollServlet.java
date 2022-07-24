@@ -27,9 +27,9 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int uid = Integer.parseInt(request.getParameter("uid"));
-		String companyNo = request.getParameter("company_no");
+		String companyNo = request.getParameter("companyNo");
 		
-		request.setAttribute("uid", "uid");
+		request.setAttribute("uid", uid);
 		request.setAttribute("companyNo", companyNo);
 		
 		request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewEnroll.jsp")

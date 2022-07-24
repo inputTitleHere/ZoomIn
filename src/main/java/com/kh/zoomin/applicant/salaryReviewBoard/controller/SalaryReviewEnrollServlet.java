@@ -24,10 +24,10 @@ public class SalaryReviewEnrollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uid = Integer.parseInt(request.getParameter("uid"));
-		String companyNo = request.getParameter("company_no");
-		request.setAttribute("uid", uid);
-		request.setAttribute("companyNo", companyNo);
+//		int uid = Integer.parseInt(request.getParameter("uid"));
+//		String companyNo = request.getParameter("companyNo");
+//		request.setAttribute("uid", "uid");
+//		request.setAttribute("companyNo", companyNo);
 		request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewEnroll.jsp")
 			.forward(request, response);
 	}

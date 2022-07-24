@@ -35,6 +35,18 @@
 				<th>분야</th>
 				<td>
 					<input type="text" name ="category_number" value="<%= companyReview.getCategoryNumber() %>" readonly/>
+					<select name="category_number" id="category_number">
+						<option disabled selected value="">---카테고리 선택---</option>
+						<option value="1">인사팀</option>
+						<option value="2">회계/총무팀</option>
+						<option value="3">마케팅팀</option>
+						<option value="4">영업팀</option>
+						<option value="5">생산/관리팀</option>
+						<option value="6">연구개발팀</option>
+						<option value="7">기술팀</option>
+						<option value="8">서비스팀</option>
+						<option value="9">인터넷팀</option>
+					</select>					
 				</td>
 			</tr>
 			<tr>
