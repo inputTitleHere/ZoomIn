@@ -125,6 +125,19 @@ insert into salary_review values (SEQ_SALARY_REVIEW_NO.nextval, 5, '1948653785',
 insert into salary_review values (SEQ_SALARY_REVIEW_NO.nextval, 13, '8153268498', 5, 4000, 2, 2, default);
 insert into salary_review values (SEQ_SALARY_REVIEW_NO.nextval, 14, '4988653629', 3, 2000, 1, 1, default);
 
+select * 
+from
+(select row_number () over (order by s.reg_date desc) rnum,no,domain,company_name,id,salary,work_year,position_name,s.reg_date 
+from salary_review s 
+    join applicant_member a on s."uid" = a."uid" 
+        join company_table m on s.company_no = m.company_no 
+            join category c on s.category_number = c.category_number 
+                join position_category p on p.category_number = c.category_number
+)
+where rnum between 1 and 5;
+
+-- select distinct a.company_name from( select * from salary_review s join company_table c on s.company_no = c.company_no )a where a."uid" = 5;
+
 -- 회사리뷰테이블
 select * from company_review;
 insert into company_review values (SEQ_COMPANY_REVIEW_NO.nextval, 5, '1948653785', 9, '자유로운 회사에요.', 4, 4, 5, 4, 5, 5, default);
