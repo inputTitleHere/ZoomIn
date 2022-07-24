@@ -13,6 +13,10 @@ select * from favourite;
 delete from favourite where "uid"=1;
 commit;
 
+select * from (select row_number() over(order by reg_date desc) rnum, s.*,c.company_name from salary_review s join company_table c on s.company_no=c.company_no) a where rnum between 1 and 5;
+
+
+select * from career;
 select * from job_category;
 select * from company_table;
 select count(*) from company_table where company_no=1122334455;
@@ -29,3 +33,21 @@ select * from category order by category_number;
 --delete from recruit_board where no in (49,50,51);
 
 commit;
+
+
+create table price_table(
+    price number,
+    name varchar2(50)
+);
+
+insert into price_table values(100, '알사탕');
+insert into price_table values(200, '콩사탕');
+insert into price_table values(300, '홍삼사탕');
+
+commit;
+
+select name from price_table where price>all(select price from price_table where name in ('알사탕','콩사탕'));
+
+
+
+

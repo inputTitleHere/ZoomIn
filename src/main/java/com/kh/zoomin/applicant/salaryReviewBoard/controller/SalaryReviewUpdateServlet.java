@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReviewExt;
@@ -29,7 +30,6 @@ public class SalaryReviewUpdateServlet extends HttpServlet {
 			SalaryReview salaryReview = salaryReviewService.findBySalaryReviewNo(no);
 			
 			request.setAttribute("salaryReview", salaryReview);
-//			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewUpdate.jsp").forward(request, response);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewUpdate.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,6 +42,7 @@ public class SalaryReviewUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+//		SalaryReview salaryReivew = new SalaryReview();
 		try {
 			int no = Integer.parseInt(request.getParameter("no"));
 			int uid = Integer.parseInt(request.getParameter("uid"));
@@ -55,10 +56,9 @@ public class SalaryReviewUpdateServlet extends HttpServlet {
 			System.out.println("salaryReviewUpdate = " + salaryReview);
 			
 			int result = salaryReviewService.updateSalaryReview(salaryReview);
-			
-			request.getSession().setAttribute("msg", "리뷰를 성공적으로 수정했습니다.");
+			HttpSession session =request.getSession();
+			session.setAttribute("msg", "리뷰를 성공적으로 수정했습니다.");
 			response.sendRedirect(request.getContextPath() + "/review/salary/salaryReviewBoard?no=" + no);
-//			response.sendRedirect(request.getContextPath() + "/");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
