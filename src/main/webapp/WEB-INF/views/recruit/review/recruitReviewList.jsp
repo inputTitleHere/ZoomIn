@@ -51,6 +51,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 		<section class="company-review">
 			<h2>회사 리뷰</h2>
 			<%
+			if (rrlLm != null && rrlLm.getMemberType() == 2) {
+				ApplicantMember rrlAm=(ApplicantMember)rrlLm;
+				int uid=rrlAm.getUid();
+				String companyNo=company.getCompanyNo();
+			%>
+			<button class="write-review-button" id="write-company-review-button" onclick="location.href='<%=request.getContextPath()%>/review/company/companyReviewEnroll?uid=<%=rrlAm.getUid()%>&companyNo=<%=companyNo%>'">회사 리뷰 작성하기</button>
+			<%}//close IF %>
+			
+			<%
 			for (CompanyReview cr : companyReviewList) {
 			%>
 			<table>
@@ -68,6 +77,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 		</section>
 		<section class="salary-review">
 			<h2>연봉 리뷰</h2>
+			<%
+			if (rrlLm != null && rrlLm.getMemberType() == 2) {
+				ApplicantMember rrlAm=(ApplicantMember)rrlLm;
+				int uid=rrlAm.getUid();
+				String companyNo=company.getCompanyNo();
+			%>
+			<button class="write-review-button" id="write-company-review-button" onclick="location.href='<%=request.getContextPath()%>/review/salary/salaryReviewEnroll?uid=<%=rrlAm.getUid()%>&companyNo=<%=companyNo%>'">연봉 리뷰 작성하기</button>
+			<%}//close IF %>
+			
 			<%
 			for (SalaryReview sr : salaryReviewList) {
 			%>
