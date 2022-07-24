@@ -11,44 +11,51 @@ if(msg != null) session.removeAttribute("msg");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/myPageNav.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/myPage.css" />
 </head>
 <body>
-<div class="mypage-content-top">
-	<div class="mypage-container">
-		<div class="mypage-content-large">
-			<h3>마이페이지</h3>
-			<!-- 회원정보수정x. 비밀번호변경만O -->
-		</div>
-	</div>
-	<div>
-		<form id="myFrm" action="<%=request.getContextPath() %>/recruit/myPage" method="POST">
-		<p>
-			<label>ID</label>
-			<input class="inputR" type="text" name="id" id="id" value="<%= rmember.getId() %>" />
-		</p>
-		<p>
-			<label>Name</label>
-			<input type="text" type="text" name="name" id="name" value="<%= rmember.getName() %>" />
-		</p>
-		<p>
-			<label>사업자등록번호</label>
-			<input type="text" type="text" name="companyNo" id="companyNo" value="<%= rmember.getCompanyNo() %>" />
-		</p>
-		<p>
-			<label>Email</label>
-			<input type="text" type="text" name="email" id="email" value="<%= rmember.getEmail() %>" />
-		</p>
-		<p class="update-btn">
-			<input type="button" value="비밀번호 변경" onclick="updatePassword();" />
-			<input type="button" value="회원 탈퇴" onclick="deleteRecruit();"/>
-		</p>
+<main class="main">
+	<aside class="sidebar">
+		<nav class="nav">
+			<ul>
+				<li class="active"><a href="<%= request.getContextPath() %>/applicant/updatePw">패스워드 변경</a></li>
+				<li><a href="<%= request.getContextPath() %>/applicant/delete">회원 탈퇴</a></li>
+			</ul>
+		</nav>
+	</aside>
+</main>
+<!-- 회원정보수정x. 비밀번호변경만O -->
+<section class="mypage">
+	<div class="container">
+		<div class="mypage-content">
+			<form id="updateFrm" class="updateFrm" action="<%=request.getContextPath() %>/recruit/myPage" method="POST">
+				<h2>회원정보 수정</h2>
+				<div class="textFrm">
+					<input class="id" type="text" name="id" id="id" value="<%= rmember.getId() %>" />
+				</div>
+				<div class="textFrm">
+					<input type="text" class="name" type="text" name="name" id="name" value="<%= rmember.getName() %>" />		
+				</div>
+				<div class="textFrm">
+					<input type="text" class="companyNo" type="text" name="companyNo" id="companyNo" value="<%= rmember.getCompanyNo() %>" />		
+				</div>
+				<div class="textFrm">
+					<input type="text" class="email" type="text" name="email" id="email" value="<%= rmember.getEmail() %>" />
+				</div>
+				<div class="btn-group">
+					<input type="button" id="btn-change" value="패스워드 수정" onclick="updatePassword();" />
+					<input type="button" id="btn-delete" value="회원 탈퇴" onclick="deleteRecruit();"/>
+				</div>
 		</form>
 	</div>
+<section>
 	<form name="deleteFrm" method="POST" action="<%= request.getContextPath() %>/recruit/delete">
 		<input type="hidden" name="id" value="<%= rmember.getId() %>" />
 	</form>
-</div>
+</section>
 <script>
 window.addEventListener('load',()=>{
 	<% if(msg!=null){%>

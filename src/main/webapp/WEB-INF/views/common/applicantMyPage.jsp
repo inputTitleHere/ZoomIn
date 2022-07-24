@@ -10,45 +10,53 @@ if(msg != null) session.removeAttribute("msg");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/myPageNav.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/myPage.css" />
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
-<div class="mypage-content-top">
-	<div class="mypage-container">
-		<div class="mypage-content-large">
-			<h3>마이페이지</h3>
-			<!-- 수정가능한 회원정보 이름, 핸드폰, 이메일 -->
+<main class="main">
+	<aside class="sidebar">
+		<nav class="nav">
+			<ul>
+				<li class="active"><a href="#">회원정보수정</a></li>
+				<li><a href="<%= request.getContextPath() %>/applicant/updatePw">패스워드 변경</a></li>
+			</ul>
+		</nav>
+	</aside>
+</main>
+<section class="mypage">
+	<div class="container">
+		<div class="mypage-content">
+			<form id="updateFrm" class="updateFrm" name="updateFrm" action="<%=request.getContextPath() %>/applicant/update" method="POST">
+				<h2>회원정보 수정</h2>
+					<div class="textFrm">
+						<input class="id" type="text" name="id" id="id" value="<%= amember.getId() %>" />
+					</div>
+					<div class="textFrm">
+						<input type="name" class="name" name="name" id="name" value="<%= amember.getName() %>" />		
+					</div>
+					<div class="textFrm">
+						<input type="phone" class="phone" name="phone" id="phone" placeholder="010제외 뒷자리 숫자만 적어주세요" value="<%= amember.getPhone() %>" />			
+					</div>
+					<div class="textFrm">
+						<input type="email" class="email" name="email" id="email" value="<%= amember.getEmail() %>" />		
+					</div>
+					<div class="btn-group">
+						<input type="submit" id="btn-change" value="회원정보수정" />
+						<input type="button" id="btn-delete" value="회원 탈퇴" onclick="deleteApplicant();"/>
+					</div>
+			</form>
 		</div>
 	</div>
-	<div>
-		<form id="updateFrm" name="updateFrm" action="<%=request.getContextPath() %>/applicant/update" method="POST">
-		<p>
-			<label>ID</label>
-			<input class="id" type="text" name="id" id="id" value="<%= amember.getId() %>" />
-		</p>
-		<p>
-			<label>Name</label>
-			<input type="name" name="name" id="name" value="<%= amember.getName() %>" />
-		</p>
-		<p>
-			<label>Phone</label>
-			<input type="phone" name="phone" id="phone" placeholder="010제외 뒷자리 숫자만 적어주세요" value="<%= amember.getPhone() %>" />
-		</p>
-		<p>
-			<label>Email</label>
-			<input type="email"  name="email" id="email" value="<%= amember.getEmail() %>" />
-		</p>
-		<p class="update-btn">
-			<input type="submit" value="회원정보수정" />
-			<input type="button" value="비밀번호 변경" onclick="updatePassword();" />
-			<input type="button" value="회원 탈퇴" onclick="deleteApplicant();"/>
-		</p>
-		</form>
-	</div>
+</section>
 	<form name="deleteFrm" method="POST" action="<%= request.getContextPath() %>/applicant/delete">
 		<input type="hidden" name="id" value="<%= amember.getId() %>" />
 	</form>
-</div>
+			<!-- 수정가능한 회원정보 이름, 핸드폰, 이메일 -->
+
 <script>
 window.addEventListener('load',()=>{
 	<% if(msg!=null){%>
@@ -79,10 +87,7 @@ document.updateFrm.onsubmit = (e) => {
 		return false;
 	}
 };
- 
-const updatePassword = () => {
-	location.href = "<%= request.getContextPath() %>/applicant/updatePw";
-};
+
 	/**
 	 * ApplicantDeleteServlet으로 보내짐.
 	 jsp -> deleteFrm 전달 (정말 탈퇴하겠습니까? -> 탈퇴되었습니다 흐름)

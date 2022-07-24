@@ -1,0 +1,65 @@
+*{
+	font-family: 'Gugi', cursive;
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+
+.sidebar {
+	top: -1px;
+	left: -1%;
+	position: absolute;
+	width: 22%;
+	height: 100%;;
+	background: #2b2b2b;
+	font-size: 16px;
+}
+
+.nav {
+	  position: relative;
+ 	  margin: 4%;
+	  text-align: right;
+	  top: 32%;
+	  transform: translateY(-50%);
+	  font-weight: bold;
+}
+
+.nav ul {
+	list-style: none;
+}
+
+li {
+	position: relative;
+	margin: 3.2em 0;
+}
+
+nav ul li a{
+	line-height: 5em;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.4em;
+	color: rgba(255, 255, 255, 0.35);
+	display: block;
+    transition: all ease-out 300ms;
+}
+
+.active a {
+	color: white;
+}
+
+nav ul li:not(.active)::after {
+	opacity: 0.2;
+}
+
+nav ul li:not(.active):hover a {
+	color: rgba(255, 255, 255, 0.75);
+}
+
+li::after {
+	content: '';
+	position: absolute;
+	width: 105%;
+	height: 2px;
+	background: black;
+	left:-15px;
+	bottom: 8px;
+	background-image: linear-gradient(to right, #883e82, #ffc357);
+}
