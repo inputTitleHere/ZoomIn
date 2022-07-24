@@ -13,6 +13,7 @@ select * from favourite;
 delete from favourite where "uid"=1;
 commit;
 
+select * from career;
 select * from job_category;
 select * from company_table;
 select count(*) from company_table where company_no=1122334455;
