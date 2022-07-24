@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dao.CompanyReviewDao;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.exception.CompanyReviewException;
+import com.kh.zoomin.company.dto.Category;
 import com.kh.zoomin.company.dto.Company;
 import com.kh.zoomin.company.exception.CompanyException;
 
@@ -188,6 +189,31 @@ public class CompanyDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<Category> getCategoryAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Category> cateList = new ArrayList<>();
+		String sql = prop.getProperty("getCategoryAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				String no = rset.getString("category_number");
+				String domain = rset.getString("domain");
+				cateList.add(new Category(no, domain));
+			}
+		} catch (SQLException e) {
+			throw new CompanyReviewException("카테고리 조회 오류", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cateList;
 	}
 
 

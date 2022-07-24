@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.zoomin.company.dao.CompanyDao;
+import com.kh.zoomin.company.dto.Category;
 import com.kh.zoomin.company.dto.Company;
 
 public class CompanyService {
@@ -67,6 +68,13 @@ public class CompanyService {
 		
 		return result;
 
+	}
+
+	public List<Category> getCategoryAll() {
+		Connection conn = getConnection();
+		List<Category> cateList = companyDao.getCategoryAll(conn);
+		close(conn);
+		return cateList;
 	}
 	
 	
