@@ -1,21 +1,21 @@
 package com.kh.zoomin.applicant.companyReviewBoard.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
+import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.common.ZoominUtils;
 import com.kh.zoomin.company.dto.Company;
 import com.kh.zoomin.company.service.CompanyService;
+import com.kh.zoomin.member.dto.Member;
 
 /**
  * Servlet implementation class CompanyReviewViewServlet
@@ -30,10 +30,21 @@ public class CompanyReviewViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession(); 
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			boolean isApplicant = false;
+			if(loginMember != null && loginMember.getMemberType() == 2) {
+				isApplicant = true;
+			}
+			
+			if(isApplicant) {
+				int uid = ((ApplicantMember) loginMember).getUid();
+			}
+			
 			int no = Integer.parseInt(request.getParameter("no"));
 			
 			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
-			System.out.println("companyReview = " + companyReview);
+			System.out.println("companyReview 상세보기 " + companyReview);
 		
 			String companyNo = companyReview.getCompanyNo();
 			Company company = companyService.getCompanyByNo(companyNo);

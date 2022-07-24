@@ -1,3 +1,7 @@
+<%@page import="com.kh.zoomin.company.dto.Company"%>
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReviewExt"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +9,43 @@
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	SalaryReview salaryReview = (SalaryReview) request.getAttribute("salaryReview");
-	SalaryReviewExt salaryReviewExt = (SalaryReviewExt) request.getAttribute("salaryReviewExt");
+	String msg = (String) session.getAttribute("msg");
+	//System.out.println("msg@jsp = " + msg);
+	if(msg != null) session.removeAttribute("msg"); 
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	System.out.println("loginMember = " + loginMember);
+	ApplicantMember am=null;
+	RecruitMember rm=null;
+	
+	if(loginMember instanceof ApplicantMember){
+		am=(ApplicantMember)loginMember;
+	}else if(loginMember instanceof RecruitMember){
+		rm=(RecruitMember)loginMember;
+	
+	}
+
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie c : cookies){
+			String name = c.getName();
+			String value = c.getValue();
+			//System.out.println("[cookie] " + name + " = " + value);
+			
+			}
+	}
+	
+	Company company = (Company) request.getAttribute("company");
+	Member applicantM = (Member) session.getAttribute("loginMember");
+	ApplicantMember applicant = null;
+	
+	if(applicantM instanceof ApplicantMember){
+		applicant = (ApplicantMember) applicantM;
+	}
+	
+	Member lm = (Member) session.getAttribute("loginMember");
+	if(lm instanceof ApplicantMember){
+		am = (ApplicantMember)session.getAttribute("loginMember");	
+	}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
 <section id="salary-review-view-container">
@@ -80,7 +120,8 @@
 </section>
 <script>
 document.querySelector("#btnSubmit").onclick = () =>{
-	document.salaryReviewUpdateFrm.submit();
+	if(confirm("정말 삭제하시겠습니까?"))
+		document.salaryReviewUpdateFrm.submit();
 };
 </script>
 

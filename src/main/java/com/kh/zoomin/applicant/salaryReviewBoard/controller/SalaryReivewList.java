@@ -16,6 +16,7 @@ import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.service.SalaryReviewService;
 import com.kh.zoomin.common.ZoominUtils;
+import com.kh.zoomin.company.dto.Company;
 import com.kh.zoomin.company.service.CompanyService;
 import com.kh.zoomin.member.dto.Member;
 
@@ -37,7 +38,8 @@ public class SalaryReivewList extends HttpServlet {
 			if(member instanceof ApplicantMember) {
 				ApplicantMember applicantMember = (ApplicantMember) member;
 				int uid = applicantMember.getUid();
-				
+			
+			
 //				int result = salaryReviewService.
 				
 			}
@@ -61,6 +63,12 @@ public class SalaryReivewList extends HttpServlet {
 			String url = request.getRequestURI();
 			String pagebar = ZoominUtils.getApplicantPageBar(cPage, numPerPage, totalContent, url);
 			
+//			int no = Integer.parseInt(request.getParameter("no"));
+//			SalaryReview salaryReview = salaryReviewService.findBySalaryReviewNo(no);
+//			String companyNo = salaryReview.getCompanyNo();
+//			Company company = companyService.getCompanyByNo(companyNo);
+//			
+//			request.setAttribute("company", company);
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewList.jsp")

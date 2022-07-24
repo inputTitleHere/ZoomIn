@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.company.dto.Company"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview"%>
@@ -59,7 +60,8 @@
 			<td>
 				<%= salaryReview.getUid() %>
 			</td>
-			<td><%= salaryReview.getCompanyNo() %></td>
+			<td>
+				<%= salaryReview.getCompanyNo() %></td>
 			<td>
 				<% if(salaryReview.getCategoryNumber() == 1) %>인사팀
 				<% if(salaryReview.getCategoryNumber() == 2) %>회계/총무팀
