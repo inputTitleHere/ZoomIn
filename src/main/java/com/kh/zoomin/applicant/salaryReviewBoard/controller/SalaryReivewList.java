@@ -57,6 +57,8 @@ public class SalaryReivewList extends HttpServlet {
 			param.put("end", end);
 			
 			List<SalaryReview> list = salaryReviewService.findAll(param);
+			
+			
 			System.out.println("salaryReview = " + list);
 			
 			int totalContent = salaryReviewService.getTotalContent();
