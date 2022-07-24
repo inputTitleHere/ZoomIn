@@ -39,6 +39,7 @@ public class CompanyService {
 	public Company getCompanyByName(String userVal) {
 		Connection conn = getConnection();
 		Company company = companyDao.getCompanyByName(conn, userVal);
+		
 		close(conn);
 		return company;
 	}
