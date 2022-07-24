@@ -42,7 +42,7 @@ h2 {
 		method="post"
 	>
 		<table id="tbl-company-review">
-			<%-- <tr>
+			<tr>
 				<th>작성자 번호</th>
 				<td>
 					<input type="hidden" name="uid" value="<%= uid %>" readonly/>
@@ -54,7 +54,7 @@ h2 {
 				
 					<input type="hidden" name ="company_no" value="<%= companyNo %>"/>
 				</td>
-			</tr> --%>
+			</tr>
 			<tr>
 				<th>분야</th>
 				<td>
