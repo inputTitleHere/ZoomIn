@@ -32,6 +32,8 @@ function loginCheck() {
 <meta charset="UTF-8">
 <title>구인자 로그인</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/simpleLogin.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -47,20 +49,20 @@ window.addEventListener('load',()=>{
 	<%}%>
 });
 </script>
-	<div class="container" align="center">
+	<div class="container">
 		<div class="collg"></div>
 		<div class="collg"></div>
-		<div class="form-group-container" style="padding-top: 20px;">
-			<form name="loginRFrm" method="POST" action="<%=request.getContextPath()%>/recruit/login">
-			<h3 style="text-allign: center;">로그인 화면</h3>
+		<div class="form-group-container">
+			<form name="loginRFrm" class="loginFrm" method="POST" action="<%=request.getContextPath()%>/recruit/login">
+				<h3>로그인 화면</h3>
 			<div class="form-group">
-				<input type="text" id="id" class="Rid" name="id" placeholder="Username" maxlength="20">
+				<input type="text" id="id" class="Rid" name="id" placeholder="아이디를 입력해주세요." maxlength="20">
 			</div>
 			<div class="form-group">
-				<input type="password" id="password" class="Rpassword" name="password" placeholder="Password">
+				<input type="password" id="password" class="Rpassword" name="password" placeholder="비밀번호를 입력해주세요.">
 			</div>
-			<button type="submit" class="btn-login" onclick="return loginCheck()">로그인</button>
-			<button class="btn-Rjoin" type="button" onclick="location.href='<%= request.getContextPath() %>/recruit/join';">회원가입</button>
+			<button type="submit" id="login-box" onclick="return loginCheck()">로 그 인</button>
+			<button id="btn-join" type="button" onclick="location.href='<%= request.getContextPath() %>/recruit/join';">회원가입</button>
 			</form>
 		</div>
 	</div>
