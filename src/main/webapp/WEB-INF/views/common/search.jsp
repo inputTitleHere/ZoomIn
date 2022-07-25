@@ -1,38 +1,18 @@
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+
+<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/search.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<%
-	List<String> comNoList = (List<String>) request.getAttribute("comNoList");
-%>
-</head>
-<body>
-<header>
-	<div id="account">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> --%>
 
-		<%-- 임시로 관리자 탭 만들었습니다. --%>
-		<%--<a href="<%= request.getContextPath() %>/supervisor/supervisorView">관리자</a> --%>
-
-		<a href ="<%= request.getContextPath() %>/recruit/login" id="logIn">구인자 로그인</a>
-		<a href ="<%= request.getContextPath() %>/applicant/login" id="logIn">구직자 로그인</a>
-		<a href ="<%= request.getContextPath() %>/recruit/join" id="recruiterAsign">구인자 회원가입</a>
-		<a href ="<%= request.getContextPath() %>/applicant/join" id="applicantAsign">구직자 회원가입</a>
-
-	</div>
-	<div id="logodiv">
-		<a href="<%=request.getContextPath()%>/index.jsp">
-			<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-		</a>
-	</div>
 	<div id="searchBoxdiv">
-		<input id="searchBox" type="text" name="userVal">
-		<button class="custom-btn btn-3" id="search-btn"><span>검색</span></button>
+		<input id="searchBox" type="text">
+			<button class="custom-btn btn-3">
+				<span>검색</span>
+			</button>
 	</div>
-</header>
-
+	
 <script>
 	$("#searchBox").autocomplete({
 		source(request, response){
@@ -61,11 +41,9 @@
 	
 	//버튼 클릭시 해당문자 포함하는 회사자동완성 검색
 	document.querySelector("#search-btn").addEventListener('click', (e) => {
-		console.log("val = " + document.querySelector("#searchBox").value);
 		const val = document.querySelector("#searchBox").value;
 		location.href="<%= request.getContextPath() %>/search/company?userVal="+val;	
 	});
 	
 </script>
-
-<%-- 여기에 메뉴탭 넣기 --%>
+	
