@@ -9,7 +9,7 @@
 
 <header>
 	<div id="account">
-		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">로그아웃</a>                                                                                  
+		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">관리자 로그아웃</a>                                                                                  
 	</div>
 	<div id="superlogodiv">
 		<img id="superlogo" alt="관리자 랜딩페이지로" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
