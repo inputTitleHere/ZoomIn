@@ -53,16 +53,15 @@
 		<tr>
 			<th>분야</th>
 			<td>
-				<% if(companyReview.getCategoryNumber()==1) %>IT/웹/통신
-				<% if(companyReview.getCategoryNumber()==2) %>미디어/디자인
-				<% if(companyReview.getCategoryNumber()==3) %>의료/제약/복지	
-				<% if(companyReview.getCategoryNumber()==4) %>건설업
-				<% if(companyReview.getCategoryNumber()==5) %>서비스업
-				<% if(companyReview.getCategoryNumber()==6) %>은행/금융업
-				<% if(companyReview.getCategoryNumber()==7) %>유통/무역/운송
-				<% if(companyReview.getCategoryNumber()==8) %>제조/화학
-				<% if(companyReview.getCategoryNumber()==9) %>기관/협회
-				<% if(companyReview.getCategoryNumber()==110) %>교육업
+				<% if(companyReview.getCategoryNumber()==1) %>인사
+				<% if(companyReview.getCategoryNumber()==2) %>회계/총무
+				<% if(companyReview.getCategoryNumber()==3) %>마케팅
+				<% if(companyReview.getCategoryNumber()==4) %>영업
+				<% if(companyReview.getCategoryNumber()==5) %>생산/관리
+				<% if(companyReview.getCategoryNumber()==6) %>연구개발
+				<% if(companyReview.getCategoryNumber()==7) %>기술
+				<% if(companyReview.getCategoryNumber()==8) %>서비스
+				<% if(companyReview.getCategoryNumber()==9) %>IT/인터넷
 			</td>
 		</tr>
 		<tr>	

@@ -92,7 +92,6 @@ const deleteApplicant = () => {
 		document.deleteFrm.submit();		 
 	}
 };
-	 
 </script>
 
 </body>

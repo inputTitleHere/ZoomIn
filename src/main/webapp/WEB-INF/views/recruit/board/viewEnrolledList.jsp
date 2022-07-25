@@ -20,27 +20,32 @@ String title=(String)request.getAttribute("title");
 <hr />
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/recruit/board/viewEnrolled.css" />
 <%
+if(rl.size()==0){
+%>
+<h1>아직 지원자가 없습니다.</h1>
+<%
+}
 for(Resume resume : rl){
-	String birthday=sdf.format(resume.getBirthday());
-	String schoolType=null;
-	switch(resume.getSchoolType()){
-	case C2:{
-		schoolType="2년제";
-		break;
-	}
-	case C3:{
-		schoolType="3년제";
-		break;
-	}
-	case C4:{
-		schoolType="4년제";
-		break;
-	}
-	case HI:{
-		schoolType="고졸";
-		break;
-	}
-	}
+String birthday=sdf.format(resume.getBirthday());
+String schoolType=null;
+switch(resume.getSchoolType()){
+case C2:{
+	schoolType="2년제";
+	break;
+}
+case C3:{
+	schoolType="3년제";
+	break;
+}
+case C4:{
+	schoolType="4년제";
+	break;
+}
+case HI:{
+	schoolType="고졸";
+	break;
+}
+}
 %>
 <div class="resume-bar-wrapper">
 	<table class="resume">
