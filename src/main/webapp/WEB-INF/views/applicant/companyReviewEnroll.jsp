@@ -1,54 +1,55 @@
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+
 <%
+String msg = (String) session.getAttribute("msg");
+//System.out.println("msg@jsp = " + msg);
+if(msg != null) session.removeAttribute("msg"); 
+Member loginMember = (Member) session.getAttribute("loginMember");
+System.out.println("loginMember = " + loginMember);
+ApplicantMember am=null;
+RecruitMember rm=null;
+if(loginMember instanceof ApplicantMember){
+	am=(ApplicantMember)loginMember;
+}else if(loginMember instanceof RecruitMember){
+	rm=(RecruitMember)loginMember;
+
+}
+
+
+Cookie[] cookies = request.getCookies();
+if(cookies != null){
+	for(Cookie c : cookies){
+		String name = c.getName();
+		String value = c.getValue();
+		//System.out.println("[cookie] " + name + " = " + value);
+		
+		}
+}
+
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReivew");
-	ApplicantMember applicantMember = (ApplicantMember) request.getAttribute("loginMember");
-	int uid = Integer.parseInt(request.getParameter("uid"));
-	String companyNo = request.getParameter("companyNo");
-	
 	ApplicantMember applicant = null;
 	Member applicantM = (Member) session.getAttribute("loginMember");
 	if(applicantM instanceof ApplicantMember){
 		applicant = (ApplicantMember) applicantM;
 	}
-	if(applicantM != null && applicantM.getMemberType()==2){
+	int uid = Integer.parseInt(request.getParameter("uid"));
+	String companyNo = request.getParameter("companyNo");
 %>
-		<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
-<%		
-	}else{
-%>
-		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%		
-	}
-%>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview2.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/applicant/applicantLoginHeader.css"/>
+
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReviewEnroll.css" />
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/applicant/applicantLoginHeader.css"/> --%>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<!-- <style>
-h2 {
-	font-size: 100px;
-}
-</style> -->
-<!-- 중복헤더 없애기, 기업리뷰 uid 불러오기, 분야 회사정보 -->
-	<%-- <div id="account">
-		<a href ="" id="writeResume">이력서 작성</a>
-		<a href ="" id="info">회원정보</a>
-		<a href ="" id="logOut">로그아웃</a>
-	</div>
-	<div id="logodiv">
-		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-	</div>  --%>
-	<%-- <div id="searchBoxdiv">
-		<input id="searchBox" type="text">
-		 <button class="custom-btn btn-3"><span>검색</span></button>
-	</div> --%>
+
 <section id="company-review-view-container">
 	<h2>-회사 리뷰 등록-</h2>
 
@@ -58,12 +59,12 @@ h2 {
 		method="post"
 	>
 		<table id="tbl-company-review">
-			 <%-- <tr>
+			 <tr>
 				<th>작성자 번호</th>
 				<td>
 					<input type="text" name="uid" value="<%= uid %>" readonly/>
 				</td>
-			</tr> --%>
+			</tr>
 			<tr>
 				<th>회사명</th>
 				<td>

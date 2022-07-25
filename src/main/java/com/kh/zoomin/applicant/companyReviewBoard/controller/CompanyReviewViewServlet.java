@@ -29,7 +29,12 @@ public class CompanyReviewViewServlet extends HttpServlet {
 	 * 리뷰 상세보기
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
+			System.out.println("companyReview 상세보기 " + companyReview);
+			
 			HttpSession session = request.getSession(); 
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			boolean isApplicant = false;
@@ -40,11 +45,6 @@ public class CompanyReviewViewServlet extends HttpServlet {
 			if(isApplicant) {
 				int uid = ((ApplicantMember) loginMember).getUid();
 			}
-			
-			int no = Integer.parseInt(request.getParameter("no"));
-			
-			CompanyReview companyReview = companyReviewService.findByCompanyReviewNo(no);
-			System.out.println("companyReview 상세보기 " + companyReview);
 		
 			String companyNo = companyReview.getCompanyNo();
 			Company company = companyService.getCompanyByNo(companyNo);
@@ -59,10 +59,7 @@ public class CompanyReviewViewServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewView.jsp")
 				.forward(request, response);
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
+		
 	}
 
 }

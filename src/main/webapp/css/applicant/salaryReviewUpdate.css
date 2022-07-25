@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+h2 {
+	text-align: center;
+	font-size: 70px;
+	font-weight: bold;
+}
+
+#tbl-salary-review {
+	align-content: center;
+	margin: 0 auto;
+	border-spacing: 30px;
+}
+#tbl-salary-review th{
+	font-size: 30px;
+}
+#tbl-salary-review td{
+	font-size: 30px;
+	padding-left: 40px;
+		
+}
+#tbl-salary-review td input {
+	width: 150px;
+	height: 25px;
+	align-content: center;
+}
+#tbl-salary-review td select {
+	width: 158px;
+	height: 31px;
+}
+#end{text-align: center;}
+/* #btnSubmit{
+	background: -webkit-linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+	background: -moz-linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+	background: -o-linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(242, 214, 98)), to(rgba(242, 187, 98,1)));
+	background: linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+	width: 130px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;	
+} */

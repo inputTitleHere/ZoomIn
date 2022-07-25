@@ -13,7 +13,6 @@
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	ApplicantMember am=null;
 	
-	
 	Cookie[] cookies = request.getCookies();
 	if(cookies != null){
 		for(Cookie c : cookies){
@@ -91,7 +90,7 @@
 	if(loginMember != null && loginMember.getMemberType()==2){
 %>
 	<div id="companyReview-btn-add">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewEnroll'">리뷰 등록하기</button>
+		<button onclick="location.href='<%= request.getContextPath() %>/recruit/review/recruitReviewList?companyNo=<%= applicantMember.getUid() %>'">리뷰 등록하기</button>
 	</div>
 <%		
 	}
