@@ -12,13 +12,14 @@
 
 </head>
 <body>
-<input type="button" class="btn" id="salBoard" value="연봉" onclick="location.href='<%= request.getContextPath()%>/supervisor/salBoardList';"/>
-<input type="button" class="btn" id="comBoard" value="회사" onclick="location.href='<%= request.getContextPath()%>/supervisor/comBoardList';"/>
-<input type="button" class="btn" id="recBoard" value="채용" onclick="location.href='<%= request.getContextPath()%>/supervisor/recBoardList';"/>
-
+<div id="board-btn-container">
+<input type="button" class="btn-board" id="salBoard" value="연봉" onclick="location.href='<%= request.getContextPath()%>/supervisor/salBoardList';"/>
+<input type="button" class="btn-board" id="comBoard" value="회사" onclick="location.href='<%= request.getContextPath()%>/supervisor/comBoardList';"/>
+<input type="button" class="btn-board" id="recBoard" value="채용" onclick="location.href='<%= request.getContextPath()%>/supervisor/recBoardList';"/>
+</div>
     <%-- 회사리뷰 게시판 --%>
-   <section id="super-board">
-    <div id="comBoard-container" class="board-container">
+<section id="super-board">
+   <div id="comBoard-container" class="board-container">
 	<h2 class="h2">회사 리뷰 게시판</h2>
 	<form action="<%= request.getContextPath() %>/supervisor/comReviewDel" method="post" name="comDelFrm">
     <table id="tbl-company-board" class="tb-manage" >

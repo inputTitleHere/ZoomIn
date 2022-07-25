@@ -7,10 +7,37 @@
 #chart{
 	width:900px;
 	height:900px;
-	left:50%;
-	margin-left:450px;
 }
-
+#chart-h1{
+	margin-top:100px;
+}
+canvas#myChart{
+	display: block;
+    height: 450px;
+    width: 900px;
+    margin-top: 50px;
+}
+section#chart-container{
+    display: flex;
+    align-content: space-around;
+    justify-content: space-around;
+}
+#btn-sch-statistic{
+	background: rgb(242 214 98 / 42%);
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+#btn-sch-statistic:hover{
+	background: #f2bb62;
+}
 
 /* supervisorLoginHeader*/
 /* nav관련스타일 */
@@ -105,13 +132,7 @@ tbody tr:hover{
 td{
 	padding : 5px;
 }
-/*테이블 감싸는 div (배경색때문에) -> 쓸지말지 고민..*/
-div#border{
-	border: 1px solid white; 
- 	background-color: #ffebb5; 
-	box-shadow: inset 0 0 6px #deb13a;
-	width: 1200px; height: 250px;
-}
+
 /*삭제버튼*/
 .under-tbl-btn{
 	display: flex;
@@ -139,7 +160,7 @@ div#border{
 
 }
 /*로그버튼*/
-input#rm-log{
+input#rm-log, #am-log{
 	background: rgb(242 214 98 / 42%);
   	width: 80px;
 	height: 40px;
@@ -152,6 +173,10 @@ input#rm-log{
     border: 2px solid orange;
     text-align: center;
     background: #ffebb5a1;	
+    margin:0px 20px;
+}
+input#rm-log:hover{
+	background: #f2bb62;
 }
 /*페이지 바 */
 #super-pagebar{
@@ -161,10 +186,20 @@ input#rm-log{
 	text-align : center;
 }
 
-.btn-member{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
+input.btn-member, input.btn-board{
+    background: rgb(242 214 98 / 42%);
+    width: 80px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+        margin: 0px 20px;
 }
 #am, #rm{
 	width: 200px;
@@ -172,6 +207,44 @@ input#rm-log{
     margin: 30px;
     margin: 40px;
     border-radius: 20px;
+}
+/*am 로그 팝업창*/
+table#tbl-amember-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
+/*rm 로그 팝업창*/
+table#tbl-rmember-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
+div.log-tbl{
+	margin: 50;
+}
+input#sal-log, #com-log, #rec-log{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;	
+    margin:0px 20px;
+}
+input#sal-log:hover{
+	background: #f2bb62;
+}
+table#tb-sal-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
 }
 
 /* 게시판관리 */
@@ -190,9 +263,10 @@ div#board-btn-container{
     margin-top: 50;
 }
 .btn-board{
+	width: 80px;
+    height: 40px;
+    margin:0 20;
 	background: rgb(242 214 98 / 42%);
-  	width: 100px;
-	height: 50px;
 	line-height: 42px;
 	padding: 0;
 	border: none;
@@ -206,6 +280,11 @@ div#board-btn-container{
 .btn:hover{
 	background: #f2bb62;
 
+}
+#tb-rec-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 10;
 }
 
 /*회원관리 버튼*/
@@ -235,15 +314,19 @@ div#member-btn-container{
 
 
 /* 통계관리 */
-h1{
+h2#super{
 	display: flex;
     justify-content: center;
+    margin: 50px 0px;
 }
 .date-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 30px;
+}
+section#statistic{
+	height:fit-content;
 }
 #statistic-date-start, #statistic-date-end{
 	    margin: 10px 40px;
@@ -252,20 +335,62 @@ h1{
     display: flex;
     justify-content: center;
 }
+.btn-startic{
+	margin: 10px 40px;
+	width: 200px;
+	background: rgb(242 214 98 / 42%);
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn-startic:hover{
+	background: #f2bb62;
+}
+/*
 button, input[type=button] {
 	width: 200px;
     height: 50px;
     margin: 10px 40px;
 }
+*/
 .tbl-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
     height: auto;
 }
-#tbl-visit-statistic, #tbl-board-statistic{
+table#tbl-visit-statistic{
     border: 1px solid black;
     border-collapse: collapse;
     margin: 20px;
+    margin-right:40px;
 }
-
+table#tbl-board-statistic{
+	border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px;
+    margin-left:50px;
+}
+table#tbl-visit-statistic th{
+	background-color:#ffe7c0;	
+    border: 2px solid orange;
+}
+table#tbl-visit-statistic td{
+    border: 2px solid orange;
+	width:50px;	
+}
+table#tbl-board-statistic th{
+	background-color:#ffe7c0;
+    border: 2px solid orange;
+}
+table#tbl-board-statistic td{
+	border: 2px solid orange;
+	width:50px;	
+}

@@ -15,8 +15,10 @@
 <title>채용게시판 데이터 관리</title>
 </head>
 <body>
-		<table id="tb-rec-log">
-		<h1>채용정보게시판 로그</h1>
+<section id="super-board">
+<div class="log-tbl">
+		<table id="tb-rec-log" calss="table-log">
+		<h2>채용정보게시판 로그</h2>
 		<thead>
 			<tr>
 				<td>no</td>
@@ -58,5 +60,7 @@
 	<div id='super-pagebar'>
 		<%= request.getAttribute("recLogPagebar") %>
 	</div>
+</div>
+</section>
 </body>
 </html>

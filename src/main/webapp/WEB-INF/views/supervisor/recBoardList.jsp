@@ -11,10 +11,11 @@
 
 </head>
 <body>
+<div id="board-btn-container">
 <input type="button" class="btn-board" id="salBoard" value="연봉" onclick="location.href='<%= request.getContextPath()%>/supervisor/salBoardList';"/>
 <input type="button" class="btn-board" id="comBoard" value="회사" onclick="location.href='<%= request.getContextPath()%>/supervisor/comBoardList';"/>
 <input type="button" class="btn-board" id="recBoard" value="채용" onclick="location.href='<%= request.getContextPath()%>/supervisor/recBoardList';"/>
-
+</div>
 
 	<%--채용게시판 --%>
 <section id="super-board">

@@ -15,9 +15,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+<section id="super-board">	
+<div class="log-tbl">
 	<table id="tbl-amember-log">
-		<h1>Applicant Log Data</h1>
+		<h2 class="h2">Applicant Log Data</h2>
 		<thead>
 			<tr>
 				<td>No</td>
@@ -58,10 +59,11 @@
 			%>
 		</tbody>
 	</table>
+</div>
 	<div id='super-pagebar'>
 		<%= request.getAttribute("amLogPagebar") %>
 	</div>	
-
+</section>
 
 </body>
 </html>

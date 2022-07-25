@@ -21,7 +21,6 @@
 	<div id="applicantMember-container" class="member-container">
 		<h2 class="h2">구직자 회원관리</h2>
 		<form action="<%= request.getContextPath() %>/supervisor/applicantMemberDelete" name="applicantFrm" method="post">
-			<div id="border">
 			<table id="tbl-applicantMember">
 				<thead>
 					<tr>
@@ -66,7 +65,6 @@
 				%>
 				</tbody>
 			</table>
-			</div>
 		</form>
 			<div id='super-pagebar'>
 				<%= request.getAttribute("amPagebar") %>

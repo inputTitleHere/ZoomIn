@@ -15,9 +15,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<table id="tb-sal-log">
-		<h1>연봉게시판 로그</h1>
+<section id="super-board">
+<div class="log-tbl">	
+	<table id="tb-sal-log" calss="table-log">
+		<h2>연봉게시판 로그</h2>
 		<thead>
 			<tr>
 				<td>no</td>
@@ -54,10 +55,11 @@
 			%>
 		</tbody>
 	</table>
+</div>
 	<div id='super-pagebar'>
 		<%= request.getAttribute("salLogPagebar") %>
 	</div>
-		
+</section>		
 
 </body>
 </html>

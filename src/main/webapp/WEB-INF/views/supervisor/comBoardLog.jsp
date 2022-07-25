@@ -15,7 +15,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<table id="tb-com-log">
+<section id="super-board">
+<div class="log-tbl">
+		<table id="tb-com-log" calss="table-log">
 		<h1>회사리뷰게시판 로그</h1>
 		<thead>
 			<tr>
@@ -56,7 +58,8 @@
 	<div id='super-pagebar'>
 		<%= request.getAttribute("comLogPagebar") %>
 	</div>
-	
+</div>
+</section>	
 
 
 </body>

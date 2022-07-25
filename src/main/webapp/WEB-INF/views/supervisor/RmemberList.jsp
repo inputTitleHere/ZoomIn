@@ -88,7 +88,7 @@
 //로그보기
   const rmlog = () => {
   	const title = "RecruitMemberLog";
-  	const spec = "width=1200px,height=500px";
+  	const spec = "width=1350px,height=500px";
   	const popup = open("", title, spec);
   	
   	const frm = document.rMemberLogFrm;
