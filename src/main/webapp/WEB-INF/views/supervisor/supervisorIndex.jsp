@@ -14,15 +14,17 @@
 	int todaySalCnt = session.getAttribute("todaySalCnt") == null ? 0 : (int) session.getAttribute("todaySalCnt");
 %>	
 	
-<section id="chart-container">
+
+<section id="chart-container" class="member-container">
+   	<h2 class="h2">최근 일주일간 방문자 & 게시글 수</h2>
     <div id="chart" >
-    	<h2>최근 일주일간 방문자 & 게시글 수</h2>
         <canvas id="myChart">
 	        <!--차트가 그려질 부분-->
         </canvas>
-    	<button id="btn-sch-statistic">기간별 통계보기</button>
+
     </div>
-</section>
+</div>
+
 	<script>
 	<!-- data 불러오기 : 오늘포함 최근 1주일 date, date별 new방문자수, date별 new게시글 수  -->
 	const findData = () => {

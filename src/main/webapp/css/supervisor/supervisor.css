@@ -12,13 +12,17 @@
 	margin-top:100px;
 }
 canvas#myChart{
-	display: block;
+    display: block;
     height: 450px;
     width: 900px;
-    margin-top: 50px;
+    position: absolute;
+    top: 340px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 section#chart-container{
-    display: flex;
     align-content: space-around;
     justify-content: space-around;
 }
