@@ -7,13 +7,44 @@
 #chart{
 	width:900px;
 	height:900px;
-	left:50%;
-	margin-left:450px;
+}
+#chart-h1{
+	margin-top:100px;
+}
+canvas#myChart{
+    display: block;
+    height: 450px;
+    width: 900px;
+    position: absolute;
+    top: 600px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+section#chart-container{
+    align-content: space-around;
+    justify-content: space-around;
+}
+#btn-sch-statistic{
+	background: rgb(242 214 98 / 42%);
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+#btn-sch-statistic:hover{
+	background: #f2bb62;
 }
 
-
 /* supervisorLoginHeader*/
-/* 메뉴관련스타일 */
+/* nav관련스타일 */
 nav {background:rgb(255 159 3 / 25%); width:100%; margin-top:40px;}
 /* ul태그의 가운데정렬 */
 ul.super-nav{
@@ -67,30 +98,112 @@ ul.super-nav li:hover span.animate_line{
 
 
 /* 회원관리 */
-#recruitMember-container, #applicantMember-container{
-	display: none;
+
+
+/*전체 section*/
+section#memberList-container{
+	text-align: center;
+}
+/*테이블 제목*/
+.h2{
+    text-align: center;
+}
+/*기본테이블 설정*/
+table{
+	border-collapse: collapse;
+	margin: auto;
+}
+thead{			
+	background-color: rgb(242 187 98);
+	padding: 10px;
+    text-align: center;
+    font-weight: bolder;
 }
 #tbl-applicantMember, #tbl-recruitMember{
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin: 5px 5px;
+    width: 1200px;
+ 	height: 250px;
+	margin: auto;
 }
-tr, td, th{
-    border: 1px solid black;
+tbody tr, td, th{
+    border: 1px solid white;
     padding: 10px;
+    text-align: center;
 }
-/* 구직자 회원관리 */
-#applicantMember-container{
-    display: block;
-    align-content: space-around;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+tbody tr:hover{
+	background-color: rgb(255 159 0 / 41%);
+	cursor:pointer;
 }
-.btn-member{
-    display: flex;
-    justify-content: center;
+td{
+	padding : 5px;
+}
+
+/*삭제버튼*/
+.under-tbl-btn{
+	display: flex;
+    justify-content: flex-end;
     flex-direction: row;
+    flex-wrap: nowrap;
+    padding-right: 200px;
+}
+.btn{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn:hover{
+	background: #f2bb62;
+
+}
+/*로그버튼*/
+input#rm-log, #am-log{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;	
+    margin:0px 20px;
+}
+input#rm-log:hover{
+	background: #f2bb62;
+}
+/*페이지 바 */
+#super-pagebar{
+    font-size: larger;
+    display: contents;
+	width : 100%;
+	text-align : center;
+}
+
+input.btn-member, input.btn-board{
+    background: rgb(242 214 98 / 42%);
+    width: 80px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+        margin: 0px 20px;
 }
 #am, #rm{
 	width: 200px;
@@ -99,28 +212,130 @@ tr, td, th{
     margin: 40px;
     border-radius: 20px;
 }
+/*am 로그 팝업창*/
+table#tbl-amember-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
+/*rm 로그 팝업창*/
+table#tbl-rmember-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
+div.log-tbl{
+	margin: 50;
+}
+table#tb-com-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
+input#sal-log, #com-log, #rec-log{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;	
+    margin:0px 20px;
+}
+input#sal-log:hover{
+	background: #f2bb62;
+}
+table#tb-sal-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
 
 /* 게시판관리 */
-#tbl-salary-board{
-    margin: 5px 5px;
+section#super-board{
+	text-align: center;
+}
+.tb-manage{
+	/*테이블 크기*/
+    width: 1200;
+    height: 300;
+}
+/*게시판 버튼*/
+div#board-btn-container{
     display: flex;
     justify-content: center;
+    margin-top: 50;
 }
-tr, td, th{
-    border: 1px solid black;
-    padding: 10px;
+.btn-board{
+	width: 80px;
+    height: 40px;
+    margin:0 20;
+	background: rgb(242 214 98 / 42%);
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn:hover{
+	background: #f2bb62;
+
+}
+#tb-rec-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 10;
 }
 
+/*회원관리 버튼*/
+div#member-btn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 50;
+}
+.btn-member{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 50px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn-member:hover{
+	background: #f2bb62;
+}
+
+
 /* 통계관리 */
-h1{
+h2#super{
 	display: flex;
     justify-content: center;
+    margin: 50px 0px;
 }
 .date-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 30px;
+}
+section#statistic{
+	height:fit-content;
 }
 #statistic-date-start, #statistic-date-end{
 	    margin: 10px 40px;
@@ -129,22 +344,62 @@ h1{
     display: flex;
     justify-content: center;
 }
+.btn-startic{
+	margin: 10px 40px;
+	width: 200px;
+	background: rgb(242 214 98 / 42%);
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;
+}
+.btn-startic:hover{
+	background: #f2bb62;
+}
+/*
 button, input[type=button] {
 	width: 200px;
     height: 50px;
     margin: 10px 40px;
 }
+*/
 .tbl-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
     height: auto;
 }
-#tbl-visit-statistic, #tbl-board-statistic{
+table#tbl-visit-statistic{
     border: 1px solid black;
     border-collapse: collapse;
     margin: 20px;
+    margin-right:40px;
 }
-tr, td, th{
-    border: 1px solid black;
+table#tbl-board-statistic{
+	border: 1px solid black;
+    border-collapse: collapse;
+    margin: 20px;
+    margin-left:50px;
+}
+table#tbl-visit-statistic th{
+	background-color:#ffe7c0;	
+    border: 2px solid orange;
+}
+table#tbl-visit-statistic td{
+    border: 2px solid orange;
+	width:50px;	
+}
+table#tbl-board-statistic th{
+	background-color:#ffe7c0;
+    border: 2px solid orange;
+}
+table#tbl-board-statistic td{
+	border: 2px solid orange;
+	width:50px;	
 }

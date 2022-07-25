@@ -13,7 +13,11 @@
 	int todaySalCnt = session.getAttribute("todaySalCnt") == null ? 0 : (int) session.getAttribute("todaySalCnt");
 %>
 
-	  <h1>관리자 통계관리</h1>
+<section id="statistic">
+	 
+	  <div>
+	  	<h2 id="super">관리자 통계관리</h1>
+	  </div>
 		
 		<form action="" name="frm">
 			<%--날짜 입력 --%>
@@ -30,11 +34,11 @@
 		    </div>
 		    
 		    <div id="btn-statistic">
-				<button type="submit" formaction="<%= request.getContextPath()%>/supervisor/visitMember" >방문자 조회</button>
-		        <button type="submit" formaction="<%=request.getContextPath()%>/supervisor/countBoard">게시글 조회</button>	
+				<button type="submit" class="btn-startic" formaction="<%= request.getContextPath()%>/supervisor/visitMember" >방문자 조회</button>
+		        <button type="submit" class="btn-startic" formaction="<%=request.getContextPath()%>/supervisor/countBoard">게시글 조회</button>	
 	        </div>	
 		</form>
-		
+</section>		
     <section class="tbl-container">
 	<table id="tbl-visit-statistic">
         <tr>

@@ -152,7 +152,7 @@
 			%>
 		</tbody>
 	</table>
-	<div id='pagebar'>
+	<div id='super-pagebar'>
 		<%= request.getAttribute("salLogPagebar") %>
 	</div>
 	
