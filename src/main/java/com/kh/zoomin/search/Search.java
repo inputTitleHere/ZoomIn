@@ -37,16 +37,8 @@ public class Search extends HttpServlet {
 		
 		//업무로직 
 		List<String> autoList = new ArrayList<>();	//자동완성에 전송할 결과리스트	
-		List<Company> comList = cs.getCompanyAll();		//회사 리스트
-		List<Category> cateList = cs.getCategoryAll();	//카테고리 리스트	
-
+		List<Company> comList = cs.getCompanyAll();		//회사 리스트	
 		
-		//카테고리 검색
-		for(Category cate : cateList) {
-			if(cate.getDomain().contains(term)) {
-				autoList.add(cate.getDomain());
-			}	
-		}		
 		//회사이름 검색
 		for(Company com : comList) {
 			if(com.getCompanyName().contains(term))

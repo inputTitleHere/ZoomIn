@@ -587,8 +587,10 @@ commit;
 select * from recruit_member where id = 'zoomin';
 insert into company_table values('1234567899', '줌인주식회사', null, '줌인 주식회사 입니다.');
 insert into recruit_member values(SEQ_RECRUIT_MEMBER.nextval, '1234567899', '줌인주식회사', 'zoomin', 1234, 'supervisor@zoomin.com', 'Y', default);
-delete from recruit_member
-desc
+select * from enroll_table;
+drop table statistic
+commit
+--select * from user_tables; 23개
 -- 이윤정 END --
 
 --김승환 테스트용
