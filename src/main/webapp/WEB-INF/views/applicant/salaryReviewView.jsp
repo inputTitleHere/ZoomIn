@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+
 <%
 	SalaryReview salaryReview = (SalaryReview) request.getAttribute("salaryReview");
 	Company company = (Company) request.getAttribute("company");
@@ -29,9 +29,8 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewView.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <section id="salary-review-view-container">
-	<h2>연봉리뷰 상세보기</h2>
+	<h2>-연봉리뷰 상세보기-</h2>
 <%
-	System.out.println("applicantMember + "  + applicant);
 	if(applicantM != null && applicantM.getMemberType()==2){
 		if((applicant != null && salaryReview.getUid() == applicant.getUid())){
 %>
@@ -58,7 +57,7 @@
 			<td><%= company.getCompanyName() %></td>
 		</tr>
 		<tr>
-			<th>카테고리</th>
+			<th>분야</th>
 			<td>
 				<% if(salaryReview.getCategoryNumber() == 1) %>인사팀
 				<% if(salaryReview.getCategoryNumber() == 2) %>회계/총무팀
@@ -77,7 +76,15 @@
 		</tr>
 		<tr>
 			<th>직급</th>
-			<td><%= salaryReview.getJobPosition() %></td>
+			<td>
+				<% if(salaryReview.getJobPosition().equals("1")) %>사원
+				<% if(salaryReview.getJobPosition().equals("2")) %>주임
+				<% if(salaryReview.getJobPosition().equals("3")) %>대리
+				<% if(salaryReview.getJobPosition().equals("4")) %>과장
+				<% if(salaryReview.getJobPosition().equals("5")) %>차장
+				<% if(salaryReview.getJobPosition().equals("6")) %>부장
+				<%-- <%= salaryReview.getJobPosition() %> --%>
+			</td>
 		</tr>
 		<tr>
 			<th>연봉</th>
@@ -93,7 +100,6 @@
 	action="<%= request.getContextPath() %>/review/salary/salaryReviewDelete" 
 	method="post"
 	name="salaryReviewDelFrm">
-	<input type="text" name="no" value="<%= salaryReview.getNo() %>"/>
 </form>
 <script>
 const deleteBoard = () => {

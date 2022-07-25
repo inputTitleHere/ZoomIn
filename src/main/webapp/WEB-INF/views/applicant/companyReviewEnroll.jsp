@@ -1,30 +1,50 @@
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReivew");
 	ApplicantMember applicantMember = (ApplicantMember) request.getAttribute("loginMember");
+	int uid = Integer.parseInt(request.getParameter("uid"));
+	String companyNo = request.getParameter("companyNo");
+	
+	ApplicantMember applicant = null;
+	Member applicantM = (Member) session.getAttribute("loginMember");
+	if(applicantM instanceof ApplicantMember){
+		applicant = (ApplicantMember) applicantM;
+	}
+	if(applicantM != null && applicantM.getMemberType()==2){
+%>
+		<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%		
+	}else{
+%>
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%		
+	}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview2.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/applicant/applicantLoginHeader.css"/>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- <style>
 h2 {
 	font-size: 100px;
 }
 </style> -->
-
-	<div id="account">
+<!-- 중복헤더 없애기, 기업리뷰 uid 불러오기, 분야 회사정보 -->
+	<%-- <div id="account">
 		<a href ="" id="writeResume">이력서 작성</a>
 		<a href ="" id="info">회원정보</a>
 		<a href ="" id="logOut">로그아웃</a>
 	</div>
 	<div id="logodiv">
 		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-	</div> 
+	</div>  --%>
 	<%-- <div id="searchBoxdiv">
 		<input id="searchBox" type="text">
 		 <button class="custom-btn btn-3"><span>검색</span></button>
@@ -38,23 +58,34 @@ h2 {
 		method="post"
 	>
 		<table id="tbl-company-review">
-			<tr>
+			 <%-- <tr>
 				<th>작성자 번호</th>
 				<td>
-					<input type="text" name="uid"/>
+					<input type="text" name="uid" value="<%= uid %>" readonly/>
 				</td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<th>회사명</th>
 				<td>
 				
-					<input type="text" name ="company_no"/>
+					<input type="text" name ="companyNo" value="<%= companyNo %>" readonly/>
 				</td>
-			</tr>
+			</tr> 
 			<tr>
 				<th>분야</th>
 				<td>
-					<input type="text" name ="category_number"/>
+					<select name="category_number" id="category_number">
+						<option disabled selected value="">---카테고리 선택---</option>
+						<option value="1">인사팀</option>
+						<option value="2">회계/총무팀</option>
+						<option value="3">마케팅팀</option>
+						<option value="4">영업팀</option>
+						<option value="5">생산/관리팀</option>
+						<option value="6">연구개발팀</option>
+						<option value="7">기술팀</option>
+						<option value="8">서비스팀</option>
+						<option value="9">인터넷팀</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
@@ -142,8 +173,8 @@ h2 {
 	</form>
 	
 	<div id="end">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewList'">cancel</button>
-		<button id="btnSubmit">submit</button>
+		<button onclick="location.href='<%= request.getContextPath() %>/recruit/review/recruitReviewList?companyNo=<%= companyNo %>'">cancel</button>
+		<button id="btnSubmit" onclick="location.href='<%= request.getContextPath() %>/recruit/review/recruitReviewList?companyNo=<%= companyNo %>'">submit</button>
 	</div>
 
 <script type="text/javascript">
