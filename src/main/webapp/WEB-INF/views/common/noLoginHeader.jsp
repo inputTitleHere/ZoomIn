@@ -36,7 +36,7 @@
 <script>
 	$("#searchBox").autocomplete({
 		source(request, response){
-    	console.log(request); //{term: 'a'} 사용자 입력값 = request객체의 term속성값 -> 서버로 보내서 서버에서 해당하는 이름들만 추려오기.
+    	//console.log(request); //{term: 'a'} 사용자 입력값 = request객체의 term속성값 -> 서버로 보내서 서버에서 해당하는 이름들만 추려오기.
     	const {term} = request;
     	if(!/.+/.test(term)) return;	//아무글자 한글자 이상
 			
@@ -59,10 +59,10 @@
 		}
 	});
 	
-	
+	//버튼 클릭시 해당문자 포함하는 회사자동완성 검색
 	document.querySelector("#search-btn").addEventListener('click', (e) => {
 		const val = document.querySelector("#searchBox").value;
-		location.href="<%= request.getContextPath() %>/search/company?userVal="+val;
+		location.href="<%= request.getContextPath() %>/search/company?userVal="+val;	
 	});
 	
 </script>

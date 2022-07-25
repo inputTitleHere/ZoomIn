@@ -36,8 +36,12 @@ public class CompanyReviewList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession();
-			ApplicantMember am = (ApplicantMember)session.getAttribute("loginMember");
-			
+			Member member = (Member)session.getAttribute("loginMember");
+			if(member instanceof ApplicantMember) {
+				ApplicantMember applicantMember = (ApplicantMember) member;
+				int uid = applicantMember.getUid();
+							
+			}
 			int numPerPage = 5;
 			int cPage = 1;
 			try {

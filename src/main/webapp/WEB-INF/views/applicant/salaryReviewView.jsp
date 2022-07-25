@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.company.dto.Company"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview"%>
@@ -7,7 +8,7 @@
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	SalaryReview salaryReview = (SalaryReview) request.getAttribute("salaryReview");
-	
+	Company company = (Company) request.getAttribute("company");
 	Member applicantM = (Member) session.getAttribute("loginMember");
 	ApplicantMember applicant = null;
 	
@@ -44,17 +45,17 @@
 %>
 	
 	<table class="salary-review-list">
-		<tr>
+		<%-- <tr>
 			<th>번호</th>
 			<td><%= salaryReview.getNo() %></td>
-		</tr>
+		</tr> --%>
 		<tr>
 			<th>작성자</th>
 			<td><%= salaryReview.getUid() %></td>
 		</tr>
 		<tr>
 			<th>회사</th>
-			<td><%= salaryReview.getCompanyNo() %></td>
+			<td><%= company.getCompanyName() %></td>
 		</tr>
 		<tr>
 			<th>카테고리</th>

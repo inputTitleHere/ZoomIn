@@ -596,11 +596,14 @@ end;
 --로그 게시판 페이징
 select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_amember_log t)where  rnum between 1 and 5;
 select * from(select row_number () over (order by t.log_date desc) rnum, t.* from tb_com_log t)where  rnum between 1 and 5;
-
+select * from recruit_board
 select * from company_table where company_name = '국민은행'
 insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, default); 
 insert into company_review values(SEQ_COMPANY_REVIEW_NO.nextval, 12, '7895621431', 6, '하는 일에 비해 연봉이 짜디짭니다' , 4, 3, 4, 3, 4, 1, default);
 commit;
+select company_no from recruit_board r join category c on r.category_number = c.category_number where c.domain = '서비스업'
+from
+    category c join 
 -- 이윤정 END --
 
 --김승환 테스트용

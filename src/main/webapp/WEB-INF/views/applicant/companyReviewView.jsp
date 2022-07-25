@@ -4,32 +4,44 @@
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
 	Company company = (Company) request.getAttribute("company");
-/* 	List<Company> company = (List<Company>) request.getAttribute("company"); */
-	/* Member lm = (Member)session.getAttribute("loginMember");
-	if(loginMember instanceof ApplicantMember){
-		am = (ApplicantMember)session.getAttribute("loginMember");
-	} */
+	Member applicantM = (Member) session.getAttribute("loginMember");
+	ApplicantMember applicant = null;
+	
+	if(applicantM instanceof ApplicantMember){
+		applicant = (ApplicantMember) applicantM;
+	}
+	
+	if(applicantM != null && applicantM.getMemberType()==2){
+%>
+		<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%		
+	}else{
+%>
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%		
+	}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
 
 <section id="company-review-view-container">
 	<h1>리뷰 상세보기</h1>
-	<!-- 작성자 / 관리자만 버튼이 보이게 함 / 맨 아래도 있음-->
-	<%-- <%
-		boolean canEdit = am != null &&(am.getId().equals(companyReview.getUid()) || am.getMemberType() == 0);
-		if(canEdit){
-	%> --%>
+<%
+	System.out.println("applicantMember + "  + applicant);
+	if(applicantM != null && applicantM.getMemberType()==2){
+		if((applicant != null && companyReview.getUid() == applicant.getUid())){
+%>
 	<div class="edit-button">
 		<button id="update-button1" onclick="updateBoard()">수정</button>
 		<button id="update-button2" onclick="deleteBoard()">삭제</button>
 	</div>
-	<%-- <%
+<%			
 		}
-	%> --%>
+	}
+%>
 	
 	<table class="company-review-list">
 		<tr>
@@ -89,7 +101,6 @@
 
 </table>
 </section>
-<%-- <% if(canEdit) {%> --%>
 <form 
 	action="<%= request.getContextPath() %>/review/company/companyReviewDelete" 
 	method="post"

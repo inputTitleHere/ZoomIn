@@ -56,10 +56,11 @@ public class SalaryReviewDao {
 	}
 
 	public List<SalaryReview> findAll(Connection conn, Map<String, Object> param) {
+		// 백승윤 - 7월 24일 수정
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<SalaryReview> list = new ArrayList<>();
-		// select * from (select row_number() over(order by reg_date desc) rnum, s.* from salary_review s) a where rnum between 1 and 5;
+		// select * from (select row_number() over(order by reg_date desc) rnum, s.*,c.company_name from salary_review s join company_table c on s.company_no=c.company_no) a where rnum between ? and ?
 		String sql = prop.getProperty("findAll");
 		
 		try {
@@ -71,7 +72,9 @@ public class SalaryReviewDao {
 			
 			while(rset.next()) {
 				SalaryReview salaryReview = handleSalaryReviewResultSet(rset);
-				list.add(salaryReview);
+				String companyName=rset.getString("company_name");
+				SalaryReviewExt sre = new SalaryReviewExt(salaryReview, companyName);
+				list.add(sre);
 			}
 		} catch (SQLException e) {
 			throw new SalaryReviewException("리뷰 목록 조회 오류", e);
@@ -231,4 +234,5 @@ public class SalaryReviewDao {
 		return totalContent;
 	}
 	// 백승윤 END
+
 }

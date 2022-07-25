@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.dto.SalaryReview;
 import com.kh.zoomin.applicant.salaryReviewBoard.model.service.SalaryReviewService;
+import com.kh.zoomin.company.dto.Company;
+import com.kh.zoomin.company.service.CompanyService;
 import com.kh.zoomin.member.dto.Member;
 
 /**
@@ -21,7 +23,7 @@ import com.kh.zoomin.member.dto.Member;
 public class SalaryReviewViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private SalaryReviewService salaryReviewService = new SalaryReviewService();  
-    
+    private CompanyService companyService = new CompanyService();
 	/**
 	 * 연봉 리뷰 상세보기
 	 */
@@ -41,7 +43,11 @@ public class SalaryReviewViewServlet extends HttpServlet {
 		if(isApplicant) {
 			int uid = ((ApplicantMember) loginMember).getUid();
 		}
-				
+		
+		String companyNo = salaryReview.getCompanyNo();
+		Company company = companyService.getCompanyByNo(companyNo);
+		
+		request.setAttribute("company", company);
 		request.setAttribute("salaryReview", salaryReview);
 		request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewView.jsp")
 			.forward(request, response);

@@ -32,22 +32,20 @@ public class SearchCompany extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자 입력값
-		String userVal = request.getParameter("userVal");		//카테고리 아니면 회사이름
+		String userVal = request.getParameter("userVal");		//카테고리 또는 회사이름
 		
 		//업무로직 : 사용자 입력값에 해당하는 회사 번호 찾기
-		List<Company> comList = cs.getCompanyAll();		//회사 리스트
-		//Company company = cs.getCompanyByName(userVal);		
-		List <String> comNoList = new ArrayList<>();
+		List<Company> comList = cs.getCompanyAll();		//회사 리스트			
+		List <String> comNoList = new ArrayList<>();	//결과값으로 보낼 회사 번호 리스트
+
 		
+			//사용자 입력값을 포함하는 회사번호
 		for(Company com : comList) {
-			if(com.getCompanyName().contains(userVal))
+			if(com.getCompanyName().contains(userVal)) {
 				comNoList.add(com.getCompanyNo());
-		}	
-		
-		for(String no : comNoList){
-			System.out.println("no = " + no);
+			}
 		}
-		
+
 		//응답처리
 		request.setAttribute("comNoLoist", comNoList);
 		request.getRequestDispatcher("/WEB-INF/views/recruit/review/recruitReviewList.jsp").forward(request, response);		
