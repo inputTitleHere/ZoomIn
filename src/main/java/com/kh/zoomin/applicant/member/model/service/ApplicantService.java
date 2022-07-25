@@ -6,10 +6,12 @@ import static com.kh.zoomin.common.JdbcTemplate.getConnection;
 import static com.kh.zoomin.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.kh.zoomin.applicant.member.model.dao.ApplicantDao;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.member.exception.MemberException;
+import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 
 public class ApplicantService {
 	private ApplicantDao ad = new ApplicantDao();
@@ -80,6 +82,29 @@ public class ApplicantService {
 			throw e;
 		} finally {
 			close(conn);
+		}
+		return result;
+	}
+
+	public List<ApplicantMember> loadPassword1234() {
+		Connection conn = getConnection();
+		List<ApplicantMember> result=null;
+		result=ad.loadPassword1234(conn);
+		close(conn);
+		return result;
+	}
+
+	public int setPassword1234(List<ApplicantMember> amember) {
+		int result=0;
+		Connection conn = getConnection();
+		try {
+			result = ad.setPassword1234(amember,conn);
+			commit(conn);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
 		}
 		return result;
 	}

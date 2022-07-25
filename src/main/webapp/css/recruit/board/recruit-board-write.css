@@ -1,0 +1,10 @@
+
+.write-recruit-board-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.write-recruit-board-wrapper h2{
+  text-align: center;
+}

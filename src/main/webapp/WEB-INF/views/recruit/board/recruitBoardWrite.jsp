@@ -7,8 +7,10 @@
 //RecruitMember rm = (RecruitMember)session.getAttribute("loginMember");
 
 %>
-
+<br /><br />
+<link	href="<%=request.getContextPath()%>/css/recruit/board/recruit-board-write.css" rel="stylesheet" type="text/css">
 <div class="write-recruit-board-wrapper">
+	<h2>신규 채용공고글 작성</h2>
 	<form action="<%=request.getContextPath()%>/recruit/board/writeRecruitBoard" method="post" id="writeRecruitBoardFrm" name="writeRecruitBoardFrm">
 		<input type="hidden" name="uid" value="<%= rm.getUid()%>" />
 		<input type="hidden" name="companyNo" value="<%= rm.getCompanyNo()%>" />
