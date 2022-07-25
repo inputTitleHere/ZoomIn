@@ -6,10 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
-<%@ include file="/WEB-INF/views/applicant/applicant.jsp" %>
+
 
 <%
-/* String msg = (String) session.getAttribute("msg");
+String msg = (String) session.getAttribute("msg");
 //System.out.println("msg@jsp = " + msg);
 if(msg != null) session.removeAttribute("msg"); 
 Member loginMember = (Member) session.getAttribute("loginMember");
@@ -33,7 +33,6 @@ if(cookies != null){
 		
 		}
 }
- */
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReivew");
 	ApplicantMember applicant = null;
@@ -49,8 +48,7 @@ if(cookies != null){
 <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/applicant/applicantLoginHeader.css"/> --%>
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <section id="company-review-view-container">
 	<h2>-회사 리뷰 등록-</h2>
 
