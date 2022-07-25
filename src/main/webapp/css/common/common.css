@@ -61,8 +61,11 @@ html, body, section{
   outline: none;
 }
 .btn-3 {
-  background: rgb(242, 214, 98);
-background: linear-gradient(0deg, rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+background: -webkit-linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+background: -moz-linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+background: -o-linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
+background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(242, 214, 98)), to(rgba(242, 187, 98,1)));
+background: linear-gradient(rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 100%);
   width: 130px;
   height: 40px;
   line-height: 42px;
@@ -82,7 +85,7 @@ background: linear-gradient(0deg, rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 10
   content: "";
   right: 0;
   top: 0;
-   background: rgba(242, 187, 98,1);
+  background: rgba(242, 187, 98,1);
   transition: all 0.3s ease;
 }
 .btn-3:before {
@@ -112,7 +115,7 @@ background: linear-gradient(0deg, rgba(242, 214, 98) 0%, rgba(242, 187, 98,1) 10
   content: "";
   left: 0;
   bottom: 0;
-   background: rgba(242, 187, 98,1);
+  background: rgba(242, 187, 98,1);
   transition: all 0.3s ease;
 }
 .btn-3 span:before {

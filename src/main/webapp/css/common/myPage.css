@@ -1,0 +1,95 @@
+.updateFrm {
+	position: absolute;
+	width: 500px;
+	height: 530px;
+	text-align: center;
+	right: 25%;
+	bottom: 25%
+}
+
+.updateFrm h2 {
+	text-align: center;
+	margin: 45px;
+	font-size: 31px;
+	background-color: white;
+}
+
+.textFrm {
+	border-bottom: 2px solid #636262;
+	margin: 32px;
+	padding: 10px;
+}
+
+.id {
+	width: 100%;
+	border: none;
+	font-size: 17px;
+	height: 25px;
+	background: none;	
+}
+
+.companyNo {
+	width: 100%;
+	border: none;
+	font-size: 17px;
+	height: 25px;
+	background: none;
+}
+
+.name {
+	width: 100%;
+	border: none;
+	font-size: 17px;
+	height: 25px;
+	background: none;
+}
+
+.phone {
+	width: 100%;
+	border: none;
+	font-size: 17px;
+	height: 25px;
+	background: none;
+}
+
+.email {
+	width: 100%;
+	border: none;
+	font-size: 17px;
+	height: 25px;
+	background: none;
+}
+
+.btn-group{
+	position : relative;
+	text-align : center;
+	bottom: -3%
+}
+
+#btn-change, #btn-delete{
+	height : 42px;
+	width : 260px;
+	margin-bottom : 45px;
+}
+
+#btn-change {
+	cursor: pointer;
+	transition: 0.4s;
+	border:none;
+	background-color: #ffab27;
+	color: balck;
+	border-radius: 2px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0,0.7);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 17px 2px rgba(255, 255, 255, 0.2) inset, 0 5px 5px rgba(255, 255, 255, 0.2) inset;	
+}
+
+#btn-delete {
+	cursor: pointer;
+	transition: 0.4s;
+	border:none;
+	background-color: #cecece;
+	color: black;
+	border-radius: 2px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0,0.7);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 17px 2px rgba(255, 255, 255, 0.2) inset, 0 5px 5px rgba(255, 255, 255, 0.2) inset;
+}

@@ -13,32 +13,35 @@ if(msg != null) session.removeAttribute("msg");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>패스워드 변경</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/updatePw.css" />
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
-<header>
-	<h2>비밀번호 변경</h2>
-</header>
-<section>
-<form name="updatePwAFrm" action="<%=request.getContextPath()%>/applicant/updatePw" method="POST">
-		<div class="">
-			<input type="password" name="prevPw" id="prevPw" required /> 
-			<label for="password">기존 비밀번호</label>
-		</div>
-		<div class="">
-			<input type="password" name="nextPw" id="nextPw" required /> 
-			<label for="password">새 비밀번호</label>
-		</div>
-		<div class="">
-			<input type="password" name="nextPwCheck" id="#nextPwCheck" required /> 
-			<label for="password">새 비밀번호 확인</label>
-		</div>
-		<div id="check">
-			<input type="submit" value="확인" />	
-		</div>
-<input type="hidden" value="<%= amember.getId() %>" name="id" id="id" />
-</form>
-</section>
+<div class="container">
+	<div class="collg"></div>
+	<div class="collg"></div>
+		<div class="form-group-container">
+			<form name="updatePwAFrm" class="changePwFrm" action="<%=request.getContextPath()%>/applicant/updatePw" method="POST">
+			<h2>패스워드 변경</h2>
+			<div class="form-group">
+				<input type="password" name="prevPw" id="prevPw" placeholder="기존 패스워드" required /> 
+			</div>
+			<div class="form-group">
+				<input type="password" name="nextPw" id="nextPw" placeholder="새 패스워드" required /> 
+			</div>
+			<div class="form-group">
+				<input type="password" name="nextPwCheck" id="nextPwCheck" placeholder="패스워드 확인" required /> 
+			</div>
+			<div class="btn-group">
+				<input type="submit" id="btn-check" value="수정" />	
+				<input type="reset" id="btn-reset" value="취소" />	
+				<input type="hidden" value="<%= amember.getId() %>" name="id" id="id" />
+			</div>
+		</form>
+	</div>
+</div>
 <script>
 window.addEventListener('load',()=>{
 	<% if(msg!=null){%>
