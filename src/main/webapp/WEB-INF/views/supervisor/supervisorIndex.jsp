@@ -1,16 +1,29 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp" %>
 	
 		<!-- 관리자 랜딩페이지 -->
+<%
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sdf.format(new Date());
+
+	//오늘 업데이트 된 게시글 수 = todayComcnt + todaySalCnt
+	int todayComCnt = session.getAttribute("todayComCnt") == null ? 0 : (int) session.getAttribute("todayComCnt");
+	int todaySalCnt = session.getAttribute("todaySalCnt") == null ? 0 : (int) session.getAttribute("todaySalCnt");
+%>	
 	
-	
-	
+
+<section id="chart-container" class="member-container">
+   	<h2 class="h2" style="margin-top:40px;">최근 일주일간 방문자 & 게시글 수</h2>
     <div id="chart" >
         <canvas id="myChart">
 	        <!--차트가 그려질 부분-->
         </canvas>
+
     </div>
+</div>
 
 	<script>
 	<!-- data 불러오기 : 오늘포함 최근 1주일 date, date별 new방문자수, date별 new게시글 수  -->
@@ -82,8 +95,23 @@
 		});		
 	};
 	
-	</script>
-	<button id="btn-sch-statistic">기간별 통계보기</button>
+
+    window.onload = () => {
+    	const todayVisitCnt = document.querySelector("#tbl-visit-statistic tr:nth-child(2) td");
+    	todayVisitCnt.innerHTML = "<%= session.getAttribute("todayCount") == null ? "-" : session.getAttribute("todayCount") %>명";
+    	
+    	const totalVisitCnt = document.querySelector("#tbl-visit-statistic tr:nth-child(3) td");
+    	totalVisitCnt.innerHTML = "<%= session.getAttribute("totalCount") == null? "-" : session.getAttribute("totalCount") %>명";
+    	
+    	const todayBoardCnt = document.querySelector("#tbl-board-statistic tr:nth-child(2) td");
+    	todayBoardCnt.innerHTML = "<%= todayComCnt + todaySalCnt == 0 ? " - " : todayComCnt + todaySalCnt %>개";
+
+    	const totalBoardCnt = document.querySelector("#tbl-board-statistic tr:nth-child(3) td");
+    	totalBoardCnt.innerHTML = "<%= session.getAttribute("totalBoardCnt") == null ? " - " : session.getAttribute("totalBoardCnt") %>개";
+    }
+    </script>
+	
+
 	<script>
 	window.onload = () => {
 		findData();
@@ -92,6 +120,10 @@
 		location.href="<%= request.getContextPath()%>/supervisor/Statistic";
 	})
 	</script>
+
+<footer id = "copyright">
+	<p>Copyright © 2022 Team 잡아조 All rights reserved.</p>
+</footer>
 
 </body>
 </html>

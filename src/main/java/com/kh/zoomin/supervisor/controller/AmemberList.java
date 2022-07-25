@@ -22,8 +22,8 @@ import com.kh.zoomin.supervisor.model.service.SupervisorService;
 /**
  * Servlet implementation class SupervisorMemberListServlet
  */
-@WebServlet("/supervisor/memberList")
-public class SupervisorMemberListServlet extends HttpServlet {
+@WebServlet("/supervisor/aMemberList")
+public class AmemberList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
 	
@@ -70,7 +70,7 @@ public class SupervisorMemberListServlet extends HttpServlet {
 			request.setAttribute("amPagebar", amPagebar);
 			request.setAttribute("recruitMemebrList", recruitMemberList);
 			request.setAttribute("rmPagebar", rmPagebar);
-			request.getRequestDispatcher("/WEB-INF/views/supervisor/memberList.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/supervisor/AmemberList.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

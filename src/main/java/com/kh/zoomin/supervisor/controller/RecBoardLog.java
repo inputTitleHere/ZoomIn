@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.zoomin.common.ZoominUtils;
-import com.kh.zoomin.supervisor.model.dto.SalaryReview;
+import com.kh.zoomin.supervisor.model.dto.RecLog;
 import com.kh.zoomin.supervisor.model.service.SupervisorService;
 
 /**
- * Servlet implementation class SalaryBoardView
+ * Servlet implementation class recBoardLog
  */
-@WebServlet("/supervisor/salaryBoardView")
-public class SalaryBoardView extends HttpServlet {
+@WebServlet("/supervisor/recBoardLog")
+public class RecBoardLog extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SupervisorService ss = new SupervisorService();
 
@@ -27,7 +27,7 @@ public class SalaryBoardView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 사용자 입력값
+		//사용자 입력값
 		int cPage = 1;
 		int numPerPage = 5;
 		try {
@@ -41,18 +41,18 @@ public class SalaryBoardView extends HttpServlet {
 		param.put("start", start);
 		param.put("end", end);
 		
-		List<SalaryReview> salList = ss.getSalReviewAll(param);
-		
-		int totalSalReviewCnt = ss.getTotalSalReviewCnt();
+		//업무로직
+		//A.content영역
+		List<RecLog> recLogList = ss.getRecLogAll(param);
+		//B.pagebar영역
+		int totalRecLogCnt = ss.getTotalRecLogCnt();
 		String url = request.getRequestURI();
-		String salPagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalSalReviewCnt, url);
+		String recLogPagebar = ZoominUtils.getPageBar(cPage, numPerPage, totalRecLogCnt, url);
 		
-		request.setAttribute("salList", salList);
-		request.setAttribute("salPagebar", salPagebar);
-		
-		
-		response.sendRedirect(request.getHeader("Referer"));
-		
+		//응답처리
+		request.setAttribute("recLogList", recLogList);
+		request.setAttribute("recLogPagebar", recLogPagebar);
+		request.getRequestDispatcher("/WEB-INF/views/supervisor/recBoardLog.jsp").forward(request, response);
 	}
 
 }

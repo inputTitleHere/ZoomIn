@@ -9,7 +9,7 @@
 
 <header>
 	<div id="account">
-		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">로그아웃</a>                                                                                  
+		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">관리자 로그아웃</a>                                                                                  
 	</div>
 	<div id="superlogodiv">
 		<img id="superlogo" alt="관리자 랜딩페이지로" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
@@ -22,11 +22,10 @@
 	
 	<nav>
 		<ul class="super-nav">
-			<li class="magage-home"><a href="#">홈으로</a></li>
-			<li class="magage-member"><a href="<%= request.getContextPath()%>/supervisor/memberList">회원관리</a></li>
-			<li class="magage-board"><a href="<%= request.getContextPath()%>/supervisor/BoardList">게시판관리</a></li>
+			<li class="magage-home"><a href="<%= request.getContextPath()%>">홈으로</a></li>
+			<li class="magage-member"><a href="<%= request.getContextPath()%>/supervisor/aMemberList">회원관리</a></li>
+			<li class="magage-board"><a href="<%= request.getContextPath()%>/supervisor/salBoardList">게시판관리</a></li>
 			<li class="magage-satatistic"><a href="<%= request.getContextPath()%>/supervisor/Statistic">통계관리</a></li>
-			<li class="magage-Datalog"><a href="<%= request.getContextPath()%>/supervisor/Datalog">수정/삭제 데이터 관리</a></li>
 		</ul>
 	</nav>
 	
