@@ -19,6 +19,7 @@ if(lm instanceof RecruitMember){
 <link	href="<%=request.getContextPath()%>/css/recruit/board/recruit-board-update.css" rel="stylesheet" type="text/css">
 
 <div class="write-recruit-board-wrapper">
+<h2>리뷰글 수정</h2>
 	<form action="<%=request.getContextPath()%>/recruit/board/updateRecruitBoard" method="post" id="writeRecruitBoardFrm" name="writeRecruitBoardFrm">
 		<input type="hidden" name="uid" value="<%= rm.getUid()%>" />
 		<input type="hidden" name="companyNo" value="<%= rm.getCompanyNo()%>" />

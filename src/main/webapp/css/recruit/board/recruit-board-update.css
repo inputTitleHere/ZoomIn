@@ -1,0 +1,13 @@
+
+
+.write-recruit-board-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form#writeRecruitBoardFrm{
+  display: flex;
+  flex-direction: column;
+  align-items:stretch;
+}
