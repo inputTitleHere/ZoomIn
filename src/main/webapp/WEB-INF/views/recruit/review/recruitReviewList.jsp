@@ -19,6 +19,7 @@ if (rrlLm != null && rrlLm.getMemberType() == 1) {
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%}%>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/recruit/board/recruit-review-view.css" />
+<link	href="<%=request.getContextPath()%>/css/recruit/board/board-common.css" rel="stylesheet" type="text/css">
 <%
 List<CompanyReview> companyReviewList = (List<CompanyReview>) request.getAttribute("companyReview");
 List<SalaryReview> salaryReviewList = (List<SalaryReview>) request.getAttribute("salaryReview");
@@ -53,7 +54,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 				int uid=rrlAm.getUid();
 				String companyNo=company.getCompanyNo();
 			%>
-			<button class="write-review-button" id="write-company-review-button" onclick="location.href='<%=request.getContextPath()%>/review/company/companyReviewEnroll?uid=<%=rrlAm.getUid()%>&companyNo=<%=companyNo%>'">회사 리뷰 작성하기</button>
+			<div class="button-wrapper">
+				<button class="write-review-button" id="write-company-review-button" onclick="location.href='<%=request.getContextPath()%>/review/company/companyReviewEnroll?uid=<%=rrlAm.getUid()%>&companyNo=<%=companyNo%>'">회사 리뷰 작성하기</button>
+			</div>
 			<%}//close IF %>
 			
 			<table class="company-review-list-table">
@@ -110,7 +113,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 				int uid=rrlAm.getUid();
 				String companyNo=company.getCompanyNo();
 			%>
-			<button class="write-review-button" id="write-company-review-button" onclick="location.href='<%=request.getContextPath()%>/review/salary/salaryReviewEnroll?uid=<%=rrlAm.getUid()%>&companyNo=<%=companyNo%>'">연봉 리뷰 작성하기</button>
+			<div class="button-wrapper">
+				<button class="write-review-button" id="write-company-review-button" onclick="location.href='<%=request.getContextPath()%>/review/salary/salaryReviewEnroll?uid=<%=rrlAm.getUid()%>&companyNo=<%=companyNo%>'">연봉 리뷰 작성하기</button>
+			</div>
 			<%}//close IF %>
 			
 			<table class="salary-review-list-table">
@@ -166,7 +171,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 		</section>
 	</div>
 	<div class="recruit-board-wrapper">
-	<h2>이 회사의 채용</h2>
+	<h2 style="text-align:center;">이 회사의 채용</h2>
 		<section id="recruit-board" class="recruit-board-section">
 			<%
 			if (rbl != null) {
@@ -180,7 +185,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 					//System.out.println(daysToClosuer);
 			%>
 			<%-- 여기에 채용게시글의 리스트를 전개한다. --%>
-			<table class="recruit-board-item">
+			<table class="recruit-board-item" id="other-recruit-board-item">
 				<tr>
 					<%--
 					<td rowspan="2" class="board-company-logo">
@@ -193,9 +198,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 						target="_blank"> <%=ZoominUtils.escapeXml(recruitBoard.getTitle())%>
 					</a>
 					</td>
-					<td rowspan="1" class="board-remaining-days">
+					<td rowspan="2" class="board-remaining-days">
 						<%-- 마감까지 남은 시간을 입력 --%> D-<%=daysToClosuer%>일 <br /> <span
-						class="closure-date">마감일 : <%=closureDate%></span>
+						class="closure-date"><%=closureDate%>까지</span>
 					</td>
 				</tr>
 				<tr class="small-info-text">

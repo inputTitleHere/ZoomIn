@@ -11,10 +11,14 @@ html, body, section{
 	width : 100%;
 }
 #account > a{
+  border-left: 5px solid orange;
 	margin : 10px;
+  padding-left: 10px;
 	font-size : 15pt;
 	text-decoration: none;
+  color: black;
 }
+
 #logodiv{
 	position : relative;
 	text-align : left;
