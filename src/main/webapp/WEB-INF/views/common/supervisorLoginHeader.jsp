@@ -9,6 +9,7 @@
 
 <header>
 	<div id="account">
+		<a href ="<%= request.getContextPath() %>/supervisor/supervisorView" id="logOut">관리자 페이지로</a>                                                                                  
 		<a href ="<%= request.getContextPath() %>/applicant/logout" id="logOut">관리자 로그아웃</a>                                                                                  
 	</div>
 	<div id="superlogodiv">
@@ -22,7 +23,6 @@
 	
 	<nav>
 		<ul class="super-nav">
-			<li class="magage-home"><a href="<%= request.getContextPath()%>">홈으로</a></li>
 			<li class="magage-member"><a href="<%= request.getContextPath()%>/supervisor/aMemberList">회원관리</a></li>
 			<li class="magage-board"><a href="<%= request.getContextPath()%>/supervisor/salBoardList">게시판관리</a></li>
 			<li class="magage-satatistic"><a href="<%= request.getContextPath()%>/supervisor/Statistic">통계관리</a></li>
