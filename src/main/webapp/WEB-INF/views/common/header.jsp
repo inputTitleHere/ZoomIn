@@ -7,7 +7,6 @@
 	pageEncoding="UTF-8"%>
 
 <%
-
 	String msg = (String) session.getAttribute("msg");
 	//System.out.println("msg@jsp = " + msg);
 	if(msg != null) session.removeAttribute("msg"); 
@@ -20,9 +19,7 @@
 		am=(ApplicantMember)loginMember;
 	}else if(loginMember instanceof RecruitMember){
 		rm=(RecruitMember)loginMember;
-
 	}
-
 	
 	Cookie[] cookies = request.getCookies();
 	if(cookies != null){
@@ -51,7 +48,6 @@ window.addEventListener('load',()=>{
 	alert('<%=msg%>');
 	<%}%>
 });
-
 //isempty 함수  null 체크용 -김승환-
 function isEmpty(value){
 	console.log(value);
@@ -63,36 +59,28 @@ function isEmpty(value){
 		return false;
 	}
 }
-
 </script>	
 
 
 
 <%
-
 // 여기서 로그인 관련 처리를 수행한다.
 // if not login(by any means) then show login option
 // else show respective menus of either recruiter or applicant.
-
 //System.out.println("loginMember = "+loginMember); // 없으면 null뜸
 if (loginMember == null) {
-
 %>
 <%@ include file="/WEB-INF/views/common/noLoginHeader.jsp"%>
 <%
-
 }else if(rm != null && loginMember.getMemberType() == 0){ 
 %>
 	<%@ include file="/WEB-INF/views/common/supervisorLoginHeader.jsp"%>
 <%
 }else if(loginMember.getMemberType() == 1){
-
 %>
 <%@ include file="/WEB-INF/views/common/recruiterLoginHeader.jsp"%>
 <%
-
 }else if(loginMember.getMemberType() == 2){
-
 %>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp"%>
 <%
