@@ -32,7 +32,7 @@ public class SearchCompany extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//사용자 입력값
-		String userVal = request.getParameter("userVal");		//카테고리 또는 회사이름
+		String userVal = request.getParameter("userVal");		//회사이름
 		
 		//업무로직 : 사용자 입력값에 해당하는 회사 번호 찾기
 		List<Company> comList = cs.getCompanyAll();		//회사 리스트			

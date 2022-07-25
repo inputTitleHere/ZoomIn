@@ -61,6 +61,7 @@
 	
 	//버튼 클릭시 해당문자 포함하는 회사자동완성 검색
 	document.querySelector("#search-btn").addEventListener('click', (e) => {
+		console.log("val = " + document.querySelector("#searchBox").value);
 		const val = document.querySelector("#searchBox").value;
 		location.href="<%= request.getContextPath() %>/search/company?userVal="+val;	
 	});
