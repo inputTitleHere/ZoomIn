@@ -4,7 +4,6 @@
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
 <%
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
 	Company company = (Company) request.getAttribute("company");
@@ -28,7 +27,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
 
 <section id="company-review-view-container">
-	<h1>리뷰 상세보기</h1>
+	<h2>-회사 리뷰 상세보기-</h2>
 <%
 	System.out.println("applicantMember + "  + applicant);
 	if(applicantM != null && applicantM.getMemberType()==2){

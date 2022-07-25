@@ -58,19 +58,10 @@ public class SalaryReviewList extends HttpServlet {
 			
 			List<SalaryReview> list = salaryReviewService.findAll(param);
 			
-			
-			System.out.println("salaryReview = " + list);
-			
 			int totalContent = salaryReviewService.getTotalContent();
 			String url = request.getRequestURI();
 			String pagebar = ZoominUtils.getApplicantPageBar(cPage, numPerPage, totalContent, url);
 			
-//			int no = Integer.parseInt(request.getParameter("no"));
-//			SalaryReview salaryReview = salaryReviewService.findBySalaryReviewNo(no);
-//			String companyNo = salaryReview.getCompanyNo();
-//			Company company = companyService.getCompanyByNo(companyNo);
-//			
-//			request.setAttribute("company", company);
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/salaryReviewList.jsp")

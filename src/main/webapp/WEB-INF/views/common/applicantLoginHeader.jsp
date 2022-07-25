@@ -31,8 +31,10 @@
 	</div>
 
 		<div id="logodiv">
-			<img id="logo" alt=""
-				src="<%=request.getContextPath()%>/images/zoominlogo.jpg">
+			<a href="<%= request.getContextPath() %>">
+				<img id="logo" alt=""
+					src="<%=request.getContextPath()%>/images/zoominlogo.jpg">
+			</a>
 		</div>
 		<div id="searchBoxdiv">
 			<input id="searchBox" type="text">
