@@ -12,9 +12,11 @@ int category=(int)request.getAttribute("category");
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 %>
 
+<link	href="<%=request.getContextPath()%>/css/recruit/board/headhunt.css" rel="stylesheet" type="text/css">
+
 <div class="content-wrapper">
 <section class="category-selector">
-	<form action="<%=request.getContextPath()%>/recruit/headhunt/headhuntList">
+	<form action="<%=request.getContextPath()%>/recruit/headhunt/headhuntList" id="category-select-frm">
 		<select name="category" id="category-select">
 			<option value="1" <%=category==1?"selected":"" %>>1.IT/웹/통신</option>
 			<option value="2" <%=category==2?"selected":"" %>>2.미디어/디자인</option>
@@ -27,11 +29,23 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 			<option value="9" <%=category==9?"selected":"" %>>9.기관/협회</option>
 			<option value="10" <%=category==10?"selected":"" %>>10.교육업</option>
 		</select>
-		<button>이 분야의 이력서 조회하기</button>
+		<button id="search-button">이 분야의 이력서 조회하기</button>
 	</form>
 </section>
 <section class="resume-list">
 	<table>
+		<thead>
+			<tr>
+				<td>이름</td>
+				<td>생일</td>
+				<td>성별</td>
+				<td>학력</td>
+				<td>학교</td>
+				<td>재적</td>
+				<td>전공</td>
+				<td>학점</td>
+			</tr>
+		</thead>
 		<%for(Resume resume : resumeList){ 
 			String schoolType=null;
 			String schoolStatus=null;
@@ -52,18 +66,19 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 		%>
 		
 			<tr>
-				<td><a href="<%=request.getContextPath() %>/recruit/board/viewEnrolledResume?uid=<%=resume.getUid()%>">이름 : <%=resume.getName() %></a></td>
-				<td>생일 : <%=sdf.format(resume.getBirthday()) %></td>
-				<td>성별 : <%=resume.getGender().toString() %></td>
-				<td>학력 : <%=schoolType %></td>
-				<td>학교 : <%=resume.getSchoolName() %></td>
-				<td>재적 : <%=schoolStatus %></td>
-				<td>전공 : <%=resume.getMajorName() %></td>
-				<td>학점 : <%=resume.getGrade() %> / <%=resume.getTotalPoint() %></td>
+				<td><a href="<%=request.getContextPath() %>/recruit/board/viewEnrolledResume?uid=<%=resume.getUid()%>"><%=resume.getName() %></a></td>
+				<td><%=sdf.format(resume.getBirthday()) %></td>
+				<td><%=resume.getGender().toString() %></td>
+				<td><%=schoolType %></td>
+				<td><%=resume.getSchoolName() %></td>
+				<td><%=schoolStatus %></td>
+				<td><%=resume.getMajorName() %></td>
+				<td><%=resume.getGrade() %> / <%=resume.getTotalPoint() %></td>
 			</tr>
 		
 		<%} %>
 	</table>
+	<br />
 	<%=pagebar %>
 </section>
 

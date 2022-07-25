@@ -10,7 +10,7 @@
 	<div id="account">
 
 		<%-- 임시로 관리자 탭 만들었습니다. --%>
-		<a href="<%= request.getContextPath() %>/supervisor/supervisorView">관리자</a>
+		<%--<a href="<%= request.getContextPath() %>/supervisor/supervisorView">관리자</a> --%>
 
 		<a href ="<%= request.getContextPath() %>/recruit/login" id="logIn">구인자 로그인</a>
 		<a href ="<%= request.getContextPath() %>/applicant/login" id="logIn">구직자 로그인</a>

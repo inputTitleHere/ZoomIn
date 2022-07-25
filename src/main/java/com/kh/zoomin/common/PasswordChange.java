@@ -28,16 +28,17 @@ public class PasswordChange extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// db상 비번 업데이트
 		
-		// recruit
-		/*
+		// recruit 비번 업데이트
+		
 		List<RecruitMember> rmember = rs.loadPassword1234();
 		for(RecruitMember r : rmember) {
 			String newPassword = ZoominMvcUtils.getEncryptedPassword(r.getPassword(), r.getId());
 			r.setPassword(newPassword);
 		}
 		int result = rs.setPassword1234(rmember);
-		*/
+		
 		/*
+		// applicant 비번 업데이트
 		List<ApplicantMember> amember=as.loadPassword1234();
 		for(ApplicantMember a:amember) {
 			String newPassword=ZoominMvcUtils.getEncryptedPassword(a.getPassword(), a.getId());

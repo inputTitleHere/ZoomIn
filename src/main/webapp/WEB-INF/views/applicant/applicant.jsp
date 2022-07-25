@@ -70,7 +70,7 @@
 		      			}else{
 		      				cInfo += "<td class='company'>\n";
 		      				console.log(response.result[i*3+j].companyNo);
-		      				cInfo += "<a href='<%=request.getContextPath()%>/recruit/review/recruitReviewList?companyNo="+response.result[i*3+j].companyNo+"'>"+response.result[i*3+j].companyName+"</a>"+"<br/>" +"<br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>" + response.result[i*3+j].companyNo + "<br/>" + "<br/>";
+		      				cInfo += "<a href='<%=request.getContextPath()%>/recruit/review/recruitReviewList?companyNo="+response.result[i*3+j].companyNo+"'>"+response.result[i*3+j].companyName+"</a>"+"<br/><br/>" + response.result[i*3+j].companyInfo + "<br/>" +"<br/>";
 		      				cInfo += "</td>\n";		      				
 		      			}
 		      		}

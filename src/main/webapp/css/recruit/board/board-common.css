@@ -1,0 +1,26 @@
+
+.recruit-board-item{
+  border-collapse: collapse;
+}
+
+.board-remaining-days{
+  width: 230px;
+}
+.board-title{
+  font-size: 35px;
+}
+
+#my-recruit-board-item .board-remaining-days{
+  border-right: 1px solid orange;
+}
+
+#my-recruit-board-item .board-title{
+  border-bottom: 1px solid orange;
+}
+
+#other-recruit-board-item .board-remaining-days{
+  border-left: 1px solid orange;
+}
+#other-recruit-board-item .board-title{
+  border-bottom: 1px solid orange;
+}

@@ -48,9 +48,12 @@ case C:{
 
 
 %>
+<link href="<%=request.getContextPath() %>/css/recruit/view-resume.css" rel="stylesheet" type="text/css">
 <% if(title!=null){%>
 <h2><%=title %> </h2>
 <%} %>
+<div class="resume-wrapper">
+
 <div class="resume">
 	<table>
 		<tbody>
@@ -61,38 +64,38 @@ case C:{
 			</tr>
 			<tr class="biography">
 				<td>
-					성별 : <%=resume.getGender()==Gender.M?"남":"여" %>
+					<span class="biography-title">성별 : </span><%=resume.getGender()==Gender.M?"남":"여" %>
 				</td>
 				<td>
-					생년월 : <%=birthday%>
+					<span class="biography-title">생년월 : </span><%=birthday%>
 				</td>
 				<td>
-					주소 : <%=resume.getAddress() %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					학교 : <%=resume.getSchoolName() %>
-				</td>
-				<td>
-					학제 : <%=schoolType %>
-				</td>
-				<td>
-					학력 : <%=schoolStatus %>
+					<span class="biography-title">주소 : </span><%=resume.getAddress() %>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					전공명: <%=resume.getMajorName()%>
+					<span class="biography-title">학교 : </span><%=resume.getSchoolName() %>
 				</td>
 				<td>
-					학점 : <%=resume.getGrade() %> / <%=resume.getTotalPoint() %>
+					<span class="biography-title">학제 : </span><%=schoolType %>
+				</td>
+				<td>
+					<span class="biography-title">학력 : </span><%=schoolStatus %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="biography-title">전공명: </span><%=resume.getMajorName()%>
+				</td>
+				<td>
+					<span class="biography-title">학점 : </span><%=resume.getGrade() %> / <%=resume.getTotalPoint() %>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
 </div>
+</div>
 
-</body>
-</html>
+ <%@include file="/WEB-INF/views/common/footer.jsp" %>
