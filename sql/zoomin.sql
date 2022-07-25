@@ -240,7 +240,6 @@ create table statistic(
     review_count number,
     constraint pk_day primary key (day)
 );
-
 create table career(
     resume_no number not null,
     company_name varchar2(50),
@@ -249,7 +248,6 @@ create table career(
     is_working char(1),
     constraint fk_resume_no foreign key(resume_no) references RESUME(resume_no) on delete cascade
 );
-
 alter table career add constraint ck_is_working check (is_working in ('A', 'B', 'C'));
 create table resume(
     resume_no number not null,
@@ -282,9 +280,7 @@ alter table resume add constraint ck_school_status check (school_status in ('A',
 
 --방문자용 통계 테이블
 --drop table visit
-create table visit (
-	v_date date not null
-);
+create table visit (v_date date not null);
 select * from visit;
 select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
 insert into visit values (to_date(sysdate, 'yyyy-mm-dd'));
@@ -293,24 +289,17 @@ insert into visit values (to_date('2022-07-12', 'yyyy-mm-dd'));
 insert into visit values (to_date('2022-07-13', 'yyyy-mm-dd'));
 insert into visit values (to_date('2022-07-14', 'yyyy-mm-dd'));
 insert into visit values (to_date('2022-07-15', 'yyyy-mm-dd'));
-
 --방문자 수 증가
 insert into visit values (sysdate);
-
 --오늘 방문자 수
 select count(*) from visit where to_date(v_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
 select sysdate from dual;
 --총 방문자수 
 select * from visit;
-
 --날짜별 방문자 수 
 select * from visit where v_date between to_date('2022-07-14', 'yyyy-mm-dd') and to_date('2022-07-14', 'yyyy-mm-dd') + 0.99999;
-
-commit;
-
 select count(*) from company_review where to_date(reg_date, 'yyyy-mm-dd') = to_date('2022-07-18', 'yyyy-mm-dd');
 select count(*) from salary_review where to_date(reg_date, 'yyyy-mm-dd') = to_date(sysdate, 'yyyy-mm-dd');
-
 --today확인용 게시글 insert
 select * from salary_review;
 insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, sysdate);
@@ -365,10 +354,6 @@ where
     reg_date >= to_char((sysdate-7), 'yyyymmdd')
 group by 
     trunc(reg_date);
---게시판관리
-select * from salary_review;
-select * from category;
-select * from position_category;
 --연봉게시판 전체조회 
 select * from(select row_number () over (order by s.reg_date desc) rnum,no,domain,company_name,id,salary,work_year,position_name,s.reg_date from salary_review s join applicant_member a on s."uid" = a."uid" join company_table m on s.company_no = m.company_no join category c on s.category_number = c.category_number join position_category p on p.category_number = c.category_number)where  rnum between 11 and 20;
 --회사리뷰게시판 전체조회
@@ -398,7 +383,6 @@ create table tb_amember_log(
 create sequence seq_tb_amember_log_no;
 --drop trigger trig_amember_log
 select * from (select row_number () over (order by r.reg_date desc) rnum,"uid", r.company_no, company_name, name, id, email, reg_date from recruit_member r join company_table c on r.company_no = c.company_no)where  rnum between 15 and 20;
-select * from recruit_member;
 commit;
 create or replace trigger trig_amember_log
     after
@@ -459,7 +443,6 @@ begin
           values( seq_tb_amember_log_no.nextval, :old."uid", :old.company_no, :old.name, :old.id, :old.email, :old.id || '님이 회원탈퇴하였습니다.');   
     end if;
 end;
-
 --연봉게시판 log 트리거
 select * from tb_sal_log;
 select * from salary_review;
@@ -601,7 +584,10 @@ select * from company_table where company_name = '국민은행'
 insert into salary_review values(SEQ_SALARY_REVIEW_NO.nextval, 3, '1472583694', 3, 3000, 1, 1, default); 
 insert into company_review values(SEQ_COMPANY_REVIEW_NO.nextval, 12, '7895621431', 6, '하는 일에 비해 연봉이 짜디짭니다' , 4, 3, 4, 3, 4, 1, default);
 commit;
-select * from recruit_member
+select * from recruit_member where id = 'zoomin';
+insert into company_table values('1234567899', '줌인주식회사', null, '줌인 주식회사 입니다.');
+insert into recruit_member values(SEQ_RECRUIT_MEMBER.nextval, '1234567899', '줌인주식회사', 'zoomin', 1234, 'supervisor@zoomin.com', 'Y', default);
+delete from recruit_member
 -- 이윤정 END --
 
 --김승환 테스트용

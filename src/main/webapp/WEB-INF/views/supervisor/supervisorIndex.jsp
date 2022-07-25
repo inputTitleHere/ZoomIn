@@ -16,7 +16,7 @@
 	
 
 <section id="chart-container" class="member-container">
-   	<h2 class="h2">최근 일주일간 방문자 & 게시글 수</h2>
+   	<h2 class="h2" style="margin-top:40px;">최근 일주일간 방문자 & 게시글 수</h2>
     <div id="chart" >
         <canvas id="myChart">
 	        <!--차트가 그려질 부분-->
@@ -120,6 +120,10 @@
 		location.href="<%= request.getContextPath()%>/supervisor/Statistic";
 	})
 	</script>
+
+<footer id = "copyright">
+	<p>Copyright © 2022 Team 잡아조 All rights reserved.</p>
+</footer>
 
 </body>
 </html>

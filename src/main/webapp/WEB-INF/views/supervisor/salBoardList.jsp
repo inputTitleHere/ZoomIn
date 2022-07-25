@@ -69,7 +69,7 @@
     			else {
     		%>
     			<tr>
-    				<td colspan="8">조회된 게시글이 없습니다.</td>
+    				<td colspan="9">조회된 게시글이 없습니다.</td>
     			</tr>
     		<% 	} %>
     		</tbody>

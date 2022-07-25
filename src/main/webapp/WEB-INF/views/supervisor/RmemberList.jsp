@@ -37,7 +37,7 @@
 						if(recruitMemberList == null || recruitMemberList.isEmpty()) {
 					%>
 						<tr>
-							<td colspan="7" align="center">조회 결과가 없습니다.</td>
+							<td colspan="8" align="center">조회 결과가 없습니다.</td>
 						</tr>
 					<%
 						}
