@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.zoomin.applicant.member.model.dao.ApplicantDao;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
 import com.kh.zoomin.applicant.member.model.service.ApplicantService;
+import com.kh.zoomin.common.ZoominMvcUtils;
 
 /**
  * Servlet implementation class ApplicantLoginServlet
@@ -32,7 +33,7 @@ public class ApplicantLoginServlet extends HttpServlet {
 			
 			//1. 사용자입력값 처리 (아이디, 비번) 폼입력값
 			String id = request.getParameter("id");
-			String password = request.getParameter("password");
+			String password = ZoominMvcUtils.getEncryptedPassword(request.getParameter("password"), id);
 			System.out.println("id = " + id);
 			System.out.println("password = " + password);
 			System.out.println(id + "," + password);

@@ -24,6 +24,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자용인다.
 	List<RecruitBoard> recruiterBoard = (List<RecruitBoard>) request.getAttribute("recruiterBoard");
 %>
+<br /><br />
 <h1>-등록한 채용 게시글-</h1>
 <div class="write-recruit-button-wrapper">
 	<button type="button" id="write-button"
