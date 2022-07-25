@@ -14,12 +14,12 @@
 }
 
 .nav {
-	  position: relative;
- 	  margin: 4%;
-	  text-align: right;
-	  top: 32%;
-	  transform: translateY(-50%);
-	  font-weight: bold;
+  position: relative;
+  margin: 4%;
+  text-align: right;
+  top: 32%;
+  transform: translateY(-50%);
+  font-weight: bold;
 }
 
 .nav ul {

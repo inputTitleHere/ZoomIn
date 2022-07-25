@@ -30,24 +30,26 @@ select * from RESUME where "uid" in (select "uid" from ENROLL_TABLE where recrui
 select * from recruit_board where "uid"=1 order by closure_date-sysdate asc;
 select * from category order by category_number;
 
+select * from position_category;
+select * from salary_review;
+
 --delete from recruit_board where no in (49,50,51);
 
 commit;
 
-
-create table price_table(
-    price number,
-    name varchar2(50)
+----------------------------
+drop table price_table;
+create table test(
+    col1 number,
+    col2 number
 );
 
-insert into price_table values(100, '알사탕');
-insert into price_table values(200, '콩사탕');
-insert into price_table values(300, '홍삼사탕');
-
+insert into test values(1,1);
+insert into test values(2,2);
+insert into test values(null,3);
+insert into test values(4,null);
 commit;
 
-select name from price_table where price>all(select price from price_table where name in ('알사탕','콩사탕'));
-
-
-
+select count(*)from test where col2 in (1,2,3) or col1 in (4);
+select count(col2) from test where col2 in (1,2,3) or col1 in (4);
 

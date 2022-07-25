@@ -1,0 +1,11 @@
+
+.write-recruit-board-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.write-recruit-board-wrapper h2{
+  text-align: center;
+}

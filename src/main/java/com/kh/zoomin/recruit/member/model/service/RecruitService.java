@@ -6,6 +6,7 @@ import static com.kh.zoomin.common.JdbcTemplate.getConnection;
 import static com.kh.zoomin.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.kh.zoomin.member.exception.MemberException;
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
@@ -70,6 +71,29 @@ public class RecruitService {
 			throw e;
 		} finally {
 			close(conn);
+		}
+		return result;
+	}
+
+	public List<RecruitMember> loadPassword1234() {
+		Connection conn = getConnection();
+		List<RecruitMember> result=null;
+		result=rd.loadPassword1234(conn);
+		close(conn);
+		return result;
+	}
+
+	public int setPassword1234(List<RecruitMember> rmember) {
+		int result=0;
+		Connection conn = getConnection();
+		try {
+			result = rd.setPassword1234(rmember,conn);
+			commit(conn);
+		}catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);			
 		}
 		return result;
 	}

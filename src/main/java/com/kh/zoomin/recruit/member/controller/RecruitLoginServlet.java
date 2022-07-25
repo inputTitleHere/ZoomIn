@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.zoomin.common.ZoominMvcUtils;
 import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.recruit.member.model.service.RecruitService;
 
@@ -31,7 +32,8 @@ public class RecruitLoginServlet extends HttpServlet {
 			
 			//1. 사용자입력값 처리 (아이디, 비번) 
 			String id = request.getParameter("id");
-			String password = request.getParameter("password");
+			String password = ZoominMvcUtils.getEncryptedPassword(request.getParameter("password"), id);
+			
 			//입력값 확인용
 			System.out.println("id = " + id);
 			System.out.println("password = " + password);

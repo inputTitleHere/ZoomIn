@@ -33,6 +33,7 @@
 	}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
+<script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section id="companyReview-container">
 	<h1>-회사 리뷰 게시판-</h1>
 

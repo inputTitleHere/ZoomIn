@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+h2 {
+	text-align: center;	
+}
 .edit-button {
 	text-align: right;
 }

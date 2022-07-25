@@ -219,6 +219,4 @@ const enroll=(e)=>{
 <br />
 <br />
 <br />
-
-</body>
-</html>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

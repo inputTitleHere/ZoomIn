@@ -13,6 +13,7 @@ import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview;
 import com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt;
 import com.kh.zoomin.applicant.companyReviewBoard.model.service.CompanyReviewService;
 import com.kh.zoomin.applicant.member.model.dto.ApplicantMember;
+import com.kh.zoomin.member.dto.Member;
 
 /**
  * Servlet implementation class CompanyEnrollServlet
@@ -27,9 +28,9 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int uid = Integer.parseInt(request.getParameter("uid"));
-		String companyNo = request.getParameter("company_no");
+		String companyNo = request.getParameter("companyNo");
 		
-		request.setAttribute("uid", "uid");
+		request.setAttribute("uid", uid);
 		request.setAttribute("companyNo", companyNo);
 		
 		request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewEnroll.jsp")
@@ -54,9 +55,17 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 //			String name = applicantMember.getName();
 
 //			int uid = companyReviewService.getWriterUid(name);
+			HttpSession session = request.getSession();
+			Member member = (Member)session.getAttribute("loginMember");
+			
+			if(member instanceof ApplicantMember) { 
+				ApplicantMember applicantMember = (ApplicantMember) member;
+			}
+//			int uid = ((ApplicantMember)member).getUid();
+			
 			
 			int uid = Integer.parseInt(request.getParameter("uid"));
-			String companyNo = request.getParameter("company_no");
+			String companyNo = request.getParameter("companyNo");
 			int categoryNumber = Integer.parseInt(request.getParameter("category_number"));
 			String content = request.getParameter("content");
 			int stars = Integer.parseInt(request.getParameter("stars"));
@@ -85,6 +94,7 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			
 			// redirect
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
+			request.setAttribute("uid", uid);
 			request.setAttribute("companyReview", companyReview);
 			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
 			

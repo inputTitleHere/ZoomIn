@@ -9,8 +9,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import com.kh.zoomin.recruit.board.exception.RecruitBoardException;
 import com.kh.zoomin.recruit.member.model.dao.RecruitDao;
 import com.kh.zoomin.recruit.member.model.dto.RecruitMember;
 import com.kh.zoomin.member.exception.MemberException;
@@ -131,6 +134,46 @@ public class RecruitDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<RecruitMember> loadPassword1234(Connection conn) {
+		List<RecruitMember> result=new ArrayList<RecruitMember>();
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		String sql = "select * from recruit_member where password=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "1234");
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				result.add(handleMemberResultSet(rset));
+			}
+		}catch(SQLException e) {
+			throw new RecruitBoardException("비번 1234 조회오류",e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int setPassword1234(List<RecruitMember> rmember, Connection conn) {
+		PreparedStatement pstmt=null;
+		String sql = "update recruit_member set password=? where id=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			for(RecruitMember r: rmember) {
+				pstmt.setString(1, r.getPassword());
+				pstmt.setString(2,r.getId());
+				pstmt.addBatch();
+			}
+			pstmt.executeBatch();
+		}catch(SQLException e) {
+			throw new RecruitBoardException("비번 1234 설정오류",e);
+		}finally {
+			close(pstmt);
+		}
+		return 1;
 	}
 
 
