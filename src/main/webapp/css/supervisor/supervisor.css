@@ -138,6 +138,21 @@ div#border{
 	background: #f2bb62;
 
 }
+/*로그버튼*/
+input#rm-log{
+	background: rgb(242 214 98 / 42%);
+  	width: 80px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	font-weight: bold;
+	border-radius:10px;
+	font-size: medium;
+    border: 2px solid orange;
+    text-align: center;
+    background: #ffebb5a1;	
+}
 /*페이지 바 */
 #super-pagebar{
     font-size: larger;
