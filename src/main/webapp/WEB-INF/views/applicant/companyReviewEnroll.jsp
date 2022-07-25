@@ -6,9 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/applicant/applicant.jsp" %>
 
 <%
-String msg = (String) session.getAttribute("msg");
+/* String msg = (String) session.getAttribute("msg");
 //System.out.println("msg@jsp = " + msg);
 if(msg != null) session.removeAttribute("msg"); 
 Member loginMember = (Member) session.getAttribute("loginMember");
@@ -32,7 +33,7 @@ if(cookies != null){
 		
 		}
 }
-
+ */
 	List<CompanyReview> list = (List<CompanyReview>) request.getAttribute("list");
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReivew");
 	ApplicantMember applicant = null;
