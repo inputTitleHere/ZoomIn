@@ -27,9 +27,7 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 <br /><br />
 <h1>-등록한 채용 게시글-</h1>
 <div class="write-recruit-button-wrapper">
-	<button type="button" id="write-button"
-		onclick="location.href='<%=request.getContextPath()%>/recruit/board/writeRecruitBoard'">신규
-		채용 공고글 작성하기</button>
+	<button type="button" id="write-button"	onclick="location.href='<%=request.getContextPath()%>/recruit/board/writeRecruitBoard'">채용 공고글 작성하기</button>
 </div>
 <section id="my-recruit-board" class="recruit-board-section">
 
@@ -173,7 +171,9 @@ if (loginMember != null && loginMember.getMemberType()==1) { // 1이 구인자�
 	}
 	}
 	%>
-	<%=request.getAttribute("pagebar")%>
+	<div class="pagebar-wrapper">
+		<%=request.getAttribute("pagebar")%>
+	</div>
 </section>
 
 <%--
@@ -229,6 +229,4 @@ const enroll=(e)=>{
 <br />
 <br />
 <%-- 여기에 footer를 배치. --%>
-
-</body>
-</html>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

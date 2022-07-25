@@ -44,7 +44,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 			<%=company.getCompanyInfo()%>
 		</div>
 	</section>
-	<div class="review-wrapper" style="display:flex;">
+	<div class="review-wrapper">
 		<section class="company-review">
 			<h2>회사 리뷰</h2>
 			<%
@@ -98,7 +98,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 			}
 			%>
 			</table>
-			<%=companyReviewPagebar%>
+			<div class="pagebar-wrapper">
+				<%=companyReviewPagebar%>
+			</div>
 		</section>
 		<section class="salary-review">
 			<h2>연봉 리뷰</h2>
@@ -158,7 +160,9 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일");
 			}
 			%>
 			</table>
-			<%=salaryReviewPagebar%>
+			<div class="pagebar-wrapper">
+				<%=salaryReviewPagebar%>
+			</div>
 		</section>
 	</div>
 	<div class="recruit-board-wrapper">

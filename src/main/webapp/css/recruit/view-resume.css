@@ -1,0 +1,31 @@
+h2{
+  text-align: center;
+}
+
+.resume-wrapper{
+  margin:20px auto;
+  width: 1024px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resume{
+  border: 2px solid orange;
+  padding: 20px;
+
+}
+
+.resume table{
+  border-collapse: collapse;
+} 
+
+.resume table tbody tr td{
+  padding: 20px;
+  font-size: 18px;
+}
+
+.biography-title{
+  font-size: 22px;
+  font-weight: bold;
+}

@@ -10,11 +10,11 @@
 <br /><br />
 <link	href="<%=request.getContextPath()%>/css/recruit/board/recruit-board-write.css" rel="stylesheet" type="text/css">
 <div class="write-recruit-board-wrapper">
-	<h2>신규 채용공고글 작성</h2>
+	<h1>신규 채용공고글 작성</h1>
 	<form action="<%=request.getContextPath()%>/recruit/board/writeRecruitBoard" method="post" id="writeRecruitBoardFrm" name="writeRecruitBoardFrm">
 		<input type="hidden" name="uid" value="<%= rm.getUid()%>" />
 		<input type="hidden" name="companyNo" value="<%= rm.getCompanyNo()%>" />
-		<label for="title">제목 : </label> <input type="text" name="title" id="title" placeholder="채용글 제목을 입력해주세요." required /><br />
+		<label for="title">제목 </label> <input type="text" name="title" id="title" placeholder="채용글 제목을 입력해주세요." required /><br />
 		<label for="category">분야 분류</label>
 		<select name="category" id="category" required>
 			<option disabled selected value="">---카테고리 선택---</option>
@@ -33,17 +33,17 @@
 		<%-- 직무테이블 임시 미루기 --%>
 		
 		<%-- 직무테이블 임시 미루기 --%>
-		<label for="closureDate">마감일자 : </label><input type="datetime-local" id="closureDate" name="closureDate" required/><br /><%-- 최대/최소 및 초기날짜 설정 가능. --%>
-		<label for="career">경력사항 : </label> <input type="text" name="career" id="career" placeholder="경력무관" /><br />
-		<label for="schoolStatus">학력사항 : </label> <input type="text" name="schoolStatus" id="schoolStatus" placeholder="학력무관" /><br />
-		<label for="workType">근무형태 : </label> <input type="text" name="workType" id="workType" placeholder="미정" /><br />
-		<label for="officeLocation">근무지역 : </label> <input type="text" name="officeLocation" id="officeLocation" placeholder="미정" /><br />
-		<label for="salary">연봉 : </label> <input type="text" name="salary" id="salary" placeholder="회사내규" /><br />
-		<label for="content">내용 : </label> <textarea rows="10" cols="50" name="content" id="content" placeholder="내용을 입력하세요." required></textarea><br />
+		<label for="closureDate">마감일자 </label><input type="datetime-local" id="closureDate" name="closureDate" required/><br /><%-- 최대/최소 및 초기날짜 설정 가능. --%>
+		<label for="career">경력사항 </label> <input type="text" name="career" id="career" placeholder="경력무관" /><br />
+		<label for="schoolStatus">학력사항 </label> <input type="text" name="schoolStatus" id="schoolStatus" placeholder="학력무관" /><br />
+		<label for="workType">근무형태 </label> <input type="text" name="workType" id="workType" placeholder="미정" /><br />
+		<label for="officeLocation">근무지역 </label> <input type="text" name="officeLocation" id="officeLocation" placeholder="미정" /><br />
+		<label for="salary">연봉 </label> <input type="text" name="salary" id="salary" placeholder="회사내규" /><br />
+		<label for="content">내용 </label> <textarea rows="10" cols="50" name="content" id="content" placeholder="내용을 입력하세요." required></textarea><br />
 		<button id="submit-button">채용글 등록하기</button>
 	</form>
+	<br />
+	<br />
+	<br />
 </div>
-
-
-</body>
-</html>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>

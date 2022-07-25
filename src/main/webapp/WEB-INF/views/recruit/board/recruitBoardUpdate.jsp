@@ -16,7 +16,7 @@ if(lm instanceof RecruitMember){
 }
 
 %>
-
+<link	href="<%=request.getContextPath()%>/css/recruit/board/recruit-board-update.css" rel="stylesheet" type="text/css">
 
 <div class="write-recruit-board-wrapper">
 	<form action="<%=request.getContextPath()%>/recruit/board/updateRecruitBoard" method="post" id="writeRecruitBoardFrm" name="writeRecruitBoardFrm">

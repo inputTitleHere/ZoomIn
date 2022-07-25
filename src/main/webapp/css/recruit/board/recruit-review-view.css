@@ -29,7 +29,50 @@ section{
 #comInfo{
 	font-size:20pt;
 }
-.company-review>table
-, .salary-review>table{
+.company-review>table, .salary-review>table{
 	font-size:17pt;
+}
+
+table{
+	width: 100%;
+  border-collapse: collapse;
+}
+
+.review-wrapper{
+	display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.review-wrapper section table>thead>tr td{
+  font-size: 20px;
+  border-right: 2px solid orange;
+  padding: 3px;
+}
+.review-wrapper section table>thead>tr td:first-child{
+  border-left: 2px solid orange;
+}
+.review-wrapper section table>thead>tr{
+  border-bottom: 3px solid orange;
+}
+.review-wrapper section table>tbody>tr{
+  border-bottom: 2px solid orange;
+}
+/*tbody section*/
+.review-wrapper section table>tbody>tr td{
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+
+
+
+
+.review-wrapper section{
+  padding: 0px 10px;
+}
+
+.review-wrapper section h2{
+  margin-bottom: 5px;
 }
