@@ -47,9 +47,9 @@
 		am = (ApplicantMember)session.getAttribute("loginMember");	
 	}
 %>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewUpdate.css" />
 <section id="salary-review-view-container">
-	<h2>연봉 리뷰 수정</h2>
+	<h2>-연봉 리뷰 수정-</h2>
 	
 	<form
 		action="<%= request.getContextPath() %>/review/salary/salaryReviewUpdate" 

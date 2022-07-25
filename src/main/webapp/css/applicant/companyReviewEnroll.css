@@ -1,0 +1,33 @@
+@charset "UTF-8";
+h2 {
+	text-align: center;
+	font-size: 70px;
+	font-weight: bold;
+}
+
+#tbl-company-review {
+	align-content: center;
+	margin: 0 auto;
+	border-spacing: 30px;
+}
+#tbl-company-review th{
+	font-size: 30px;
+}
+#tbl-company-review td{
+	font-size: 30px;
+	padding-left: 40px;
+		
+}
+#tbl-company-review td input {
+	width: 150px;
+	height: 25px;
+	align-content: center;
+}
+#tbl-company-review td select {
+	width: 158px;
+	height: 31px;
+}
+#end{text-align: center;}
+#counter, #max-counter{
+	font-size: 20px;
+}

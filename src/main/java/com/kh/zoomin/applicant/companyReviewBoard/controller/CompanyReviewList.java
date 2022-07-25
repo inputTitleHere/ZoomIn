@@ -56,7 +56,6 @@ public class CompanyReviewList extends HttpServlet {
 			param.put("end", end);
 			
 			List<CompanyReview> list = companyReviewService.findAll(param);
-			System.out.println("list들 = " + list);
 			
 			int totalContent = companyReviewService.getTotalContent();
 			String url = request.getRequestURI(); 
@@ -64,11 +63,9 @@ public class CompanyReviewList extends HttpServlet {
 			
 			// view
 			request.setAttribute("list", list);
-		
 			request.setAttribute("pagebar", pagebar);
 			request.getRequestDispatcher("/WEB-INF/views/applicant/companyReviewList.jsp")
 				.forward(request, response);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
