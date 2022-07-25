@@ -28,16 +28,16 @@ public class ZoominUtils {
 			// 첫페이지인 경우 "이전"처리를 생략한다.
 		}else {
 			// 현제 pageNo는 pageStart를 가르킨다. 여기서 -1을 하면 이전페이지 블럭으로 넘긴다.
-			pagebarBuilder.append("<a href='"+url+(pageNo-1)+"'>이전</a>\n");
+			pagebarBuilder.append("<div class='before-after'><a href='"+url+(pageNo-1)+"'>이전</a></div>\n");
 		}
 		//=== 각각의 페이지에 대한 링크들 만들기 ===//
 		while(pageNo<=pagebarEnd&&pageNo<=totalPages) {
 			if(pageNo==currentPage) {
 				// 현재페이지이면 링크없이 그냥 span을 추가.
-				pagebarBuilder.append("<span class='cPage'>"+pageNo+"</span>\n");
+				pagebarBuilder.append("<div class='current'> <span class='cPage'>"+pageNo+"</span></div>\n");
 			}else {
 				// 현재페이지가 아니면 해당 페이지를 로드할 링크를 기제한다.
-				pagebarBuilder.append("<a href='"+url+pageNo+"'>"+pageNo+"</a>\n");
+				pagebarBuilder.append("<div class='other-page'><a href='"+url+pageNo+"'>"+pageNo+"</a></div>\n");
 			}
 			pageNo++; // 증감처리
 		}
@@ -46,7 +46,7 @@ public class ZoominUtils {
 			//마지막 페이지 블럭인 경우 "다음"을 추가하지 않는다.
 			// 위의 증감처리로 인해 pageNo에는 해당 페이지 블럭의 마지막 값+1이 들어있다.
 		}else {
-			pagebarBuilder.append("<a href='"+url+pageNo+"'>다음</a>\n");
+			pagebarBuilder.append("<div class='before-after'> <a href='"+url+pageNo+"'>다음</a></div>\n");
 		}
 		return pagebarBuilder.toString();
 	}

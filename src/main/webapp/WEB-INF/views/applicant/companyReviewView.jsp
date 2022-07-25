@@ -24,10 +24,10 @@
 <%		
 	}
 %>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview.css"/>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReviewView.css"/>
 
 <section id="company-review-view-container">
-	<h2>-회사 리뷰 상세보기-</h2>
+	<h1>-회사 리뷰 상세보기-</h1>
 <%
 	System.out.println("applicantMember + "  + applicant);
 	if(applicantM != null && applicantM.getMemberType()==2){

@@ -16,14 +16,15 @@ if(lm instanceof RecruitMember){
 }
 
 %>
-
+<link	href="<%=request.getContextPath()%>/css/recruit/board/recruit-board-update.css" rel="stylesheet" type="text/css">
 
 <div class="write-recruit-board-wrapper">
 	<form action="<%=request.getContextPath()%>/recruit/board/updateRecruitBoard" method="post" id="writeRecruitBoardFrm" name="writeRecruitBoardFrm">
+		<h2>리뷰글 수정</h2>
 		<input type="hidden" name="uid" value="<%= rm.getUid()%>" />
 		<input type="hidden" name="companyNo" value="<%= rm.getCompanyNo()%>" />
 		<input type="hidden" name="no" id="no" value="<%=rb.getNo()%>"/>
-		<label for="title">제목 : </label> <input type="text" name="title" id="title" value="<%=rb.getTitle()%>" required /><br />
+		<label for="title">제목 </label> <input type="text" name="title" id="title" value="<%=rb.getTitle()%>" required /><br />
 		<label for="category">분야 분류</label>
 		<select name="category" id="category" required>
 			<option disabled value="">---카테고리 선택---</option>
@@ -42,16 +43,14 @@ if(lm instanceof RecruitMember){
 		<%-- 직무테이블 임시 미루기 --%>
 		
 		<%-- 직무테이블 임시 미루기 --%>
-		<label for="closureDate">마감일자 : </label><input type="datetime-local" id="closureDate" name="closureDate" value="<%=closureTime %>" required/><br /><%-- 최대/최소 및 초기날짜 설정 가능. --%>
-		<label for="career">경력사항 : </label> <input type="text" name="career" id="career" value="<%=rb.getCareerYears() %>" /><br />
-		<label for="schoolStatus">학력사항 : </label> <input type="text" name="schoolStatus" id="schoolStatus" value="<%=rb.getSchoolStatus() %>" /><br />
-		<label for="workType">근무형태 : </label> <input type="text" name="workType" id="workType" value="<%=rb.getWorkType() %>" /><br />
-		<label for="officeLocation">근무지역 : </label> <input type="text" name="officeLocation" id="officeLocation" value="<%=rb.getOfficeLocation() %>" /><br />
-		<label for="salary">연봉 : </label> <input type="text" name="salary" id="salary" value="<%=rb.getSalary() %>" /><br />
-		<label for="content">내용 : </label> <textarea rows="10" cols="50" name="content" id="content"required><%=rb.getContent() %></textarea><br />
+		<label for="closureDate">마감일자 </label><input type="datetime-local" id="closureDate" name="closureDate" value="<%=closureTime %>" required/><br /><%-- 최대/최소 및 초기날짜 설정 가능. --%>
+		<label for="career">경력사항 </label> <input type="text" name="career" id="career" value="<%=rb.getCareerYears() %>" /><br />
+		<label for="schoolStatus">학력사항 </label> <input type="text" name="schoolStatus" id="schoolStatus" value="<%=rb.getSchoolStatus() %>" /><br />
+		<label for="workType">근무형태 </label> <input type="text" name="workType" id="workType" value="<%=rb.getWorkType() %>" /><br />
+		<label for="officeLocation">근무지역 </label> <input type="text" name="officeLocation" id="officeLocation" value="<%=rb.getOfficeLocation() %>" /><br />
+		<label for="salary">연봉 </label> <input type="text" name="salary" id="salary" value="<%=rb.getSalary() %>" /><br />
+		<label for="content">내용 </label> <textarea rows="10" cols="50" name="content" id="content"required><%=rb.getContent() %></textarea><br />
 		<button id="submit-button">채용글 등록하기</button>
 	</form>
 </div>
-
-</body>
-</html>
+<%@include file="/WEB-INF/views/common/footer.jsp" %>
