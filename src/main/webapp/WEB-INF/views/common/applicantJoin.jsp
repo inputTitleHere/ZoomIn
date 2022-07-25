@@ -5,55 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>개인 회원가입</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/simpleJoin.css" />
+<script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
-	<h2>개인 회원가입</h2>
-	<div>
-		<form name="joinAFrm" id="joinAFrm" action="" method="POST"/>
-			<table>
-				<tr>
-					<th>이름<sup></sup></th>
-					<td>
-						<input type="text" name="name" id="name" value="" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>아이디<sup></sup></th>
-					<td>
-						<input type="text" placeholder="3글자이상" name="id" id="aId" value="" required> 
-						<input type="button" value="중복검사" onclick="checkIdApplication();" /> 
+	<div id="join-wrap">
+		<div id="join-container">
+			<form name="joinAFrm" class="joinFrm" id="joinAFrm" action="" method="POST"/>
+				<h2>개인 회원가입</h2>
+					<div class=textFrm>
+						<input type="text" class="name" name="name" id="name" placeholder="이름을 입력하세요" value="" required>				
+					</div>
+					<div class=textFrm>
+						<input type="text" placeholder="아이디를 입력하세요" name="id" class="id" id="aId" value="" required> 
+						<input type="button" id="idcheck" value="중복검사" onclick="checkIdApplication();" /> 
 						<input type="hidden" id="idValid" value="0" />
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호<sup></sup></th>
-					<td>
-					<input type="password" name="password" id="aPassword"
-						value="password" placeholder="숫자와 특수문자를 포함 4글자 이상" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호 재입력<sup></sup></th>
-					<td>
-						<input type="password" id="passwordCheck" value="password" required><br>
-					</td>
-				</tr>
-				<tr>
-					<th>핸드폰번호</th>
-					<td>
-						<input type="tel" placeholder="(-)없이 숫자만 입력" name="phone" id="phone" maxlength="11" value="" required><br />
-					</td>
-				</tr>
-				<tr>
-					<th>이메일주소</th>
-					<td>
-						<input type="email" placeholder="@이후 메일주소까지 작성" name="email" id="email" value=""><br>
-					</td>
-				</tr>
-				</table>
-				<input type="submit" value="가입" >
-				<input type="reset" value="취소">
-			</form>
+					</div>
+					<div class=textFrm>
+						<input type="password" name="password" class="pw" id="aPassword"
+							value="password" placeholder="비밀번호를 입력하세요" required>
+					</div>
+					<div class=textFrm>
+						<input type="password" class="pwCheck" id="passwordCheck" value="password" placeholder="비밀번호를 다시 입력하세요" required>
+					</div>
+					<div class=textFrm>
+						<input type="tel" class="phone" placeholder="(-)없이 핸드폰 번호를 입력하세요" name="phone" id="phone" maxlength="11" value="" required><br />					
+					</div>
+					<div class=textFrm>
+						<input type="email" class="email" placeholder="@을 포함한 이메일 주소를 작성하세요" name="email" id="email" value="">
+					</div>
+					<input type="submit" class="btn-join" value="가입하기" >
+				</form>
+			</div>
 		</div>
 	<section>
 		<form action="<%=request.getContextPath()%>/applicant/checkId" name="checkIdAFrm">
