@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#company-review-view-container{
+  width: 1024px;
+  margin: 30px auto;
+}
+
 h2 {
 	text-align: center;	
 }
@@ -13,9 +18,9 @@ h1 {
 }
 .company-review-list {
 	font-size: 20px;
-	margin-left: 150px;
+  margin: 10px auto;
 }
 .company-review-list th {
 	height: 40px;
-	padding-right: 30px;
+	padding-right: 50px;
 }

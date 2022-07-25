@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* 공통 css */
 html, body, section{
-	height:100%;	
+	height:fit-content;	
 }
 /*구직자 구인자 비회 원 모두 공통으로 로고 검색창으로 바꿈*/
 /* zoomHeader.jsp 헤더 css */
@@ -11,10 +11,14 @@ html, body, section{
 	width : 100%;
 }
 #account > a{
+  border-left: 5px solid orange;
 	margin : 10px;
+  padding-left: 10px;
 	font-size : 15pt;
 	text-decoration: none;
+  color: black;
 }
+
 #logodiv{
 	position : relative;
 	text-align : left;
@@ -55,9 +59,9 @@ html, body, section{
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-   7px 7px 20px 0px rgba(0,0,0,.1),
-   4px 4px 5px 0px rgba(0,0,0,.1);
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
 }
 .btn-3 {
@@ -452,3 +456,38 @@ fieldset#inputs:before{ /* couture autour des inputs */
     right: -27%;
     top: 1%;
 }
+/* 백승윤 페이지바 버튼 */
+.pagebar-wrapper div{
+  margin: 5px
+}
+
+.other-page{
+  width: fit-content;
+  min-width: 18px;
+  text-align: center;
+  height: 22px;
+  border: 1px solid black;
+  border-radius: 2px;
+  background-color: lightgray;
+}
+.other-page a{
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+span.cPage{
+	font-size:18px;
+}
+
+.current{
+  width: fit-content;
+  min-width: 18px;
+  text-align: center;
+  height: 22px;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: orange;
+}
+
+

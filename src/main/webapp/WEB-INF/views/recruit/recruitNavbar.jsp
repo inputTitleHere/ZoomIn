@@ -18,7 +18,3 @@ if(rnLm instanceof RecruitMember){
 	<a href="<%=request.getContextPath() %>/recruit/review/recruitReviewList?companyNo=<%=rnRm.getCompanyNo() %>" id="companyInfo">회사 리뷰</a>
 	<a href="<%=request.getContextPath() %>/recruit/headhunt/headhuntList" id="headhunt">헤드헌팅</a>
 </div>
-
-<style>
-
-</style>

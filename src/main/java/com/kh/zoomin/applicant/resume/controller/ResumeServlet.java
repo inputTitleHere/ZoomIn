@@ -89,8 +89,8 @@ public class ResumeServlet extends HttpServlet {
 			double grade = Double.valueOf(request.getParameter("grade"));
 			double totalPoint = Double.valueOf(request.getParameter("totalPoint"));
 		
-			SimpleDateFormat dateFomat = new SimpleDateFormat("yyyyMMdd");
-			Date birthday = dateFomat.parse(_birthday);
+			SimpleDateFormat dateFomat = new SimpleDateFormat("yyyy-MM-dd");
+			java.sql.Date birthday = new java.sql.Date(dateFomat.parse(_birthday).getTime());
 			
 			Resume resume = new Resume(uid, categoryNumber ,name, birthday, gender, address, 
 					schoolType, schoolName, schoolStatus, majorName, grade, totalPoint);
