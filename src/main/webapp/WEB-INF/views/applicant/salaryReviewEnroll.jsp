@@ -40,8 +40,9 @@ if(apMember instanceof ApplicantMember){
 int uid = Integer.parseInt(request.getParameter("uid"));
 String companyNo = request.getParameter("companyNo");
 %>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewEnroll.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewUpdate.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+
 <section id="salary-review-view-container">
 	<h2>-연봉 리뷰 등록-</h2>
 	
@@ -60,7 +61,7 @@ String companyNo = request.getParameter("companyNo");
 			<tr>
 				<th>회사명</th>
 				<td><%-- value="<%= companyNo %>"  --%>
-					<input type="text" name="company_no" />
+					<input type="text" name="company_no" value="<%= companyNo %>" readonly/>
 				</td>
 			</tr>
 			<tr>

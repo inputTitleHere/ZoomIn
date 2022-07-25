@@ -50,9 +50,10 @@
 %>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReviewEnroll.css" />
 <script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section id="company-review-view-container">
-	<h2>회사 리뷰 수정</h2>
+	<h2>-회사 리뷰 수정-</h2>
 	
 	<form 
 		name="companyReviewUpdateFrm"
@@ -176,7 +177,7 @@
 	</form>
 	
 	<div id="end">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewList'">취소</button>
+		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewBoard?no=<%= companyReview.getNo() %>'">취소</button>
 		<button id="btnSubmit">수정하기</button>
 	</div>
 </section>

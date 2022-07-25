@@ -51,17 +51,15 @@ public class SalaryReviewEnrollServlet extends HttpServlet {
 			String jobPosition = request.getParameter("job_position");
 			
 			salaryReview = new SalaryReview(uid, companyNo, categoryNumber, salary, workYear, jobPosition, null);
-//			System.out.println("salaryReview = " + salaryReview);
 			
 			// 업무로직
 			int result = salaryReviewService.insertSalaryReviewService(salaryReview);
 			
 			// redirect
 			HttpSession session = request.getSession();
-//			request.setAttribute("loginMember", am);
-//			ApplicantMember am = (ApplicantMember) loginSession.getAttribute("loginMember");
 			session.setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
-			response.sendRedirect(request.getContextPath() + "/");
+			request.setAttribute("companyNo", companyNo);
+			response.sendRedirect(request.getContextPath() + "/recruit/review/recruitReviewList?companyNo=" + companyNo);
 						
 		} catch (Exception e) {
 			e.printStackTrace();
