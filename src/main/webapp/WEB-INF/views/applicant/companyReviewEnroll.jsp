@@ -1,3 +1,4 @@
+<%@page import="com.kh.zoomin.member.dto.Member"%>
 <%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@page import="java.util.List"%>
@@ -9,6 +10,21 @@
 	ApplicantMember applicantMember = (ApplicantMember) request.getAttribute("loginMember");
 	int uid = Integer.parseInt(request.getParameter("uid"));
 	String companyNo = request.getParameter("companyNo");
+	
+	ApplicantMember applicant = null;
+	Member applicantM = (Member) session.getAttribute("loginMember");
+	if(applicantM instanceof ApplicantMember){
+		applicant = (ApplicantMember) applicantM;
+	}
+	if(applicantM != null && applicantM.getMemberType()==2){
+%>
+		<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%		
+	}else{
+%>
+		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%		
+	}
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/companyReview2.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/common.css" />
@@ -21,14 +37,14 @@ h2 {
 }
 </style> -->
 <!-- 중복헤더 없애기, 기업리뷰 uid 불러오기, 분야 회사정보 -->
-	<div id="account">
+	<%-- <div id="account">
 		<a href ="" id="writeResume">이력서 작성</a>
 		<a href ="" id="info">회원정보</a>
 		<a href ="" id="logOut">로그아웃</a>
 	</div>
 	<div id="logodiv">
 		<img id="logo" alt="" src="<%= request.getContextPath() %>/images/zoominlogo.jpg">
-	</div> 
+	</div>  --%>
 	<%-- <div id="searchBoxdiv">
 		<input id="searchBox" type="text">
 		 <button class="custom-btn btn-3"><span>검색</span></button>
@@ -42,19 +58,19 @@ h2 {
 		method="post"
 	>
 		<table id="tbl-company-review">
-			<tr>
+			 <%-- <tr>
 				<th>작성자 번호</th>
 				<td>
-					<input type="hidden" name="uid" value="<%= uid %>" readonly/>
+					<input type="text" name="uid" value="<%= uid %>" readonly/>
 				</td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<th>회사명</th>
 				<td>
 				
-					<input type="hidden" name ="company_no" value="<%= companyNo %>"/>
+					<input type="text" name ="companyNo" value="<%= companyNo %>" readonly/>
 				</td>
-			</tr>
+			</tr> 
 			<tr>
 				<th>분야</th>
 				<td>
@@ -157,8 +173,8 @@ h2 {
 	</form>
 	
 	<div id="end">
-		<button onclick="location.href='<%= request.getContextPath() %>/review/company/companyReviewList'">cancel</button>
-		<button id="btnSubmit">submit</button>
+		<button onclick="location.href='<%= request.getContextPath() %>/recruit/review/recruitReviewList?companyNo=<%= companyNo %>'">cancel</button>
+		<button id="btnSubmit" onclick="location.href='<%= request.getContextPath() %>/recruit/review/recruitReviewList?companyNo=<%= companyNo %>'">submit</button>
 	</div>
 
 <script type="text/javascript">

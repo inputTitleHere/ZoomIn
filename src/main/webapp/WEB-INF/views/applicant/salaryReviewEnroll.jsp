@@ -37,8 +37,8 @@ ApplicantMember applicantMember = null;
 if(apMember instanceof ApplicantMember){
 	applicantMember = (ApplicantMember) apMember;
 }
-/* int uid = Integer.parseInt(request.getParameter("uid"));
-String companyNo = request.getParameter("companyNo"); */
+int uid = Integer.parseInt(request.getParameter("uid"));
+String companyNo = request.getParameter("companyNo");
 %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewEnroll.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
@@ -60,7 +60,7 @@ String companyNo = request.getParameter("companyNo"); */
 			<tr>
 				<th>회사명</th>
 				<td><%-- value="<%= companyNo %>"  --%>
-					<input type="text" name="company_no" readonly/>
+					<input type="text" name="company_no" />
 				</td>
 			</tr>
 			<tr>

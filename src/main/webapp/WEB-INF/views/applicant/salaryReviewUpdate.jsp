@@ -73,7 +73,19 @@
 			<tr>
 				<th>분야</th>
 				<td>
-					<input type="text" name ="category_number" value="<%= salaryReview.getCategoryNumber() %>"/>
+					<%-- <input type="text" name ="category_number" value="<%= salaryReview.getCategoryNumber() %>"/> --%>
+					<select name="category_number" id="category_number">
+						<option disabled selected value="">---카테고리 선택---</option>
+						<option value="1">인사팀</option>
+						<option value="2">회계/총무팀</option>
+						<option value="3">마케팅팀</option>
+						<option value="4">영업팀</option>
+						<option value="5">생산/관리팀</option>
+						<option value="6">연구개발팀</option>
+						<option value="7">기술팀</option>
+						<option value="8">서비스팀</option>
+						<option value="9">인터넷팀</option>
+					</select>					
 				</td>
 			</tr>
 			<tr>
@@ -85,7 +97,7 @@
 			<tr>
 				<th>직급</th>
 				<td>
-					<select name="job_position" id="aaaa" value="<%= salaryReview.getJobPosition() %>">
+					<select name="job_position" id="aaaa">
 						<option value="1">사원</option>
 						<option value="2">주임</option>
 						<option value="3">대리</option>
@@ -120,7 +132,7 @@
 </section>
 <script>
 document.querySelector("#btnSubmit").onclick = () =>{
-	if(confirm("정말 삭제하시겠습니까?"))
+	if(confirm("정말 수정하시겠습니까?"))
 		document.salaryReviewUpdateFrm.submit();
 };
 </script>
