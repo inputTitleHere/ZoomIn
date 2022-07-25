@@ -1,37 +1,27 @@
-h1{
-  text-align: center;
+@charset "UTF-8";
+
+h2 {
+	text-align: center;
+	font-size: 70px;
+	font-weight: bold;
 }
 
-section{
-  width: fit-content;
-  height: fit-content;
-  margin: 0px auto;
+
+.edit-button {
+	text-align: right;
 }
 
 .company-review-list {
-	border: 1px solid black;
-	border-collapse: collapse;
-	display: flex;
-
+	align-content: center;
+	margin: 0 auto;
+	border-spacing: 30px;
 }
+
 .company-review-list th {
-	border: 1px solid black;
-	border-collapse: collapse;
+	font-size: 30px;	
 }
+
 .company-review-list td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-#write-button {
-	align-items: flex-end;
-}
-
-#pagebar {
-	text-align: center;
-}
-
-#companyReview-btn-add {
-	text-align: right;
-	
+	font-size: 30px;
+	padding-left: 40px;
 }

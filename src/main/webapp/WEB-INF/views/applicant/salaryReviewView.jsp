@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/applicant/salaryReviewView.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <section id="salary-review-view-container">
-	<h2>-연봉리뷰 상세보기-</h2>
+	<h2>-연봉 리뷰 상세보기-</h2>
 <%
 	if(applicantM != null && applicantM.getMemberType()==2){
 		if((applicant != null && salaryReview.getUid() == applicant.getUid())){
@@ -100,10 +100,11 @@
 	action="<%= request.getContextPath() %>/review/salary/salaryReviewDelete" 
 	method="post"
 	name="salaryReviewDelFrm">
+	<input type="hidden" name="no" value="<%= salaryReview.getNo() %>" />
 </form>
 <script>
 const deleteBoard = () => {
-	if(confirm("삭제하시겠습니까?"));
+	if(confirm("삭제하시겠습니까?"))
 		document.salaryReviewDelFrm.submit();
 };
 const updateBoard = () => {

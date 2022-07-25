@@ -46,24 +46,11 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			CompanyReview companyReview = new CompanyReview();
-//			HttpSession loginSession = request.getSession();
-//			ApplicantMember applicantMember = (ApplicantMember)loginSession.getAttribute("applicantMember");
-//			System.out.println("applicantMember = " + applicantMember);
-			// 사용자 입력값 처리
-			
-//			int uid = applicantMember.getUid();
-//			String name = applicantMember.getName();
 
-//			int uid = companyReviewService.getWriterUid(name);
-			HttpSession session = request.getSession();
-			Member member = (Member)session.getAttribute("loginMember");
-			
-			if(member instanceof ApplicantMember) { 
-				ApplicantMember applicantMember = (ApplicantMember) member;
-			}
-//			int uid = ((ApplicantMember)member).getUid();
-			
-			
+			/*
+			 * if(member instanceof ApplicantMember) { ApplicantMember applicantMember =
+			 * (ApplicantMember) member; }
+			 */
 			int uid = Integer.parseInt(request.getParameter("uid"));
 			String companyNo = request.getParameter("companyNo");
 			int categoryNumber = Integer.parseInt(request.getParameter("category_number"));
@@ -76,27 +63,28 @@ public class CompanyReviewEnrollServlet extends HttpServlet {
 			int salarySatisfaction = Integer.parseInt(request.getParameter("salary_satisfaction"));
 			companyReview = new CompanyReview(0, uid, companyNo, categoryNumber, content, stars, workLifeBalance, levelUp, workIntensity, potential, salarySatisfaction, null);
 			System.out.println("companyReviewEnroll = " + companyReview);
-			
-			companyReview.setUid(uid);
-			companyReview.setCompanyNo(companyNo);
-			companyReview.setCategoryNumber(categoryNumber);
-			companyReview.setContent(content);
-			companyReview.setStars(stars);
-			companyReview.setWorkLifeBalance(workLifeBalance);
-			companyReview.setLevelUp(levelUp);
-			companyReview.setWorkIntensity(workIntensity);
-			companyReview.setPotential(potential);
-			companyReview.setSalarySatisfaction(salarySatisfaction);
+			/*
+			 * companyReview.setUid(uid); companyReview.setCompanyNo(companyNo);
+			 * companyReview.setCategoryNumber(categoryNumber);
+			 * companyReview.setContent(content); companyReview.setStars(stars);
+			 * companyReview.setWorkLifeBalance(workLifeBalance);
+			 * companyReview.setLevelUp(levelUp);
+			 * companyReview.setWorkIntensity(workIntensity);
+			 * companyReview.setPotential(potential);
+			 * companyReview.setSalarySatisfaction(salarySatisfaction);
+			 */
 			
 			System.out.println("companyReviewEnroll = " + companyReview);
 			// 업무로직
 			int result = companyReviewService.insertCompanyReview(companyReview);
 			
 			// redirect
+			HttpSession session = request.getSession();
 			request.getSession().setAttribute("msg", "게시글을 성공적으로 등록했습니다.");
 			request.setAttribute("uid", uid);
+			request.setAttribute("companyNo", companyNo);
 			request.setAttribute("companyReview", companyReview);
-			response.sendRedirect(request.getContextPath() + "/review/company/companyReviewList");
+			response.sendRedirect(request.getContextPath() + "/recruit/review/recruitReviewList?companyNo=" + companyNo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
