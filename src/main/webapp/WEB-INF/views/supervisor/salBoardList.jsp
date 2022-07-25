@@ -90,11 +90,13 @@
 
     <script>
     document.querySelector("#sal-delete").addEventListener('click', (e) => {
+    	document.querySeletorAll
     	e.preventDefault()
-    	if(confirm("정말 삭제하시겠습니까?")){
-    		document.querySelector("#searchType").value = "sal";
-    		document.salDelFrm.submit();
-    	}
+	    	if(confirm("정말 삭제하시겠습니까?")){
+	    		document.querySelector("#searchType").value = "sal";
+	    		document.salDelFrm.submit();
+	    	}
+    	
     });
     
     

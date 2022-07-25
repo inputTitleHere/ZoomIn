@@ -16,7 +16,7 @@
 	
 <section id="chart-container">
     <div id="chart" >
-    	<h1 id="chart-h1">최근 일주일간 방문자 & 게시글 수</h1>
+    	<h2>최근 일주일간 방문자 & 게시글 수</h2>
         <canvas id="myChart">
 	        <!--차트가 그려질 부분-->
         </canvas>
