@@ -41,7 +41,7 @@ public class RecruitReivewList extends HttpServlet {
 		String companyNo=request.getParameter("companyNo");
 		int currCompanyReivewPage=1;
 		int currSalaryReivewPage=1;
-		int itemsPerPage=10;
+		int itemsPerPage=5;
 		try {
 			// crp = Company-Review-Page 약자
 			currCompanyReivewPage=Integer.parseInt(request.getParameter("crp"));
