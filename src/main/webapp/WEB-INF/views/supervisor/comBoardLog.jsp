@@ -17,8 +17,8 @@
 <body>
 <section id="super-board">
 <div class="log-tbl">
-		<table id="tb-com-log" calss="table-log">
-		<h1>회사리뷰게시판 로그</h1>
+	<table id="tb-com-log" calss="table-log">
+		<h2>회사리뷰게시판 로그</h2>
 		<thead>
 			<tr>
 				<td>no</td>
@@ -55,10 +55,10 @@
 			%>
 		</tbody>
 	</table>
+</div>
 	<div id='super-pagebar'>
 		<%= request.getAttribute("comLogPagebar") %>
 	</div>
-</div>
 </section>	
 
 

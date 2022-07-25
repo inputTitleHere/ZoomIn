@@ -57,10 +57,10 @@
 			%>
 		</tbody>
 	</table>
+</div>
 	<div id='super-pagebar'>
 		<%= request.getAttribute("recLogPagebar") %>
 	</div>
-</div>
 </section>
 </body>
 </html>

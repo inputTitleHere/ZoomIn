@@ -223,6 +223,11 @@ table#tbl-rmember-log td{
 div.log-tbl{
 	margin: 50;
 }
+table#tb-com-log td{
+	width:fit-content;
+	height:20px;
+	padding: 10 15;
+}
 input#sal-log, #com-log, #rec-log{
 	background: rgb(242 214 98 / 42%);
   	width: 80px;
