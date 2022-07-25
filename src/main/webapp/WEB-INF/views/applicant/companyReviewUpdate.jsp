@@ -1,14 +1,56 @@
+<%@page import="com.kh.zoomin.recruit.member.model.dto.RecruitMember"%>
+<%@page import="com.kh.zoomin.applicant.member.model.dto.ApplicantMember"%>
+<%@page import="com.kh.zoomin.member.dto.Member"%>
+<%@page import="com.kh.zoomin.company.dto.Company"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReviewExt"%>
 <%@page import="com.kh.zoomin.applicant.companyReviewBoard.model.dto.CompanyReview"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/applicantLoginHeader.jsp" %> 
 <%
 	CompanyReview companyReview = (CompanyReview) request.getAttribute("companyReview");
-	CompanyReviewExt companyReviewExt = (CompanyReviewExt) request.getAttribute("companyReviewExt"); 
+	String msg = (String) session.getAttribute("msg");
+	//System.out.println("msg@jsp = " + msg);
+	if(msg != null) session.removeAttribute("msg"); 
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	System.out.println("loginMember = " + loginMember);
+	ApplicantMember am=null;
+	RecruitMember rm=null;
+	
+	if(loginMember instanceof ApplicantMember){
+		am=(ApplicantMember)loginMember;
+	}else if(loginMember instanceof RecruitMember){
+		rm=(RecruitMember)loginMember;
+	
+	}
+	
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie c : cookies){
+			String name = c.getName();
+			String value = c.getValue();
+			//System.out.println("[cookie] " + name + " = " + value);
+			
+			}
+	}
+	
+	Company company = (Company) request.getAttribute("company");
+	Member applicantM = (Member) session.getAttribute("loginMember");
+	ApplicantMember applicant = null;
+	
+	if(applicantM instanceof ApplicantMember){
+		applicant = (ApplicantMember) applicantM;
+	}
+	
+	Member lm = (Member) session.getAttribute("loginMember");
+	if(lm instanceof ApplicantMember){
+		am = (ApplicantMember)session.getAttribute("loginMember");	
+	}
+	
 %>
+
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/common.css" />
+<script src="<%= request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 <section id="company-review-view-container">
 	<h2>회사 리뷰 수정</h2>
 	
@@ -34,7 +76,19 @@
 			<tr>
 				<th>분야</th>
 				<td>
-					<input type="text" name ="category_number" value="<%= companyReview.getCategoryNumber() %>" readonly/>
+					<%-- <input type="text" name ="category_number" value="<%= companyReview.getCategoryNumber() %>" readonly/> --%>
+					<select name="category_number" id="category_number">
+						<option disabled selected value="">---카테고리 선택---</option>
+						<option value="1">인사팀</option>
+						<option value="2">회계/총무팀</option>
+						<option value="3">마케팅팀</option>
+						<option value="4">영업팀</option>
+						<option value="5">생산/관리팀</option>
+						<option value="6">연구개발팀</option>
+						<option value="7">기술팀</option>
+						<option value="8">서비스팀</option>
+						<option value="9">인터넷팀</option>
+					</select>					
 				</td>
 			</tr>
 			<tr>

@@ -105,11 +105,11 @@
 	action="<%= request.getContextPath() %>/review/company/companyReviewDelete" 
 	method="post"
 	name="companyReviewDelFrm">
-	<input type="text" name="no" value="<%= companyReview.getNo() %>"/>
+	<%-- <input type="text" name="no" value="<%= companyReview.getNo() %>"/> --%>
 </form>
 <script>
 const deleteBoard = () => {
-	if(confirm("삭제하시겠습니까?"));
+	if(confirm("삭제하시겠습니까?"))
 		document.companyReviewDelFrm.submit();
 };
 
