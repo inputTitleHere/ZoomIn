@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>개인 회원가입</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/simpleJoin.css" />
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/common/simpleJoinAppli.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
