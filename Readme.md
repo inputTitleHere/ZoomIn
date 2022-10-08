@@ -17,4 +17,4 @@
 
 ## Project Architecture
 
-A MVC(Model2) pattern using database provided by Oracle Cloud
+A MVC pattern using database provided by Oracle Cloud
